@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require 'protobuf/rpc/client'
+require '<%= required_file %>'
+
+# build request
+request = <%= module_name %>::<%= Util.modulize(request) %>.new
+# TODO: setup a request
+raise StandardError, 'setup a request'
+
+# create blank response
+response = <%= module_name %>::<%= Util.modulize(response) %>.new
+
+# execute rpc
+Protobuf::Rpc::Client.new('localhost', <%= default_port %>).call :<%= Util.underscore(name) %>, request, response
+
+# show response
+puts response
+

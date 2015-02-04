@@ -1,0 +1,980 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>HTML5 Websocket chat</title>
+<style>
+body{background:#000;color:white;}
+a:link{color:#aaaaFF}
+a:visited{color:#aaaaFF}
+#slider {
+  width: 200px;
+  height: 6px;
+  margin: 5px;
+  background: #FFF;
+border: 1px solid #888;
+  position: relative;
+}
+.ui-slider-handle {
+  width: 8px;
+  height: 14px;
+  position: absolute;
+  top: -6px;
+  background: #FFF;
+  border: solid 1px #888;
+}
+.quote{padding: 8px; margin-left: 30px; border-left: 1px solid #eee;}
+.bold{font-weight: bold}
+.italic{font-style: italic}
+.underline{text-decoration:underline}
+.underline1{border-bottom: 1px solid #ccc}
+.overline{text-decoration:overline}
+.strike{text-decoration:line-through}
+.blue{color: blue}
+.red{color: red}
+.yellow{color: yellow}
+.green{color: green}
+.purple{color: purple}
+.orange{color: orange}
+.center{color: text-align: center}
+input, textarea{font-size:13px; border: 1px solid #888; padding:5px; background:white}
+input[type=submit]{font-size:18px; font-weight:bold}
+/* th, td, table{font-size:15px; border: 1px solid #888;
+   padding:10px;margin:10px} */
+dt{font-weight:bold; font-size:15;}
+dd{border-left: 1px solid #ccc;padding-left:10px}
+.spoiler{background-color: black}
+.unspoiler{background-color: white}
+.bl{font-weight:bold;width:250px;float:left;clear:both}
+.clear{clear:both}
+ul li {list-style-type: square;}
+textarea{padding:10px;color:#444}
+.__toc{border: 1px solid #aaa; background-color: #fefefe; padding: 3px; font-size: 18px; width: 350px; font-weight: bold}
+.__toc a{color: #114466; text-decoration:none}
+p {
+    width: 460;
+    background-color: #fafafa;
+    border: 1px solid #e5e5e5;
+    padding: 5px;
+    text-indent: 15px; 
+    margin: 12px 0px 4px 5px;
+}
+.__ref_list{margin:0px;margin:0px}
+</style>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="jquery-ui-1.8.5.custom.min.js"></script>
+  <script type="text/javascript" src="keyLib.js"></script>
+</head>
+  <body>  
+  <h4 style="margin:0;padding:0;">Pure HTML5+Websockets Old School RPG Chat: Use arrow keys to move</h4>
+	<script type="text/javascript">
+	</script>
+        <div id="slider" style="margin-bottom:10px"></div>
+<table cellspacing="10" style="border:none;" border="0"><tr><td valign="top" style="width:400px">  <canvas id="canvas" style="border:1px solid blue;margin:0px;padding:0"></canvas>
+<br/>
+<div style="width:400;padding:0px;margin:5px"><span style="color:red">This is a work in progress. Not a lot works.</span> Add me <a href="http://twitter.com/#!/JimmyRcom" target="_blank">@JimmyRcom</a> / <a href="http://www.facebook.com/jimmy.ruska" target="_blank">My Facebook</a>.  Here is my <a href="http://github.com/jimmyrcom/HTML5-Canvas-Old-School-RPG-Map-with-Erlang-Websockets-Chat" target="_blank">erlang websocket server</a>. You can register a name at the <a href="http://rp.eliteskills.com/" target="_blank">roleplay</a> site then refresh the page here.</div>
+  <td  style="width:500px"  valign="top">
+  <div style="position:relative;left:10px;color:white;text-shadow: red 3px 3px 3px;width:400px;margin:0px;padding:0px"><b>Say:</b>
+  <input id="say" onSubmit="return say();" type="text" size="25"  autocomplete="off" maxlength="250" style="background:black;font-size:16px;font-weight:bold;color:white;border:1px dashed white;opacity:0.8;padding:3"/></div>
+
+<script>
+var defaultUsername = "Guest"+String(Math.random()).substr(2,6);;
+</script>
+</body>
+<!-- <input type="text" id="debug" style=""/> -->
+
+<div style="width:450px;">
+   <b>Help:</b> type /help into the <a href="#" onclick="commands('/help');return false;">text box</a> and hit enter. CTRL key brings focuses/unfocuses to the chat box.<br/>
+<h2 style="border-bottom: 1px solid white">Console</h2>
+  <div id="console" style="color:#5F5;font-family:courier;font-weight:bold;"></div>
+</div>
+<div id="iframe"></div>
+</td></tr></table>
+
+<script>
+/* %%Created by Jimmy Ruska under GPL 2.0 */
+/* %% Copyright (C) 2010 Jimmy Ruska (@JimmyRcom,Youtube:JimmyRcom,Gmail:JimmyRuska) */
+
+/* %% This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version. */
+
+/* %% This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. */
+
+/* %% You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA */
+
+
+   var __support = "MozWebSocket" in window ? 'MozWebSocket' : ("WebSocket" in window ? 'WebSocket' : null);
+//__support=false;
+function send_data(data){
+  if (__support){
+    ws.send(data);
+    return;
+  }
+  $.ajax({
+    type: "POST",
+        url: "http://localhost/comet/",
+        scriptCharset: "utf-8",
+        contentType: " application/x-www-form-urlencoded; charset=UTF-8", 
+        data: {ip: "121.99.135.95", data: data}
+    });
+}
+
+var canvas = document.getElementById("canvas");
+var map = canvas.getContext("2d");
+var bunchies = [1];
+var scale=2;
+var screenWidth=200*scale;
+var screenHeight=130*scale;
+canvas.width=screenWidth;
+canvas.height=screenHeight;
+var background=new Background();
+var you = new User();
+var sayExpiration = 5;
+var globalX=you.x+background.subX;
+var globalY=you.y+background.subY;
+var things = [];
+var increment=0;
+var last = [you.x, you.y];
+var ws;
+var __connected=false;
+var wsTry=0;
+var consoleArr=[];
+for(var i=0; i<20;i++) consoleArr.push("");
+var sprites = 
+  [ "./crono_walk.gif"
+    , "./magus_walk.gif"
+    ];
+var moveLock=false;
+
+
+function say(){
+  //  alert(background.subX + ","+background.subY+"\n"+you.x+", "+you.y+"\n"+(background.subX+you.x)+", "+(background.subY+you.y));
+  
+  var message=jQuery.trim($('#say').val());
+  if (message==="" || __connected===false) return false;
+  you.say=message;
+  $('#say').val("");
+  if(message.charAt(0)==="/"){ 
+    return commands(message.substr(1).toLowerCase());
+  }
+
+  send_data("say||"+you.say);
+  //console("<span style='color:#88F;font-weigt:bold'>You:</span> "+$('<div/>').text(message).html());
+  var foo = new Date; 
+  var utime = foo.getTime();
+  you.sayExpiration=utime+(sayExpiration*1000);
+  return false;
+}
+
+
+function commands(message){
+  var reply="";
+  if (message.match(/^nick [A-Za-z0-9_\-]{1,25}$/)!==null){
+    var arr=message.split(' ');
+    send_data("nick||"+arr[1]);
+    return;
+  }
+  else if (message.match(/^pic [A-Za-z0-9]{1,25}$/)!==null){
+    var arr=message.split(' ');
+    if ("magus"===arr[1]){
+      you.pic.src="magus_walk.gif";
+      you.width=34;
+    }
+    else{
+      you.pic.src="crono_walk.gif";
+      you.width=27;      
+    }
+    send_data("pic||"+arr[1]);
+    return;
+  }
+  else if (message.match(/^challenge [A-Za-z0-9_-]{1,25}$/)!==null){
+    var arr=message.split(' ');
+    send_data("challenge||"+arr[1]);
+    return;
+  }
+  else if (message==="help controls" || message==="controls"){
+    reply="<h3>Controls</h3><p>To move around use the arrow keys or 'wsad' or 'ikjl' keys on your keyboard. Because the movement keys conflict with the text box, click ctrl to automatically select it or deselect it. Dragging the slider above the graphics will make the graphics bigger or smaller.<p>";
+  }
+  else if (message==="help nickname" || message==="nickname" || message==="nick" || message==="/help nick"){
+    reply="Change your name,  by using the command<br/>/nick whateverNameHere<br/>Name can only be letters and numbers. No spaces of symbols.";
+  }
+  else if (message==="help pic" || message==="pic"){
+    reply="Pic: Changes Sprite. Available commands are:<br/>/pic magus<br/>/pic crono";
+  }
+  else if (message==="help about" || message==="about"){
+    reply="<h3>About</h3>This is a pure javascript/html5 game client using websockets. Websockets server made entirely in erlang using erlang OTP and custom code for the websockets specifications. Simple MMOs can be made using just html now. Made by Jimmy Ruska.";
+  }
+  else if (message==="help challenge" || message==="challenge"){
+    reply="<h3>Challenge</h3>/challenge Username";
+    reply="Not yet implemented";
+  }
+  else{
+    ///help challenge<br/>/help nickname<br/>/help pm
+    reply="Use the following commands:<br/>/help controls<br/>/help pic<br/>/help about<br/>";
+  }
+  console("<span style='color:white;font-weight:bold'>"+reply + "</span><br/><br/>");
+}
+
+//  var canvasData = map.getImageData(0, 0, 400, 425);
+
+
+http://javascript.crockford.com/prototypal.html
+function object(o) {
+  function F() {}
+  F.prototype = o;
+  return new F();
+}
+
+
+if (typeof Object.create !== 'function') {
+  Object.create = function (o) {
+    function F() {}
+    F.prototype = o;
+    return new F();
+  };
+}
+
+function directions(x,y){
+  if (x>y){
+    if (x>0) return "right";
+    else return "up";
+  }
+  else{
+    if (y>0) return "down";
+    else return "left";
+  }
+  if (y>0) return "down";
+  else return "up";
+}
+
+function setPixel(X,Y,R,G,B,A){
+  
+}
+
+function Background(){
+  this.pic= new Image();
+  this.pic.src = "first_screen.png";
+  this.width=225;
+  this.height=500;
+  this.subX=0;
+  this.subY=0;
+  this.grabX = ((screenWidth/scale)>(this.width-this.subX)) ? (this.width-this.subX) : parseInt(screenWidth/scale);
+  this.grabY = ((screenHeight/scale)>(this.height-this.subY)) ? (this.height-this.subY) : parseInt(screenHeight/scale);
+  
+  this.offset= 5*scale;
+  this.collisions = 
+    [ [0,92,0,50]
+      , [0,65,0,85]               
+      , [0,57,0,96]               
+      , [0,40,0,110]               
+      , [0,27,0,500]
+      , [0,40,124,150]
+      , [0,47,124,190]
+      , [0,85,173,200]
+      , [0,96,189,228]
+      , [0,85,228,263]
+      , [0,94,263,296]
+      , [0,82,263,313]
+      , [0,65,263,326]
+      , [0,49,263,500]
+      , [0,65,377,500]
+      , [0,81,439,500]
+      , [0,97,457,500]
+      , [0,500,469,500]
+      , [142,500,457,500]
+      , [164,500,425,500]
+      , [177,500,401,500]
+      , [164,500,313,402]
+      , [180,500,0,500]
+      , [148,500,217,300]
+      , [133,500,233,280]
+      , [160,500,77,153]
+      , [150,500,90,125]
+      , [114,500,0,50]
+      , [124,152,0,66]
+      ];
+  [ [0,250,639,700]
+    ,  [250,290,607,700]
+    , [290,300,400,650]
+    , [270,290,397,413]
+    , [240,280,341,390]
+    , [270,330,326,340]
+    , [327,350,268,340]
+
+    , [119,200,0,100]
+    , [207,223,0,61]
+    , [216,343,0,100]
+    , [239,305,0,129]
+    , [0,130,85,181]
+    , [0,100,181,209]
+    , [0,79,213,250]
+    , [0,100,218,295]
+    , [0,167,290,365]
+    , [0,180,290,420]
+    , [160,207,300,341]
+    , [0,135,420,445]
+    , [0,90,437,490]
+    , [0,127,490,600]
+    , [0,183,605,690]
+
+    , [325,500,101,325]
+    , [300,500,141,265]
+    , [271,310,173,229]
+    ]; 
+}
+
+function Thing(){
+  this.what = "tile";
+  this.id = ++increment;
+  this.content={};
+  if (arguments.length>0) for (property in arguments[0]) this[property]=arguments[0][property];
+}
+
+/*
+  things.push(new Thing({what:"tile",content:new Tile({pic:img("wolven_top.gif"),width:32,height:33,x:87*scale,y:80*scale,collision:false})}));
+  things.push(new Thing({what:"tile",content:new Tile({pic:img("wolven_bottom.gif"),width:32,height:14,x:87*scale,y:(80*scale)+33*scale,collision:true})}));
+*/
+
+/*
+  things.push(new Thing({what:"tile",content:new Tile({pic:img("mudkip_top.gif"),width:40,height:34,x:87*scale,y:(400*scale),collision:false})}));
+  things.push(new Thing({what:"tile",content:new Tile({pic:img("mudkip_bottom.gif"),width:40,height:8,x:87*scale,y:(400*scale)+34*scale,collision:true})}));
+*/
+
+function img(pic){
+  var x=new Image();
+  x.src=pic;
+  return x;
+}
+
+function Tile(){
+  this.what="";
+  this.pic= new Image();
+  this.x=0;
+  this.y=0;
+  this.overlay=false;
+  this.subX=0;
+  this.subY=0;  
+  this.width=0;
+  this.height=0;  
+  this.blocking=false;
+  this.action=false;
+  this.animation=false;
+  if (arguments.length>0) for (property in arguments[0]) this[property]=arguments[0][property];
+}
+
+
+function addTile(pic,width,height,x,y,collision){
+  var thing=new Tile();
+  thing.pic=pic;
+  thing.width=width;
+  thing.height=height;
+  thing.x=x*scale;
+  thing.y=y*scale;
+  thing.collision=collision;
+  var tile = new Thing();
+  tile.what="tile";
+  tile.content=thing;
+  things.push(tile);
+}
+
+
+function User(){
+  this.who=defaultUsername;
+  this.pic= new Image();
+  this.pic.src="crono_walk.gif";
+  this.width=27; //34
+  this.height=37;
+  this.x=104;
+  this.y=64;
+  this.targetX=0;
+  this.targetY=0;
+  this.lastMessage=0;
+  this.say="";
+  this.collide=new Rect();
+  this.sayExpiration=0;
+  this.blocks = {}
+  this.offset=4;
+  this.mobile=false;
+  this.frame=0;
+  this.index=2;
+  this.state="down";
+  this.animate = {start: 1
+                  , end: 6
+                  , timer: 75                      
+                  , up: 0
+                  , right: 1
+                  , down: 2
+                  , left: 3
+  }
+  if (arguments.length>0) for (property in arguments[0]) this[property]=arguments[0][property];
+}
+
+
+User.prototype.left=function(){
+  var x=this.x*scale;
+  var y=this.y*scale;
+  var offset=this.offset*scale;
+  if (x < 0 || hitTest(-offset,0)) return;
+  else if (0>(background.subX-offset) || (x > screenWidth/2))  you.x-=you.offset;
+  else background.subX-=offset;
+}
+  User.prototype.right=function(){
+    var x=this.x*scale;
+    var y=this.y*scale;
+    var offset=this.offset*scale;
+    if ((x+this.width+offset+5) > screenWidth || hitTest(offset,0)) return;
+    else if (background.width<(background.subX+background.grabX+offset) || (x+this.width < screenWidth/2))  you.x+=you.offset;
+    else background.subX+=offset;
+  }
+    User.prototype.up=function(){
+      var x=this.x*scale;
+      var y=this.y*scale;
+      var offset=this.offset*scale;
+
+      if (y < 0 || hitTest(0,-offset)) return;
+      if (0>(background.subY-offset) || (y+this.height)>screenHeight/2)  you.y-=you.offset;
+      else background.subY-=offset;
+    }
+      User.prototype.down=function(){
+        var x=this.x*scale;
+        var y=this.y*scale;
+        var offset=this.offset*scale;
+
+        if (y+this.height+offset > screenHeight || hitTest(0,offset)) return;
+        if (background.height<(background.subY+background.grabY+offset) || (y+this.height)< screenHeight/2)  you.y+=you.offset;
+        else background.subY+=offset;
+      }
+
+        $(document).ready(function() {
+            setInterval("redraw()", 90);
+
+            $('#say').blur(function() {
+                moveLock=false;
+              });
+            $('#say').focus(function() {
+                moveLock=true;
+              });
+
+            document.addEventListener("keydown", 
+                                      function(e){
+                                        var code = e.keyCode || e.which;
+                                        if (code === 17 || code===27){
+                                          if (moveLock===false){
+                                            moveLock=true;
+                                            $("#say").focus();
+                                          }
+                                          else{
+                                            moveLock=false;
+                                            $("#say").blur();                
+                                          }
+                                        }
+                                      },false);
+            
+            /*
+              $(document).keypress(function(event) {
+              var code = e.keyCode || e.which;
+              if (code==96  || code==126){
+              $("#say").focus();
+              }
+              });
+            */
+            $('#say').keypress(function(event) {
+                if (event.keyCode == '13') {
+                  event.preventDefault();
+                  say();
+                }
+
+                return event;
+              });
+
+
+          });
+
+
+
+function test(direction){  
+  if (you.mobile===false){
+    you.state=direction;
+    you.mobile=true;
+  }
+  you[direction]();
+}
+
+function hitTest(dx,dy){
+  var x=you.x*scale;
+  var y=you.y*scale;
+  var offset=you.offset*scale;
+  if (dy>0){
+    ry=y+you.height*scale+offset;
+    rx=x+(you.width/2)*scale;
+  }
+  else if (dy<0){
+    ry=y+you.height*scale-offset;
+    rx=x+(you.width/2)*scale;    
+  }
+  else if (dx>0){
+    ry=y+you.height*scale;
+    rx=x+you.width*scale-6*scale;    
+  }
+  else if (dx<0){
+    ry=y+you.height*scale;
+    rx=x+5*scale;    
+  }
+  x=rx+background.subX*scale;
+  y=ry+background.subY*scale;
+  //$('#debug').val(x + "," + y);
+  var hit=background.collisions;
+  // alert("ok");
+  for (var i in hit){
+    var test = hit[i];
+    // console(test+" "+x+" "+y );
+    if (x > test[0]*scale && x < test[1]*scale && y > test[2]*scale && y < test[3]*scale) return true;
+  }
+  for (i in things){
+    if (things[i].what==="tile"){
+      var tile=things[i].content;
+      if (tile.collision===true){
+        //        $('#debug').val(x+" "+y+" "+tile.x+" "+tile.y);
+        //map.fillStyle = "rgb(0,255,0)";
+        //        map.fillRect(tile.x,tile.y,tile.width*scale,tile.height*scale);
+        var xx=tile.x-scale-background.subX;
+        var yy=tile.y-scale-background.subY;
+        if (x > xx && x < (xx+tile.width*scale) && y > yy-7 && y < (yy+tile.height*scale)) return true;
+      }
+    }
+  }
+  return false;
+}
+
+function Rect(){
+  this.x=0;
+  this.y=0;
+  this.width=0;
+  this.height=0;
+}
+
+function Draw(){
+  this.pic;
+  this.subX;
+  this.subY;
+  this.x;
+  this.y;
+  this.width;
+  this.height;
+  this.sizeX;
+  this.sizeY;
+  if (arguments.length>0) for (property in arguments[0]) this[property]=arguments[0][property];
+}
+
+function sorts(a,b){
+  return (a.y+a.height*scale)-(b.y+b.height*scale);
+}
+
+function redraw(){
+  you.collide=new Rect();
+  //background.subX+
+  /*
+    you.collide.x=you.x+background.subX+(you.width*scale)/2;
+    you.collide.y=you.y+background.subY+(you.height*.88)*scale;
+    you.collide.width=10;
+    you.collide.height=10;
+  */
+  noMove=true;
+
+  if (moveLock===false){
+    if (Key.isDown(75) || Key.isDown(83) ||Key.isDown(Key.DOWN)){
+      test("down");
+      noMove=false;
+    }
+    if (Key.isDown(73) || Key.isDown(87) || Key.isDown(Key.UP)){
+      test("up");
+      noMove=false;
+    }
+    if (Key.isDown(76) || Key.isDown(68) || Key.isDown(Key.RIGHT)){
+      test("right");
+      noMove=false;
+    }
+    if (Key.isDown(74) || Key.isDown(65) || Key.isDown(Key.LEFT)){
+      test("left");
+      noMove=false;
+    }
+    if (noMove){
+      you.mobile=false;
+    }
+  }
+  canvas.width=canvas.width;
+  what=you;
+  index=what.animate[what.state];
+  if (what.mobile===true){
+    frame=what.frame;
+    what.frame = (what.animate.end===frame) ? 1 : frame+1;
+  }
+  else frame=0;
+
+  map.drawImage(background.pic, background.subX, background.subY, background.grabX, background.grabY, 0, 0, background.grabX*scale, background.grabY*scale);
+
+  var foo = new Date; 
+  now = foo.getTime();  
+  var under=[];
+  var over=[];
+  var drawQueue=[];
+  map.fillStyle    = '#FFF';
+  /*
+    map.shadowOffsetX = 2;
+    map.shadowOffsetY = 2;
+    map.shadowBlur    = 0;
+    map.shadowColor   = '#FFF';
+  */
+
+  for (var i in things){
+    var thing = things[i];
+    if (thing.what==="tile"){
+      var tile = thing.content;
+      if (tile.overlay===true) over.push(tile);
+      else under.push(tile);
+    }
+    else if (thing.what==="player"){
+      var player = thing.content;
+      var size=8*scale;
+      map.font = "bold "+size+"px sans-serif"; 
+      var xx=player.x-(background.subX);
+      var yy=player.y-(background.subY);
+      var xxt=player.targetX-(background.subX);
+      var yyt=player.targetY-(background.subY);
+      //$('#debug').val(xx+","+yy+" "+xxt+","+yyt);
+      if (xx===xxt && yy===yyt){
+        player.mobile=false;
+        player.frame=0;
+      }
+      else{
+        var dx=xxt-xx;
+        var dy=yyt-yy;
+        //        alert(dx+","+dy);
+        player.index=player.animate[directions(dx,dy)];
+        player.frame = (player.animate.end===player.frame) ? 1 : player.frame+1;
+        var sign= (dx<0) ? -1 : 1;
+        dx=Math.abs(dx);
+        if (dx<6){
+          player.x=player.targetX;
+        }
+        else{
+          player.x+=6*sign;
+          xx+=6*sign;
+        }
+        var sign= (dy<0) ? -1 : 1;
+        dy=Math.abs(dy);
+        if (dy<6){
+          player.y=player.targetY;
+        }
+        else{
+          player.y+=6*sign;
+          yy+=6*sign;
+        }
+      }
+      map.fillText(player.who, player.x*scale-(background.subX*scale),player.y*scale-(background.subY*scale));
+      drawQueue.push(new Draw({pic:player.pic, subX:player.width*player.frame, subY:player.height*player.index, width:player.width, height:player.height, x: xx, y: yy, sizeX:player.width, sizeY:player.height}));
+      if (player.say!==""){
+        map.font = "bold 12px sans-serif";
+        asdf= (player.say.length<35) ? player.say.length : 35;      
+        linebreak(player.say,xx+(player.width*scale)/2-(asdf/2)*7, (yy+player.height*scale+10));
+      }
+
+    }
+  } // for things 
+
+  if (what.say!=="" && what.sayExpiration<now) what.say="";
+  //  $('#debug').val((you.x+background.subX) + "," + (you.y+background.subY));
+  //$('#debug').val((you.collide.x) + "," + (you.collide.y));
+
+  //  map.drawImage(what.pic, 27*frame, 37*index, what.width, 20, what.x, what.y, what.width*scale, 20*scale);
+  //  map.drawImage(what.pic, 27*frame, (37*index)+20, what.width, what.height-20, what.x, what.y+20*scale, what.width*scale, (what.height-20)*scale);
+
+  for(i in under){
+    var tile=under[i];
+    //    map.drawImage(tile.pic, 0, 0, tile.width, tile.height, tile.x-background.subX*scale, tile.y-background.subY*scale, tile.width*scale,  tile.height*scale);
+    //    $('#debug').val(tile.y+" "+background.subY+" "+(tile.y-background.subY));
+    drawQueue.push(new Draw({pic:tile.pic, subX:0, subY:0, width:tile.width, height:tile.height, x:tile.x-background.subX*scale, y:tile.y-background.subY*scale, sizeX:tile.width, sizeY:tile.height}));
+  }
+  
+
+  /*
+    var rx=what.x;
+    var ry=what.y;
+
+    if (what.state==="down"){
+    ry=what.y+what.height*scale+what.offset*scale;
+    rx=what.x+(what.width/2)*scale;
+    }
+    else if (what.state==="up"){
+    ry=what.y+what.height*scale-what.offset*scale;
+    rx=what.x+(what.width/2)*scale;    
+    }
+    else if (what.state==="right"){
+    ry=what.y+what.height*scale;
+    rx=what.x+what.width*scale-6*scale;    
+    }
+    else if (what.state==="left"){
+    ry=what.y+what.height*scale;
+    rx=what.x+5*scale;
+    }
+
+    map.fillStyle = "rgb(200,0,0)";
+    map.fillRect(rx,ry,2,2);
+  */
+  //  if (what.state=="down") rx=you.x
+
+  drawQueue.push(new Draw({pic:what.pic, subX:what.width*frame, subY:what.height*index, width:what.width, height:what.height, x:what.x, y:what.y, sizeX:what.width, sizeY:what.height}));
+
+  drawQueue=drawQueue.sort(sorts);
+  for (i in drawQueue){
+    var draw=drawQueue[i];
+    map.drawImage(draw.pic, draw.subX, draw.subY, draw.width, draw.height, draw.x*scale, draw.y*scale, draw.width*scale,  draw.height*scale);
+  }
+
+
+  var size=8*scale;
+  map.font = "bold "+size+"px sans-serif"; 
+  map.fillText(what.who, what.x*scale-(what.who.length/2)*4, what.y*scale-2*scale);
+  if (what.say!==""){
+    map.font = "bold 12px sans-serif";
+    asdf= (what.say.length<35) ? what.say.length : 35;      
+    linebreak(what.say,what.x*scale+(what.width*scale)/2-(asdf/2)*7, (what.y*scale+what.height*scale+10));
+  }
+  you.mobile=false;
+  
+  //  map.fillRect(what.collide.x-background.subX,what.collide.y-background.subY,what.collide.width,what.collide.height);
+
+  for(i in over){
+    var tile=over[i];
+    map.drawImage(tile.pic, 0, 0, tile.width, tile.height, tile.x-background.subX*scale, tile.y-background.subY*scale, tile.width*scale,  tile.height*scale);
+  }
+}
+
+function linebreak(text,X,Y){
+  if (text.length>35){
+    var newString="";
+    for (var i=0,replace=false,len=text.length;i<len;i++){
+      if ((i+1)%35===0){
+        replace=true;
+      }
+      if (replace===true && what.say.charAt(i)===" "){
+        map.fillText(newString,X,Y);
+        newString = "";
+        Y+=12;
+        replace=false;
+      }
+      else  newString = newString + what.say.charAt(i);
+    }
+    map.fillText(newString,X,Y);
+  }
+  else map.fillText(text,X,Y);
+}
+
+
+function draw(){
+ 
+  var crono = new Image();
+  crono.src = 'crono_walk.gif';
+  map.drawImage(crono, 27*0, 37*2, 27, 37, 0, 0, 27, 37);
+
+  /*
+    for (var i=0, len=bunchies.length; i<len; i+=1){
+    var x=bunchies[i]; //(bunchies[i]+(bunchies[i+1]*107))*4;//
+    //    document.write(x+", ");
+    canvasData.data[x]=0;
+    canvasData.data[x+1]=0;
+    canvasData.data[x+2]=0;
+    canvasData.data[x+3]=255;
+    }
+    map.putImageData(canvasData, 0, 0);
+  */
+}
+/*
+  map.beginPath();
+  map.lineTo(100,100);
+  map.strokeStyle = "#000";
+  map.stroke();
+*/
+
+
+function sockChange(){
+  var xx=parseInt(you.x)+background.subX;
+  var yy=parseInt(you.y)+background.subY;
+  if ((last[0] === xx && last[1] ===yy)===false){
+    last = [xx,yy];
+    send_data("move||"+(xx)+"||"+(yy));
+  }
+}        
+
+function console(message,type){
+  consoleArr.pop();
+  consoleArr.unshift(message+"<br/>");
+  $('#console').html(consoleArr.join(""));
+}
+
+function moveUser(user,x,y){
+  for(var i in things){
+    if (things[i].what==="player" && things[i].content.who===user){
+      //things[i].content.x=x;
+      //things[i].content.y=y;
+      //      alert(x+" "+y);
+      things[i].content.targetX=parseInt(x);
+      things[i].content.targetY=parseInt(y);
+      return true;
+    }
+  }
+}
+
+function userExists(user,sprite,auth,x,y){
+  x=parseInt(x);
+  y=parseInt(y);
+  var pic=new Image();
+  pic.src=sprites[parseInt(sprite)];
+  console("<span color='orange'>"+$('<div/>').text(user).html()+" has connected to chat!</span>");
+  things.push(new Thing({what:"player",content: new User({who: user ,x: x,y: y,targetX: x,targetY: y,index:1,pic:pic})}));
+}
+
+
+    var __interval;
+
+    function iframe_connect(){
+      console("Connected to comet server!");
+      //$('sayForm').attr("onSubmit","return say();");
+      __connected=true;
+      __interval=setInterval("sockChange()", 1000);
+    }
+    function iframe_break(){
+      __connected=false;
+      console("Connection Closed. You are alone again in your dark room. Refresh the page to reconnect?");
+    }
+
+    function handler(data){
+      var i = data.indexOf(" @@@ ");
+      var action = data.slice(0,i);
+      var datas = data.slice(i+5);
+      //console("'"+action+"' - '"+datas+"'");
+      if (action==="move"){
+        //made by jimmy ruska
+        var person=datas.split("||");
+        moveUser(person[0],person[1],person[2]);
+      }
+      else if (action==="say"){
+        var person=datas.split("||");
+        console("<span style='font-weight:bold;color:white'>"+$('<div/>').text(person[0]).html()+"</span>: "+person[1]);
+        for (var i in things){
+          if (things[i].what==="player" && things[i].content.who===person[0]){
+            things[i].content.say=person[1];
+            setTimeout(function(){things[i].content.say="";},5000);
+          }
+        }
+      }
+      else if (action==="login"){
+        //made by  jimmy ruska
+        var person=datas.split("||"); //user,sprite,auth,X,Y
+        userExists(person[0],person[1],person[2],person[3],person[4]);
+      }
+      else if (action==="logout"){
+        console(datas+" disconnected");
+        for (var i in things){
+          if (things[i].what==="player" && things[i].content.who===datas)
+            delete things[i];
+        }
+      }
+      if (action==="all" && datas!=="[[]]"){
+        var arr=jQuery.parseJSON(datas);
+        for (i in arr){
+          var person=arr[i];
+          userExists(person[0],person[1],person[2],person[3],person[4]);
+        }
+      }
+      else if(action==="alert"){
+        console("<span style='color:red'>"+datas+"</span>");
+      }
+    }
+
+
+$(document).ready(function(){
+   
+    $("#slider").slider({
+      animate: true,
+          value: ((scale-1)/10)*200,
+          change: handleSliderChange
+          //          slide: handleSliderSlide
+          });
+
+    function handleSliderChange(e, ui){
+      scale=1+(ui.value/200)*10;
+      if (scale<1.2) scale=1;
+      canvas.width=screenWidth=200*scale;
+      canvas.height=screenHeight=130*scale;
+      moveLock=false;
+    }
+
+
+
+    /*
+      function handleSliderSlide(e, ui){
+      var maxScroll = $("#content-scroll").attr("scrollWidth") - 
+      $("#content-scroll").width();
+      $("#content-scroll").attr({scrollLeft: ui.value * (maxScroll / 100) });
+      }
+    */    
+
+    if (__support) {
+      console("Yay you have websockets");
+      //debug("Horray you have web sockets\nTrying to connect...");
+      // ws = new WebSocket("ws://76.74.253.61:844/websession");
+      if (document.location.href && document.location.href.indexOf("localhost")!==-1){
+        ws = new (window[__support])("ws://localhost:5055/ws/");     
+      } else ws = new (window[__support])("ws://rp.eliteskills.com/ws/");
+
+      ws.onopen = function() {
+        console("Connected to websocket server");
+        __connected=true;
+        ws.send("register||"+you.who+"||0||"+you.x+"||"+you.y);
+        // Web Socket is connected. You can send data by send() method.
+        //$('sayForm').attr("onSubmit","return say();");
+        //        $('#say').focus();
+        __interval=setInterval("sockChange()", 350);
+      };
+
+
+
+      ws.onmessage = function (evt){
+        var data = evt.data;
+        handler(data);
+      };
+      
+      ws.onclose = function(){
+        console("Websocket Closed. You are alone again in your dark room. Refresh the page to reconnect?");
+        __connected=false;
+      };
+    } else {
+      $(document).ready(function() {
+          $('#iframe').append('<iframe src="http://rp.eliteskills.com/comet/forever?data='+encodeURIComponent("register||"+you.who+"||0||"+you.x+"||"+you.y)+'" style="visibility:hidden"></iframe>');
+        });
+    };
+  });
+
+/*
+  ws.send("challenge||"+arr[1]);
+  ws.send("pic||"+arr[1]);
+  ws.send("nick||"+arr[1]);
+
+  ws.send("say||"+you.say);
+  ws.send("move||"+(xx)+"||"+(yy));
+
+  say @@@ who || what
+  login @@@ user,sprite,auth,X,Y
+  logout @@@ user
+  all @@@ json array of user,sprite,auth,X,Y
+
+*/
+</script>
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+</html>
