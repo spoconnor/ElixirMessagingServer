@@ -1,4 +1,4 @@
-defmodule Websocket.Simple do
+defmodule WebsocketSimple do
   defstruct(
     id:  0,
     map:  0,

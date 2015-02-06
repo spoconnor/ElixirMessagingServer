@@ -1,4 +1,4 @@
-defmodule Websocket.QConsumer do
+defmodule WebsocketQConsumer do
   use GenServer
   use AMQP
 
@@ -35,7 +35,7 @@ defmodule Websocket.QConsumer do
   defp consume(channel, tag, redelivered, payload) do
     try do
       Lib.trace("Received msg from queue", payload)
-      Websocket.Users.notify(Websocket.Users, payload)
+      WebsocketUsers.notify(WebsocketUsers, payload)
       Basic.ack channel, tag
       #Basic.reject channel, tag, requeue: false
     rescue

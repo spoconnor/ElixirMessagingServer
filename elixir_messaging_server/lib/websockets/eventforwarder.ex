@@ -1,4 +1,4 @@
-defmodule Websocket.EventForwarder do
+defmodule WebsocketEventForwarder do
 use GenEvent
 
 def handle_event(event, parent) do

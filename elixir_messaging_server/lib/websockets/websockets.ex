@@ -1,4 +1,4 @@
-defmodule Websocket.Websockets do
+defmodule WebsocketWebsockets do
 
 # TODO
 def allowedOrigin do
@@ -20,7 +20,7 @@ def handshake(bin,callback) do
     httpRequest = bin
     fields = String.split(httpRequest, [" ", "\r\n"]) #<<0x0d0a::16>>])
     Lib.trace("Fields: #{fields}")
-    %Websocket.Websock{
+    %WebsocketWebsock{
                key: key,
                key1: _key1,
                key2: _key2,
@@ -30,7 +30,7 @@ def handshake(bin,callback) do
                request: _request,
                host: _host,
                port: _port
-            } = parseKeys(fields,%Websocket.Websock{allowed: allowedOrigin, callback: callback})
+            } = parseKeys(fields,%WebsocketWebsock{allowed: allowedOrigin, callback: callback})
 
     # TODO - filter unsupported protocols
 
@@ -131,11 +131,11 @@ def parseKeys(["Origin:",origin|t],websock) do
   #Lib.trace("ParseKeys Origin: #{origin}")
   parseKeys(t,%{websock | origin: origin})
 end
-def parseKeys([], %Websocket.Websock{origin: :undefined, host: :undefined} = _w) do
+def parseKeys([], %WebsocketWebsock{origin: :undefined, host: :undefined} = _w) do
   #Lib.trace("ParseKeys Undefined")
   :nil
 end
-def parseKeys([], %Websocket.Websock{} = w) do
+def parseKeys([], %WebsocketWebsock{} = w) do
   #Lib.trace("ParseKeys end")
   case  w.allowed do
     any ->
@@ -161,11 +161,11 @@ def parseKeys([],w) do
   throw("Missing Information")
 end
 
-def parseKeys([ignore|t], %Websocket.Websock{callback: :false} = w) do
+def parseKeys([ignore|t], %WebsocketWebsock{callback: :false} = w) do
   #Lib.trace("ParseKeys Ignoring [#{ignore}|t] callback=false")
   parseKeys(t,w)
 end
-def parseKeys([ignore|t], %Websocket.Websock{} = w) do
+def parseKeys([ignore|t], %WebsocketWebsock{} = w) do
   #Lib.trace("ParseKeys Ignoring [#{ignore}|t]")
   f=w.callback
   parseKeys(t, %{w | callbackData: f})

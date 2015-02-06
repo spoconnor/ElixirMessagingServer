@@ -1,4 +1,4 @@
-defmodule Websocket.Users do
+defmodule WebsocketUsers do
   use GenServer
 
   def start_link(opts \\ []) do
@@ -14,7 +14,7 @@ defmodule Websocket.Users do
   end
 
   def init(:ok) do
-    Lib.trace("Starting Websocket.Users")
+    Lib.trace("Starting WebsocketUsers")
     users = HashDict.new
     {:ok, users}
   end

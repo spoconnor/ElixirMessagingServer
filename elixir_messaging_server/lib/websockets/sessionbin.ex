@@ -1,4 +1,4 @@
-defmodule Websocket.SessionBin do
+defmodule WebsocketSessionBin do
 
 # This code can parse the PHP Session. For now, I'm just using it to see if the session exists
 # in order to authenticate a particular name. Authenticated names will show up in a different

@@ -1,4 +1,4 @@
-defmodule Websocket.Connect do
+defmodule WebsocketConnect do
 use Bitwise
 
 defmacro timeoutTime do
@@ -14,14 +14,14 @@ def accept_connections(s) do
   spawn(fn() -> accept_connections(s) end)
   receive do
     {_tcp,_,bin} ->
-      reply =  Websocket.Websockets.handshake(bin)
+      reply =  WebsocketWebsockets.handshake(bin)
       Lib.trace("Reply: #{reply} to '#{:erlang.port_info(clientS)[:id]}'")
       Lib.trace(:erlang.port_info(clientS))
       :gen_tcp.send(clientS, reply)
-      #Websocket.Websockets.sendTcpMsg(clientS, reply)
+      #WebsocketWebsockets.sendTcpMsg(clientS, reply)
       step2(clientS)
     after timeoutTime ->
-      Websocket.Websockets.die(clientS, "Timeout on Handshake")
+      WebsocketWebsockets.die(clientS, "Timeout on Handshake")
   end
 end
 
@@ -34,7 +34,7 @@ def step2(clientS) do
       {header,body} = Packet.decode(str)
       registerMsg(clientS, header, body)
     after timeoutTime ->
-      Websocket.Websockets.die(clientS,"Timeout on Handshake")
+      WebsocketWebsockets.die(clientS,"Timeout on Handshake")
   end
 end
 
@@ -43,22 +43,22 @@ def registerMsg(clientS, header, register) do
   Lib.trace("MsgType:", header.msgtype)
   Lib.trace("Registering #{register.name}")
   #if (length(user.name)>25) do
-  #  Websocket.Websockets.die("Name too long")
+  #  WebsocketWebsockets.die("Name too long")
   #end
   {:ok,{ip,_}} = :inet.peername(clientS)
-  state = %Websocket.User{user: register.name, sock: clientS, x: 1,y: 1, ip: ip, pid: self()}
+  state = %WebsocketUser{user: register.name, sock: clientS, x: 1,y: 1, ip: ip, pid: self()}
 
   notify_pid = spawn(fn() -> notify_thread(clientS) end)
-  Websocket.Users.add_user(Websocket.Users, register.name, notify_pid)
+  WebsocketUsers.add_user(WebsocketUsers, register.name, notify_pid)
 
-  case Websocket.EsWebsock.checkUser(Websocket.Worker, state) do
-    {:fail, _} -> Websocket.Websockets.die(clientS,"Already Connected");
+  case WebsocketEsWebsock.checkUser(WebsocketWorker, state) do
+    {:fail, _} -> WebsocketWebsockets.die(clientS,"Already Connected");
     id ->
       Lib.trace("ObjectId: #{id}")
       registered = CommsMessages.Registered.new(objectid: id, motd: "Welcome!")
       data = Packet.encode(registered)
-      Websocket.Websockets.sendTcpMsg(clientS, data)
-      client(%Websocket.Simple{id: id, sock: clientS})
+      WebsocketWebsockets.sendTcpMsg(clientS, data)
+      client(%WebsocketSimple{id: id, sock: clientS})
   end
 end
 
@@ -127,14 +127,14 @@ def notify_thread(clientS) do
   receive do
     data ->
       Lib.trace("Client notify thread recd", data)
-      Websocket.Websockets.sendTcpMsg(clientS, data)
+      WebsocketWebsockets.sendTcpMsg(clientS, data)
       notify_thread(clientS)
   end
 end
 
 def logoutAndDie(state,msg) do
-    Websocket.EsWebsock.logout(Websocket.Worker, state)
-    Websocket.Websockets.die(state.sock,msg)
+    WebsocketEsWebsock.logout(WebsocketWorker, state)
+    WebsocketWebsockets.die(state.sock,msg)
 end
     
 end

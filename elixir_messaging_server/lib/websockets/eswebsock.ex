@@ -1,4 +1,4 @@
-defmodule Websocket.EsWebsock do
+defmodule WebsocketEsWebsock do
 use GenServer
 
 # This code uses erlang OTP's gen_server to handle incoming data like movements, messages and registration
@@ -20,8 +20,8 @@ def init(:ok) do
   port = 8081
   {:ok, s} = :gen_tcp.listen(port, [:binary, {:packet, 0}, {:active, :true}, {:reuseaddr, :true}, {:packet_size,1024*2},{:keepalive,:true}]) 
   Lib.trace("Accepting connections on port #{port}")
-  spawn(fn() -> Websocket.Connect.accept_connections(s) end)
-  {:ok, %Websocket.State{sock: s}}
+  spawn(fn() -> WebsocketConnect.accept_connections(s) end)
+  {:ok, %WebsocketState{sock: s}}
 end
 
 def debug(server) do
@@ -46,7 +46,7 @@ def sendToAll(server, dict,you,message) do
   #:dict.map(dict,
   #  fn(id,_) 
   #  when id===you -> :nil
-  #     (_,record) -> Websocket.Websockets.sendTcpMsg(id.sock,[0,message,255])
+  #     (_,record) -> WebsocketWebsockets.sendTcpMsg(id.sock,[0,message,255])
   #  end)
 end
 
@@ -73,13 +73,13 @@ end
 
 def handle_call({:checkUser,userState}, _, state) do
   Lib.trace("eswebsock handle call checkUser")
-  Websocket.CheckUser.checkUser(userState,state)
+  WebsocketCheckUser.checkUser(userState,state)
 end
 def handle_call(:getState, _from, state) do
   {:reply,state,state}
 end
 def handle_call(:debug, _from, state) do
-  %Websocket.State{ lookupByID: lbid, lookupByName: lbName, lookupByIP: lbip, maps: maps} = state
+  %WebsocketState{ lookupByID: lbid, lookupByName: lbName, lookupByIP: lbip, maps: maps} = state
   Lib.trace(:dict.to_list(:array.get(0,maps)))
   Lib.trace(:gb_trees.to_list(lbName))
   Lib.trace(:gb_trees.to_list(lbip))
@@ -98,15 +98,15 @@ def handle_call(_request, _from, state) do
 end
 
 def handle_cast({:say,simple,message}, state) when message !== ""  do
-  Websocket.Say.say(simple,message,state)
+  WebsocketSay.say(simple,message,state)
 end
 
 def handle_cast({:move,simple,x,y}, state) do
-  Websocket.Move.move(simple,x,y,state)
+  WebsocketMove.move(simple,x,y,state)
 end
 
 def handle_cast({:logout,simple}, state) do
-  Websocket.Logout.logout(simple,state)
+  WebsocketLogout.logout(simple,state)
 end
 
 def handle_cast(_msg, state) do
@@ -119,7 +119,7 @@ def handle_info(_info, state) do
   {:noreply, state}
 end
 
-def terminate(_reason, %Websocket.State{sock: sock} = state) do
+def terminate(_reason, %WebsocketState{sock: sock} = state) do
   :gen_tcp.close(sock)
   Lib.trace("gen_server:terminate()",{_reason,state})
   :ok

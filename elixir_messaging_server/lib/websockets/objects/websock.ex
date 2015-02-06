@@ -1,4 +1,4 @@
-defmodule Websocket.Websock do
+defmodule WebsocketWebsock do
   defstruct(
     key:  :nil,
     key1:  :nil,
