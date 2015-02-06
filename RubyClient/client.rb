@@ -56,24 +56,6 @@ def StartReceiveThread()
 end
 
 
-# Ping server
-puts("Pinging server '#{serverurl}'")
-header = Header.new
-header.msgtype = PING
-msg = Ping.new
-msg.count = 1
-client.send(header.to_s + msg.to_s)
-
-data = client.receive()
-header = Header.new
-header.parse_from_string(data[2..9999])
-if (header.msgtype != PONG) 
-  puts("Unexcpected message type '#{header.msgtype}'")
-  exit()
-end
-reply = PONG.new
-puts("Received pong '#{reply.count}'")
-
 # Login
   loggedin = false
   username = ""
@@ -113,16 +95,20 @@ puts("Received pong '#{reply.count}'")
     if (send)
       client.send(header.to_s + msg.to_s)
       data = client.receive()
+
       header = Header.new
-      header.parse_from_string(data[2..9999])
+      header.parse_from_string(data[0..1])
       if (header.msgtype != RESPONSE) 
         puts("Unexcpected message type '#{header.msgtype}'")
         exit()
       end
       reply = Response.new
-      puts("Received response '#{response.code}' #{response.message}")
-      if (response.code = 1) 
+      reply.parse_from_string(data[2..9999])
+      puts("Received response '#{reply.code}' #{reply.message}")
+      if (reply.code = 1) 
         loggedin = true
+      else
+        puts("Login failed")
       end
     end
   end

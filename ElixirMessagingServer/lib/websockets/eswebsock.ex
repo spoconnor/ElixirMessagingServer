@@ -1,13 +1,8 @@
 defmodule WebsocketEsWebsock do
 use GenServer
 
-# This code uses erlang OTP's gen_server to handle incoming data like movements, messages and registration
+# This code uses erlang OTP's gen_server to handle incoming data like messages and registration
 # All data is centralized in the server state and is lost on exit. At this time there is no centralized database
-# though I don't plan on adding features that require one, like a player inventory or permanent statistics.
-#
-# There is a performance penalty from using modules, but putting all the code here gets ridiculous pretty fast
-# It's hard to debug and read things when everything is nested, stacking functions on one page isn't any prettier
-
 
 def start_link(opts \\ []) do
   GenServer.start_link(__MODULE__, :ok, opts)

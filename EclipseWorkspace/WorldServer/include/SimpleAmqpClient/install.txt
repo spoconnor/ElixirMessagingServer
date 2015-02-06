@@ -1,0 +1,2 @@
+apt-get install librabbitmq-dev
+git clone https://github.com/alanxz/SimpleAmqpClient.git

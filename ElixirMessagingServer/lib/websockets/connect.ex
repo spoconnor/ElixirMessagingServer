@@ -32,31 +32,31 @@ def step2(clientS) do
       str = to_string(decodeString(bin1))
       Lib.trace("Received:", str)
       {header,body} = Packet.decode(str)
-      registerMsg(clientS, header, body)
+      loginMsg(clientS, header, body)
     after timeoutTime ->
       WebsocketWebsockets.die(clientS,"Timeout on Handshake")
   end
 end
 
-# RegisterClient
-def registerMsg(clientS, header, register) do
+# LoginClient
+def loginMsg(clientS, header, login) do
   Lib.trace("MsgType:", header.msgtype)
-  Lib.trace("Registering #{register.name}")
+  Lib.trace("Login #{login.username}")
   #if (length(user.name)>25) do
   #  WebsocketWebsockets.die("Name too long")
   #end
   {:ok,{ip,_}} = :inet.peername(clientS)
-  state = %WebsocketUser{user: register.name, sock: clientS, x: 1,y: 1, ip: ip, pid: self()}
+  state = %WebsocketUser{user: login.username, sock: clientS, x: 1,y: 1, ip: ip, pid: self()}
 
   notify_pid = spawn(fn() -> notify_thread(clientS) end)
-  WebsocketUsers.add_user(WebsocketUsers, register.name, notify_pid)
+  WebsocketUsers.add_user(WebsocketUsers, login.username, notify_pid)
 
   case WebsocketEsWebsock.checkUser(WebsocketWorker, state) do
     {:fail, _} -> WebsocketWebsockets.die(clientS,"Already Connected");
     id ->
       Lib.trace("ObjectId: #{id}")
-      registered = CommsMessages.Registered.new(objectid: id, motd: "Welcome!")
-      data = Packet.encode(registered)
+      response = CommsMessages.Response.new(code: 1, message: "Welcome #{login.username}!")
+      data = Packet.encode(response)
       WebsocketWebsockets.sendTcpMsg(clientS, data)
       client(%WebsocketSimple{id: id, sock: clientS})
   end
