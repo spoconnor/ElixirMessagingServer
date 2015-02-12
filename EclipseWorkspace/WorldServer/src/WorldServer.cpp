@@ -78,6 +78,7 @@ int main()
         Say sayMsg;
         //Map mapMsg;
         //TArray2<uint>* map;
+        std::string replyHeadStr = "";
         std::string replyBodyStr = "";
         switch (header.msgtype())
         {
@@ -106,6 +107,7 @@ int main()
               continue;
             }
             std::cout << "Say: '" << sayMsg.text() << "'\n";
+            replyHeadStr = headStr;
             replyBodyStr = bodyStr; // Bounce back to clients
             break;
 
@@ -134,7 +136,7 @@ int main()
         msleep(2000);
 
         BasicMessage::ptr_t outgoing_message = BasicMessage::Create();
-        outgoing_message->Body(replyBodyStr);
+        outgoing_message->Body(replyHeadStr + replyBodyStr);
         channel->BasicPublish(EXCHANGE_NAME, OUTBOUND_ROUTING_KEY, outgoing_message);
       }
       else

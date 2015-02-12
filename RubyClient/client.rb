@@ -28,33 +28,6 @@ objectid = 0
   LOGIN = 5
   SAY = 6
 
-def StartReceiveThread()
-  Thread.new() do
-    while data = client.receive()
-      printf("Received [%p]\n", data)
-      header = Header.new
-      header.parse_from_string(data[0..1])
-      case header.msgtype
-      when RESPONSE
-        msg = Response.new
-        msg.parse_from_string(data[2..9999])
-        puts("Response: (#{msg.code}) #{msg.message}")
-      when SAY
-        puts("Say")
-        msg = Say.new
-        msg.parse_from_string(data[2..9999])
-        puts("From: #{msg.from}")
-        puts("Target: #{msg.target}")
-        puts("Text: #{msg.text}")
-      else
-        puts("Unknown")
-      end
-    end
-    printf("Closing reader")
-    exit()
-  end
-end
-
 
 # Login
   loggedin = false
@@ -104,7 +77,7 @@ end
       end
       reply = Response.new
       reply.parse_from_string(data[2..9999])
-      puts("Received response '#{reply.code}' #{reply.message}")
+      puts("Response '#{reply.code}' #{reply.message}")
       if (reply.code = 1) 
         loggedin = true
       else
@@ -113,10 +86,31 @@ end
     end
   end
 
-  StartReceiveThread()
+  Thread.new() do
+    while data = client.receive()
+      #printf("Received [%p]\n", data)
+      header = Header.new
+      header.parse_from_string(data[0..1])
+      case header.msgtype
+      when RESPONSE
+        resmsg = Response.new
+        resmsg.parse_from_string(data[2..9999])
+        puts("Response: (#{resmsg.code}) #{resmsg.message}")
+      when SAY
+        #puts("Say")
+        resmsg = Say.new
+        resmsg.parse_from_string(data[2..9999])
+        puts("#{resmsg.from}: #{resmsg.text}")
+      else
+        puts("Unknown")
+      end
+    end
+    printf("Closing reader")
+    exit()
+  end
+
 
   while (1) do
-    printf(">")
     header = Header.new
     header.msgtype = SAY
     msg = Say.new
