@@ -115,8 +115,14 @@ objectid = 0
     header.msgtype = SAY
     msg = Say.new
     msg.from = username
-    msg.target = ""
-    msg.text = gets.chomp
+    parsed = gets.chomp.split(/:/)
+    if (parsed[1] == nil)
+      msg.target = ""
+      msg.text = parsed[0]
+    else
+      msg.target = parsed[0]
+      msg.text = parsed[1]
+    end
     
     client.send(header.to_s + msg.to_s)
   end

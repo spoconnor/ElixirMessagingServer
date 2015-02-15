@@ -1,6 +1,6 @@
 %{"amqp": {:git, "git://github.com/pma/amqp.git", "56c79ba83e1098db03a4ac5921eff6895ae9bd17", [tag: "v0.0.6"]},
   "amqp_client": {:hex, :amqp_client, "3.4.0"},
-  "cowboy": {:git, "git://github.com/extend/cowboy.git", "3cede06283a2b7b33ec822526341a9261574a2bf", []},
+  "cowboy": {:git, "git://github.com/extend/cowboy.git", "89c47d3d6edc8aafb4c9c4a5a86fb0239dee8f3a", []},
   "cowlib": {:git, "git://github.com/ninenines/cowlib.git", "d544a494af4dbc810fc9c15eaf5cc050cced1501", [ref: "1.0.0"]},
   "eper": {:git, "git://github.com/massemanet/eper.git", "5d4c3e9c91bd96b67a92cbdac4601c43340e1d88", []},
   "exprotobuf": {:git, "git://github.com/bitwalker/exprotobuf.git", "1cafab931d9a9284761c7388de9f4cf0b980ae8c", [tag: "0.8.3"]},
