@@ -39,9 +39,7 @@
 #   
 #   message Say 
 #   {
-#     optional string from = 1;
-#     required string target = 2;
-#     required string text = 3;
+#     required string text = 1;
 #   }
 #   
 #   enum MsgType {
@@ -56,6 +54,8 @@
 #   message Header {
 #     // Identifies type of following data
 #     required int32 msgtype = 1;
+#     required string msgFrom = 2;
+#     required string msgTo = 3;
 #   }
 # 
 
@@ -91,9 +91,7 @@ class Login < ::Protobuf::Message
 end
 class Say < ::Protobuf::Message
   defined_in __FILE__
-  optional :string, :from, 1
-  required :string, :target, 2
-  required :string, :text, 3
+  required :string, :text, 1
 end
 class MsgType < ::Protobuf::Enum
   defined_in __FILE__
@@ -107,4 +105,6 @@ end
 class Header < ::Protobuf::Message
   defined_in __FILE__
   required :int32, :msgtype, 1
+  required :string, :msgFrom, 2
+  required :string, :msgTo, 3
 end

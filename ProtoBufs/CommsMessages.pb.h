@@ -599,34 +599,10 @@ class Say : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional string from = 1;
-  inline bool has_from() const;
-  inline void clear_from();
-  static const int kFromFieldNumber = 1;
-  inline const ::std::string& from() const;
-  inline void set_from(const ::std::string& value);
-  inline void set_from(const char* value);
-  inline void set_from(const char* value, size_t size);
-  inline ::std::string* mutable_from();
-  inline ::std::string* release_from();
-  inline void set_allocated_from(::std::string* from);
-
-  // required string target = 2;
-  inline bool has_target() const;
-  inline void clear_target();
-  static const int kTargetFieldNumber = 2;
-  inline const ::std::string& target() const;
-  inline void set_target(const ::std::string& value);
-  inline void set_target(const char* value);
-  inline void set_target(const char* value, size_t size);
-  inline ::std::string* mutable_target();
-  inline ::std::string* release_target();
-  inline void set_allocated_target(::std::string* target);
-
-  // required string text = 3;
+  // required string text = 1;
   inline bool has_text() const;
   inline void clear_text();
-  static const int kTextFieldNumber = 3;
+  static const int kTextFieldNumber = 1;
   inline const ::std::string& text() const;
   inline void set_text(const ::std::string& value);
   inline void set_text(const char* value);
@@ -637,21 +613,15 @@ class Say : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:Say)
  private:
-  inline void set_has_from();
-  inline void clear_has_from();
-  inline void set_has_target();
-  inline void clear_has_target();
   inline void set_has_text();
   inline void clear_has_text();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* from_;
-  ::std::string* target_;
   ::std::string* text_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
   friend void  protobuf_AddDesc_CommsMessages_2eproto();
   friend void protobuf_AssignDesc_CommsMessages_2eproto();
@@ -723,17 +693,47 @@ class Header : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 msgtype() const;
   inline void set_msgtype(::google::protobuf::int32 value);
 
+  // required string msgFrom = 2;
+  inline bool has_msgfrom() const;
+  inline void clear_msgfrom();
+  static const int kMsgFromFieldNumber = 2;
+  inline const ::std::string& msgfrom() const;
+  inline void set_msgfrom(const ::std::string& value);
+  inline void set_msgfrom(const char* value);
+  inline void set_msgfrom(const char* value, size_t size);
+  inline ::std::string* mutable_msgfrom();
+  inline ::std::string* release_msgfrom();
+  inline void set_allocated_msgfrom(::std::string* msgfrom);
+
+  // required string msgTo = 3;
+  inline bool has_msgto() const;
+  inline void clear_msgto();
+  static const int kMsgToFieldNumber = 3;
+  inline const ::std::string& msgto() const;
+  inline void set_msgto(const ::std::string& value);
+  inline void set_msgto(const char* value);
+  inline void set_msgto(const char* value, size_t size);
+  inline ::std::string* mutable_msgto();
+  inline ::std::string* release_msgto();
+  inline void set_allocated_msgto(::std::string* msgto);
+
   // @@protoc_insertion_point(class_scope:Header)
  private:
   inline void set_has_msgtype();
   inline void clear_has_msgtype();
+  inline void set_has_msgfrom();
+  inline void clear_has_msgfrom();
+  inline void set_has_msgto();
+  inline void clear_has_msgto();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::std::string* msgfrom_;
+  ::std::string* msgto_;
   ::google::protobuf::int32 msgtype_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_CommsMessages_2eproto();
   friend void protobuf_AssignDesc_CommsMessages_2eproto();
@@ -1255,155 +1255,15 @@ inline void Login::set_allocated_password(::std::string* password) {
 
 // Say
 
-// optional string from = 1;
-inline bool Say::has_from() const {
+// required string text = 1;
+inline bool Say::has_text() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Say::set_has_from() {
+inline void Say::set_has_text() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Say::clear_has_from() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void Say::clear_from() {
-  if (from_ != &::google::protobuf::internal::kEmptyString) {
-    from_->clear();
-  }
-  clear_has_from();
-}
-inline const ::std::string& Say::from() const {
-  return *from_;
-}
-inline void Say::set_from(const ::std::string& value) {
-  set_has_from();
-  if (from_ == &::google::protobuf::internal::kEmptyString) {
-    from_ = new ::std::string;
-  }
-  from_->assign(value);
-}
-inline void Say::set_from(const char* value) {
-  set_has_from();
-  if (from_ == &::google::protobuf::internal::kEmptyString) {
-    from_ = new ::std::string;
-  }
-  from_->assign(value);
-}
-inline void Say::set_from(const char* value, size_t size) {
-  set_has_from();
-  if (from_ == &::google::protobuf::internal::kEmptyString) {
-    from_ = new ::std::string;
-  }
-  from_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Say::mutable_from() {
-  set_has_from();
-  if (from_ == &::google::protobuf::internal::kEmptyString) {
-    from_ = new ::std::string;
-  }
-  return from_;
-}
-inline ::std::string* Say::release_from() {
-  clear_has_from();
-  if (from_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = from_;
-    from_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void Say::set_allocated_from(::std::string* from) {
-  if (from_ != &::google::protobuf::internal::kEmptyString) {
-    delete from_;
-  }
-  if (from) {
-    set_has_from();
-    from_ = from;
-  } else {
-    clear_has_from();
-    from_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string target = 2;
-inline bool Say::has_target() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void Say::set_has_target() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void Say::clear_has_target() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void Say::clear_target() {
-  if (target_ != &::google::protobuf::internal::kEmptyString) {
-    target_->clear();
-  }
-  clear_has_target();
-}
-inline const ::std::string& Say::target() const {
-  return *target_;
-}
-inline void Say::set_target(const ::std::string& value) {
-  set_has_target();
-  if (target_ == &::google::protobuf::internal::kEmptyString) {
-    target_ = new ::std::string;
-  }
-  target_->assign(value);
-}
-inline void Say::set_target(const char* value) {
-  set_has_target();
-  if (target_ == &::google::protobuf::internal::kEmptyString) {
-    target_ = new ::std::string;
-  }
-  target_->assign(value);
-}
-inline void Say::set_target(const char* value, size_t size) {
-  set_has_target();
-  if (target_ == &::google::protobuf::internal::kEmptyString) {
-    target_ = new ::std::string;
-  }
-  target_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Say::mutable_target() {
-  set_has_target();
-  if (target_ == &::google::protobuf::internal::kEmptyString) {
-    target_ = new ::std::string;
-  }
-  return target_;
-}
-inline ::std::string* Say::release_target() {
-  clear_has_target();
-  if (target_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = target_;
-    target_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void Say::set_allocated_target(::std::string* target) {
-  if (target_ != &::google::protobuf::internal::kEmptyString) {
-    delete target_;
-  }
-  if (target) {
-    set_has_target();
-    target_ = target;
-  } else {
-    clear_has_target();
-    target_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string text = 3;
-inline bool Say::has_text() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void Say::set_has_text() {
-  _has_bits_[0] |= 0x00000004u;
-}
 inline void Say::clear_has_text() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void Say::clear_text() {
   if (text_ != &::google::protobuf::internal::kEmptyString) {
@@ -1489,6 +1349,146 @@ inline ::google::protobuf::int32 Header::msgtype() const {
 inline void Header::set_msgtype(::google::protobuf::int32 value) {
   set_has_msgtype();
   msgtype_ = value;
+}
+
+// required string msgFrom = 2;
+inline bool Header::has_msgfrom() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Header::set_has_msgfrom() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Header::clear_has_msgfrom() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void Header::clear_msgfrom() {
+  if (msgfrom_ != &::google::protobuf::internal::kEmptyString) {
+    msgfrom_->clear();
+  }
+  clear_has_msgfrom();
+}
+inline const ::std::string& Header::msgfrom() const {
+  return *msgfrom_;
+}
+inline void Header::set_msgfrom(const ::std::string& value) {
+  set_has_msgfrom();
+  if (msgfrom_ == &::google::protobuf::internal::kEmptyString) {
+    msgfrom_ = new ::std::string;
+  }
+  msgfrom_->assign(value);
+}
+inline void Header::set_msgfrom(const char* value) {
+  set_has_msgfrom();
+  if (msgfrom_ == &::google::protobuf::internal::kEmptyString) {
+    msgfrom_ = new ::std::string;
+  }
+  msgfrom_->assign(value);
+}
+inline void Header::set_msgfrom(const char* value, size_t size) {
+  set_has_msgfrom();
+  if (msgfrom_ == &::google::protobuf::internal::kEmptyString) {
+    msgfrom_ = new ::std::string;
+  }
+  msgfrom_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Header::mutable_msgfrom() {
+  set_has_msgfrom();
+  if (msgfrom_ == &::google::protobuf::internal::kEmptyString) {
+    msgfrom_ = new ::std::string;
+  }
+  return msgfrom_;
+}
+inline ::std::string* Header::release_msgfrom() {
+  clear_has_msgfrom();
+  if (msgfrom_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = msgfrom_;
+    msgfrom_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Header::set_allocated_msgfrom(::std::string* msgfrom) {
+  if (msgfrom_ != &::google::protobuf::internal::kEmptyString) {
+    delete msgfrom_;
+  }
+  if (msgfrom) {
+    set_has_msgfrom();
+    msgfrom_ = msgfrom;
+  } else {
+    clear_has_msgfrom();
+    msgfrom_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string msgTo = 3;
+inline bool Header::has_msgto() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void Header::set_has_msgto() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void Header::clear_has_msgto() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void Header::clear_msgto() {
+  if (msgto_ != &::google::protobuf::internal::kEmptyString) {
+    msgto_->clear();
+  }
+  clear_has_msgto();
+}
+inline const ::std::string& Header::msgto() const {
+  return *msgto_;
+}
+inline void Header::set_msgto(const ::std::string& value) {
+  set_has_msgto();
+  if (msgto_ == &::google::protobuf::internal::kEmptyString) {
+    msgto_ = new ::std::string;
+  }
+  msgto_->assign(value);
+}
+inline void Header::set_msgto(const char* value) {
+  set_has_msgto();
+  if (msgto_ == &::google::protobuf::internal::kEmptyString) {
+    msgto_ = new ::std::string;
+  }
+  msgto_->assign(value);
+}
+inline void Header::set_msgto(const char* value, size_t size) {
+  set_has_msgto();
+  if (msgto_ == &::google::protobuf::internal::kEmptyString) {
+    msgto_ = new ::std::string;
+  }
+  msgto_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Header::mutable_msgto() {
+  set_has_msgto();
+  if (msgto_ == &::google::protobuf::internal::kEmptyString) {
+    msgto_ = new ::std::string;
+  }
+  return msgto_;
+}
+inline ::std::string* Header::release_msgto() {
+  clear_has_msgto();
+  if (msgto_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = msgto_;
+    msgto_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Header::set_allocated_msgto(::std::string* msgto) {
+  if (msgto_ != &::google::protobuf::internal::kEmptyString) {
+    delete msgto_;
+  }
+  if (msgto) {
+    set_has_msgto();
+    msgto_ = msgto;
+  } else {
+    clear_has_msgto();
+    msgto_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 

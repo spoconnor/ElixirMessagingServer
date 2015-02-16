@@ -66,6 +66,8 @@ objectid = 0
       send = false
     end
     if (send)
+      header.msgFrom = msg.username
+      header.msgTo = ""
       client.send(header.to_s + msg.to_s)
       data = client.receive()
 
@@ -100,7 +102,7 @@ objectid = 0
         #puts("Say")
         resmsg = Say.new
         resmsg.parse_from_string(data[2..9999])
-        puts("#{resmsg.from}: #{resmsg.text}")
+        puts("#{header.msgFrom}: #{resmsg.text}")
       else
         puts("Unknown")
       end
@@ -114,13 +116,13 @@ objectid = 0
     header = Header.new
     header.msgtype = SAY
     msg = Say.new
-    msg.from = username
+    header.msgFrom = username
     parsed = gets.chomp.split(/:/)
     if (parsed[1] == nil)
-      msg.target = ""
+      header.msgTo = ""
       msg.text = parsed[0]
     else
-      msg.target = parsed[0]
+      header.msgTo = parsed[0]
       msg.text = parsed[1]
     end
     

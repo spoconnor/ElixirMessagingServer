@@ -37,9 +37,7 @@ option optimize_for = SPEED;
   
   message Say 
   {
-    optional string from = 1;
-    required string target = 2;
-    required string text = 3;
+    required string text = 1;
   }
   
   enum MsgType {
@@ -54,5 +52,7 @@ option optimize_for = SPEED;
   message Header {
     // Identifies type of following data
     required int32 msgtype = 1;
+    required string msgFrom = 2;
+    required string msgTo = 3;
   }
 
