@@ -693,43 +693,43 @@ class Header : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 msgtype() const;
   inline void set_msgtype(::google::protobuf::int32 value);
 
-  // required string msgFrom = 2;
-  inline bool has_msgfrom() const;
-  inline void clear_msgfrom();
-  static const int kMsgFromFieldNumber = 2;
-  inline const ::std::string& msgfrom() const;
-  inline void set_msgfrom(const ::std::string& value);
-  inline void set_msgfrom(const char* value);
-  inline void set_msgfrom(const char* value, size_t size);
-  inline ::std::string* mutable_msgfrom();
-  inline ::std::string* release_msgfrom();
-  inline void set_allocated_msgfrom(::std::string* msgfrom);
+  // required string from = 2;
+  inline bool has_from() const;
+  inline void clear_from();
+  static const int kFromFieldNumber = 2;
+  inline const ::std::string& from() const;
+  inline void set_from(const ::std::string& value);
+  inline void set_from(const char* value);
+  inline void set_from(const char* value, size_t size);
+  inline ::std::string* mutable_from();
+  inline ::std::string* release_from();
+  inline void set_allocated_from(::std::string* from);
 
-  // required string msgTo = 3;
-  inline bool has_msgto() const;
-  inline void clear_msgto();
-  static const int kMsgToFieldNumber = 3;
-  inline const ::std::string& msgto() const;
-  inline void set_msgto(const ::std::string& value);
-  inline void set_msgto(const char* value);
-  inline void set_msgto(const char* value, size_t size);
-  inline ::std::string* mutable_msgto();
-  inline ::std::string* release_msgto();
-  inline void set_allocated_msgto(::std::string* msgto);
+  // required string dest = 3;
+  inline bool has_dest() const;
+  inline void clear_dest();
+  static const int kDestFieldNumber = 3;
+  inline const ::std::string& dest() const;
+  inline void set_dest(const ::std::string& value);
+  inline void set_dest(const char* value);
+  inline void set_dest(const char* value, size_t size);
+  inline ::std::string* mutable_dest();
+  inline ::std::string* release_dest();
+  inline void set_allocated_dest(::std::string* dest);
 
   // @@protoc_insertion_point(class_scope:Header)
  private:
   inline void set_has_msgtype();
   inline void clear_has_msgtype();
-  inline void set_has_msgfrom();
-  inline void clear_has_msgfrom();
-  inline void set_has_msgto();
-  inline void clear_has_msgto();
+  inline void set_has_from();
+  inline void clear_has_from();
+  inline void set_has_dest();
+  inline void clear_has_dest();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* msgfrom_;
-  ::std::string* msgto_;
+  ::std::string* from_;
+  ::std::string* dest_;
   ::google::protobuf::int32 msgtype_;
 
   mutable int _cached_size_;
@@ -1351,143 +1351,143 @@ inline void Header::set_msgtype(::google::protobuf::int32 value) {
   msgtype_ = value;
 }
 
-// required string msgFrom = 2;
-inline bool Header::has_msgfrom() const {
+// required string from = 2;
+inline bool Header::has_from() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void Header::set_has_msgfrom() {
+inline void Header::set_has_from() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void Header::clear_has_msgfrom() {
+inline void Header::clear_has_from() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void Header::clear_msgfrom() {
-  if (msgfrom_ != &::google::protobuf::internal::kEmptyString) {
-    msgfrom_->clear();
+inline void Header::clear_from() {
+  if (from_ != &::google::protobuf::internal::kEmptyString) {
+    from_->clear();
   }
-  clear_has_msgfrom();
+  clear_has_from();
 }
-inline const ::std::string& Header::msgfrom() const {
-  return *msgfrom_;
+inline const ::std::string& Header::from() const {
+  return *from_;
 }
-inline void Header::set_msgfrom(const ::std::string& value) {
-  set_has_msgfrom();
-  if (msgfrom_ == &::google::protobuf::internal::kEmptyString) {
-    msgfrom_ = new ::std::string;
+inline void Header::set_from(const ::std::string& value) {
+  set_has_from();
+  if (from_ == &::google::protobuf::internal::kEmptyString) {
+    from_ = new ::std::string;
   }
-  msgfrom_->assign(value);
+  from_->assign(value);
 }
-inline void Header::set_msgfrom(const char* value) {
-  set_has_msgfrom();
-  if (msgfrom_ == &::google::protobuf::internal::kEmptyString) {
-    msgfrom_ = new ::std::string;
+inline void Header::set_from(const char* value) {
+  set_has_from();
+  if (from_ == &::google::protobuf::internal::kEmptyString) {
+    from_ = new ::std::string;
   }
-  msgfrom_->assign(value);
+  from_->assign(value);
 }
-inline void Header::set_msgfrom(const char* value, size_t size) {
-  set_has_msgfrom();
-  if (msgfrom_ == &::google::protobuf::internal::kEmptyString) {
-    msgfrom_ = new ::std::string;
+inline void Header::set_from(const char* value, size_t size) {
+  set_has_from();
+  if (from_ == &::google::protobuf::internal::kEmptyString) {
+    from_ = new ::std::string;
   }
-  msgfrom_->assign(reinterpret_cast<const char*>(value), size);
+  from_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* Header::mutable_msgfrom() {
-  set_has_msgfrom();
-  if (msgfrom_ == &::google::protobuf::internal::kEmptyString) {
-    msgfrom_ = new ::std::string;
+inline ::std::string* Header::mutable_from() {
+  set_has_from();
+  if (from_ == &::google::protobuf::internal::kEmptyString) {
+    from_ = new ::std::string;
   }
-  return msgfrom_;
+  return from_;
 }
-inline ::std::string* Header::release_msgfrom() {
-  clear_has_msgfrom();
-  if (msgfrom_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* Header::release_from() {
+  clear_has_from();
+  if (from_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = msgfrom_;
-    msgfrom_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = from_;
+    from_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void Header::set_allocated_msgfrom(::std::string* msgfrom) {
-  if (msgfrom_ != &::google::protobuf::internal::kEmptyString) {
-    delete msgfrom_;
+inline void Header::set_allocated_from(::std::string* from) {
+  if (from_ != &::google::protobuf::internal::kEmptyString) {
+    delete from_;
   }
-  if (msgfrom) {
-    set_has_msgfrom();
-    msgfrom_ = msgfrom;
+  if (from) {
+    set_has_from();
+    from_ = from;
   } else {
-    clear_has_msgfrom();
-    msgfrom_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_from();
+    from_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
-// required string msgTo = 3;
-inline bool Header::has_msgto() const {
+// required string dest = 3;
+inline bool Header::has_dest() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void Header::set_has_msgto() {
+inline void Header::set_has_dest() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void Header::clear_has_msgto() {
+inline void Header::clear_has_dest() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void Header::clear_msgto() {
-  if (msgto_ != &::google::protobuf::internal::kEmptyString) {
-    msgto_->clear();
+inline void Header::clear_dest() {
+  if (dest_ != &::google::protobuf::internal::kEmptyString) {
+    dest_->clear();
   }
-  clear_has_msgto();
+  clear_has_dest();
 }
-inline const ::std::string& Header::msgto() const {
-  return *msgto_;
+inline const ::std::string& Header::dest() const {
+  return *dest_;
 }
-inline void Header::set_msgto(const ::std::string& value) {
-  set_has_msgto();
-  if (msgto_ == &::google::protobuf::internal::kEmptyString) {
-    msgto_ = new ::std::string;
+inline void Header::set_dest(const ::std::string& value) {
+  set_has_dest();
+  if (dest_ == &::google::protobuf::internal::kEmptyString) {
+    dest_ = new ::std::string;
   }
-  msgto_->assign(value);
+  dest_->assign(value);
 }
-inline void Header::set_msgto(const char* value) {
-  set_has_msgto();
-  if (msgto_ == &::google::protobuf::internal::kEmptyString) {
-    msgto_ = new ::std::string;
+inline void Header::set_dest(const char* value) {
+  set_has_dest();
+  if (dest_ == &::google::protobuf::internal::kEmptyString) {
+    dest_ = new ::std::string;
   }
-  msgto_->assign(value);
+  dest_->assign(value);
 }
-inline void Header::set_msgto(const char* value, size_t size) {
-  set_has_msgto();
-  if (msgto_ == &::google::protobuf::internal::kEmptyString) {
-    msgto_ = new ::std::string;
+inline void Header::set_dest(const char* value, size_t size) {
+  set_has_dest();
+  if (dest_ == &::google::protobuf::internal::kEmptyString) {
+    dest_ = new ::std::string;
   }
-  msgto_->assign(reinterpret_cast<const char*>(value), size);
+  dest_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* Header::mutable_msgto() {
-  set_has_msgto();
-  if (msgto_ == &::google::protobuf::internal::kEmptyString) {
-    msgto_ = new ::std::string;
+inline ::std::string* Header::mutable_dest() {
+  set_has_dest();
+  if (dest_ == &::google::protobuf::internal::kEmptyString) {
+    dest_ = new ::std::string;
   }
-  return msgto_;
+  return dest_;
 }
-inline ::std::string* Header::release_msgto() {
-  clear_has_msgto();
-  if (msgto_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* Header::release_dest() {
+  clear_has_dest();
+  if (dest_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = msgto_;
-    msgto_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = dest_;
+    dest_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void Header::set_allocated_msgto(::std::string* msgto) {
-  if (msgto_ != &::google::protobuf::internal::kEmptyString) {
-    delete msgto_;
+inline void Header::set_allocated_dest(::std::string* dest) {
+  if (dest_ != &::google::protobuf::internal::kEmptyString) {
+    delete dest_;
   }
-  if (msgto) {
-    set_has_msgto();
-    msgto_ = msgto;
+  if (dest) {
+    set_has_dest();
+    dest_ = dest;
   } else {
-    clear_has_msgto();
-    msgto_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_dest();
+    dest_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 

@@ -8,7 +8,7 @@
   "gpb": {:git, "git://github.com/tomas-abrahamsson/gpb.git", "cc12c0b642c294c66a10649e0b28b4edbe7483ae", [tag: "3.16.0"]},
   "ibrowse": {:git, "git://github.com/cmullaparthi/ibrowse.git", "e18ea912b62b0f4a48d0f0edc8bb2f542863a88c", []},
   "jiffy": {:git, "git://github.com/davisp/jiffy.git", "801f9e72995eb72b303018885137ad8afbf1fb2b", []},
-  "lager": {:git, "git://github.com/basho/lager.git", "b7984d4628d0a7780166f3f26207882fddb31251", []},
+  "lager": {:git, "git://github.com/basho/lager.git", "d33ccf3b69de09a628fe38b4d7981bb8671b8a4f", []},
   "meck": {:git, "git://github.com/basho/meck.git", "d4730c6d47e437b1dcd170551506e7b10596cd5a", [tag: "0.8.1p1"]},
   "mixer": {:git, "git://github.com/opscode/mixer.git", "a95d63e68794cd3532f9b65d9ca9d97ffeb61152", []},
   "protobuffs": {:git, "git://github.com/basho/erlang_protobuffs.git", "5257dfe4e000b58487af89b849c7336ffa9bae82", [tag: "0.8.1p4"]},

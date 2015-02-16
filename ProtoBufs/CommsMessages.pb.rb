@@ -54,8 +54,8 @@
 #   message Header {
 #     // Identifies type of following data
 #     required int32 msgtype = 1;
-#     required string msgFrom = 2;
-#     required string msgTo = 3;
+#     required string from = 2;
+#     required string dest = 3;
 #   }
 # 
 
@@ -105,6 +105,6 @@ end
 class Header < ::Protobuf::Message
   defined_in __FILE__
   required :int32, :msgtype, 1
-  required :string, :msgFrom, 2
-  required :string, :msgTo, 3
+  required :string, :from, 2
+  required :string, :dest, 3
 end

@@ -1,19 +1,22 @@
 defmodule Packet do
 
-  def decode(<<a::8,b::8,body::binary>>) do
-    header = CommsMessages.Header.decode(<<a,b>>)
+  def decode(<<headerSize::8,data::binary>>) do
+    headerData = :binary.part(data,0,headerSize)
+    bodyData = :binary.part(data,headerSize,byte_size(data)-headerSize)
+    header = CommsMessages.Header.decode(<<headerData::binary>>)
     case header.msgtype do
-      1 -> {header,CommsMessages.Response.decode(body)}
-      2 -> {header,CommsMessages.Ping.decode(body)}
-      3 -> {header,CommsMessages.Pong.decode(body)}
-      4 -> {header,CommsMessages.NewUser.decode(body)}
-      5 -> {header,CommsMessages.Login.decode(body)}
-      6 -> {header,CommsMessages.Say.decode(body)}
+      1 -> {header,CommsMessages.Response.decode(bodyData)}
+      2 -> {header,CommsMessages.Ping.decode(bodyData)}
+      3 -> {header,CommsMessages.Pong.decode(bodyData)}
+      4 -> {header,CommsMessages.NewUser.decode(bodyData)}
+      5 -> {header,CommsMessages.Login.decode(bodyData)}
+      6 -> {header,CommsMessages.Say.decode(bodyData)}
     end
   end
 
-  def msgType(<<a::8,b::8,body::binary>>) do
-    header = CommsMessages.Header.decode(<<a,b>>)
+  def msgType(<<headerSize::8,data::binary>>) do
+    headerData = :binary.part(data,0,headerSize)
+    header = CommsMessages.Header.decode(<<headerData::binary>>)
     case header.msgtype do
       1 -> "Response"
       2 -> "Ping"
@@ -24,28 +27,30 @@ defmodule Packet do
     end
   end
 
-  def encode(message) do
+  def encode(message,from,dest) do
     case message.__struct__ do
       CommsMessages.Response -> 
         msgtype = 1
-        body = CommsMessages.Response.encode(message)
+        bodyData = CommsMessages.Response.encode(message)
       CommsMessages.Ping -> 
         msgtype = 2
-        body = CommsMessages.Ping.encode(message)
+        bodyData = CommsMessages.Ping.encode(message)
       CommsMessages.Pong -> 
         msgtype = 3
-        body = CommsMessages.Pong.encode(message)
+        bodyData = CommsMessages.Pong.encode(message)
       CommsMessages.NewUser -> 
         msgtype = 4
-        body = CommsMessages.NewUser.encode(message)
+        bodyData = CommsMessages.NewUser.encode(message)
       CommsMessages.Login -> 
         msgtype = 5
-        body = CommsMessages.Login.encode(message)
+        bodyData = CommsMessages.Login.encode(message)
       CommsMessages.Say -> 
         msgtype = 6
-        body = CommsMessages.Say.encode(message)
+        bodyData = CommsMessages.Say.encode(message)
     end
-    CommsMessages.Header.encode(CommsMessages.Header.new(msgtype: msgtype)) <> body
+    header = CommsMessages.Header.new(msgtype: msgtype, from: from, dest: dest)
+    headerData = CommsMessages.Header.encode(header)
+    <<byte_size(headerData)>> <> headerData <> bodyData
   end
 
 end

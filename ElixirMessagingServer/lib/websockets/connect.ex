@@ -56,7 +56,7 @@ def loginMsg(clientS, header, login) do
     id ->
       Lib.trace("ObjectId: #{id}")
       response = CommsMessages.Response.new(code: 1, message: "Welcome #{login.username}!")
-      data = Packet.encode(response)
+      data = Packet.encode(response, "Elixir", login.username)
       WebsocketWebsockets.sendTcpMsg(clientS, data)
       client(%WebsocketSimple{id: id, sock: clientS})
   end

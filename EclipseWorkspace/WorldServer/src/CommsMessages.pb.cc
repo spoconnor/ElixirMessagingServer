@@ -147,8 +147,8 @@ void protobuf_AssignDesc_CommsMessages_2eproto() {
   Header_descriptor_ = file->message_type(6);
   static const int Header_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header, msgtype_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header, msgfrom_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header, msgto_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header, from_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header, dest_),
   };
   Header_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -221,11 +221,11 @@ void protobuf_AddDesc_CommsMessages_2eproto() {
     "\014\n\004code\030\001 \002(\005\022\017\n\007message\030\002 \001(\t\";\n\007NewUse"
     "r\022\020\n\010username\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\022\014\n"
     "\004name\030\003 \002(\t\"+\n\005Login\022\020\n\010username\030\001 \002(\t\022\020"
-    "\n\010password\030\002 \002(\t\"\023\n\003Say\022\014\n\004text\030\001 \002(\t\"9\n"
-    "\006Header\022\017\n\007msgtype\030\001 \002(\005\022\017\n\007msgFrom\030\002 \002("
-    "\t\022\r\n\005msgTo\030\003 \002(\t*R\n\007MsgType\022\r\n\teResponse"
-    "\020\001\022\t\n\005ePing\020\002\022\t\n\005ePong\020\003\022\014\n\010eNewUser\020\004\022\n"
-    "\n\006eLogin\020\005\022\010\n\004eSay\020\006B\002H\001", 384);
+    "\n\010password\030\002 \002(\t\"\023\n\003Say\022\014\n\004text\030\001 \002(\t\"5\n"
+    "\006Header\022\017\n\007msgtype\030\001 \002(\005\022\014\n\004from\030\002 \002(\t\022\014"
+    "\n\004dest\030\003 \002(\t*R\n\007MsgType\022\r\n\teResponse\020\001\022\t"
+    "\n\005ePing\020\002\022\t\n\005ePong\020\003\022\014\n\010eNewUser\020\004\022\n\n\006eL"
+    "ogin\020\005\022\010\n\004eSay\020\006B\002H\001", 380);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "CommsMessages.proto", &protobuf_RegisterTypes);
   Ping::default_instance_ = new Ping();
@@ -1807,8 +1807,8 @@ void Say::Swap(Say* other) {
 
 #ifndef _MSC_VER
 const int Header::kMsgtypeFieldNumber;
-const int Header::kMsgFromFieldNumber;
-const int Header::kMsgToFieldNumber;
+const int Header::kFromFieldNumber;
+const int Header::kDestFieldNumber;
 #endif  // !_MSC_VER
 
 Header::Header()
@@ -1828,8 +1828,8 @@ Header::Header(const Header& from)
 void Header::SharedCtor() {
   _cached_size_ = 0;
   msgtype_ = 0;
-  msgfrom_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  msgto_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  from_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  dest_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1838,11 +1838,11 @@ Header::~Header() {
 }
 
 void Header::SharedDtor() {
-  if (msgfrom_ != &::google::protobuf::internal::kEmptyString) {
-    delete msgfrom_;
+  if (from_ != &::google::protobuf::internal::kEmptyString) {
+    delete from_;
   }
-  if (msgto_ != &::google::protobuf::internal::kEmptyString) {
-    delete msgto_;
+  if (dest_ != &::google::protobuf::internal::kEmptyString) {
+    delete dest_;
   }
   if (this != default_instance_) {
   }
@@ -1872,14 +1872,14 @@ Header* Header::New() const {
 void Header::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     msgtype_ = 0;
-    if (has_msgfrom()) {
-      if (msgfrom_ != &::google::protobuf::internal::kEmptyString) {
-        msgfrom_->clear();
+    if (has_from()) {
+      if (from_ != &::google::protobuf::internal::kEmptyString) {
+        from_->clear();
       }
     }
-    if (has_msgto()) {
-      if (msgto_ != &::google::protobuf::internal::kEmptyString) {
-        msgto_->clear();
+    if (has_dest()) {
+      if (dest_ != &::google::protobuf::internal::kEmptyString) {
+        dest_->clear();
       }
     }
   }
@@ -1904,36 +1904,36 @@ bool Header::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_msgFrom;
+        if (input->ExpectTag(18)) goto parse_from;
         break;
       }
 
-      // required string msgFrom = 2;
+      // required string from = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_msgFrom:
+         parse_from:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_msgfrom()));
+                input, this->mutable_from()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->msgfrom().data(), this->msgfrom().length(),
+            this->from().data(), this->from().length(),
             ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_msgTo;
+        if (input->ExpectTag(26)) goto parse_dest;
         break;
       }
 
-      // required string msgTo = 3;
+      // required string dest = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_msgTo:
+         parse_dest:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_msgto()));
+                input, this->mutable_dest()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->msgto().data(), this->msgto().length(),
+            this->dest().data(), this->dest().length(),
             ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
@@ -1965,22 +1965,22 @@ void Header::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->msgtype(), output);
   }
 
-  // required string msgFrom = 2;
-  if (has_msgfrom()) {
+  // required string from = 2;
+  if (has_from()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->msgfrom().data(), this->msgfrom().length(),
+      this->from().data(), this->from().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->msgfrom(), output);
+      2, this->from(), output);
   }
 
-  // required string msgTo = 3;
-  if (has_msgto()) {
+  // required string dest = 3;
+  if (has_dest()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->msgto().data(), this->msgto().length(),
+      this->dest().data(), this->dest().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      3, this->msgto(), output);
+      3, this->dest(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -1996,24 +1996,24 @@ void Header::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->msgtype(), target);
   }
 
-  // required string msgFrom = 2;
-  if (has_msgfrom()) {
+  // required string from = 2;
+  if (has_from()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->msgfrom().data(), this->msgfrom().length(),
+      this->from().data(), this->from().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->msgfrom(), target);
+        2, this->from(), target);
   }
 
-  // required string msgTo = 3;
-  if (has_msgto()) {
+  // required string dest = 3;
+  if (has_dest()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->msgto().data(), this->msgto().length(),
+      this->dest().data(), this->dest().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->msgto(), target);
+        3, this->dest(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2034,18 +2034,18 @@ int Header::ByteSize() const {
           this->msgtype());
     }
 
-    // required string msgFrom = 2;
-    if (has_msgfrom()) {
+    // required string from = 2;
+    if (has_from()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->msgfrom());
+          this->from());
     }
 
-    // required string msgTo = 3;
-    if (has_msgto()) {
+    // required string dest = 3;
+    if (has_dest()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->msgto());
+          this->dest());
     }
 
   }
@@ -2078,11 +2078,11 @@ void Header::MergeFrom(const Header& from) {
     if (from.has_msgtype()) {
       set_msgtype(from.msgtype());
     }
-    if (from.has_msgfrom()) {
-      set_msgfrom(from.msgfrom());
+    if (from.has_from()) {
+      set_from(from.from());
     }
-    if (from.has_msgto()) {
-      set_msgto(from.msgto());
+    if (from.has_dest()) {
+      set_dest(from.dest());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -2109,8 +2109,8 @@ bool Header::IsInitialized() const {
 void Header::Swap(Header* other) {
   if (other != this) {
     std::swap(msgtype_, other->msgtype_);
-    std::swap(msgfrom_, other->msgfrom_);
-    std::swap(msgto_, other->msgto_);
+    std::swap(from_, other->from_);
+    std::swap(dest_, other->dest_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

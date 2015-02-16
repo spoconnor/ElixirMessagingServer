@@ -56,16 +56,16 @@ int main()
     {
       if (channel->BasicConsumeMessage(CONSUMER_TAG, env, 0))
       {
-        std::string bodyStr = env->Message()->Body().substr(2, -1);
-        std::string headStr = env->Message()->Body().substr(0, 2);
+        char headSize = env->Message()->Body()[0];
+        std::string headStr = env->Message()->Body().substr(1, headSize);
+        std::string bodyStr = env->Message()->Body().substr(headSize+1, -1);
 
         std::cout << "Envelope received: \n"
                   << " Exchange: " << env->Exchange()
                   << "\n Routing key: " << env->RoutingKey()
                   << "\n Consumer tag: " << env->ConsumerTag()
                   << "\n Delivery tag: " << env->DeliveryTag()
-                  << "\n Redelivered: " << env->Redelivered()
-                  << "\n Body: " << bodyStr << std::endl;
+                  << "\n Redelivered: " << env->Redelivered() << std::endl;
 
         Header header;
         header.ParseFromString(headStr);
@@ -136,7 +136,7 @@ int main()
         msleep(2000);
 
         BasicMessage::ptr_t outgoing_message = BasicMessage::Create();
-        outgoing_message->Body(replyHeadStr + replyBodyStr);
+        outgoing_message->Body((char)replyHeadStr.length() + replyHeadStr + replyBodyStr);
         channel->BasicPublish(EXCHANGE_NAME, OUTBOUND_ROUTING_KEY, outgoing_message);
       }
       else
