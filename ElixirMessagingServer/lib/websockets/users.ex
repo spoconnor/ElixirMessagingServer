@@ -31,11 +31,24 @@ defmodule WebsocketUsers do
     {header,data} = Packet.decode(payload)
     Lib.trace("MessageType:", header.msgtype)
 #    actions(payload, msg)
+    notify_users(payload, header.dest, users)
+    {:noreply, users}
+  end
+
+  # Send to all users
+  defp notify_users(payload, "", users) do
     Enum.each users, fn {user, notify_pid} -> 
-      # TODO - select target of message
       Lib.trace("Sending notify to #{user}")
       send notify_pid, payload
     end
+    {:noreply, users}
+  end
+
+  # Send to a specified user
+  defp notify_users(payload, dest, users) do
+    {user, notify_pid} = Enum.find(users, fn {user, _notify_pid} -> user == dest end)
+    Lib.trace("Sending notify to #{user}")
+    send notify_pid, payload
     {:noreply, users}
   end
 
