@@ -1,0 +1,105 @@
+Elixir leverages the Erlang Virtual Machine (BEAM) and Open Telecom Platform (OTP)
+Nine Nines reliability (99.9999999%)
+OTP offers high reliability, supervised processes, distributed apps, hot code swapping, failure management
+
+Dynamically typed
+Elixir compiles to Erlang VM bytecode
+Influenced by Erlang, Ruby, Clojure
+
+
+Atoms
+:hello
+
+Tupples
+(struct like storage)
+{1,2,3}
+elem({1,2,3}, 0)
+
+Lists
+(stored as linked lists)
+[1,2,3]
+[h|t] = [1,2,3]
+[1,2,3] ++ [4,5]
+1..10
+
+Binaries
+<<1,2,3>>
+<<1,2,3>> <> <<4,5>>
+
+Strings
+"Hello"
+
+
+Keyword lists (first element of tuple is an atom)
+list = [{:a, 1}, {:b, 2}]
+list[:a]
+list ++ [c: 3]
+
+Maps (allow any value as key)
+map = %{:a => 1, 2 => b}
+map = %{a: 1, b: 2}       (or syntax if all keys are atoms)
+map[:a]
+
+Structures (provide compile time checking)
+defmodule User do
+ defstruct(
+  name: "",
+  id: 0
+ )
+end
+user = %User{name: "sean", id: 123}
+user.name
+is_map(user)       (based on maps)
+user.__struct__ 
+
+
+Enum Module
+Enum.map([1,2,3], fn(x) -> x * 2 end)
+dict = %{a: 1, :b, 2}
+Enum.map(dict, fn {k, v} -> {k, v * 2} end)
+
+See also Dict and Map modules
+
+
+Pattern Matching
+
+a = {[1, 2, 3], {:atom, "Hello!"}} 
+{[h|t], {:atom, msg}} = a
+
+Immutability
+
+a = [1,2,3]
+List.delete(a,2)
+a
+
+Pipe Operator
+Result passed in as first parameter to next function
+[1, [2], [[3, 4], 5]] |> List.flatten |> Enum.map(fn x -> x * x * x end)
+
+
+
+
+Interprocess
+
+Node = Erlang VM (Beam)
+
+Node.self
+:nonode@nohost
+
+iex --name wibble@home.local
+iex --sname wibble
+
+iex --sname node1
+iex --sname node2
+Node.list
+Node.connect :"node1@hostname"
+
+Create a function
+func = fn -> IO.inspect Node.self end
+spawn(func)
+Node.spawn(:"node2@hostname", func)
+
+Code runs on other node, output to first
+
+iex --sname node1 --cookie mysecret
+
