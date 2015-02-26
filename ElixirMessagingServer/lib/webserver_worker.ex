@@ -4,7 +4,7 @@ use GenServer
 # Client API
 
  def start_link(opts \\ []) do
-  IO.puts "Starting WebserverWorker link..."
+  IO.puts "Starting Webserver Worker..."
   GenServer.start_link(__MODULE__, :ok, opts)
  end
 

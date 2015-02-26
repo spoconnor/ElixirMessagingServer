@@ -1,4 +1,4 @@
-defmodule WebserverSupervisor do
+defmodule ElixirServerSupervisor do
 use Supervisor
 
 # admin api
@@ -7,7 +7,7 @@ def start_link do
     Supervisor.start_link(__MODULE__,:ok)
 end
 
-#@riakworker Riak
+@riakworker Riak
 @webworker WebserverWorker
 @es_websock WebsocketWorker
 @q_consumer WebsocketQConsumer
@@ -18,7 +18,7 @@ def init(:ok) do
     IO.puts "WebserverSupervisor.init"
 
     children = [
-      #worker(Riak.Client, []),
+      worker(RiakClient, [[name: @riakworker]]),
       worker(WebserverWorker, [[name: @webworker]]),
       worker(WebsocketEsWebsock, [[name: @es_websock]]), 
       worker(WebsocketQConsumer, [[name: @q_consumer]]), 

@@ -5,7 +5,7 @@ def start(_startType, _startArgs) do
   IO.puts "Ensure all started"
   :application.ensure_all_started(ElixirMessagingServer)
 
-  {:ok, _pid} = WebserverSupervisor.start_link
+  {:ok, _pid} = ElixirServerSupervisor.start_link
 
   #  IO.puts "Configuring Riak..."
   #  {:ok, _pid} = Riak.start
