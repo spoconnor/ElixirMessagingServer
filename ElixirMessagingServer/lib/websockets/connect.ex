@@ -38,9 +38,13 @@ def step2(clientS) do
   end
 end
 
+def loginMsg(clientS, %CommsMessages.Header{msgtype: 4, from: _from, dest: _dest}, login) do
+  Lib.trace("NewUser #{login.username}")
+end
+
 # LoginClient
-def loginMsg(clientS, header, login) do
-  Lib.trace("MsgType:", header.msgtype)
+#def loginMsg(clientS, header, login) do
+def loginMsg(clientS, %CommsMessages.Header{msgtype: 5, from: _from, dest: _dest}, login) do
   Lib.trace("Login #{login.username}")
   #if (length(user.name)>25) do
   #  WebsocketWebsockets.die("Name too long")
