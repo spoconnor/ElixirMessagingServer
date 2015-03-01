@@ -13,7 +13,9 @@ defmodule RiakClient do
     GenServer.start_link(__MODULE__, :ok, opt)
   end
 
-  def init() do
+  def init(:ok) do
+    configure(Riak, host: '127.0.0.1', port: 8087)
+    IO.puts("Riak Client init")
     { :ok, nil }
   end
 
