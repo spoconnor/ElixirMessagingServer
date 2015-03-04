@@ -5,7 +5,8 @@ defmodule ElixirMessagingServer.Mixfile do
     [app: :ElixirMessagingServer,
      version: "0.0.1",
      elixir: "~> 1.0.0",
-     deps: deps]
+     deps: deps,
+     escript: escript]
   end
 
   # Configuration for the OTP application
@@ -20,6 +21,10 @@ defmodule ElixirMessagingServer.Mixfile do
         http_listener_count: 10
       ],
     ]
+  end
+
+  def escript do
+    [main_module: ElixirMessagingServer]
   end
 
   defp deps do
