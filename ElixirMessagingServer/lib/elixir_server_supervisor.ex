@@ -18,7 +18,7 @@ def init(:ok) do
     IO.puts "WebserverSupervisor.init"
 
     children = [
-      worker(RiakClient, [[name: @riakworker]]),
+      #worker(RiakClient, [[name: @riakworker]]),
       worker(WebserverWorker, [[name: @webworker]]),
       worker(WebsocketEsWebsock, [[name: @es_websock]]), 
       worker(WebsocketQConsumer, [[name: @q_consumer]]), 

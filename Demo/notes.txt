@@ -106,4 +106,4 @@ iex --sname node1 --cookie mysecret
 
 
 iex -S mix
-iex escript.build
+mix escript.build
