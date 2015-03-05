@@ -34,15 +34,20 @@ RUN apt-get install -y libboost-chrono1.54.0
 RUN service rabbitmq-server start
 
 # My code
-RUN wget -P /tmp/install https://s3-ap-southeast-2.amazonaws.com/onewheel/installation/MyApp.20150304-1603.tgz
+RUN wget -P /tmp/install https://s3-ap-southeast-2.amazonaws.com/onewheel/installation/MyApp.20150305-2203.tgz
 RUN tar -xvzf /tmp/install/MyApp.*.tgz -C /var
 RUN mv /var/MyApp/lib* /usr/lib
 RUN chmod +x /var/MyApp/ElixirMessagingServer
 RUN chmod +x /var/MyApp/WorldServer
+RUN chmod +x /var/MyApp/*.sh
 RUN ln -s /usr/lib/libSimpleAmqpClient.so.2.4.0 /usr/lib/libSimpleAmqpClient.so.2
 RUN ln -s /usr/lib/libSimpleAmqpClient.so.2.4.0 /usr/lib/libSimpleAmqpClient.so
+
 WORKDIR /var/MyApp
 
+# Web port
 EXPOSE 80
+# RabbitMq port
+EXPOSE 5672 15672
 
-CMD "echo" "Hello World!"
+
