@@ -1,6 +1,11 @@
 defmodule ElixirMessagingServer do
 use Application
 
+def main(args) do
+  IO.puts "Running..."
+  IO.gets(">")
+end
+
 def start(_startType, _startArgs) do
   IO.puts "Ensure all started"
   :application.ensure_all_started(ElixirMessagingServer)

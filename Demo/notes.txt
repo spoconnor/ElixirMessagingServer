@@ -107,3 +107,27 @@ iex --sname node1 --cookie mysecret
 
 iex -S mix
 mix escript.build
+
+
+# Start rabbitmq cluster
+
+On each node
+rabbitmq-server -detached
+
+Join nodes 2,3,4.. to another
+rabbitmqctl stop_app
+rabbitmqctl join_cluster --ram rabbit@server1
+rabbitmqctl start_app
+
+rabbitmqctl cluster_status
+
+Set a second node to disk instead of ram
+
+rabbitmqctl stop_app
+rabbitmqctl change_cluster_node_type disc
+rabbitmqctl start_app
+
+
+rabbitmq-plugins enable rabbitmq_management
+Browse to http://localhost:15672/
+guest/guest

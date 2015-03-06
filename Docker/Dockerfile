@@ -23,14 +23,12 @@ RUN apt-get install -y libprotoc-dev
 RUN apt-get install -y rabbitmq-server
 RUN apt-get install -y librabbitmq1
 RUN apt-get install -y libboost-chrono1.54.0
-# Elixir
-#ADD https://github.com/elixir-lang/elixir/releases/download/v1.0.0/Precompiled.zip /tmp/install/
-#RUN unzip /tmp/install/Precompiled.zip -d /usr
 
 # Riak
 #ADD http://s3.amazonaws.com/downloads.basho.com/riak/2.0/2.0.5/ubuntu/trusty/riak_2.0.5-1_amd64.deb /tmp/install/
 #RUN dpkg -i /tmp/install/riak_2.0.5-1_amd64.deb
 
+RUN rabbitmq-plugins enable rabbitmq_management
 RUN service rabbitmq-server start
 
 # My code
@@ -42,6 +40,10 @@ RUN chmod +x /var/MyApp/WorldServer
 RUN chmod +x /var/MyApp/*.sh
 RUN ln -s /usr/lib/libSimpleAmqpClient.so.2.4.0 /usr/lib/libSimpleAmqpClient.so.2
 RUN ln -s /usr/lib/libSimpleAmqpClient.so.2.4.0 /usr/lib/libSimpleAmqpClient.so
+
+# Elixir - For demo
+ADD https://github.com/elixir-lang/elixir/releases/download/v1.0.0/Precompiled.zip /tmp/install/
+RUN unzip /tmp/install/Precompiled.zip -d /usr
 
 WORKDIR /var/MyApp
 
