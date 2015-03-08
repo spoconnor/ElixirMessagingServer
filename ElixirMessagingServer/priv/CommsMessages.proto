@@ -1,0 +1,58 @@
+//package CommsMessages;
+ 
+//import "google/protobuf/csharp_options.proto";
+//
+//option (google.protobuf.csharp_file_options).namespace = "Onewheel.Interface";
+//option (google.protobuf.csharp_file_options).umbrella_classname = "WorldEventsProtos";
+
+option optimize_for = SPEED;
+
+  message Ping
+  {
+    required int32 count = 1;
+  }
+  message Pong
+  {
+    required int32 count = 1;
+  }
+
+  message Response
+  {
+    required int32 code = 1;
+    optional string message = 2;
+  }
+
+  message NewUser
+  {
+    required string username = 1;
+    required string password = 2;
+    required string name = 3;
+  }
+  
+  message Login
+  {
+    required string username = 1;
+    required string password = 2;
+  }
+  
+  message Say 
+  {
+    required string text = 1;
+  }
+  
+  enum MsgType {
+    eResponse = 1;
+    ePing = 2;
+    ePong = 3;
+    eNewUser = 4;
+    eLogin = 5;
+    eSay = 6;
+  }
+
+  message Header {
+    // Identifies type of following data
+    required int32 msgtype = 1;
+    required string from = 2;
+    required string dest = 3;
+  }
+

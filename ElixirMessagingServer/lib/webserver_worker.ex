@@ -28,8 +28,8 @@ use GenServer
          [
             {"/events", WebserverEventsHandler, []},
             {"/foobar", WebserverFoobarHandler, []},
-            {"/api", WebserverRestApiHandler, []},
-            #{"/ws", :cowboy_static, {:priv_file, :ElixirMessagingServer, "ws_index.html"}},
+            #{"/api", WebserverRestApiHandler, []},
+            {"/ws", :cowboy_static, {:file, "priv/ws_index.html"}},
             #{"/websocket", WebserverWebsocketHandler, []},
             {"/static/[...]", :cowboy_static, {:priv_dir, :ElixirMessagingServer, "static"}},
             #{"/api/[:id]", [{:v1, :int}], WebserverToppageHandler, []},

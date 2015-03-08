@@ -3,18 +3,24 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Websocket client</title>
     <script src="/static/jquery.min.js"></script>
+    <script src="/static/ProtoBuf.js"></script>
     <script type="text/javascript">
       
       var websocket;
+      var ProtoBuf = dcodeIO.ProtoBuf;
+      var LoginMessage = ProtoBuf.loadProtoFile("./CommsMessages.proto").build("Login");
+      //var SayMessage = ProtoBuf.loadProtoFile("CommsMessages.proto").build("Say");
+      //var HeadeMessage = ProtoBuf.loadProtoFile("CommsMessages.proto").build("Header");
+
       $(document).ready(init);
       
       function init() {
-          $('#server').val("ws://" + window.location.host + "/websocket");
+          $('#server').val("ws://" + window.location.hostname + ":8081/");
           if(!("WebSocket" in window)){  
-              $('#status').append('<p><span style="color: red;">websockets are not supported </span></p>');
+              $('#status').append('<p><span style="color: red;">websockets are not supported</span></p>');
               $("#navigation").hide();  
           } else {
-              $('#status').append('<p><span style="color: green;">websockets are supported </span></p>');
+              $('#status').append('<p><span style="color: green;">websockets are supported</span></p>');
               connect();
           };
               $("#connected").hide(); 	
@@ -23,7 +29,7 @@
 
       function connect()
       {
-          wsHost = $("#server").val()
+          wsHost = $("#server").val();
           websocket = new WebSocket(wsHost);
           showScreen('<b>Connecting to: ' +  wsHost + '</b>'); 
           websocket.onopen = function(evt) { onOpen(evt) }; 
@@ -41,6 +47,26 @@
               disconnect();
           } else {
               connect();
+          };
+      };
+
+      function login() {
+          if(websocket.readyState == websocket.OPEN){
+              usertxt = $("#user_txt").val();
+              passtxt = $("#pass_txt").val();
+              //var header = new HeaderMessage();
+              //header.msgtype = 5;
+              //header.from = "client";
+              //header.dest = "server";
+              //var headerBuf = header.toArrayBuffer();
+              //var login = new LoginMessage();
+              //login.username = usertxt;
+              //login.password = passtxt;
+              //var loginBuf = login.toArrayBuffer();
+              //websocket.send(headerBuf.byteLength + headerBuf + loginBuf);
+              showScreen('sending: Login');
+          } else {
+               showScreen('websocket is not connected');
           };
       };
 
@@ -96,6 +122,13 @@
 	<input type='text' id="server" value=""></input>
 	<button type="button" onclick="toggle_connection()">connection</button>
       </p>
+      <div id="user">
+	<p>
+	  <input type='text' id="user_txt" value=></input>
+	  <input type='text' id="pass_txt" value=></input>
+	  <button type="button" onclick="login();">login</button>
+	</p>
+      </div>
       <div id="connected">				
 	<p>
 	  <input type='text' id="send_txt" value=></input>
