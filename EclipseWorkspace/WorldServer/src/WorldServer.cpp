@@ -37,6 +37,7 @@ int main()
   const std::string PASSWORD = "guest";
   const std::string VHOST = "/";
   const std::string EXCHANGE_NAME = "MyExchange";
+  const std::string OUT_EXCHANGE_NAME = "MyFanoutExchange";
 
   const std::string OUTBOUND_ROUTING_KEY = "Outbound";
   const std::string CONSUMER_TAG = "ConsumerTag";
@@ -137,7 +138,7 @@ int main()
 
         BasicMessage::ptr_t outgoing_message = BasicMessage::Create();
         outgoing_message->Body((char)replyHeadStr.length() + replyHeadStr + replyBodyStr);
-        channel->BasicPublish(EXCHANGE_NAME, OUTBOUND_ROUTING_KEY, outgoing_message);
+        channel->BasicPublish(OUT_EXCHANGE_NAME, OUTBOUND_ROUTING_KEY, outgoing_message);
       }
       else
       {
