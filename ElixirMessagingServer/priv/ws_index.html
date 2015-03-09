@@ -1,16 +1,24 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Websocket client</title>
-    <script src="/static/jquery.min.js"></script>
-    <script src="/static/ProtoBuf.js"></script>
+
+    <script src="./static/jquery.min.js"></script>
+    <script src="./static/Long.min.js"></script>         <!-- https://raw.github.com/dcodeIO/Long.js/master/dist/Long.min.js -->
+    <script src="./static/ByteBufferAB.min.js"></script> <!-- https://raw.github.com/dcodeIO/ByteBuffer.js/master/dist/ByteBufferAB.min.js -->
+    <script src="./static/ProtoBuf.js"></script>     <!-- https://raw.github.com/dcodeIO/ProtoBuf.js/master/dist/ProtoBuf.min.js -->
     <script type="text/javascript">
-      
+      if (typeof dcodeIO === 'undefined' || !dcodeIO.ProtoBuf) {
+        throw(new Error("ProtoBuf.js is not present. Please see www/index.html for manual setup instructions."));
+      }
+
+      // Initialize ProtoBuf.js
       var websocket;
       var ProtoBuf = dcodeIO.ProtoBuf;
-      var LoginMessage = ProtoBuf.loadProtoFile("./CommsMessages.proto").build("Login");
-      //var SayMessage = ProtoBuf.loadProtoFile("CommsMessages.proto").build("Say");
-      //var HeadeMessage = ProtoBuf.loadProtoFile("CommsMessages.proto").build("Header");
+      var LoginMessage = ProtoBuf.loadProtoFile("./static/CommsMessages.proto").build("Login");
+      var SayMessage = ProtoBuf.loadProtoFile("./static/CommsMessages.proto").build("Say");
+      var HeaderMessage = ProtoBuf.loadProtoFile("./static/CommsMessages.proto").build("Header");
 
       $(document).ready(init);
       
@@ -31,6 +39,7 @@
       {
           wsHost = $("#server").val();
           websocket = new WebSocket(wsHost);
+          websocket.binaryType = "blob";//"arrayBuffer";
           showScreen('<b>Connecting to: ' +  wsHost + '</b>'); 
           websocket.onopen = function(evt) { onOpen(evt) }; 
           websocket.onclose = function(evt) { onClose(evt) }; 
@@ -50,20 +59,32 @@
           };
       };
 
+      function appendBuffer( buffer1, buffer2 ) {
+        var tmp = new Uint8Array( buffer1.byteLength + buffer2.byteLength );
+        tmp.set( new Uint8Array( buffer1 ), 0 );
+        tmp.set( new Uint8Array( buffer2 ), buffer1.byteLength );
+        return tmp.buffer;
+      }
+
       function login() {
           if(websocket.readyState == websocket.OPEN){
               usertxt = $("#user_txt").val();
               passtxt = $("#pass_txt").val();
-              //var header = new HeaderMessage();
-              //header.msgtype = 5;
-              //header.from = "client";
-              //header.dest = "server";
-              //var headerBuf = header.toArrayBuffer();
-              //var login = new LoginMessage();
-              //login.username = usertxt;
-              //login.password = passtxt;
-              //var loginBuf = login.toArrayBuffer();
-              //websocket.send(headerBuf.byteLength + headerBuf + loginBuf);
+              var header = new HeaderMessage();
+              header.msgtype = 5;
+              header.from = usertxt;
+              header.dest = "";
+              var headerBuf = header.encodeAB();
+              var login = new LoginMessage();
+              login.username = usertxt;
+              login.password = passtxt;
+              var loginBuf = login.encodeAB();
+              var lengthBuf = new Int8Array(1);
+              lengthBuf[0] = headerBuf.byteLength;
+              var sendBuf = appendBuffer(appendBuffer(lengthBuf, headerBuf), loginBuf);
+              var int8SendBuf = new Int8Array(sendBuf);
+              websocket.send(int8SendBuf);
+
               showScreen('sending: Login');
           } else {
                showScreen('websocket is not connected');
@@ -72,8 +93,21 @@
 
       function sendTxt() {
           if(websocket.readyState == websocket.OPEN){
+              usertxt = $("#user_txt").val();
               txt = $("#send_txt").val();
-              websocket.send(txt);
+              var header = new HeaderMessage();
+              header.msgtype = 6;
+              header.from = usertxt;
+              header.dest = "";
+              var headerBuf = header.encodeAB();
+              var say = new SayMessage();
+              say.text = txt;
+              var sayBuf = say.encodeAB();
+              var lengthBuf = new Int8Array(1);
+              lengthBuf[0] = headerBuf.byteLength;
+              var sendBuf = appendBuffer(appendBuffer(lengthBuf, headerBuf), sayBuf);
+              var int8SendBuf = new Int8Array(sendBuf);
+              websocket.send(int8SendBuf);
               showScreen('sending: ' + txt); 
           } else {
                showScreen('websocket is not connected'); 

@@ -29,6 +29,7 @@ def step2(clientS) do
   Lib.trace("Connection Step2")
   receive do
     {_tcp, _, bin1} ->
+      Lib.trace("Received binary:", bin1)
       str = to_string(decodeString(bin1))
       Lib.trace("Received:", str)
       {header,body} = Packet.decode(str)
@@ -73,7 +74,13 @@ end
 def decodeString(data) do
   decodeStream(:binary.bin_to_list(data))
 end
-# encrypted string marker
+# binary encrypted string marker
+def decodeStream([130,b2|t]) do
+  [mask1,mask2,mask3,mask4|data] = t
+  masks = [mask1,mask2,mask3,mask4]
+  decodeBytes(data,masks,[])
+end
+# text encrypted string marker
 def decodeStream([129,b2|t]) do
   #length = b2 &&& 127  # bitwise AND, unless special case
   #indexFirstMask = 2   # if not a special case

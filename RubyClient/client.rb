@@ -14,7 +14,14 @@ require "CommsMessages.pb.rb"
 
 #begin
 
-serverurl = "ws://localhost:8081"
+if (ARGV.size > 0)
+ hostname = ARGV[0]
+else
+ hostname = "localhost"
+end
+serverurl = "ws://#{hostname}:8081"
+
+puts "Connecting to #{serverurl}"
 
 #client = WebSocket.new(ARGV[0])
 client = WebSocket.new(serverurl)
