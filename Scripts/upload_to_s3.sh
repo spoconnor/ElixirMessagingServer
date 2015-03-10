@@ -1,6 +1,5 @@
 mkdir MyApp
-cp start_server.sh MyApp
-cp start_web.sh MyApp
+cp start_*.sh MyApp
 cp ../ElixirMessagingServer/ElixirMessagingServer MyApp 
 cp ../ElixirMessagingServer/priv MyApp -R
 cp ../EclipseWorkspace/WorldServer/Debug/WorldServer MyApp
