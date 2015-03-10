@@ -1,5 +1,6 @@
 mkdir MyApp
 cp start_*.sh MyApp
+cp rabbit_queue_defs.json MyApp
 cp ../ElixirMessagingServer/ElixirMessagingServer MyApp 
 cp ../ElixirMessagingServer/priv MyApp -R
 cp ../EclipseWorkspace/WorldServer/Debug/WorldServer MyApp
