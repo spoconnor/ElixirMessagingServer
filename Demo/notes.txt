@@ -131,3 +131,4 @@ rabbitmqctl start_app
 rabbitmq-plugins enable rabbitmq_management
 Browse to http://localhost:15672/
 guest/guest
+Import queue defintions

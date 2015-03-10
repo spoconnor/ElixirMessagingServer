@@ -15,7 +15,7 @@ require "CommsMessages.pb.rb"
 #begin
 
 if (ARGV.size > 0)
- hostname = ARGV[0]
+ hostname = ARGV.shift
 else
  hostname = "localhost"
 end
