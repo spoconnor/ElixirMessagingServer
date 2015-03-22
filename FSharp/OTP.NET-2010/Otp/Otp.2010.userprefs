@@ -1,0 +1,14 @@
+﻿<Properties StartupItem="OtpFSharpTest/OtpFSharpTest.fsproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="OtpFSharpTest/Program.fs">
+    <Files>
+      <File FileName="../OtpTest1/Test1.cs" Line="18" Column="18" />
+      <File FileName="OtpFSharpTest/Program.fs" Line="21" Column="21" />
+      <File FileName="OtpEpmd.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
