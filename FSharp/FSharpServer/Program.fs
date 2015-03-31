@@ -42,10 +42,14 @@ module Wrapper =
         | :? Erlang.Binary as binary -> Term.Binary <| binary.binaryValue()
         | :? Erlang.Double as double -> Term.Double <| double.doubleValue()
         | :? Erlang.List as list -> 
-          let contents = list.elements()
-                         |> Seq.map ToTerm
-                         |> Seq.toList
-          Term.List contents
+          match list.elements() with
+          | null -> 
+              Term.List []
+          | _ ->
+              let contents = list.elements()
+                             |> Seq.map ToTerm
+                             |> Seq.toList
+              Term.List contents
         | :? Erlang.Long as long -> Term.Integer <| bigint (long.longValue())
         | :? Erlang.Pid as pid -> Term.Pid {Node = pid.node(); Id = pid.id(); Serial = pid.serial(); Creation = pid.creation()}
         | :? Erlang.Port as port -> Term.Port {Node = port.node(); Id = port.id(); Creation = port.creation()}
@@ -91,7 +95,7 @@ module Main =
      ReceiveRPC connection
     
   let StartGenServer (connection : OtpConnection)  =
-    match MakeRPC connection "mathserver" "start_link" [] with
+    match MakeRPC connection "Mathserver" "start_link" [] with
     | Term.Tuple [ Term.Atom "ok" ; pid ] -> pid
     | Term.Tuple [ Term.Atom "error"; Term.Tuple [ Term.Atom "already_started" ; pid2 ]] -> pid2
     | start -> raise (new System.InvalidOperationException(start.ToString()))
