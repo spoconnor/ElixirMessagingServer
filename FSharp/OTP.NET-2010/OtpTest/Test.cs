@@ -1,6 +1,7 @@
 using System;
+using Otp;
 
-namespace Otp
+namespace OtpTest
 {
     public class Test
     {
@@ -19,8 +20,9 @@ namespace Otp
 
             String  host   = System.Net.Dns.GetHostName();
             String  user   = Environment.UserName;
-            OtpNode node   = new OtpNode(user + "@" + host);
-            String  remote = (args[0].Contains("@")) ? args[0] : remote = args[0] + "@" + host;
+			String  cookie = "cookie";
+			OtpNode node   = new OtpNode(user + "@" + host, false, cookie);
+            String  remote = (args[0].Contains("@")) ? args[0] : args[0] + "@" + host;
             OtpMbox mbox   = null;
 
             System.Console.Out.WriteLine("This node is: {0} (cookie='{1}'). Remote: {2}",
@@ -28,7 +30,7 @@ namespace Otp
             
             //bool ok = node.ping(remote, 1000*300);
 
-            OtpCookedConnection conn = node.getConnection(remote);
+            OtpCookedConnection conn = node.connection(remote);
 
             try
             {
@@ -37,22 +39,22 @@ namespace Otp
                 else
                     throw new System.Exception("Could not ping node: " + remote);
 
-                conn.traceLevel = 1;
+                //conn.traceLevel = 1;
 
                 mbox = node.createMbox();
                 mbox.registerName("server");
 
-                mbox.sendRPC(conn.peer.node(), "lists", "reverse", new Erlang.List(new Erlang.String("Hello world!")));
-				Erlang.Object reply = mbox.receiveRPC(5000);
+				mbox.sendRPC(conn.peer.node(), "lists", "reverse", new Otp.Erlang.List(new Otp.Erlang.String("Hello world!")));
+				Otp.Erlang.Object reply = mbox.receiveRPC(5000);
                 System.Console.Out.WriteLine("<= " + reply.ToString());
 
                 {
-                    Erlang.List rpcArgs = new Erlang.List(
-                        new Erlang.Object[] {
+					Otp.Erlang.List rpcArgs = new Otp.Erlang.List(
+						new Otp.Erlang.Object[] {
                             mbox.self(),
-                            new Erlang.Tuple(
-                                new Erlang.Object[] {
-                                    new Erlang.Atom("table"), new Erlang.Atom("test"), new Erlang.Atom("simple")
+							new Otp.Erlang.Tuple(
+								new Otp.Erlang.Object[] {
+									new Otp.Erlang.Atom("table"), new Otp.Erlang.Atom("test"), new Otp.Erlang.Atom("simple")
                                 }
                             )
                         }
@@ -65,7 +67,7 @@ namespace Otp
 
                 while (true)
                 {
-                    Erlang.Object msg = mbox.receive();
+                    Otp.Erlang.Object msg = mbox.receive();
                     System.Console.Out.WriteLine("IN msg: " + msg.ToString() + "\n");
                 }
             }
