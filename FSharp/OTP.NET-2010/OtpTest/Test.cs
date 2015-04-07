@@ -45,6 +45,7 @@ namespace OtpTest
                 mbox.registerName("server");
 
 				mbox.sendRPC(conn.peer.node(), "lists", "reverse", new Otp.Erlang.List(new Otp.Erlang.String("Hello world!")));
+				//mbox.sendRPC(conn.peer.node(), "Elixir.Mathserver", "start_link", new Otp.Erlang.List());
 				Otp.Erlang.Object reply = mbox.receiveRPC(5000);
                 System.Console.Out.WriteLine("<= " + reply.ToString());
 

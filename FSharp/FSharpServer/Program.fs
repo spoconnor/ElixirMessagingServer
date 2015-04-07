@@ -86,7 +86,7 @@ module Main =
     let clientNode = new OtpSelf("clientnode", cookie)
     let serverNode = new OtpPeer(server)
     clientNode.connect(serverNode)
-    
+
   let ReceiveRPC (connection : OtpConnection) =
     Wrapper.ToTerm <| connection.receiveRPC()
     
@@ -95,7 +95,7 @@ module Main =
      ReceiveRPC connection
     
   let StartGenServer (connection : OtpConnection)  =
-    match MakeRPC connection "Mathserver" "start_link" [] with
+    match MakeRPC connection "Elixir.Mathserver" "start_link" [] with
     | Term.Tuple [ Term.Atom "ok" ; pid ] -> pid
     | Term.Tuple [ Term.Atom "error"; Term.Tuple [ Term.Atom "already_started" ; pid2 ]] -> pid2
     | start -> raise (new System.InvalidOperationException(start.ToString()))
@@ -103,12 +103,12 @@ module Main =
   [<EntryPoint>]
   let Main arguments =
     let connection = ConnectTo "servernode@zen" "cookie"
+
     let pid = StartGenServer connection
     
-    let args = [6I; 9I]
-               |> Seq.map Term.Integer
+    let args = Term.Tuple[ Term.Pid pid ; Term.Integer 6I ; Term.Integer 9I]
     
-    match MakeRPC connection "mathserver" "multiply" args with
+    match MakeRPC connection "Elixir.Mathserver" "multiply" args with
     | Term.Tuple [ Term.Atom "ok" ; Term.Integer value ] -> 
       Console.WriteLine("Return Value:" + value.ToString())
     | result -> Console.WriteLine("Failure:" + result.ToString())
