@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{ED9CDEB6-5F1F-4C58-8F57-F216266F4B79}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Sean.World</RootNamespace>
+    <AssemblyName>WorldServer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="OpenTK">
+      <HintPath>..\deps\OpenTK\OpenTK.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\AddBlock.cs" />
+    <Compile Include="Shared\Block.cs" />
+    <Compile Include="Shared\Blocks.cs" />
+    <Compile Include="Shared\Chunk.cs" />
+    <Compile Include="Shared\ChunkCoords.cs" />
+    <Compile Include="Shared\Coords.cs" />
+    <Compile Include="Shared\Enums.cs" />
+    <Compile Include="Shared\GameAction.cs" />
+    <Compile Include="Shared\GameItemDynamic.cs" />
+    <Compile Include="Shared\GameItemStatic.cs" />
+    <Compile Include="Shared\GameObject.cs" />
+    <Compile Include="Shared\LightSource.cs" />
+    <Compile Include="Shared\Lighting.cs" />
+    <Compile Include="Shared\Position.cs" />
+    <Compile Include="Shared\TextureType.cs" />
+    <Compile Include="Shared\UiTextGraphics.cs" />
+    <Compile Include="World\Chunks.cs" />
+    <Compile Include="World\Constants.cs" />
+    <Compile Include="World\Settings.cs" />
+    <Compile Include="World\WorldData.cs" />
+    <Compile Include="World\WorldHost.cs" />
+    <Compile Include="World\WorldSettings.cs" />
+    <Compile Include="World\Generator\Generator.cs" />
+    <Compile Include="World\Generator\PerlinNoise.cs" />
+    <Compile Include="World\Generator\TreeGenerator.cs" />
+    <Compile Include="World\Render\TexCoordsShort.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\OTP.NET-2010\Otp\Otp.2010.csproj">
+      <Project>{8155F56B-4925-406C-8619-7D0E57DD7FE1}</Project>
+      <Name>Otp.2010</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Shared\" />
+    <Folder Include="World\" />
+  </ItemGroup>
+</Project>
