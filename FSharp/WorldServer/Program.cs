@@ -12,7 +12,8 @@ namespace Sean.World
 		static public void Main(String[] args)
 		{
 			System.Console.Out.WriteLine("World Server...");
-
+            WorldMapData worldMapData = new WorldMapData();
+            worldMapData.Generate();
 
 			WorldData.Initialize();
 
