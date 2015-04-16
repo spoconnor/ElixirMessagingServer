@@ -66,6 +66,7 @@
     <Compile Include="World\Generator\TreeGenerator.cs" />
     <Compile Include="World\Render\TexCoordsShort.cs" />
     <Compile Include="World\WorldMapData.cs" />
+    <Compile Include="World\Generator\Misc.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

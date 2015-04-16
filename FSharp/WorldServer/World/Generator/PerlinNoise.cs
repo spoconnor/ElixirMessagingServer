@@ -4,7 +4,7 @@
 	{
 		private static float[][] GenerateWhiteNoise(int width, int height)
 		{
-			float[][] noise = GetEmptyArray<float>(width, height);
+            float[][] noise = Misc.GetEmptyArray<float>(width, height);
 
 			for (int i = 0; i < width; i++)
 			{
@@ -31,7 +31,7 @@
 		{
 			int width = perlinNoise.Length;
 			int height = perlinNoise[0].Length;
-			int[][] heightMap = GetEmptyArray<int>(width, height);
+            int[][] heightMap = Misc.GetEmptyArray<int>(width, height);
 
 			for (int i = 0; i < width; i++)
 			{
@@ -47,7 +47,7 @@
 		{
 			int width = perlinNoise.Length;
 			int height = perlinNoise[0].Length;
-			float[][] treeMap = GetEmptyArray<float>(width, height);
+			float[][] treeMap = Misc.GetEmptyArray<float>(width, height);
 
 			for (int i = 0; i < width; i++)
 			{
@@ -59,23 +59,13 @@
 			return treeMap;
 		}
 
-		private static T[][] GetEmptyArray<T>(int width, int height)
-		{
-			var image = new T[width][];
-
-			for (int i = 0; i < width; i++)
-			{
-				image[i] = new T[height];
-			}
-			return image;
-		}
 
 		private static float[][] GenerateSmoothNoise(float[][] baseNoise, int octave)
 		{
 			int width = baseNoise.Length;
 			int height = baseNoise[0].Length;
 
-			float[][] smoothNoise = GetEmptyArray<float>(width, height);
+            float[][] smoothNoise = Misc.GetEmptyArray<float>(width, height);
 			int samplePeriod = 1 << octave; // calculates 2 ^ k
 			float sampleFrequency = 1.0f / samplePeriod;
 
@@ -121,7 +111,7 @@
 				smoothNoise[i] = GenerateSmoothNoise(baseNoise, i);
 			}
 
-			float[][] perlinNoise = GetEmptyArray<float>(width, height); //an array of floats initialised to 0
+            float[][] perlinNoise = Misc.GetEmptyArray<float>(width, height); //an array of floats initialised to 0
 
 			float amplitude = 1f;
 			float totalAmplitude = 0.0f;
