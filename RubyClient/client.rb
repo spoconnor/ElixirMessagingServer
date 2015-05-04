@@ -30,14 +30,6 @@ client = WebSocket.new(serverurl)
 puts("Connected")
 objectid = 0
 
-  RESPONSE = 1
-  PING = 2
-  PONG = 3
-  NEWUSER = 4
-  LOGIN = 5
-  SAY = 6
-
-
 # Login
   loggedin = false
   username = ""
@@ -73,7 +65,9 @@ objectid = 0
       client.send(JSON.generate(header) + "\x00" + JSON.generate(msg))
       data = client.receive()
       printf("Received [%p]\n", data)
-      msg = JSON.parse(data)
+      printf("Received [%p]\n", data)
+      #msg = JSON.parse(data)
+      loggedin = true  # TODO
     end
   end
 
@@ -101,21 +95,19 @@ objectid = 0
 
 
   while (1) do
-    header = Header.new
-    header.msgtype = "Say"
-    msg = Say.new
-    header.from = username
+    header = Hash.new()
+    header[:from] = username
+    header[:msgtype] = "Say"
+    msg = Hash.new()
     parsed = gets.chomp.split(/:/)
     if (parsed[1] == nil)
-      header.dest = ""
-      msg.text = parsed[0]
+      header[:dest] = ""
+      msg[:text] = parsed[0]
     else
-      header.dest = parsed[0]
-      msg.text = parsed[1]
+      header[:dest] = parsed[0]
+      msg[:text] = parsed[1]
     end
-    
-    headerStr = header.to_s
-    client.send(headerStr.length.chr + headerStr + msg.to_s)
+    client.send(JSON.generate(header) + "\x00" + JSON.generate(msg))
   end
 
 puts("Client closing")
