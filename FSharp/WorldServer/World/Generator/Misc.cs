@@ -4,7 +4,7 @@ namespace Sean.World
 {
     public static class Misc
     {
-        static T[][] GetEmptyArray<T>(int width, int height)
+        public static T[][] GetEmptyArray<T>(int width, int height)
         {
             var image = new T[width][];
 

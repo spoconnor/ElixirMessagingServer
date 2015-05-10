@@ -27,31 +27,39 @@ namespace Sean.World
 			OtpNode.useShortNames = true;
 
 			String  host   = System.Net.Dns.GetHostName();
-			String  user   = Environment.UserName;
+			//String  user   = Environment.UserName;
+            String name = "world";
 			String  cookie = "cookie";
-			OtpNode node   = new OtpNode(user + "@" + host, false, cookie);
-			String  remote = (args[0].Contains("@")) ? args[0] : args[0] + "@" + host;
+			OtpNode node   = new OtpNode(name + "@" + host, false, cookie);
+			//String  remote = (args[0].Contains("@")) ? args[0] : args[0] + "@" + host;
 			OtpMbox mbox   = null;
 
-			System.Console.Out.WriteLine("This node is: {0} (cookie='{1}'). Remote: {2}",
-				node.node(), node.cookie(), remote);
+			System.Console.Out.WriteLine("This node is: {0} (cookie='{1}')",
+				node.node(), node.cookie());
 
 			//bool ok = node.ping(remote, 1000*300);
 
-			OtpCookedConnection conn = node.connection(remote);
+			//OtpCookedConnection conn = node.connection(remote);
 
 			try
 			{
-				if (conn != null)
-					System.Console.Out.WriteLine("   successfully pinged node " + remote + "\n");
-				else
-					throw new System.Exception("Could not ping node: " + remote);
+				//if (conn != null)
+				//	System.Console.Out.WriteLine("   successfully pinged node " + remote + "\n");
+				//else
+				//	throw new System.Exception("Could not ping node: " + remote);
 
 				//conn.traceLevel = 1;
 
 				mbox = node.createMbox();
-				mbox.registerName("server");
+                mbox.registerName(name + "@" + host); //"server");
 
+                while (true)
+                {
+                    Otp.Erlang.Object msg = mbox.receive();
+                    System.Console.Out.WriteLine("IN msg: " + msg.ToString() + "\n");
+                }
+
+                /*
 				mbox.sendRPC(conn.peer.node(), "lists", "reverse", new Otp.Erlang.List(new Otp.Erlang.String("Hello world!")));
 				//mbox.sendRPC(conn.peer.node(), "Elixir.Mathserver", "start_link", new Otp.Erlang.List());
 				Otp.Erlang.Object reply = mbox.receiveRPC(5000);
@@ -73,12 +81,8 @@ namespace Sean.World
 					reply = mbox.receiveRPC(5000);
 					System.Console.Out.WriteLine("<= " + reply.ToString());
 				}
-
-				while (true)
-				{
-					Otp.Erlang.Object msg = mbox.receive();
-					System.Console.Out.WriteLine("IN msg: " + msg.ToString() + "\n");
-				}
+                */
+		
 			}
 			catch (System.Exception e)
 			{
