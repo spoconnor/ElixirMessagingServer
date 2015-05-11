@@ -7,7 +7,6 @@ using Otp;
 
 namespace Sean.World
 {
-
 	// Start server with
 	// iex --sname servernode --cookie cookie mathserver.ex                             
 
@@ -68,20 +67,36 @@ namespace Sean.World
 
 			OtpNode.useShortNames = true;
 
-			String  host   = System.Net.Dns.GetHostName();
-			//String  user   = Environment.UserName;
-            String name = "world";
-			String  cookie = "cookie";
-			node   = new OtpNode(name + "@" + host, false, cookie);
-			//String  remote = (args[0].Contains("@")) ? args[0] : args[0] + "@" + host;
-			mbox   = null;
+			String host = System.Net.Dns.GetHostName();
+			//String user = Environment.UserName;
+            const String name = "world";
+			const String cookie = "cookie";
+			node = new OtpNode(name + "@" + host, true, cookie);
+			mbox = null;
 
-			System.Console.Out.WriteLine("This node is: {0} (cookie='{1}')",
-				node.node(), node.cookie());
+            Console.WriteLine("This node is: {0} (cookie='{1}')", node.node(), node.cookie());
 
-			//bool ok = node.ping(remote, 1000*300);
+            const String remote = "client@zen";
+            if (node.ping(remote, 1000 * 300) != true)
+            {
+                Console.WriteLine("Failed to Ping remote at {0}", remote);
+                return;
+            }
 
 			//OtpCookedConnection conn = node.connection(remote);
+
+            //OtpSelf cNode = new OtpSelf("clientnode", "cookie");
+            //OtpPeer sNode = new OtpPeer("servernode@chloe.ravnaandtines.com");
+            //OtpConnection connection = cNode.connect(sNode);
+            //
+            //OtpErlangObject[] args = new OtpErlangObject[]{new OtpErlangLong(1), new OtpErlangLong(2)};
+            //connection.sendRPC("mathserver", "add", args);
+            //OtpErlangLong sum = (OtpErlangLong) connection.receiveRPC();
+            //if (sum.intValue() != 3)
+            //{
+            //    throw new System.SystemException("Assertion failed, returned = " + sum.intValue());
+            //}
+            //System.Console.Out.WriteLine("OK!");
 
 			try
 			{
@@ -93,12 +108,16 @@ namespace Sean.World
 				//conn.traceLevel = 1;
 
 				mbox = node.createMbox();
-                mbox.registerName(name + "@" + host); //"server");
+                if (mbox.registerName("server") != true)
+                {
+                    Console.WriteLine("Failed to register name");
+                    return;
+                }
 
                 while (true)
                 {
                     Otp.Erlang.Object msg = mbox.receive();
-                    System.Console.Out.WriteLine("IN msg: " + msg.ToString() + "\n");
+                    Console.WriteLine("IN msg: " + msg.ToString() + "\n");
                 }
 
                 /*

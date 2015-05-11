@@ -5,14 +5,24 @@ defmodule WorldServer do
     GenServer.start_link(__MODULE__, :ok, opts)
   end
 
+  def connect_server() do
+    GenServer.cast(server, {:connectServer})
+  end
+
   def get_map(server) do
-    GenServer.cast(server, {:getmap}
+    GenServer.cast(server, {:getmap})
   end
 
   def init(:ok) do
     Lib.trace("Starting WorldServer")
-    users = HashDict.new
-    {:ok, users}
+    {:ok}
+  end
+
+  def handle_cast({:connectServer}, worldServer) do
+    Lib.trace("Pinging server world@zen...")
+    :pong = Node.ping(:world@zen)
+    Lib.trace("Ping to world@zen successful")
+    {:noreply, worldServer}
   end
 
   def handle_cast({:add, user, notify_pid}, users) do
