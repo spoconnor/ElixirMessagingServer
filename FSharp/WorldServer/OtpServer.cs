@@ -7,8 +7,8 @@ using Otp;
 
 namespace Sean.World
 {
-	// Start server with
-	// iex --sname servernode --cookie cookie mathserver.ex                             
+    // Start server with
+    // iex --sname servernode --cookie cookie mathserver.ex                             
 
     class OtpServer
     {
@@ -26,10 +26,10 @@ namespace Sean.World
         }
     }
 
-	class OtpServerInstance : IDisposable
-	{
-		public void OtpServer()
-		{
+    class OtpServerInstance : IDisposable
+    {
+        public void OtpServer()
+        {
         }
 
         ~OtpServerInstance()
@@ -51,8 +51,8 @@ namespace Sean.World
             this.IsDisposed = true;
             if (node != null)
             {
-	            node.closeMbox(mbox);
-			    node.close();
+                node.closeMbox(mbox);
+                node.close();
                 node = null;
             }
         }
@@ -63,27 +63,29 @@ namespace Sean.World
 
         public void Execute()
         {
-			System.Console.Out.WriteLine("Starting Otp Server...");
+            System.Console.Out.WriteLine("Starting Otp Server...");
 
-			OtpNode.useShortNames = true;
+            OtpNode.useShortNames = true;
 
-			String host = System.Net.Dns.GetHostName();
-			//String user = Environment.UserName;
+            String host = System.Net.Dns.GetHostName();
+            //String user = Environment.UserName;
             const String name = "world";
-			const String cookie = "cookie";
-			node = new OtpNode(name + "@" + host, true, cookie);
-			mbox = null;
+            const String cookie = "cookie";
+            const String mailboxname = "server";
+            node = new OtpNode(name + "@" + host, true, cookie);
+            mbox = null;
 
             Console.WriteLine("This node is: {0} (cookie='{1}')", node.node(), node.cookie());
 
-            const String remote = "client@zen";
+            const String remote = "client@" + host;
+            Console.WriteLine("Pinging {0}", remote);
             if (node.ping(remote, 1000 * 300) != true)
             {
                 Console.WriteLine("Failed to Ping remote at {0}", remote);
                 return;
             }
 
-			//OtpCookedConnection conn = node.connection(remote);
+            //OtpCookedConnection conn = node.connection(remote);
 
             //OtpSelf cNode = new OtpSelf("clientnode", "cookie");
             //OtpPeer sNode = new OtpPeer("servernode@chloe.ravnaandtines.com");
@@ -98,17 +100,18 @@ namespace Sean.World
             //}
             //System.Console.Out.WriteLine("OK!");
 
-			try
-			{
-				//if (conn != null)
-				//	System.Console.Out.WriteLine("   successfully pinged node " + remote + "\n");
-				//else
-				//	throw new System.Exception("Could not ping node: " + remote);
+            try
+            {
+                //if (conn != null)
+                //    System.Console.Out.WriteLine("   successfully pinged node " + remote + "\n");
+                //else
+                //    throw new System.Exception("Could not ping node: " + remote);
 
-				//conn.traceLevel = 1;
+                //conn.traceLevel = 1;
 
-				mbox = node.createMbox();
-                if (mbox.registerName("server") != true)
+                mbox = node.createMbox();
+                Console.WriteLine("Registering mailbox {0}", mailboxname );
+                if (mbox.registerName(mailboxname) != true)
                 {
                     Console.WriteLine("Failed to register name");
                     return;
@@ -121,41 +124,41 @@ namespace Sean.World
                 }
 
                 /*
-				mbox.sendRPC(conn.peer.node(), "lists", "reverse", new Otp.Erlang.List(new Otp.Erlang.String("Hello world!")));
-				//mbox.sendRPC(conn.peer.node(), "Elixir.Mathserver", "start_link", new Otp.Erlang.List());
-				Otp.Erlang.Object reply = mbox.receiveRPC(5000);
-				System.Console.Out.WriteLine("<= " + reply.ToString());
+                mbox.sendRPC(conn.peer.node(), "lists", "reverse", new Otp.Erlang.List(new Otp.Erlang.String("Hello world!")));
+                //mbox.sendRPC(conn.peer.node(), "Elixir.Mathserver", "start_link", new Otp.Erlang.List());
+                Otp.Erlang.Object reply = mbox.receiveRPC(5000);
+                System.Console.Out.WriteLine("<= " + reply.ToString());
 
-				{
-					Otp.Erlang.List rpcArgs = new Otp.Erlang.List(
-						new Otp.Erlang.Object[] {
-							mbox.self(),
-							new Otp.Erlang.Tuple(
-								new Otp.Erlang.Object[] {
-									new Otp.Erlang.Atom("table"), new Otp.Erlang.Atom("test"), new Otp.Erlang.Atom("simple")
-								}
-							)
-						}
-					);
+                {
+                    Otp.Erlang.List rpcArgs = new Otp.Erlang.List(
+                        new Otp.Erlang.Object[] {
+                            mbox.self(),
+                            new Otp.Erlang.Tuple(
+                                new Otp.Erlang.Object[] {
+                                    new Otp.Erlang.Atom("table"), new Otp.Erlang.Atom("test"), new Otp.Erlang.Atom("simple")
+                                }
+                            )
+                        }
+                    );
 
-					mbox.sendRPC(conn.peer.node(), "mnesia_subscr", "subscribe", rpcArgs);
-					reply = mbox.receiveRPC(5000);
-					System.Console.Out.WriteLine("<= " + reply.ToString());
-				}
+                    mbox.sendRPC(conn.peer.node(), "mnesia_subscr", "subscribe", rpcArgs);
+                    reply = mbox.receiveRPC(5000);
+                    System.Console.Out.WriteLine("<= " + reply.ToString());
+                }
                 */
-		
-			}
-			catch (System.Exception e)
-			{
-				System.Console.Out.WriteLine("Error: " + e.ToString());
-			}
-			finally
-			{
-				node.closeMbox(mbox);
-			}
+        
+            }
+            catch (System.Exception e)
+            {
+                System.Console.Out.WriteLine("Error: " + e.ToString());
+            }
+            finally
+            {
+                node.closeMbox(mbox);
+            }
 
-			node.close();
-		}
+            node.close();
+        }
 
 
     }
