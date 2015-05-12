@@ -60,30 +60,29 @@ namespace Sean.World
 
         private OtpNode node;
         private OtpMbox mbox;
+        private const String name = "world";
+        private const String cookie = "cookie";
+        private const String mailboxname = "server";
 
         public void Execute()
         {
             System.Console.Out.WriteLine("Starting Otp Server...");
 
             OtpNode.useShortNames = true;
-
             String host = System.Net.Dns.GetHostName();
             //String user = Environment.UserName;
-            const String name = "world";
-            const String cookie = "cookie";
-            const String mailboxname = "server";
+            //String remote = "client@" + host;
             node = new OtpNode(name + "@" + host, true, cookie);
             mbox = null;
 
             Console.WriteLine("This node is: {0} (cookie='{1}')", node.node(), node.cookie());
 
-            const String remote = "client@" + host;
-            Console.WriteLine("Pinging {0}", remote);
-            if (node.ping(remote, 1000 * 300) != true)
-            {
-                Console.WriteLine("Failed to Ping remote at {0}", remote);
-                return;
-            }
+            //Console.WriteLine("Pinging {0}", remote);
+            //if (node.ping(remote, 1000 * 300) != true)
+            //{
+            //    Console.WriteLine("Failed to Ping remote at {0}", remote);
+            //    return;
+            //}
 
             //OtpCookedConnection conn = node.connection(remote);
 
@@ -106,7 +105,6 @@ namespace Sean.World
                 //    System.Console.Out.WriteLine("   successfully pinged node " + remote + "\n");
                 //else
                 //    throw new System.Exception("Could not ping node: " + remote);
-
                 //conn.traceLevel = 1;
 
                 mbox = node.createMbox();
@@ -117,6 +115,7 @@ namespace Sean.World
                     return;
                 }
 
+                Console.WriteLine("Listening...");
                 while (true)
                 {
                     Otp.Erlang.Object msg = mbox.receive();
@@ -146,7 +145,6 @@ namespace Sean.World
                     System.Console.Out.WriteLine("<= " + reply.ToString());
                 }
                 */
-        
             }
             catch (System.Exception e)
             {
@@ -159,7 +157,5 @@ namespace Sean.World
 
             node.close();
         }
-
-
     }
 }

@@ -12,6 +12,7 @@ end
 @es_websock WebsocketWorker
 @q_consumer WebsocketQConsumer
 @users WebsocketUsers
+@worldserver WorldServer
 
 # behaviour callbacks
 def init(:ok) do
@@ -23,6 +24,7 @@ def init(:ok) do
       worker(WebsocketEsWebsock, [[name: @es_websock]]), 
       worker(WebsocketQConsumer, [[name: @q_consumer]]), 
       worker(WebsocketUsers, [[name: @users]]), 
+      worker(WorldServer, [[name: @worldserver]]),
 
       #, [restart: :permanent, shutdown: 1000])
     ]
