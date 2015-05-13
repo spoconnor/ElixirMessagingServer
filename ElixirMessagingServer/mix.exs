@@ -43,7 +43,7 @@ defmodule ElixirMessagingServer.Mixfile do
       {:exprotobuf, github: "bitwalker/exprotobuf", tag: "0.8.3"},
       {:gpb, github: "tomas-abrahamsson/gpb", tag: "3.16.0", override: :true},
       {:amqp, github: "pma/amqp", tag: "v0.0.6" },
-      {:json, github: "devinus/poison", tag: "1.4.0"},
+      {:poison, github: "devinus/poison", tag: "1.4.0"},
     ]
   end
 end

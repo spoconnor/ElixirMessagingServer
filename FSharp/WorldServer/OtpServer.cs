@@ -75,7 +75,7 @@ namespace Sean.World
             node = new OtpNode(name + "@" + host, true, cookie);
             mbox = null;
 
-            Console.WriteLine("This node is: {0} (cookie='{1}')", node.node(), node.cookie());
+			Console.WriteLine("This node is: {0} listening on port {1}, cookie='{2}'", node.node(), node.port, node.cookie());
 
             //Console.WriteLine("Pinging {0}", remote);
             //if (node.ping(remote, 1000 * 300) != true)
@@ -106,6 +106,8 @@ namespace Sean.World
                 //else
                 //    throw new System.Exception("Could not ping node: " + remote);
                 //conn.traceLevel = 1;
+
+			
 
                 mbox = node.createMbox();
                 Console.WriteLine("Registering mailbox {0}", mailboxname );

@@ -12,6 +12,7 @@
   "lager": {:git, "git://github.com/basho/lager.git", "d33ccf3b69de09a628fe38b4d7981bb8671b8a4f", [tag: "2.1.1"]},
   "meck": {:git, "git://github.com/basho/meck.git", "dde759050eff19a1a80fd854d7375174b191665d", [tag: "0.8.2"]},
   "mixer": {:git, "git://github.com/opscode/mixer.git", "58ded93d5c47675899d8e5e1589270f340ea66c5", [tag: "0.1.1"]},
+  "poison": {:git, "git://github.com/devinus/poison.git", "f293cf6e6697b6a1ed1db9c9ec4abfb0de204ef8", [tag: "1.4.0"]},
   "protobuffs": {:git, "git://github.com/basho/erlang_protobuffs.git", "f88fc3c6881687432ddd5546b3c7b08009dfb26f", [tag: "0.8.1p5"]},
   "rabbit_common": {:hex, :rabbit_common, "3.4.0"},
   "ranch": {:git, "git://github.com/ninenines/ranch.git", "adf1822defc2b7cfdc7aca112adabfa1d614043c", [ref: "1.0.0"]},
