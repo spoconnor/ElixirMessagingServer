@@ -32,32 +32,40 @@ def step2(clientS) do
       Lib.trace("Received binary:", bin1)
       str = to_string(decodeString(bin1))
       Lib.trace("Received str:", str)
-      {header, body} = Packet.decode(str)
-      loginMsg(clientS, header, body)
+      [header, body] = String.split(str, "\x00")
+      Lib.trace("Received header:", header)
+      Lib.trace("Received body:", body)
+      {:ok, msg} = Packet.decode(header, body)
+      loginMsg(clientS, msg)
     after timeoutTime ->
       WebsocketWebsockets.die(clientS,"Timeout on Handshake")
   end
 end
 
+#def loginMsg(clientS, %CommsMessages.Header{msgtype: 4, from: _from, dest: _dest}, login) do
+def loginMsg(clientS, login) do
+  Lib.trace("NewUser #{login}")
+end
+
 # LoginClient
-def loginMsg(clientS, %CommsMessages.Header{msgtype: "NewUser", from: _from, dest: _dest}, body) do
-  Lib.trace("Login #{body.username}")
+#def loginMsg(clientS, header, login) do
+def loginMsg(clientS, %CommsMessages.Header{msgtype: 5, from: _from, dest: _dest}, login) do
+  Lib.trace("Login #{login.username}")
   #if (length(user.name)>25) do
   #  WebsocketWebsockets.die("Name too long")
   #end
   {:ok,{ip,_}} = :inet.peername(clientS)
-  state = %WebsocketUser{user: body.username, sock: clientS, x: 1,y: 1, ip: ip, pid: self()}
+  state = %WebsocketUser{user: login.username, sock: clientS, x: 1,y: 1, ip: ip, pid: self()}
 
   notify_pid = spawn(fn() -> notify_thread(clientS) end)
-  WebsocketUsers.add_user(WebsocketUsers, body.username, notify_pid)
+  WebsocketUsers.add_user(WebsocketUsers, login.username, notify_pid)
 
   case WebsocketEsWebsock.checkUser(WebsocketWorker, state) do
     {:fail, _} -> WebsocketWebsockets.die(clientS,"Already Connected");
     id ->
       Lib.trace("ObjectId: #{id}")
-      responseHeader = %CommsMessages.Header{msgtype: "Response", from: "Elixir", dest: body.username}
-      responseBody = %CommsMessages.Response{code: 1, message: "Welcome #{body.username}!"}
-      data = Packet.encode(responseHeader, responseBody)
+      response = CommsMessages.Response.new(code: 1, message: "Welcome #{login.username}!")
+      data = Packet.encode(response, "Elixir", login.username)
       WebsocketWebsockets.sendTcpMsg(clientS, data)
       client(%WebsocketSimple{id: id, sock: clientS})
   end
@@ -104,10 +112,9 @@ def client(state) do
   Lib.trace("Client #{state.id} receive loop")
   receive do
     {_tcp,_,bin} -> 
-      Lib.trace("Recived binary:", bin)
       str = to_string(decodeString(bin))
-      Lib.trace("Received str:", str)
-      {header, body} = Packet.decode(str)
+      Lib.trace("received:", str)
+      Lib.trace("type:", Packet.msgType(str))
       # Send message thru rabbit queue
 
       {:ok, conn} = AMQP.Connection.open("amqp://guest:guest@localhost")

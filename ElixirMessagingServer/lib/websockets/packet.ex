@@ -1,31 +1,20 @@
 defmodule Packet do
 
-  def decode(data) do
-    [header, body] = String.split(data, "\x00")
-    Lib.trace("Received header:", header)
-    Lib.trace("Received body:", body)
-    decode(header,body)
-  end
-
-  defp decode(header,body) do
+  def decode(header,body) do
     h = Poison.decode!(header, as: CommsMessages.Header)
     Lib.trace("Header Type: #{h.msgtype}")
     case h.msgtype do
-      "Response" -> {h, Poison.decode!(body, as: CommsMessages.Response)}
-      "Ping" -> {h, Poison.decode!(body, as: CommsMessages.Ping)}
-      "Pong" -> {h, Poison.decode!(body, as: CommsMessages.Pong)}
-      "NewUser" -> {h, Poison.decode!(body, as: CommsMessages.NewUser)}
-      "Login" -> {h, Poison.decode!(body, as: CommsMessages.Login)}
-      "Say" -> {h, Poison.decode!(body, as: CommsMessages.Say)}
+      "Response" -> {:ok, Poison.decode!(body, as: CommsMessages.Response)}
+      "Ping" -> {:ok, Poison.decode!(body, as: CommsMessages.Ping)}
+      "Pong" -> {:ok, Poison.decode!(body, as: CommsMessages.Pong)}
+      "NewUser" -> {:ok, Poison.decode!(body, as: CommsMessages.NewUser)}
+      "Login" -> {:ok, Poison.decode!(body, as: CommsMessages.Login)}
+      "Say" -> {:ok, Poison.decode!(body, as: CommsMessages.Say)}
     end
   end
 
-  def encode(header, body) do
-    h = Poison.encode!(header,[])
-    b = Poison.encode!(body,[])
-    Lib.trace("Sending header:", h)
-    Lib.trace("Sending body:", b)
-    h <> "\x00" <> b
+  def encode(message, from, dest) do
+    #JSON.encode(message)
   end
 
 #  def decode(<<headerSize::8,data::binary>>) do
