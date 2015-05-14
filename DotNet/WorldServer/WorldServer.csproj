@@ -72,6 +72,7 @@
     <Compile Include="World\WorldMapData.cs" />
     <Compile Include="World\Generator\Misc.cs" />
     <Compile Include="OtpServer.cs" />
+    <Compile Include="ServerSocketListener.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

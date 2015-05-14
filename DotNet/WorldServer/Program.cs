@@ -13,8 +13,10 @@ namespace Sean.World
 
 			WorldData.Initialize();
 
-            var otpServer = new OtpServer();
-            otpServer.Start();
+            //var otpServer = new OtpServer();
+            //otpServer.Start();
+
+            ServerSocketListener.StartListening();
 
             Console.WriteLine("Press any key to exit");
             Console.ReadKey();
