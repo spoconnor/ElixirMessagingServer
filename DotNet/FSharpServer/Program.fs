@@ -105,13 +105,14 @@ module Main =
     let connection = ConnectTo "servernode@zen" "cookie"
 
     let pid = StartGenServer connection
-    
-    let args = Term.Tuple[ Term.Pid pid ; Term.Integer 6I ; Term.Integer 9I]
-    
-    match MakeRPC connection "Elixir.Mathserver" "multiply" args with
-    | Term.Tuple [ Term.Atom "ok" ; Term.Integer value ] -> 
-      Console.WriteLine("Return Value:" + value.ToString())
-    | result -> Console.WriteLine("Failure:" + result.ToString())
+
+//TODO - uncomment and fix
+//    let args = Term.Tuple[ Term.Pid pid ; Term.Integer 6I ; Term.Integer 9I]
+//    
+//    match MakeRPC connection "Elixir.Mathserver" "multiply" args with
+//    | Term.Tuple [ Term.Atom "ok" ; Term.Integer value ] -> 
+//      Console.WriteLine("Return Value:" + value.ToString())
+//    | result -> Console.WriteLine("Failure:" + result.ToString())
     
     0
 

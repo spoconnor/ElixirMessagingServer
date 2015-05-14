@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Otp;
-using NFX.Erlang;
 
 namespace Sean.World
 {
@@ -70,17 +69,6 @@ namespace Sean.World
 			try
 			{
             	System.Console.Out.WriteLine("Starting Otp Server...");
-
-
-				var mbox = ErlApp.Node.CreateMbox("test");
-
-				while (App.Active)
-				{
-					var result = mbox.Receive(1000);
-					if (result != null)
-						Console.WriteLine("Mailbox {0} got message: {1}", mbox.Self, result);
-				}
-
 
             	OtpNode.useShortNames = true;
             	String host = System.Net.Dns.GetHostName();

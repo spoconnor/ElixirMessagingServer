@@ -1,13 +1,9 @@
 ﻿<Properties StartupItem="../WorldServer/WorldServer.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../OTP.NET-2010/Otp/OtpEpmd.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../WorldServer/OtpServer.cs">
     <Files>
       <File FileName="../WorldServer/Program.cs" Line="1" Column="1" />
-      <File FileName="../WorldServer/OtpServer.cs" Line="20" Column="20" />
-      <File FileName="../OTP.NET-2010/Otp/OtpNode.cs" Line="62" Column="62" />
-      <File FileName="../OTP.NET-2010/Otp/OtpMbox.cs" Line="3" Column="3" />
-      <File FileName="../OTP.NET-2010/Otp/AbstractNode.cs" Line="45" Column="45" />
-      <File FileName="../OTP.NET-2010/Otp/OtpEpmd.cs" Line="1" Column="1" />
+      <File FileName="../WorldServer/OtpServer.cs" Line="14" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

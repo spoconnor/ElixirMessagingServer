@@ -35,9 +35,13 @@
     <Reference Include="OpenTK">
       <HintPath>..\deps\OpenTK\OpenTK.dll</HintPath>
     </Reference>
+    <Reference Include="Google.ProtocolBuffers">
+      <HintPath>..\..\ProtoBufs\DotNet\Google.ProtocolBuffers.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
+    <Compile Include="CommsMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\AddBlock.cs" />
     <Compile Include="Shared\Block.cs" />
