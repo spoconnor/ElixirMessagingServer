@@ -31,20 +31,16 @@ def step2(clientS) do
     {_tcp, _, bin1} ->
       Lib.trace("Received binary:", bin1)
       str = to_string(decodeString(bin1))
-      Lib.trace("Received str:", str)
-      [header, body] = String.split(str, "\x00")
-      Lib.trace("Received header:", header)
-      Lib.trace("Received body:", body)
-      {:ok, msg} = Packet.decode(header, body)
-      loginMsg(clientS, msg)
+      Lib.trace("Received:", str)
+      {header,body} = Packet.decode(str)
+      loginMsg(clientS, header, body)
     after timeoutTime ->
       WebsocketWebsockets.die(clientS,"Timeout on Handshake")
   end
 end
 
-#def loginMsg(clientS, %CommsMessages.Header{msgtype: 4, from: _from, dest: _dest}, login) do
-def loginMsg(clientS, login) do
-  Lib.trace("NewUser #{login}")
+def loginMsg(clientS, %CommsMessages.Header{msgtype: 4, from: _from, dest: _dest}, login) do
+  Lib.trace("NewUser #{login.username}")
 end
 
 # LoginClient
