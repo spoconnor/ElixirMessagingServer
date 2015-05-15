@@ -33,7 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="OpenTK">
-      <HintPath>..\deps\OpenTK\OpenTK.dll</HintPath>
+      <HintPath>deps\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="Google.ProtocolBuffers">
       <HintPath>..\..\ProtoBufs\DotNet\Google.ProtocolBuffers.dll</HintPath>
