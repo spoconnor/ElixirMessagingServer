@@ -16,6 +16,8 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace CommsMessages {
+
 namespace {
 
 const ::google::protobuf::Descriptor* Ping_descriptor_ = NULL;
@@ -216,16 +218,16 @@ void protobuf_AddDesc_CommsMessages_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023CommsMessages.proto\"\025\n\004Ping\022\r\n\005count\030\001"
-    " \002(\005\"\025\n\004Pong\022\r\n\005count\030\001 \002(\005\")\n\010Response\022"
-    "\014\n\004code\030\001 \002(\005\022\017\n\007message\030\002 \001(\t\";\n\007NewUse"
-    "r\022\020\n\010username\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\022\014\n"
-    "\004name\030\003 \002(\t\"+\n\005Login\022\020\n\010username\030\001 \002(\t\022\020"
-    "\n\010password\030\002 \002(\t\"\023\n\003Say\022\014\n\004text\030\001 \002(\t\"5\n"
-    "\006Header\022\017\n\007msgtype\030\001 \002(\005\022\014\n\004from\030\002 \002(\t\022\014"
-    "\n\004dest\030\003 \002(\t*R\n\007MsgType\022\r\n\teResponse\020\001\022\t"
-    "\n\005ePing\020\002\022\t\n\005ePong\020\003\022\014\n\010eNewUser\020\004\022\n\n\006eL"
-    "ogin\020\005\022\010\n\004eSay\020\006B\002H\001", 380);
+    "\n\023CommsMessages.proto\022\rCommsMessages\"\025\n\004"
+    "Ping\022\r\n\005count\030\001 \002(\005\"\025\n\004Pong\022\r\n\005count\030\001 \002"
+    "(\005\")\n\010Response\022\014\n\004code\030\001 \002(\005\022\017\n\007message\030"
+    "\002 \001(\t\";\n\007NewUser\022\020\n\010username\030\001 \002(\t\022\020\n\010pa"
+    "ssword\030\002 \002(\t\022\014\n\004name\030\003 \002(\t\"+\n\005Login\022\020\n\010u"
+    "sername\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"\023\n\003Say\022\014"
+    "\n\004text\030\001 \002(\t\"5\n\006Header\022\017\n\007msgtype\030\001 \002(\005\022"
+    "\014\n\004from\030\002 \002(\t\022\014\n\004dest\030\003 \002(\t*R\n\007MsgType\022\r"
+    "\n\teResponse\020\001\022\t\n\005ePing\020\002\022\t\n\005ePong\020\003\022\014\n\010e"
+    "NewUser\020\004\022\n\n\006eLogin\020\005\022\010\n\004eSay\020\006B\002H\001", 395);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "CommsMessages.proto", &protobuf_RegisterTypes);
   Ping::default_instance_ = new Ping();
@@ -2127,5 +2129,7 @@ void Header::Swap(Header* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace CommsMessages
 
 // @@protoc_insertion_point(global_scope)

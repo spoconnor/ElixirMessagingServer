@@ -2,6 +2,14 @@ window.onload = function() {
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'Html5Client', { preload: preload, create: create });
 
+var ProtoBuf = dcodeIO.ProtoBuf;
+var builder = ProtoBuf.loadProtoFile("CommsMessages.proto")
+var CommsMessages = builder.build("CommsMessages")
+var Ping = CommsMessages.Ping;
+var Header = CommsMessages.Header;
+var NewUser = CommsMessages.NewUser;
+var socket;
+
 //var socket = new WebSocket("ws://localhost:8000/socket/server/startDaemon.php");
 //
 //socket.onopen = function(){
@@ -13,14 +21,14 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'Html5Client', { preload: prel
 
 function connect() {
     try {
-        var socket;
-        var host = "ws://localhost:8081";// /socket/server/startDaemon.php";
+        var host = "ws://zen:8081";// /socket/server/startDaemon.php";
         var socket = new WebSocket(host);
 
         console.log('Socket Status: '+socket.readyState);
 
         socket.onopen = function() {
             console.log('Socket Status: '+socket.readyState+' (open)');
+            login(socket);
         }
 
         socket.onmessage = function(msg) {
@@ -35,10 +43,16 @@ function connect() {
     }
 }
 
-function send(text) {
+function login(socket) {
     try {
-        socket.send(text);
-        console.log('Sent: '+text)
+        console.log('Login...');
+        var hdr = new Header({"msgtype":4, "from":"html5", "dest":"cloud" });
+        var msg = new NewUser({"username":"sean", "password":"pass", "name":"Sean"});
+        var hdrBuffer = hdr.encode().toArrayBuffer();
+        var msgBuffer = msg.encode().toArrayBuffer();
+        var array = Buffer.concat(hdrBuffer, msgBuffer);
+        socket.send(array);
+        console.log('Sent: '+array)
     } catch(exception) {
        console.log('Error:' + exception);
     }
@@ -63,7 +77,6 @@ var cop;
 function create() {
 
     connect();
-    send('wibble');
 
     game.stage.backgroundColor = '#404040';
 

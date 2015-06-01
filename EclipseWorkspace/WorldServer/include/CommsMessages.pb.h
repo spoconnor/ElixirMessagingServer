@@ -27,6 +27,8 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
+namespace CommsMessages {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_CommsMessages_2eproto();
 void protobuf_AssignDesc_CommsMessages_2eproto();
@@ -126,7 +128,7 @@ class Ping : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 count() const;
   inline void set_count(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:Ping)
+  // @@protoc_insertion_point(class_scope:CommsMessages.Ping)
  private:
   inline void set_has_count();
   inline void clear_has_count();
@@ -208,7 +210,7 @@ class Pong : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 count() const;
   inline void set_count(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:Pong)
+  // @@protoc_insertion_point(class_scope:CommsMessages.Pong)
  private:
   inline void set_has_count();
   inline void clear_has_count();
@@ -302,7 +304,7 @@ class Response : public ::google::protobuf::Message {
   inline ::std::string* release_message();
   inline void set_allocated_message(::std::string* message);
 
-  // @@protoc_insertion_point(class_scope:Response)
+  // @@protoc_insertion_point(class_scope:CommsMessages.Response)
  private:
   inline void set_has_code();
   inline void clear_has_code();
@@ -416,7 +418,7 @@ class NewUser : public ::google::protobuf::Message {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
-  // @@protoc_insertion_point(class_scope:NewUser)
+  // @@protoc_insertion_point(class_scope:CommsMessages.NewUser)
  private:
   inline void set_has_username();
   inline void clear_has_username();
@@ -521,7 +523,7 @@ class Login : public ::google::protobuf::Message {
   inline ::std::string* release_password();
   inline void set_allocated_password(::std::string* password);
 
-  // @@protoc_insertion_point(class_scope:Login)
+  // @@protoc_insertion_point(class_scope:CommsMessages.Login)
  private:
   inline void set_has_username();
   inline void clear_has_username();
@@ -611,7 +613,7 @@ class Say : public ::google::protobuf::Message {
   inline ::std::string* release_text();
   inline void set_allocated_text(::std::string* text);
 
-  // @@protoc_insertion_point(class_scope:Say)
+  // @@protoc_insertion_point(class_scope:CommsMessages.Say)
  private:
   inline void set_has_text();
   inline void clear_has_text();
@@ -717,7 +719,7 @@ class Header : public ::google::protobuf::Message {
   inline ::std::string* release_dest();
   inline void set_allocated_dest(::std::string* dest);
 
-  // @@protoc_insertion_point(class_scope:Header)
+  // @@protoc_insertion_point(class_scope:CommsMessages.Header)
  private:
   inline void set_has_msgtype();
   inline void clear_has_msgtype();
@@ -1494,13 +1496,15 @@ inline void Header::set_allocated_dest(::std::string* dest) {
 
 // @@protoc_insertion_point(namespace_scope)
 
+}  // namespace CommsMessages
+
 #ifndef SWIG
 namespace google {
 namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::MsgType>() {
-  return ::MsgType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::CommsMessages::MsgType>() {
+  return ::CommsMessages::MsgType_descriptor();
 }
 
 }  // namespace google
