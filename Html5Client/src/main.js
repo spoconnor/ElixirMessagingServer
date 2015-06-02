@@ -7,7 +7,7 @@ var builder = ProtoBuf.loadProtoFile("CommsMessages.proto")
 var CommsMessages = builder.build("CommsMessages")
 var Ping = CommsMessages.Ping;
 var Header = CommsMessages.Header;
-var NewUser = CommsMessages.NewUser;
+var Login = CommsMessages.Login;
 var socket;
 
 //var socket = new WebSocket("ws://localhost:8000/socket/server/startDaemon.php");
@@ -18,6 +18,21 @@ var socket;
 //socket.onmessage = function(msg){
     //console.log(msg);
 //}
+
+/**
+ * Creates a new Uint8Array based on two different ArrayBuffers
+ *
+ * @private
+ * @param {ArrayBuffers} buffer1 The first buffer.
+ * @param {ArrayBuffers} buffer2 The second buffer.
+ * @return {ArrayBuffers} The new ArrayBuffer created out of the two.
+ */
+var _appendBuffer = function(buffer1, buffer2) {
+  var tmp = new Uint8Array(buffer1.byteLength + buffer2.byteLength);
+  tmp.set(new Uint8Array(buffer1), 0);
+  tmp.set(new Uint8Array(buffer2), buffer1.byteLength);
+  return tmp.buffer;
+};
 
 function connect() {
     try {
@@ -46,13 +61,12 @@ function connect() {
 function login(socket) {
     try {
         console.log('Login...');
-        var hdr = new Header({"msgtype":4, "from":"html5", "dest":"cloud" });
-        var msg = new NewUser({"username":"sean", "password":"pass", "name":"Sean"});
-        var hdrBuffer = hdr.encode().toArrayBuffer();
-        var msgBuffer = msg.encode().toArrayBuffer();
-        var array = Buffer.concat(hdrBuffer, msgBuffer);
-        socket.send(array);
-        console.log('Sent: '+array)
+        var hdr = new Header({"msgtype":5, "from":"html5", "dest":"cloud" });
+        var msg = new Login({"username":"sean", "password":"pass"});
+        var hdrBuffer = hdr.encodeDelimited().toArrayBuffer();
+        var msgBuffer = msg.encodeDelimited().toArrayBuffer();
+        var data = _appendBuffer(hdrBuffer, msgBuffer); 
+        socket.send(data);
     } catch(exception) {
        console.log('Error:' + exception);
     }

@@ -4,6 +4,10 @@ defmodule Packet do
     headerData = :binary.part(data,0,headerSize)
     bodyData = :binary.part(data,headerSize,byte_size(data)-headerSize)
     header = CommsMessages.Header.decode(<<headerData::binary>>)
+    decodeBody(header, bodyData)
+  end
+
+  def decodeBody(header, <<bodySize::8,bodyData::binary>>) do
     case header.msgtype do
       1 -> {header,CommsMessages.Response.decode(bodyData)}
       2 -> {header,CommsMessages.Ping.decode(bodyData)}
@@ -50,7 +54,7 @@ defmodule Packet do
     end
     header = CommsMessages.Header.new(msgtype: msgtype, from: from, dest: dest)
     headerData = CommsMessages.Header.encode(header)
-    <<byte_size(headerData)>> <> headerData <> bodyData
+    <<byte_size(headerData)>> <> headerData <> <<byte_size(bodyData)>> <> bodyData
   end
 
 end

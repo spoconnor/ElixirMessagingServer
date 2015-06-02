@@ -81,7 +81,6 @@ end
 def msg(clientS,type,msg) do
   Lib.trace("Sending msg '#{msg}' type '#{type}' to '#{:erlang.port_info(clientS)[:id]}'")
   #:gen_tcp.send(clientS,[0,type,<<" @@@ ">>,msg,255])
-  sendTcpMsg(clientS, "Testing...")
   sendTcpMsg(clientS, msg)
 end
 
