@@ -27,13 +27,12 @@ end
 
 class Sprites
   def initialize()
-    @sprs = Hash.new[
-      0 => Spr.new(' ', COLOR_WHITE),
-      1 => Spr.new('@', COLOR_RED),
-      2 => Spr.new('#', COLOR_WHITE),
-      3 => Spr.new('o', COLOR_WHITE),
-      4 => Spr.new('-', COLOR_BLUE),
-    ]
+    @sprs = Hash.new()
+    @sprs[0] = Spr.new(' ', COLOR_WHITE)
+    @sprs[1] = Spr.new('@', COLOR_RED)
+    @sprs[2] = Spr.new('#', COLOR_WHITE)
+    @sprs[3] = Spr.new('o', COLOR_WHITE)
+    @sprs[4] = Spr.new('-', COLOR_BLUE)
   end
   def get(id)
     @sprs[id]
@@ -70,6 +69,7 @@ class Worker
     @index = index
     @percent = 0
     @map = Map.new
+    Curses.refresh
   end
 
   def run
@@ -101,12 +101,15 @@ class Worker
   end
 end
 
-workers = (1..10).map{ |index| Worker.new(index) }
+#workers = (1..10).map{ |index| Worker.new(index) }
+#
+#at_exit do
+#  workers.each{ |worker| puts worker }
+#end
+#
+#workers.map{ |worker| Thread.new{ worker.run } }.each(&:join)
 
-at_exit do
-  workers.each{ |worker| puts worker }
-end
-
-workers.map{ |worker| Thread.new{ worker.run } }.each(&:join)
+worker = Worker.new(0)
+worker.run()
 
 Curses.close_screen
