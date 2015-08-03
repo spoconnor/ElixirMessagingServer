@@ -1,0 +1,9 @@
+Blank, ,1
+Player,@,2
+Dirt,.,1
+Ground,.,1
+Tree,o,1
+Water,0x2248,3
+Wall,#,1
+UpStair,0x1402,1
+DownStair,0x1400,1

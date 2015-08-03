@@ -18,6 +18,7 @@ class Spr
     @col = col
   end
   def draw(x,y)
+puts "Draw #{chr} at #{x},#{y}"
     Curses.setpos(x,y)
     Curses.attron(color_pair(@col)|A_NORMAL) {
       Curses.addstr("#{@chr}")
@@ -61,6 +62,7 @@ class Map
         @sprs.get(id).draw(x,y)
       end
     end
+    Curses.refresh
   end
 end
 
@@ -69,7 +71,6 @@ class Worker
     @index = index
     @percent = 0
     @map = Map.new
-    Curses.refresh
   end
 
   def run
@@ -81,24 +82,24 @@ class Worker
     #end
   end
 
-  def to_s
-    "Worker ##{'%2d' % @index} is #{'%3d' % @percent}% complete"
-  end
+  #def to_s
+  #  "Worker ##{'%2d' % @index} is #{'%3d' % @percent}% complete"
+  #end
 
-  private
+  #private
 
-  def work
-    @percent += 10
-  end
+  #def work
+  #  @percent += 10
+  #end
 
-  def report
-    Curses.attron(color_pair(COLOR_BLUE)|A_NORMAL) {
-      Curses.addstr("#{0x2588.chr('UTF-8')}#{132.chr('UTF-8')}#{133.chr('UTF-8')}")
-    }
-    Curses.setpos(@index, 0)
-    Curses.addstr(to_s)
-    Curses.refresh
-  end
+  #def report
+  #  Curses.attron(color_pair(COLOR_BLUE)|A_NORMAL) {
+  #    Curses.addstr("#{0x2588.chr('UTF-8')}#{132.chr('UTF-8')}#{133.chr('UTF-8')}")
+  #  }
+  #  Curses.setpos(@index, 0)
+  #  Curses.addstr(to_s)
+  #  Curses.refresh
+  #end
 end
 
 #workers = (1..10).map{ |index| Worker.new(index) }
@@ -109,7 +110,10 @@ end
 #
 #workers.map{ |worker| Thread.new{ worker.run } }.each(&:join)
 
+puts "Init"
 worker = Worker.new(0)
 worker.run()
 
+sleep(5)
 Curses.close_screen
+puts "Done"
