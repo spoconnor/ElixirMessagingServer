@@ -1,154 +1,145 @@
-object PerlinNoise
+object perlinNoise 
 {
-    def GenerateWhiteNoise(width: Int, height: Int): Float[][] =
+  class PerlinNoise() 
+  {  
+    def GenerateWhiteNoise(width: Int, height: Int): misc.FloatArray =
 		{
-      Float[][] noise = Misc.GetEmptyArray<Float>(width, height)
-
-			for (Int i = 0; i < width; i++)
+      var noise = new misc.FloatArray(width, height)
+      val rand = scala.util.Random
+      for (i <- 0 to width)
 			{
-				for (Int j = 0; j < height; j++)
+				for (j <- 0 to height)
 				{
-					noise[i][j] = (Float)Settings.Random.NextDouble()
+					noise.Set(i,j, rand.nextFloat())
 				}
 			}
-			return noise
+			noise
 		}
 
 		def Interpolate(x0: Float, x1: Float, alpha: Float): Float =
 		{
-			return x0 * (1 - alpha) + alpha * x1
+			x0 * (1 - alpha) + alpha * x1
 		}
 
 		def Interpolate(minY: Int, maxY: Int, t: Float): Int =
 		{
-			Float u = 1 - t
-			return (Int)(minY * u + maxY * t)
+			var u = 1 - t
+			(minY * u + maxY * t).toInt
 		}
 
-		def MapInts(minY: Int, maxY: Int, perlinNoise: Float[][]): Int[][] =
+		def MapInts(minY: Int, maxY: Int, perlinNoise: misc.FloatArray): misc.IntArray =
 		{
-			Int width = perlinNoise.Length
-			Int height = perlinNoise[0].Length
-      Int[][] heightMap = Misc.GetEmptyArray<Int>(width, height)
-
-			for (Int i = 0; i < width; i++)
+      var heightMap = new misc.IntArray(perlinNoise.Width, perlinNoise.Height)
+			for (i <- 0 to perlinNoise.Width)
 			{
-				for (Int j = 0; j < height; j++)
+				for (j <- 0 to perlinNoise.Height)
 				{
-					heightMap[i][j] = Interpolate(minY, maxY, perlinNoise[i][j])
+					heightMap.Set(i,j, Interpolate(minY, maxY, perlinNoise.Get(i,j)))
 				}
 			}
-			return heightMap
+			heightMap
 		}
 
-		def MapFloats(minY: Float, maxY: Float, perlinNoise: Float[][]): Float[][] =
+		def MapFloats(minY: Float, maxY: Float, perlinNoise: misc.FloatArray): misc.FloatArray =
 		{
-			Int width = perlinNoise.Length
-			Int height = perlinNoise[0].Length
-			Float[][] treeMap = Misc.GetEmptyArray<Float>(width, height)
+			var treeMap = new misc.FloatArray(perlinNoise.Width, perlinNoise.Height)
 
-			for (Int i = 0; i < width; i++)
+			for (i <- 0 to perlinNoise.Width)
 			{
-				for (Int j = 0; j < height; j++)
+				for (j <- 0 to perlinNoise.Height)
 				{
-					treeMap[i][j] = Interpolate(minY, maxY, perlinNoise[i][j])
+					treeMap.Set(i,j, Interpolate(minY, maxY, perlinNoise.Get(i,j)))
 				}
 			}
-			return treeMap
+			treeMap
 		}
 
-		def GenerateSmoothNoise(baseNoise: Float[][], octave: Int): Float[][] =
+		def GenerateSmoothNoise(baseNoise: misc.FloatArray, octave: Int): misc.FloatArray =
 		{
-			Int width = baseNoise.Length
-			Int height = baseNoise[0].Length
+      var smoothNoise = new misc.FloatArray(baseNoise.Width, baseNoise.Height)
+			var samplePeriod = 1 << octave // calculates 2 ^ k
+			var sampleFrequency = 1.0f / samplePeriod
 
-      Float[][] smoothNoise = Misc.GetEmptyArray<Float>(width, height)
-			Int samplePeriod = 1 << octave // calculates 2 ^ k
-			Float sampleFrequency = 1.0f / samplePeriod
-
-			for (Int i = 0; i < width; i++)
+			for (i <- 0 to baseNoise.Width)
 			{
 				//calculate the horizontal sampling indices
-				Int iSample0 = (i / samplePeriod) * samplePeriod
-				Int iSample1 = (iSample0 + samplePeriod) % width //wrap around
-				Float horizontalBlend = (i - iSample0) * sampleFrequency
+				var iSample0 = (i / samplePeriod) * samplePeriod
+				var iSample1 = (iSample0 + samplePeriod) % baseNoise.Width //wrap around
+				var horizontalBlend = (i - iSample0) * sampleFrequency
 
-				for (Int j = 0; j < height; j++)
+				for (j <- 0 to baseNoise.Height)
 				{
 					//calculate the vertical sampling indices
-					Int jSample0 = (j / samplePeriod) * samplePeriod
-					Int jSample1 = (jSample0 + samplePeriod) % height //wrap around
-					Float verticalBlend = (j - jSample0) * sampleFrequency
+					var jSample0 = (j / samplePeriod) * samplePeriod
+					var jSample1 = (jSample0 + samplePeriod) % baseNoise.Height //wrap around
+					var verticalBlend = (j - jSample0) * sampleFrequency
 
 					//blend the top two corners
-					Float top = Interpolate(baseNoise[iSample0][jSample0], baseNoise[iSample1][jSample0], horizontalBlend)
+					var top = Interpolate(baseNoise.Get(iSample0,jSample0), baseNoise.Get(iSample1,jSample0), horizontalBlend)
 
 					//blend the bottom two corners
-					Float bottom = Interpolate(baseNoise[iSample0][jSample1], baseNoise[iSample1][jSample1], horizontalBlend)
+					var bottom = Interpolate(baseNoise.Get(iSample0,jSample1), baseNoise.Get(iSample1,jSample1), horizontalBlend)
 
 					//final blend
-					smoothNoise[i][j] = Interpolate(top, bottom, verticalBlend)
+					smoothNoise.Set(i,j, Interpolate(top, bottom, verticalBlend))
 				}
 			}
-			return smoothNoise
+			smoothNoise
 		}
 
-		def GeneratePerlinNoise(baseNoise: Float[][], octaveCount: Int): Float[][] =
+		def GeneratePerlinNoise(baseNoise: misc.FloatArray, octaveCount: Int): misc.FloatArray =
 		{
-			Int width = baseNoise.Length
-			Int height = baseNoise[0].Length
-
-			var smoothNoise = new Float[octaveCount][][] //an array of 2D arrays containing
-
-			const Float PERSISTANCE = 0.4f
+			var smoothNoise = Array.ofDim[misc.FloatArray](octaveCount) //an array of 2D arrays containing
+			var PERSISTANCE = 0.4f
 
 			//generate smooth noise
-			for (Int i = 0; i < octaveCount; i++)
+			for (i <- 0 to octaveCount)
 			{
-				smoothNoise[i] = GenerateSmoothNoise(baseNoise, i)
+				smoothNoise(i) = GenerateSmoothNoise(baseNoise, i)
 			}
 
-      Float[][] perlinNoise = Misc.GetEmptyArray<Float>(width, height) //an array of floats initialised to 0
-			Float amplitude = 1f
-			Float totalAmplitude = 0.0f
+      var perlinNoise = new misc.FloatArray(baseNoise.Width, baseNoise.Height) //an array of floats initialised to 0
+			var amplitude = 1f
+			var totalAmplitude = 0.0f
 
 			//blend noise together
-			for (Int octave = octaveCount - 1; octave >= 0; octave--)
+			for (octave <- octaveCount - 1 to 0 by -1)
 			{
 				amplitude *= PERSISTANCE
 				totalAmplitude += amplitude
 
-				for (Int i = 0; i < width; i++)
+				for (i <- 0 to baseNoise.Width)
 				{
-					for (Int j = 0; j < height; j++)
+					for (j <- 0 to baseNoise.Height)
 					{
-						perlinNoise[i][j] += smoothNoise[octave][i][j] * amplitude
+						perlinNoise.Set(i,j, perlinNoise.Get(i,j) + smoothNoise(octave).Get(i,j) * amplitude)
 					}
 				}
 			}
 
 			//normalisation
-			for (Int i = 0; i < width; i++)
+			for (i <- 0 to baseNoise.Width)
 			{
-				for (Int j = 0; j < height; j++)
+				for (j <- 0 to baseNoise.Height)
 				{
-					perlinNoise[i][j] /= totalAmplitude
+					perlinNoise.Set(i,j, perlinNoise.Get(i,j) / totalAmplitude)
 				}
 			}
-			return perlinNoise
+			perlinNoise
 		}
 
-		def GetIntMap(width :Int, height: Int, minY: Int, maxY: Int, octaveCount: Int): Int[][] =
+		def GetIntMap(width :Int, height: Int, minY: Int, maxY: Int, octaveCount: Int): misc.IntArray =
 		{
-      Float[][] baseNoise = GenerateWhiteNoise(width, height)
-			Float[][] perlinNoise = GeneratePerlinNoise(baseNoise, octaveCount)
-			return MapInts(minY, maxY, perlinNoise)
+      var baseNoise = GenerateWhiteNoise(width, height)
+			var perlinNoise = GeneratePerlinNoise(baseNoise, octaveCount)
+			MapInts(minY, maxY, perlinNoise)
 		}
 
-    def GetFloatMap(width: Int, height: Int, minY: Float, maxY: Float, octaveCount: Int): Float[][] =
+    def GetFloatMap(width: Int, height: Int, minY: Float, maxY: Float, octaveCount: Int): misc.FloatArray =
 		{
-      Float[][] baseNoise = GenerateWhiteNoise(width, height)
-			Float[][] perlinNoise = GeneratePerlinNoise(baseNoise, octaveCount)
-			return MapFloats(minY, maxY, perlinNoise)
+      var baseNoise = GenerateWhiteNoise(width, height)
+			var perlinNoise = GeneratePerlinNoise(baseNoise, octaveCount)
+			MapFloats(minY, maxY, perlinNoise)
 		}
+  }
 }
