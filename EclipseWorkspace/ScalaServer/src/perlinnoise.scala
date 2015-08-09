@@ -1,19 +1,13 @@
 object perlinNoise 
 {
   class PerlinNoise() 
-  {  
+  {   
     def GenerateWhiteNoise(width: Int, height: Int): misc.FloatArray =
 		{
       var noise = new misc.FloatArray(width, height)
-      val rand = scala.util.Random
-      for (i <- 0 to width)
-			{
-				for (j <- 0 to height)
-				{
-					noise.Set(i,j, rand.nextFloat())
-				}
-			}
-			noise
+      val rand = new scala.util.Random
+      noise.Map((i:Float) => rand.nextFloat())
+      noise
 		}
 
 		def Interpolate(x0: Float, x1: Float, alpha: Float): Float =
@@ -30,27 +24,14 @@ object perlinNoise
 		def MapInts(minY: Int, maxY: Int, perlinNoise: misc.FloatArray): misc.IntArray =
 		{
       var heightMap = new misc.IntArray(perlinNoise.Width, perlinNoise.Height)
-			for (i <- 0 to perlinNoise.Width)
-			{
-				for (j <- 0 to perlinNoise.Height)
-				{
-					heightMap.Set(i,j, Interpolate(minY, maxY, perlinNoise.Get(i,j)))
-				}
-			}
+			heightMap.Map((f:Int) => this.Interpolate(minY, maxY, f))
 			heightMap
 		}
 
 		def MapFloats(minY: Float, maxY: Float, perlinNoise: misc.FloatArray): misc.FloatArray =
 		{
 			var treeMap = new misc.FloatArray(perlinNoise.Width, perlinNoise.Height)
-
-			for (i <- 0 to perlinNoise.Width)
-			{
-				for (j <- 0 to perlinNoise.Height)
-				{
-					treeMap.Set(i,j, Interpolate(minY, maxY, perlinNoise.Get(i,j)))
-				}
-			}
+      treeMap.Map((f:Float) => this.Interpolate(minY, maxY, f))
 			treeMap
 		}
 
@@ -60,14 +41,14 @@ object perlinNoise
 			var samplePeriod = 1 << octave // calculates 2 ^ k
 			var sampleFrequency = 1.0f / samplePeriod
 
-			for (i <- 0 to baseNoise.Width)
+			for (i <- 0 to baseNoise.Width-1)
 			{
 				//calculate the horizontal sampling indices
 				var iSample0 = (i / samplePeriod) * samplePeriod
 				var iSample1 = (iSample0 + samplePeriod) % baseNoise.Width //wrap around
 				var horizontalBlend = (i - iSample0) * sampleFrequency
 
-				for (j <- 0 to baseNoise.Height)
+				for (j <- 0 to baseNoise.Height-1)
 				{
 					//calculate the vertical sampling indices
 					var jSample0 = (j / samplePeriod) * samplePeriod
@@ -93,7 +74,7 @@ object perlinNoise
 			var PERSISTANCE = 0.4f
 
 			//generate smooth noise
-			for (i <- 0 to octaveCount)
+			for (i <- 0 to octaveCount-1)
 			{
 				smoothNoise(i) = GenerateSmoothNoise(baseNoise, i)
 			}
@@ -108,9 +89,9 @@ object perlinNoise
 				amplitude *= PERSISTANCE
 				totalAmplitude += amplitude
 
-				for (i <- 0 to baseNoise.Width)
+				for (i <- 0 to baseNoise.Width-1)
 				{
-					for (j <- 0 to baseNoise.Height)
+					for (j <- 0 to baseNoise.Height-1)
 					{
 						perlinNoise.Set(i,j, perlinNoise.Get(i,j) + smoothNoise(octave).Get(i,j) * amplitude)
 					}
@@ -118,13 +99,7 @@ object perlinNoise
 			}
 
 			//normalisation
-			for (i <- 0 to baseNoise.Width)
-			{
-				for (j <- 0 to baseNoise.Height)
-				{
-					perlinNoise.Set(i,j, perlinNoise.Get(i,j) / totalAmplitude)
-				}
-			}
+      perlinNoise.Map((i:Float) => i / totalAmplitude)
 			perlinNoise
 		}
 

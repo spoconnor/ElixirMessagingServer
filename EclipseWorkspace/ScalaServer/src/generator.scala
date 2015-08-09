@@ -2,6 +2,7 @@ object generator
 {
   class Generator
   {
+    /*
     private const int WATER_LEVEL = Chunk.CHUNK_HEIGHT / 2 - 24
 
 		/// <summary>Use the raw seed string to come up with an integer based seed.</summary>
@@ -9,7 +10,7 @@ object generator
 		def GetNumericSeed(): Int =
 		{
 			long seed = 0
-			for (int position = 1; position <= WorldData.RawSeed.Length; position++)
+			for (position <- 1 to WorldData.RawSeed.Length)
 			{
 				var charValue = Convert.ToInt32(WorldData.RawSeed[position - 1])
 				if (charValue < 32 || charValue > 126) continue //toss out any chars not in this range, 32=space, 126='~'
@@ -37,7 +38,7 @@ object generator
 			var chunkCount = 1
 			foreach (Chunk chunk in WorldData.Chunks)
 			{
-                Debug.WriteLine(string.Format("Generating Chunks {0} / {1}", chunkCount, WorldData.SizeInChunksX * WorldData.SizeInChunksZ), chunkCount, WorldData.SizeInChunksX * WorldData.SizeInChunksZ)
+        Debug.WriteLine(string.Format("Generating Chunks {0} / {1}", chunkCount, WorldData.SizeInChunksX * WorldData.SizeInChunksZ), chunkCount, WorldData.SizeInChunksX * WorldData.SizeInChunksZ)
 				
 				//bm: we can't run this in parallel or the results will not be deterministic based on our seed.
 				GenerateChunk(WorldData.Chunks[chunk.Coords.X, chunk.Coords.Z], heightMap, mineralMap)
@@ -47,7 +48,7 @@ object generator
 
 			//loop through chunks again for actions that require the neighboring chunks to be built
 			Debug.WriteLine("Completing growth in chunks and building heightmaps...")
-            Debug.WriteLine("Completing growth in chunks...", 0, 0)
+      Debug.WriteLine("Completing growth in chunks...", 0, 0)
 			foreach (Chunk chunk in WorldData.Chunks)
 			{
 				//build heightmap here only so we know where to place trees/clutter (it will get built again on world load anyway)
@@ -80,7 +81,7 @@ object generator
 			{
 				for (var z = chunk.Coords.WorldCoordsZ; z < chunk.Coords.WorldCoordsZ + Chunk.CHUNK_SIZE; z++)
 				{
-					for (var y = 0; y <= Math.Max(heightMap[x][z], WATER_LEVEL); y++)
+					for (y <- 0 to Math.Max(heightMap[x][z], WATER_LEVEL))
 					{
 						Block.BlockType blockType
 						if (y == 0) //world base
@@ -215,5 +216,6 @@ object generator
 				}
 			}
 		}
+    */
 	}
 }

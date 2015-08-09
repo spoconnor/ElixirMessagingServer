@@ -7,7 +7,23 @@ object misc
     def Height():Int = height
     def Get(x:Int, y:Int):Float = myArray(x)(y)
     def Set(x:Int, y:Int, value:Float) = myArray(x)(y) = value
-    def Map(fn:(Float)=>(Float)) = myArray.map(i:Array[Float] => fn(i))
+    def Map(fn:Float=>Float) = 
+    {
+      myArray = myArray.map(_.map(fn))
+    }
+    
+    def Dump() =
+    {
+      for (y <- 0 to height-1)
+      {
+        for (x <- 0 to width-1)
+        {
+          Console.print(myArray(x)(y))
+        }
+        Console.println()
+      }   
+    }
+
   }
     
   class IntArray(width:Int, height:Int)
@@ -17,6 +33,22 @@ object misc
     def Height():Int = height
     def Get(x:Int, y:Int):Int = myArray(x)(y)
     def Set(x:Int, y:Int, value:Int) = myArray(x)(y) = value
+    def Map(fn:Int=>Int) = 
+    {
+      myArray = myArray.map(_.map(fn))
+    }
+    
+    def Dump() =
+    {
+      for (y <- 0 to height-1)
+      {
+        for (x <- 0 to width-1)
+        {
+          Console.print(myArray(x)(y))
+        }
+        Console.println()
+      }   
+    }
   }
 }
 
