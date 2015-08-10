@@ -24,15 +24,29 @@ object perlinNoise
 		def MapInts(minY: Int, maxY: Int, perlinNoise: misc.FloatArray): misc.IntArray =
 		{
       var heightMap = new misc.IntArray(perlinNoise.Width, perlinNoise.Height)
-			heightMap.Map((f:Int) => this.Interpolate(minY, maxY, f))
-			heightMap
+      for (i <- 0 to perlinNoise.Width-1)
+      {
+        for (j <- 0 to perlinNoise.Height-1)
+        {
+          var f = perlinNoise.Get(i,j)
+          heightMap.Set(i, j, this.Interpolate(minY, maxY, f))
+        }
+      }
+      heightMap 
 		}
 
 		def MapFloats(minY: Float, maxY: Float, perlinNoise: misc.FloatArray): misc.FloatArray =
 		{
 			var treeMap = new misc.FloatArray(perlinNoise.Width, perlinNoise.Height)
-      treeMap.Map((f:Float) => this.Interpolate(minY, maxY, f))
-			treeMap
+      for (i <- 0 to perlinNoise.Width-1)
+      {
+        for (j <- 0 to perlinNoise.Height-1)
+        {
+          var f = perlinNoise.Get(i,j)
+          treeMap.Set(i, j, this.Interpolate(minY, maxY, f))
+        }
+      }
+      treeMap
 		}
 
 		def GenerateSmoothNoise(baseNoise: misc.FloatArray, octave: Int): misc.FloatArray =
@@ -100,14 +114,14 @@ object perlinNoise
 
 			//normalisation
       perlinNoise.Map((i:Float) => i / totalAmplitude)
-			perlinNoise
-		}
+      perlinNoise
+    }
 
 		def GetIntMap(width :Int, height: Int, minY: Int, maxY: Int, octaveCount: Int): misc.IntArray =
 		{
       var baseNoise = GenerateWhiteNoise(width, height)
 			var perlinNoise = GeneratePerlinNoise(baseNoise, octaveCount)
-			MapInts(minY, maxY, perlinNoise)
+      MapInts(minY, maxY, perlinNoise)
 		}
 
     def GetFloatMap(width: Int, height: Int, minY: Float, maxY: Float, octaveCount: Int): misc.FloatArray =
