@@ -76,10 +76,15 @@ function login(socket) {
 
 
 function preload() {
-    //  We load a TexturePacker JSON file and image and show you how to make several unique sprites from the same file
-    game.load.atlas('iso-outside', 'resources/iso-64x64-outside.png', 'resources/iso-64x64-outside.json');
+    try {
+      console.log('Loading textures')
+      //  We load a TexturePacker JSON file and image and show you how to make several unique sprites from the same file
+      game.load.atlas('iso-outside', 'resources/iso-64x64-outside.png', 'resources/iso-64x64-outside.json');
 
-    //game.load.image('block', 'resources/block.png');
+      //game.load.image('block', 'resources/block.png');
+    } catch(exception) {
+      console.log('Error:' + exception);
+    }
 }
 
 var chick;
@@ -90,7 +95,7 @@ var cop;
 
 function create() {
 
-    connect();
+    //connect();
 
     game.stage.backgroundColor = '#404040';
 
@@ -151,6 +156,7 @@ function create() {
         for (var y=0; y<10; y++){
             for (var z=1; z<=mapdata[y*10+x]; z++){
                 var block = game.add.sprite(400+(x-y)*32,128+(x+y)*16-z*21, 'iso-outside');
+                console.log('frameName: ' + x + ',' + y + '=' + mapsprites[y*10+x] + '=>' + sprites[mapsprites[y*10+x]])
                 block.frameName = sprites[mapsprites[y*10+x]]
                 block.anchor.setTo(0.5, 0.5);
             }

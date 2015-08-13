@@ -39,6 +39,25 @@ option optimize_for = SPEED;
   {
     required string text = 1;
   }
+
+  message MapRequestUpdates
+  {
+    required int32 mapX = 1;
+    required int32 mapY = 2;
+  }
+
+  message MapIgnoreUpdates
+  {
+    required int32 mapX = 1;
+    required int32 mapY = 2;
+  }
+
+  message Map
+  {
+    required int32 mapX = 1;
+    required int32 mapY = 2;
+    required int32 data = 3;
+  }
   
   enum MsgType {
     eResponse = 1;
