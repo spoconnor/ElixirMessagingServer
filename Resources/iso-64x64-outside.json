@@ -1,29 +1,49 @@
 {"frames": [
-
-{
-	"filename": "dirt.png",
-	"frame": {"x":256,"y":192,"w":64,"h":64},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "rock.png",
-	"frame": {"x":256,"y":320,"w":64,"h":64},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
-	"sourceSize": {"w":64,"h":64}
-}
+  {
+    "name": "grass_slope_n.png", "frame": {"x":0,"y":192,"w":64,"h":64},
+  },
+  {
+    "name": "grass_slope_ne.png", "frame": {"x":0,"y":192,"w":64,"h":64},
+  },
+  {
+    "name": "grass_slope_ne.png", "frame": {"x":0,"y":192,"w":64,"h":64},
+  },
+  {
+    "name": "grass_slope_e.png", "frame": {"x":0,"y":192,"w":64,"h":64},
+  },
+  {
+    "name": "grass_block.png", "frame": {"x":0,"y":192,"w":64,"h":64},
+  },
+  {
+    "name": "grass_slope_w.png", "frame": {"x":0,"y":192,"w":64,"h":64},
+  },
+  {
+    "name": "grass_slope_se.png", "frame": {"x":0,"y":192,"w":64,"h":64},
+  },
+  {
+    "name": "grass_slope_sw.png", "frame": {"x":0,"y":192,"w":64,"h":64},
+  },
+  {
+    "name": "grass_slope_s.png", "frame": {"x":0,"y":192,"w":64,"h":64},
+  },
+  {
+    "name": "grass_slope_wse.png", "frame": {"x":0,"y":192,"w":64,"h":64},
+  },
+  {
+    "name": "grass_slope_nws.png", "frame": {"x":0,"y":192,"w":64,"h":64},
+  },
+  {
+    "name": "grass_slope_wne.png", "frame": {"x":0,"y":192,"w":64,"h":64},
+  },
+  {
+    "name": "grass_slope_nes.png", "frame": {"x":0,"y":192,"w":64,"h":64},
+  },
 ],
 "meta": {
-	"app": "http://www.texturepacker.com",
-	"version": "1.0",
-	"image": "iso-64x64-outside.png",
-	"format": "RGBA8888",
-	"size": {"w":1024,"h":319},
-	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:17590581092f2081f084c22bf7b2e6b2$"
+  "filename": "iso-64x64-outside.png",
+  "spriteSize": {"w":64, "h":64}
+  "version": "1.0",
+  "format": "RGBA8888",
+  "scale": "1",
 }
 }

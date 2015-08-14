@@ -5,6 +5,7 @@ $LOAD_PATH << File.dirname(__FILE__) + "/lib"
 require "web_socket"
 
 $LOAD_PATH << File.dirname(__FILE__) + "/../ProtoBufs"
+$LOAD_PATH << File.dirname(__FILE__) + "/../ProtoBufs/ruby-protobuf/lib"
 require "CommsMessages.pb.rb"
 
 #if ARGV.size != 1
@@ -28,14 +29,6 @@ client = WebSocket.new(serverurl)
 puts("Connected")
 objectid = 0
 
-  RESPONSE = 1
-  PING = 2
-  PONG = 3
-  NEWUSER = 4
-  LOGIN = 5
-  SAY = 6
-
-
 # Login
   loggedin = false
   username = ""
@@ -43,54 +36,51 @@ objectid = 0
     puts("[1] new user")
     puts("[2] login")
     selection = gets.chomp
-    header = CommsMessages::Header.new
+    message = CommsMessages::Message.new
     case selection
     when "1"
       puts "New User"
-      header.msgtype = NEWUSER
-      msg = CommsMessages::NewUser.new
+      message.msgtype = CommsMessages::MsgType::ENewUser
+      message.newUser = CommsMessages::NewUser.new
       printf("FullName:")
-      msg.name = gets.chomp
+      message.newUser.name = gets.chomp
       printf("UserName:")
       username = gets.chomp
-      msg.username = username
+      message.newUser.username = username
       printf("Password:")
-      msg.password = gets.chomp
+      message.newUser.password = gets.chomp
       send = true
     when "2"
       puts "Login"
       printf("Name:")
-      header.msgtype = LOGIN
-      msg = CommsMessages::Login.new
+      message.msgtype = CommsMessages::MsgType::ELogin
+      message.login = CommsMessages::Login.new
       printf("UserName:")
       username = gets.chomp
-      msg.username = username
+      message.login.username = username
       printf("Password:")
-      msg.password = gets.chomp
+      message.login.password = gets.chomp
       send = true
     else
       puts "Unknown option"
       send = false
     end
     if (send)
-      header.from = msg.username
-      header.dest = ""
-      headerStr = header.to_s
-      msgStr = msg.to_s
-      client.send(headerStr.length.chr + headerStr + msgStr.length.chr + msgStr)
+      message.from = message.login.username
+      message.dest = ""
+      messageStr = message.to_s
+      client.send(messageStr.length.chr + messageStr)
       data = client.receive()
       printf("Received [%p]\n", data)
-      headerSize = data[0].ord
-      header = CommsMessages::Header.new
-      header.parse_from_string(data[1,headerSize])
-      if (header.msgtype != RESPONSE) 
-        puts("Unexcpected message type '#{header.msgtype}'")
+      messageSize = data[0].ord
+      message = CommsMessages::Message.new
+      message.parse_from_string(data[1,messageSize])
+      if (message.msgtype != CommsMessages::MsgType::EResponse) 
+        puts("Unexcpected message type '#{message.msgtype}'")
         exit()
       end
-      reply = CommsMessages::Response.new
-      reply.parse_from_string(data[headerSize+2,9999])
-      puts("Response '#{reply.code}' #{reply.message}")
-      if (reply.code = 1) 
+      puts("Response '#{message.response.code}' #{message.response.message}")
+      if (message.response.code = 1) 
         loggedin = true
       else
         puts("Login failed")
@@ -101,21 +91,17 @@ objectid = 0
   Thread.new() do
     while data = client.receive()
       printf("Received [%p]\n", data)
-      headerSize = data[0].ord
-      header = CommsMessages::Header.new
-      puts("Received msgSize #{headerSize}")
-      header.parse_from_string(data[1,headerSize])
-      puts("Received msgtype #{header.msgtype}")
-      case header.msgtype
-      when RESPONSE
-        resmsg = CommsMessages::Response.new
-        resmsg.parse_from_string(data[headerSize+2,9999])
-        puts("Response: (#{resmsg.code}) #{resmsg.message}")
-      when SAY
+      messageSize = data[0].ord
+      message = CommsMessages::Message.new
+      puts("Received msgSize #{messageSize}")
+      message.parse_from_string(data[1,messageSize])
+      puts("Received msgtype #{message.msgtype}")
+      case message.msgtype
+      when CommsMessages::MsgType::EResponse
+        puts("Response: (#{message.response.code}) #{message.response.message}")
+      when CommsMessages::MsgType::ESay
         #puts("Say")
-        resmsg = CommsMessages::Say.new
-        resmsg.parse_from_string(data[headerSize+2,9999])
-        puts("#{header.from}: #{resmsg.text}")
+        puts("#{message.say.from}: #{message.say.text}")
       else
         puts("Unknown")
       end
@@ -126,22 +112,21 @@ objectid = 0
 
 
   while (1) do
-    header = CommsMessages::Header.new
-    header.msgtype = SAY
-    msg = CommsMessages::Say.new
-    header.from = username
+    message = CommsMessages::Message.new
+    message.msgtype = CommsMessages::MsgType::ESay
+    message.say = ComddmsMessages::Say.new
+    message.from = username
     parsed = gets.chomp.split(/:/)
     if (parsed[1] == nil)
-      header.dest = ""
-      msg.text = parsed[0]
+      message.dest = ""
+      message.say.text = parsed[0]
     else
-      header.dest = parsed[0]
-      msg.text = parsed[1]
+      message.dest = parsed[0]
+      message.say.text = parsed[1]
     end
     
-    headerStr = header.to_s
-    msgStr = msg.to_s
-    client.send(headerStr.length.chr + headerStr + msgStr.length.chr + msgStr)
+    messageStr = message.to_s
+    client.send(messageStr.length.chr + messageStr)
   end
 
 puts("Client closing")
