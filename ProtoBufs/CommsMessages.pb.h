@@ -34,13 +34,16 @@ void  protobuf_AddDesc_CommsMessages_2eproto();
 void protobuf_AssignDesc_CommsMessages_2eproto();
 void protobuf_ShutdownFile_CommsMessages_2eproto();
 
+class Message;
 class Ping;
 class Pong;
 class Response;
 class NewUser;
 class Login;
 class Say;
-class Header;
+class MapRequestUpdates;
+class MapIgnoreUpdates;
+class Map;
 
 enum MsgType {
   eResponse = 1,
@@ -48,11 +51,14 @@ enum MsgType {
   ePong = 3,
   eNewUser = 4,
   eLogin = 5,
-  eSay = 6
+  eSay = 6,
+  eMapRequestUpdates = 7,
+  eMapIgnoreUpdates = 8,
+  eMap = 9
 };
 bool MsgType_IsValid(int value);
 const MsgType MsgType_MIN = eResponse;
-const MsgType MsgType_MAX = eSay;
+const MsgType MsgType_MAX = eMap;
 const int MsgType_ARRAYSIZE = MsgType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* MsgType_descriptor();
@@ -66,6 +72,226 @@ inline bool MsgType_Parse(
     MsgType_descriptor(), name, value);
 }
 // ===================================================================
+
+class Message : public ::google::protobuf::Message {
+ public:
+  Message();
+  virtual ~Message();
+
+  Message(const Message& from);
+
+  inline Message& operator=(const Message& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Message& default_instance();
+
+  void Swap(Message* other);
+
+  // implements Message ----------------------------------------------
+
+  Message* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const Message& from);
+  void MergeFrom(const Message& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .CommsMessages.MsgType msgtype = 1;
+  inline bool has_msgtype() const;
+  inline void clear_msgtype();
+  static const int kMsgtypeFieldNumber = 1;
+  inline ::CommsMessages::MsgType msgtype() const;
+  inline void set_msgtype(::CommsMessages::MsgType value);
+
+  // required string from = 2;
+  inline bool has_from() const;
+  inline void clear_from();
+  static const int kFromFieldNumber = 2;
+  inline const ::std::string& from() const;
+  inline void set_from(const ::std::string& value);
+  inline void set_from(const char* value);
+  inline void set_from(const char* value, size_t size);
+  inline ::std::string* mutable_from();
+  inline ::std::string* release_from();
+  inline void set_allocated_from(::std::string* from);
+
+  // required string dest = 3;
+  inline bool has_dest() const;
+  inline void clear_dest();
+  static const int kDestFieldNumber = 3;
+  inline const ::std::string& dest() const;
+  inline void set_dest(const ::std::string& value);
+  inline void set_dest(const char* value);
+  inline void set_dest(const char* value, size_t size);
+  inline ::std::string* mutable_dest();
+  inline ::std::string* release_dest();
+  inline void set_allocated_dest(::std::string* dest);
+
+  // optional .CommsMessages.Response response = 4;
+  inline bool has_response() const;
+  inline void clear_response();
+  static const int kResponseFieldNumber = 4;
+  inline const ::CommsMessages::Response& response() const;
+  inline ::CommsMessages::Response* mutable_response();
+  inline ::CommsMessages::Response* release_response();
+  inline void set_allocated_response(::CommsMessages::Response* response);
+
+  // optional .CommsMessages.Ping ping = 5;
+  inline bool has_ping() const;
+  inline void clear_ping();
+  static const int kPingFieldNumber = 5;
+  inline const ::CommsMessages::Ping& ping() const;
+  inline ::CommsMessages::Ping* mutable_ping();
+  inline ::CommsMessages::Ping* release_ping();
+  inline void set_allocated_ping(::CommsMessages::Ping* ping);
+
+  // optional .CommsMessages.Pong pong = 6;
+  inline bool has_pong() const;
+  inline void clear_pong();
+  static const int kPongFieldNumber = 6;
+  inline const ::CommsMessages::Pong& pong() const;
+  inline ::CommsMessages::Pong* mutable_pong();
+  inline ::CommsMessages::Pong* release_pong();
+  inline void set_allocated_pong(::CommsMessages::Pong* pong);
+
+  // optional .CommsMessages.NewUser newUser = 7;
+  inline bool has_newuser() const;
+  inline void clear_newuser();
+  static const int kNewUserFieldNumber = 7;
+  inline const ::CommsMessages::NewUser& newuser() const;
+  inline ::CommsMessages::NewUser* mutable_newuser();
+  inline ::CommsMessages::NewUser* release_newuser();
+  inline void set_allocated_newuser(::CommsMessages::NewUser* newuser);
+
+  // optional .CommsMessages.Login login = 8;
+  inline bool has_login() const;
+  inline void clear_login();
+  static const int kLoginFieldNumber = 8;
+  inline const ::CommsMessages::Login& login() const;
+  inline ::CommsMessages::Login* mutable_login();
+  inline ::CommsMessages::Login* release_login();
+  inline void set_allocated_login(::CommsMessages::Login* login);
+
+  // optional .CommsMessages.Say say = 9;
+  inline bool has_say() const;
+  inline void clear_say();
+  static const int kSayFieldNumber = 9;
+  inline const ::CommsMessages::Say& say() const;
+  inline ::CommsMessages::Say* mutable_say();
+  inline ::CommsMessages::Say* release_say();
+  inline void set_allocated_say(::CommsMessages::Say* say);
+
+  // optional .CommsMessages.MapRequestUpdates mapRequestUpdates = 10;
+  inline bool has_maprequestupdates() const;
+  inline void clear_maprequestupdates();
+  static const int kMapRequestUpdatesFieldNumber = 10;
+  inline const ::CommsMessages::MapRequestUpdates& maprequestupdates() const;
+  inline ::CommsMessages::MapRequestUpdates* mutable_maprequestupdates();
+  inline ::CommsMessages::MapRequestUpdates* release_maprequestupdates();
+  inline void set_allocated_maprequestupdates(::CommsMessages::MapRequestUpdates* maprequestupdates);
+
+  // optional .CommsMessages.MapIgnoreUpdates mapIgnoreUpdates = 11;
+  inline bool has_mapignoreupdates() const;
+  inline void clear_mapignoreupdates();
+  static const int kMapIgnoreUpdatesFieldNumber = 11;
+  inline const ::CommsMessages::MapIgnoreUpdates& mapignoreupdates() const;
+  inline ::CommsMessages::MapIgnoreUpdates* mutable_mapignoreupdates();
+  inline ::CommsMessages::MapIgnoreUpdates* release_mapignoreupdates();
+  inline void set_allocated_mapignoreupdates(::CommsMessages::MapIgnoreUpdates* mapignoreupdates);
+
+  // optional .CommsMessages.Map map = 12;
+  inline bool has_map() const;
+  inline void clear_map();
+  static const int kMapFieldNumber = 12;
+  inline const ::CommsMessages::Map& map() const;
+  inline ::CommsMessages::Map* mutable_map();
+  inline ::CommsMessages::Map* release_map();
+  inline void set_allocated_map(::CommsMessages::Map* map);
+
+  // @@protoc_insertion_point(class_scope:CommsMessages.Message)
+ private:
+  inline void set_has_msgtype();
+  inline void clear_has_msgtype();
+  inline void set_has_from();
+  inline void clear_has_from();
+  inline void set_has_dest();
+  inline void clear_has_dest();
+  inline void set_has_response();
+  inline void clear_has_response();
+  inline void set_has_ping();
+  inline void clear_has_ping();
+  inline void set_has_pong();
+  inline void clear_has_pong();
+  inline void set_has_newuser();
+  inline void clear_has_newuser();
+  inline void set_has_login();
+  inline void clear_has_login();
+  inline void set_has_say();
+  inline void clear_has_say();
+  inline void set_has_maprequestupdates();
+  inline void clear_has_maprequestupdates();
+  inline void set_has_mapignoreupdates();
+  inline void clear_has_mapignoreupdates();
+  inline void set_has_map();
+  inline void clear_has_map();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* from_;
+  ::std::string* dest_;
+  ::CommsMessages::Response* response_;
+  ::CommsMessages::Ping* ping_;
+  ::CommsMessages::Pong* pong_;
+  ::CommsMessages::NewUser* newuser_;
+  ::CommsMessages::Login* login_;
+  ::CommsMessages::Say* say_;
+  ::CommsMessages::MapRequestUpdates* maprequestupdates_;
+  ::CommsMessages::MapIgnoreUpdates* mapignoreupdates_;
+  ::CommsMessages::Map* map_;
+  int msgtype_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(12 + 31) / 32];
+
+  friend void  protobuf_AddDesc_CommsMessages_2eproto();
+  friend void protobuf_AssignDesc_CommsMessages_2eproto();
+  friend void protobuf_ShutdownFile_CommsMessages_2eproto();
+
+  void InitAsDefaultInstance();
+  static Message* default_instance_;
+};
+// -------------------------------------------------------------------
 
 class Ping : public ::google::protobuf::Message {
  public:
@@ -634,14 +860,14 @@ class Say : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class Header : public ::google::protobuf::Message {
+class MapRequestUpdates : public ::google::protobuf::Message {
  public:
-  Header();
-  virtual ~Header();
+  MapRequestUpdates();
+  virtual ~MapRequestUpdates();
 
-  Header(const Header& from);
+  MapRequestUpdates(const MapRequestUpdates& from);
 
-  inline Header& operator=(const Header& from) {
+  inline MapRequestUpdates& operator=(const MapRequestUpdates& from) {
     CopyFrom(from);
     return *this;
   }
@@ -655,17 +881,17 @@ class Header : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Header& default_instance();
+  static const MapRequestUpdates& default_instance();
 
-  void Swap(Header* other);
+  void Swap(MapRequestUpdates* other);
 
   // implements Message ----------------------------------------------
 
-  Header* New() const;
+  MapRequestUpdates* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Header& from);
-  void MergeFrom(const Header& from);
+  void CopyFrom(const MapRequestUpdates& from);
+  void MergeFrom(const MapRequestUpdates& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -688,51 +914,225 @@ class Header : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 msgtype = 1;
-  inline bool has_msgtype() const;
-  inline void clear_msgtype();
-  static const int kMsgtypeFieldNumber = 1;
-  inline ::google::protobuf::int32 msgtype() const;
-  inline void set_msgtype(::google::protobuf::int32 value);
+  // required int32 mapX = 1;
+  inline bool has_mapx() const;
+  inline void clear_mapx();
+  static const int kMapXFieldNumber = 1;
+  inline ::google::protobuf::int32 mapx() const;
+  inline void set_mapx(::google::protobuf::int32 value);
 
-  // required string from = 2;
-  inline bool has_from() const;
-  inline void clear_from();
-  static const int kFromFieldNumber = 2;
-  inline const ::std::string& from() const;
-  inline void set_from(const ::std::string& value);
-  inline void set_from(const char* value);
-  inline void set_from(const char* value, size_t size);
-  inline ::std::string* mutable_from();
-  inline ::std::string* release_from();
-  inline void set_allocated_from(::std::string* from);
+  // required int32 mapY = 2;
+  inline bool has_mapy() const;
+  inline void clear_mapy();
+  static const int kMapYFieldNumber = 2;
+  inline ::google::protobuf::int32 mapy() const;
+  inline void set_mapy(::google::protobuf::int32 value);
 
-  // required string dest = 3;
-  inline bool has_dest() const;
-  inline void clear_dest();
-  static const int kDestFieldNumber = 3;
-  inline const ::std::string& dest() const;
-  inline void set_dest(const ::std::string& value);
-  inline void set_dest(const char* value);
-  inline void set_dest(const char* value, size_t size);
-  inline ::std::string* mutable_dest();
-  inline ::std::string* release_dest();
-  inline void set_allocated_dest(::std::string* dest);
-
-  // @@protoc_insertion_point(class_scope:CommsMessages.Header)
+  // @@protoc_insertion_point(class_scope:CommsMessages.MapRequestUpdates)
  private:
-  inline void set_has_msgtype();
-  inline void clear_has_msgtype();
-  inline void set_has_from();
-  inline void clear_has_from();
-  inline void set_has_dest();
-  inline void clear_has_dest();
+  inline void set_has_mapx();
+  inline void clear_has_mapx();
+  inline void set_has_mapy();
+  inline void clear_has_mapy();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* from_;
-  ::std::string* dest_;
-  ::google::protobuf::int32 msgtype_;
+  ::google::protobuf::int32 mapx_;
+  ::google::protobuf::int32 mapy_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_CommsMessages_2eproto();
+  friend void protobuf_AssignDesc_CommsMessages_2eproto();
+  friend void protobuf_ShutdownFile_CommsMessages_2eproto();
+
+  void InitAsDefaultInstance();
+  static MapRequestUpdates* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class MapIgnoreUpdates : public ::google::protobuf::Message {
+ public:
+  MapIgnoreUpdates();
+  virtual ~MapIgnoreUpdates();
+
+  MapIgnoreUpdates(const MapIgnoreUpdates& from);
+
+  inline MapIgnoreUpdates& operator=(const MapIgnoreUpdates& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MapIgnoreUpdates& default_instance();
+
+  void Swap(MapIgnoreUpdates* other);
+
+  // implements Message ----------------------------------------------
+
+  MapIgnoreUpdates* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MapIgnoreUpdates& from);
+  void MergeFrom(const MapIgnoreUpdates& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 mapX = 1;
+  inline bool has_mapx() const;
+  inline void clear_mapx();
+  static const int kMapXFieldNumber = 1;
+  inline ::google::protobuf::int32 mapx() const;
+  inline void set_mapx(::google::protobuf::int32 value);
+
+  // required int32 mapY = 2;
+  inline bool has_mapy() const;
+  inline void clear_mapy();
+  static const int kMapYFieldNumber = 2;
+  inline ::google::protobuf::int32 mapy() const;
+  inline void set_mapy(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:CommsMessages.MapIgnoreUpdates)
+ private:
+  inline void set_has_mapx();
+  inline void clear_has_mapx();
+  inline void set_has_mapy();
+  inline void clear_has_mapy();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 mapx_;
+  ::google::protobuf::int32 mapy_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_CommsMessages_2eproto();
+  friend void protobuf_AssignDesc_CommsMessages_2eproto();
+  friend void protobuf_ShutdownFile_CommsMessages_2eproto();
+
+  void InitAsDefaultInstance();
+  static MapIgnoreUpdates* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class Map : public ::google::protobuf::Message {
+ public:
+  Map();
+  virtual ~Map();
+
+  Map(const Map& from);
+
+  inline Map& operator=(const Map& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Map& default_instance();
+
+  void Swap(Map* other);
+
+  // implements Message ----------------------------------------------
+
+  Map* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const Map& from);
+  void MergeFrom(const Map& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 mapX = 1;
+  inline bool has_mapx() const;
+  inline void clear_mapx();
+  static const int kMapXFieldNumber = 1;
+  inline ::google::protobuf::int32 mapx() const;
+  inline void set_mapx(::google::protobuf::int32 value);
+
+  // required int32 mapY = 2;
+  inline bool has_mapy() const;
+  inline void clear_mapy();
+  static const int kMapYFieldNumber = 2;
+  inline ::google::protobuf::int32 mapy() const;
+  inline void set_mapy(::google::protobuf::int32 value);
+
+  // required int32 dataSize = 3;
+  inline bool has_datasize() const;
+  inline void clear_datasize();
+  static const int kDataSizeFieldNumber = 3;
+  inline ::google::protobuf::int32 datasize() const;
+  inline void set_datasize(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:CommsMessages.Map)
+ private:
+  inline void set_has_mapx();
+  inline void clear_has_mapx();
+  inline void set_has_mapy();
+  inline void clear_has_mapy();
+  inline void set_has_datasize();
+  inline void clear_has_datasize();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 mapx_;
+  ::google::protobuf::int32 mapy_;
+  ::google::protobuf::int32 datasize_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
@@ -742,12 +1142,521 @@ class Header : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_CommsMessages_2eproto();
 
   void InitAsDefaultInstance();
-  static Header* default_instance_;
+  static Map* default_instance_;
 };
 // ===================================================================
 
 
 // ===================================================================
+
+// Message
+
+// required .CommsMessages.MsgType msgtype = 1;
+inline bool Message::has_msgtype() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void Message::set_has_msgtype() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void Message::clear_has_msgtype() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void Message::clear_msgtype() {
+  msgtype_ = 1;
+  clear_has_msgtype();
+}
+inline ::CommsMessages::MsgType Message::msgtype() const {
+  return static_cast< ::CommsMessages::MsgType >(msgtype_);
+}
+inline void Message::set_msgtype(::CommsMessages::MsgType value) {
+  assert(::CommsMessages::MsgType_IsValid(value));
+  set_has_msgtype();
+  msgtype_ = value;
+}
+
+// required string from = 2;
+inline bool Message::has_from() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Message::set_has_from() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Message::clear_has_from() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void Message::clear_from() {
+  if (from_ != &::google::protobuf::internal::kEmptyString) {
+    from_->clear();
+  }
+  clear_has_from();
+}
+inline const ::std::string& Message::from() const {
+  return *from_;
+}
+inline void Message::set_from(const ::std::string& value) {
+  set_has_from();
+  if (from_ == &::google::protobuf::internal::kEmptyString) {
+    from_ = new ::std::string;
+  }
+  from_->assign(value);
+}
+inline void Message::set_from(const char* value) {
+  set_has_from();
+  if (from_ == &::google::protobuf::internal::kEmptyString) {
+    from_ = new ::std::string;
+  }
+  from_->assign(value);
+}
+inline void Message::set_from(const char* value, size_t size) {
+  set_has_from();
+  if (from_ == &::google::protobuf::internal::kEmptyString) {
+    from_ = new ::std::string;
+  }
+  from_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Message::mutable_from() {
+  set_has_from();
+  if (from_ == &::google::protobuf::internal::kEmptyString) {
+    from_ = new ::std::string;
+  }
+  return from_;
+}
+inline ::std::string* Message::release_from() {
+  clear_has_from();
+  if (from_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = from_;
+    from_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Message::set_allocated_from(::std::string* from) {
+  if (from_ != &::google::protobuf::internal::kEmptyString) {
+    delete from_;
+  }
+  if (from) {
+    set_has_from();
+    from_ = from;
+  } else {
+    clear_has_from();
+    from_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string dest = 3;
+inline bool Message::has_dest() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void Message::set_has_dest() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void Message::clear_has_dest() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void Message::clear_dest() {
+  if (dest_ != &::google::protobuf::internal::kEmptyString) {
+    dest_->clear();
+  }
+  clear_has_dest();
+}
+inline const ::std::string& Message::dest() const {
+  return *dest_;
+}
+inline void Message::set_dest(const ::std::string& value) {
+  set_has_dest();
+  if (dest_ == &::google::protobuf::internal::kEmptyString) {
+    dest_ = new ::std::string;
+  }
+  dest_->assign(value);
+}
+inline void Message::set_dest(const char* value) {
+  set_has_dest();
+  if (dest_ == &::google::protobuf::internal::kEmptyString) {
+    dest_ = new ::std::string;
+  }
+  dest_->assign(value);
+}
+inline void Message::set_dest(const char* value, size_t size) {
+  set_has_dest();
+  if (dest_ == &::google::protobuf::internal::kEmptyString) {
+    dest_ = new ::std::string;
+  }
+  dest_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Message::mutable_dest() {
+  set_has_dest();
+  if (dest_ == &::google::protobuf::internal::kEmptyString) {
+    dest_ = new ::std::string;
+  }
+  return dest_;
+}
+inline ::std::string* Message::release_dest() {
+  clear_has_dest();
+  if (dest_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = dest_;
+    dest_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Message::set_allocated_dest(::std::string* dest) {
+  if (dest_ != &::google::protobuf::internal::kEmptyString) {
+    delete dest_;
+  }
+  if (dest) {
+    set_has_dest();
+    dest_ = dest;
+  } else {
+    clear_has_dest();
+    dest_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional .CommsMessages.Response response = 4;
+inline bool Message::has_response() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void Message::set_has_response() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void Message::clear_has_response() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void Message::clear_response() {
+  if (response_ != NULL) response_->::CommsMessages::Response::Clear();
+  clear_has_response();
+}
+inline const ::CommsMessages::Response& Message::response() const {
+  return response_ != NULL ? *response_ : *default_instance_->response_;
+}
+inline ::CommsMessages::Response* Message::mutable_response() {
+  set_has_response();
+  if (response_ == NULL) response_ = new ::CommsMessages::Response;
+  return response_;
+}
+inline ::CommsMessages::Response* Message::release_response() {
+  clear_has_response();
+  ::CommsMessages::Response* temp = response_;
+  response_ = NULL;
+  return temp;
+}
+inline void Message::set_allocated_response(::CommsMessages::Response* response) {
+  delete response_;
+  response_ = response;
+  if (response) {
+    set_has_response();
+  } else {
+    clear_has_response();
+  }
+}
+
+// optional .CommsMessages.Ping ping = 5;
+inline bool Message::has_ping() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void Message::set_has_ping() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void Message::clear_has_ping() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void Message::clear_ping() {
+  if (ping_ != NULL) ping_->::CommsMessages::Ping::Clear();
+  clear_has_ping();
+}
+inline const ::CommsMessages::Ping& Message::ping() const {
+  return ping_ != NULL ? *ping_ : *default_instance_->ping_;
+}
+inline ::CommsMessages::Ping* Message::mutable_ping() {
+  set_has_ping();
+  if (ping_ == NULL) ping_ = new ::CommsMessages::Ping;
+  return ping_;
+}
+inline ::CommsMessages::Ping* Message::release_ping() {
+  clear_has_ping();
+  ::CommsMessages::Ping* temp = ping_;
+  ping_ = NULL;
+  return temp;
+}
+inline void Message::set_allocated_ping(::CommsMessages::Ping* ping) {
+  delete ping_;
+  ping_ = ping;
+  if (ping) {
+    set_has_ping();
+  } else {
+    clear_has_ping();
+  }
+}
+
+// optional .CommsMessages.Pong pong = 6;
+inline bool Message::has_pong() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void Message::set_has_pong() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void Message::clear_has_pong() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void Message::clear_pong() {
+  if (pong_ != NULL) pong_->::CommsMessages::Pong::Clear();
+  clear_has_pong();
+}
+inline const ::CommsMessages::Pong& Message::pong() const {
+  return pong_ != NULL ? *pong_ : *default_instance_->pong_;
+}
+inline ::CommsMessages::Pong* Message::mutable_pong() {
+  set_has_pong();
+  if (pong_ == NULL) pong_ = new ::CommsMessages::Pong;
+  return pong_;
+}
+inline ::CommsMessages::Pong* Message::release_pong() {
+  clear_has_pong();
+  ::CommsMessages::Pong* temp = pong_;
+  pong_ = NULL;
+  return temp;
+}
+inline void Message::set_allocated_pong(::CommsMessages::Pong* pong) {
+  delete pong_;
+  pong_ = pong;
+  if (pong) {
+    set_has_pong();
+  } else {
+    clear_has_pong();
+  }
+}
+
+// optional .CommsMessages.NewUser newUser = 7;
+inline bool Message::has_newuser() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void Message::set_has_newuser() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void Message::clear_has_newuser() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void Message::clear_newuser() {
+  if (newuser_ != NULL) newuser_->::CommsMessages::NewUser::Clear();
+  clear_has_newuser();
+}
+inline const ::CommsMessages::NewUser& Message::newuser() const {
+  return newuser_ != NULL ? *newuser_ : *default_instance_->newuser_;
+}
+inline ::CommsMessages::NewUser* Message::mutable_newuser() {
+  set_has_newuser();
+  if (newuser_ == NULL) newuser_ = new ::CommsMessages::NewUser;
+  return newuser_;
+}
+inline ::CommsMessages::NewUser* Message::release_newuser() {
+  clear_has_newuser();
+  ::CommsMessages::NewUser* temp = newuser_;
+  newuser_ = NULL;
+  return temp;
+}
+inline void Message::set_allocated_newuser(::CommsMessages::NewUser* newuser) {
+  delete newuser_;
+  newuser_ = newuser;
+  if (newuser) {
+    set_has_newuser();
+  } else {
+    clear_has_newuser();
+  }
+}
+
+// optional .CommsMessages.Login login = 8;
+inline bool Message::has_login() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void Message::set_has_login() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void Message::clear_has_login() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void Message::clear_login() {
+  if (login_ != NULL) login_->::CommsMessages::Login::Clear();
+  clear_has_login();
+}
+inline const ::CommsMessages::Login& Message::login() const {
+  return login_ != NULL ? *login_ : *default_instance_->login_;
+}
+inline ::CommsMessages::Login* Message::mutable_login() {
+  set_has_login();
+  if (login_ == NULL) login_ = new ::CommsMessages::Login;
+  return login_;
+}
+inline ::CommsMessages::Login* Message::release_login() {
+  clear_has_login();
+  ::CommsMessages::Login* temp = login_;
+  login_ = NULL;
+  return temp;
+}
+inline void Message::set_allocated_login(::CommsMessages::Login* login) {
+  delete login_;
+  login_ = login;
+  if (login) {
+    set_has_login();
+  } else {
+    clear_has_login();
+  }
+}
+
+// optional .CommsMessages.Say say = 9;
+inline bool Message::has_say() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void Message::set_has_say() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void Message::clear_has_say() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void Message::clear_say() {
+  if (say_ != NULL) say_->::CommsMessages::Say::Clear();
+  clear_has_say();
+}
+inline const ::CommsMessages::Say& Message::say() const {
+  return say_ != NULL ? *say_ : *default_instance_->say_;
+}
+inline ::CommsMessages::Say* Message::mutable_say() {
+  set_has_say();
+  if (say_ == NULL) say_ = new ::CommsMessages::Say;
+  return say_;
+}
+inline ::CommsMessages::Say* Message::release_say() {
+  clear_has_say();
+  ::CommsMessages::Say* temp = say_;
+  say_ = NULL;
+  return temp;
+}
+inline void Message::set_allocated_say(::CommsMessages::Say* say) {
+  delete say_;
+  say_ = say;
+  if (say) {
+    set_has_say();
+  } else {
+    clear_has_say();
+  }
+}
+
+// optional .CommsMessages.MapRequestUpdates mapRequestUpdates = 10;
+inline bool Message::has_maprequestupdates() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void Message::set_has_maprequestupdates() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void Message::clear_has_maprequestupdates() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void Message::clear_maprequestupdates() {
+  if (maprequestupdates_ != NULL) maprequestupdates_->::CommsMessages::MapRequestUpdates::Clear();
+  clear_has_maprequestupdates();
+}
+inline const ::CommsMessages::MapRequestUpdates& Message::maprequestupdates() const {
+  return maprequestupdates_ != NULL ? *maprequestupdates_ : *default_instance_->maprequestupdates_;
+}
+inline ::CommsMessages::MapRequestUpdates* Message::mutable_maprequestupdates() {
+  set_has_maprequestupdates();
+  if (maprequestupdates_ == NULL) maprequestupdates_ = new ::CommsMessages::MapRequestUpdates;
+  return maprequestupdates_;
+}
+inline ::CommsMessages::MapRequestUpdates* Message::release_maprequestupdates() {
+  clear_has_maprequestupdates();
+  ::CommsMessages::MapRequestUpdates* temp = maprequestupdates_;
+  maprequestupdates_ = NULL;
+  return temp;
+}
+inline void Message::set_allocated_maprequestupdates(::CommsMessages::MapRequestUpdates* maprequestupdates) {
+  delete maprequestupdates_;
+  maprequestupdates_ = maprequestupdates;
+  if (maprequestupdates) {
+    set_has_maprequestupdates();
+  } else {
+    clear_has_maprequestupdates();
+  }
+}
+
+// optional .CommsMessages.MapIgnoreUpdates mapIgnoreUpdates = 11;
+inline bool Message::has_mapignoreupdates() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+inline void Message::set_has_mapignoreupdates() {
+  _has_bits_[0] |= 0x00000400u;
+}
+inline void Message::clear_has_mapignoreupdates() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+inline void Message::clear_mapignoreupdates() {
+  if (mapignoreupdates_ != NULL) mapignoreupdates_->::CommsMessages::MapIgnoreUpdates::Clear();
+  clear_has_mapignoreupdates();
+}
+inline const ::CommsMessages::MapIgnoreUpdates& Message::mapignoreupdates() const {
+  return mapignoreupdates_ != NULL ? *mapignoreupdates_ : *default_instance_->mapignoreupdates_;
+}
+inline ::CommsMessages::MapIgnoreUpdates* Message::mutable_mapignoreupdates() {
+  set_has_mapignoreupdates();
+  if (mapignoreupdates_ == NULL) mapignoreupdates_ = new ::CommsMessages::MapIgnoreUpdates;
+  return mapignoreupdates_;
+}
+inline ::CommsMessages::MapIgnoreUpdates* Message::release_mapignoreupdates() {
+  clear_has_mapignoreupdates();
+  ::CommsMessages::MapIgnoreUpdates* temp = mapignoreupdates_;
+  mapignoreupdates_ = NULL;
+  return temp;
+}
+inline void Message::set_allocated_mapignoreupdates(::CommsMessages::MapIgnoreUpdates* mapignoreupdates) {
+  delete mapignoreupdates_;
+  mapignoreupdates_ = mapignoreupdates;
+  if (mapignoreupdates) {
+    set_has_mapignoreupdates();
+  } else {
+    clear_has_mapignoreupdates();
+  }
+}
+
+// optional .CommsMessages.Map map = 12;
+inline bool Message::has_map() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void Message::set_has_map() {
+  _has_bits_[0] |= 0x00000800u;
+}
+inline void Message::clear_has_map() {
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline void Message::clear_map() {
+  if (map_ != NULL) map_->::CommsMessages::Map::Clear();
+  clear_has_map();
+}
+inline const ::CommsMessages::Map& Message::map() const {
+  return map_ != NULL ? *map_ : *default_instance_->map_;
+}
+inline ::CommsMessages::Map* Message::mutable_map() {
+  set_has_map();
+  if (map_ == NULL) map_ = new ::CommsMessages::Map;
+  return map_;
+}
+inline ::CommsMessages::Map* Message::release_map() {
+  clear_has_map();
+  ::CommsMessages::Map* temp = map_;
+  map_ = NULL;
+  return temp;
+}
+inline void Message::set_allocated_map(::CommsMessages::Map* map) {
+  delete map_;
+  map_ = map;
+  if (map) {
+    set_has_map();
+  } else {
+    clear_has_map();
+  }
+}
+
+// -------------------------------------------------------------------
 
 // Ping
 
@@ -1329,168 +2238,168 @@ inline void Say::set_allocated_text(::std::string* text) {
 
 // -------------------------------------------------------------------
 
-// Header
+// MapRequestUpdates
 
-// required int32 msgtype = 1;
-inline bool Header::has_msgtype() const {
+// required int32 mapX = 1;
+inline bool MapRequestUpdates::has_mapx() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Header::set_has_msgtype() {
+inline void MapRequestUpdates::set_has_mapx() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Header::clear_has_msgtype() {
+inline void MapRequestUpdates::clear_has_mapx() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void Header::clear_msgtype() {
-  msgtype_ = 0;
-  clear_has_msgtype();
+inline void MapRequestUpdates::clear_mapx() {
+  mapx_ = 0;
+  clear_has_mapx();
 }
-inline ::google::protobuf::int32 Header::msgtype() const {
-  return msgtype_;
+inline ::google::protobuf::int32 MapRequestUpdates::mapx() const {
+  return mapx_;
 }
-inline void Header::set_msgtype(::google::protobuf::int32 value) {
-  set_has_msgtype();
-  msgtype_ = value;
+inline void MapRequestUpdates::set_mapx(::google::protobuf::int32 value) {
+  set_has_mapx();
+  mapx_ = value;
 }
 
-// required string from = 2;
-inline bool Header::has_from() const {
+// required int32 mapY = 2;
+inline bool MapRequestUpdates::has_mapy() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void Header::set_has_from() {
+inline void MapRequestUpdates::set_has_mapy() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void Header::clear_has_from() {
+inline void MapRequestUpdates::clear_has_mapy() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void Header::clear_from() {
-  if (from_ != &::google::protobuf::internal::kEmptyString) {
-    from_->clear();
-  }
-  clear_has_from();
+inline void MapRequestUpdates::clear_mapy() {
+  mapy_ = 0;
+  clear_has_mapy();
 }
-inline const ::std::string& Header::from() const {
-  return *from_;
+inline ::google::protobuf::int32 MapRequestUpdates::mapy() const {
+  return mapy_;
 }
-inline void Header::set_from(const ::std::string& value) {
-  set_has_from();
-  if (from_ == &::google::protobuf::internal::kEmptyString) {
-    from_ = new ::std::string;
-  }
-  from_->assign(value);
-}
-inline void Header::set_from(const char* value) {
-  set_has_from();
-  if (from_ == &::google::protobuf::internal::kEmptyString) {
-    from_ = new ::std::string;
-  }
-  from_->assign(value);
-}
-inline void Header::set_from(const char* value, size_t size) {
-  set_has_from();
-  if (from_ == &::google::protobuf::internal::kEmptyString) {
-    from_ = new ::std::string;
-  }
-  from_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Header::mutable_from() {
-  set_has_from();
-  if (from_ == &::google::protobuf::internal::kEmptyString) {
-    from_ = new ::std::string;
-  }
-  return from_;
-}
-inline ::std::string* Header::release_from() {
-  clear_has_from();
-  if (from_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = from_;
-    from_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void Header::set_allocated_from(::std::string* from) {
-  if (from_ != &::google::protobuf::internal::kEmptyString) {
-    delete from_;
-  }
-  if (from) {
-    set_has_from();
-    from_ = from;
-  } else {
-    clear_has_from();
-    from_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
+inline void MapRequestUpdates::set_mapy(::google::protobuf::int32 value) {
+  set_has_mapy();
+  mapy_ = value;
 }
 
-// required string dest = 3;
-inline bool Header::has_dest() const {
+// -------------------------------------------------------------------
+
+// MapIgnoreUpdates
+
+// required int32 mapX = 1;
+inline bool MapIgnoreUpdates::has_mapx() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void MapIgnoreUpdates::set_has_mapx() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void MapIgnoreUpdates::clear_has_mapx() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void MapIgnoreUpdates::clear_mapx() {
+  mapx_ = 0;
+  clear_has_mapx();
+}
+inline ::google::protobuf::int32 MapIgnoreUpdates::mapx() const {
+  return mapx_;
+}
+inline void MapIgnoreUpdates::set_mapx(::google::protobuf::int32 value) {
+  set_has_mapx();
+  mapx_ = value;
+}
+
+// required int32 mapY = 2;
+inline bool MapIgnoreUpdates::has_mapy() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MapIgnoreUpdates::set_has_mapy() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MapIgnoreUpdates::clear_has_mapy() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void MapIgnoreUpdates::clear_mapy() {
+  mapy_ = 0;
+  clear_has_mapy();
+}
+inline ::google::protobuf::int32 MapIgnoreUpdates::mapy() const {
+  return mapy_;
+}
+inline void MapIgnoreUpdates::set_mapy(::google::protobuf::int32 value) {
+  set_has_mapy();
+  mapy_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// Map
+
+// required int32 mapX = 1;
+inline bool Map::has_mapx() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void Map::set_has_mapx() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void Map::clear_has_mapx() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void Map::clear_mapx() {
+  mapx_ = 0;
+  clear_has_mapx();
+}
+inline ::google::protobuf::int32 Map::mapx() const {
+  return mapx_;
+}
+inline void Map::set_mapx(::google::protobuf::int32 value) {
+  set_has_mapx();
+  mapx_ = value;
+}
+
+// required int32 mapY = 2;
+inline bool Map::has_mapy() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Map::set_has_mapy() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Map::clear_has_mapy() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void Map::clear_mapy() {
+  mapy_ = 0;
+  clear_has_mapy();
+}
+inline ::google::protobuf::int32 Map::mapy() const {
+  return mapy_;
+}
+inline void Map::set_mapy(::google::protobuf::int32 value) {
+  set_has_mapy();
+  mapy_ = value;
+}
+
+// required int32 dataSize = 3;
+inline bool Map::has_datasize() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void Header::set_has_dest() {
+inline void Map::set_has_datasize() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void Header::clear_has_dest() {
+inline void Map::clear_has_datasize() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void Header::clear_dest() {
-  if (dest_ != &::google::protobuf::internal::kEmptyString) {
-    dest_->clear();
-  }
-  clear_has_dest();
+inline void Map::clear_datasize() {
+  datasize_ = 0;
+  clear_has_datasize();
 }
-inline const ::std::string& Header::dest() const {
-  return *dest_;
+inline ::google::protobuf::int32 Map::datasize() const {
+  return datasize_;
 }
-inline void Header::set_dest(const ::std::string& value) {
-  set_has_dest();
-  if (dest_ == &::google::protobuf::internal::kEmptyString) {
-    dest_ = new ::std::string;
-  }
-  dest_->assign(value);
-}
-inline void Header::set_dest(const char* value) {
-  set_has_dest();
-  if (dest_ == &::google::protobuf::internal::kEmptyString) {
-    dest_ = new ::std::string;
-  }
-  dest_->assign(value);
-}
-inline void Header::set_dest(const char* value, size_t size) {
-  set_has_dest();
-  if (dest_ == &::google::protobuf::internal::kEmptyString) {
-    dest_ = new ::std::string;
-  }
-  dest_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Header::mutable_dest() {
-  set_has_dest();
-  if (dest_ == &::google::protobuf::internal::kEmptyString) {
-    dest_ = new ::std::string;
-  }
-  return dest_;
-}
-inline ::std::string* Header::release_dest() {
-  clear_has_dest();
-  if (dest_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = dest_;
-    dest_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void Header::set_allocated_dest(::std::string* dest) {
-  if (dest_ != &::google::protobuf::internal::kEmptyString) {
-    delete dest_;
-  }
-  if (dest) {
-    set_has_dest();
-    dest_ = dest;
-  } else {
-    clear_has_dest();
-    dest_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
+inline void Map::set_datasize(::google::protobuf::int32 value) {
+  set_has_datasize();
+  datasize_ = value;
 }
 
 

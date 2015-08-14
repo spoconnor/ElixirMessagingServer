@@ -20,6 +20,9 @@ namespace CommsMessages {
 
 namespace {
 
+const ::google::protobuf::Descriptor* Message_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  Message_reflection_ = NULL;
 const ::google::protobuf::Descriptor* Ping_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Ping_reflection_ = NULL;
@@ -38,9 +41,15 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* Say_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Say_reflection_ = NULL;
-const ::google::protobuf::Descriptor* Header_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* MapRequestUpdates_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  Header_reflection_ = NULL;
+  MapRequestUpdates_reflection_ = NULL;
+const ::google::protobuf::Descriptor* MapIgnoreUpdates_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  MapIgnoreUpdates_reflection_ = NULL;
+const ::google::protobuf::Descriptor* Map_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  Map_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* MsgType_descriptor_ = NULL;
 
 }  // namespace
@@ -52,7 +61,33 @@ void protobuf_AssignDesc_CommsMessages_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "CommsMessages.proto");
   GOOGLE_CHECK(file != NULL);
-  Ping_descriptor_ = file->message_type(0);
+  Message_descriptor_ = file->message_type(0);
+  static const int Message_offsets_[12] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, msgtype_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, from_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, dest_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, response_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, ping_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, pong_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, newuser_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, login_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, say_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, maprequestupdates_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, mapignoreupdates_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, map_),
+  };
+  Message_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      Message_descriptor_,
+      Message::default_instance_,
+      Message_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(Message));
+  Ping_descriptor_ = file->message_type(1);
   static const int Ping_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Ping, count_),
   };
@@ -67,7 +102,7 @@ void protobuf_AssignDesc_CommsMessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Ping));
-  Pong_descriptor_ = file->message_type(1);
+  Pong_descriptor_ = file->message_type(2);
   static const int Pong_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Pong, count_),
   };
@@ -82,7 +117,7 @@ void protobuf_AssignDesc_CommsMessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Pong));
-  Response_descriptor_ = file->message_type(2);
+  Response_descriptor_ = file->message_type(3);
   static const int Response_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Response, code_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Response, message_),
@@ -98,7 +133,7 @@ void protobuf_AssignDesc_CommsMessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Response));
-  NewUser_descriptor_ = file->message_type(3);
+  NewUser_descriptor_ = file->message_type(4);
   static const int NewUser_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NewUser, username_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NewUser, password_),
@@ -115,7 +150,7 @@ void protobuf_AssignDesc_CommsMessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(NewUser));
-  Login_descriptor_ = file->message_type(4);
+  Login_descriptor_ = file->message_type(5);
   static const int Login_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Login, username_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Login, password_),
@@ -131,7 +166,7 @@ void protobuf_AssignDesc_CommsMessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Login));
-  Say_descriptor_ = file->message_type(5);
+  Say_descriptor_ = file->message_type(6);
   static const int Say_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Say, text_),
   };
@@ -146,23 +181,55 @@ void protobuf_AssignDesc_CommsMessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Say));
-  Header_descriptor_ = file->message_type(6);
-  static const int Header_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header, msgtype_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header, from_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header, dest_),
+  MapRequestUpdates_descriptor_ = file->message_type(7);
+  static const int MapRequestUpdates_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequestUpdates, mapx_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequestUpdates, mapy_),
   };
-  Header_reflection_ =
+  MapRequestUpdates_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      Header_descriptor_,
-      Header::default_instance_,
-      Header_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header, _unknown_fields_),
+      MapRequestUpdates_descriptor_,
+      MapRequestUpdates::default_instance_,
+      MapRequestUpdates_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequestUpdates, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequestUpdates, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(Header));
+      sizeof(MapRequestUpdates));
+  MapIgnoreUpdates_descriptor_ = file->message_type(8);
+  static const int MapIgnoreUpdates_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnoreUpdates, mapx_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnoreUpdates, mapy_),
+  };
+  MapIgnoreUpdates_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      MapIgnoreUpdates_descriptor_,
+      MapIgnoreUpdates::default_instance_,
+      MapIgnoreUpdates_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnoreUpdates, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnoreUpdates, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(MapIgnoreUpdates));
+  Map_descriptor_ = file->message_type(9);
+  static const int Map_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, mapx_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, mapy_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, datasize_),
+  };
+  Map_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      Map_descriptor_,
+      Map::default_instance_,
+      Map_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(Map));
   MsgType_descriptor_ = file->enum_type(0);
 }
 
@@ -177,6 +244,8 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    Message_descriptor_, &Message::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Ping_descriptor_, &Ping::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Pong_descriptor_, &Pong::default_instance());
@@ -189,12 +258,18 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Say_descriptor_, &Say::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Header_descriptor_, &Header::default_instance());
+    MapRequestUpdates_descriptor_, &MapRequestUpdates::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    MapIgnoreUpdates_descriptor_, &MapIgnoreUpdates::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    Map_descriptor_, &Map::default_instance());
 }
 
 }  // namespace
 
 void protobuf_ShutdownFile_CommsMessages_2eproto() {
+  delete Message::default_instance_;
+  delete Message_reflection_;
   delete Ping::default_instance_;
   delete Ping_reflection_;
   delete Pong::default_instance_;
@@ -207,8 +282,12 @@ void protobuf_ShutdownFile_CommsMessages_2eproto() {
   delete Login_reflection_;
   delete Say::default_instance_;
   delete Say_reflection_;
-  delete Header::default_instance_;
-  delete Header_reflection_;
+  delete MapRequestUpdates::default_instance_;
+  delete MapRequestUpdates_reflection_;
+  delete MapIgnoreUpdates::default_instance_;
+  delete MapIgnoreUpdates_reflection_;
+  delete Map::default_instance_;
+  delete Map_reflection_;
 }
 
 void protobuf_AddDesc_CommsMessages_2eproto() {
@@ -218,32 +297,54 @@ void protobuf_AddDesc_CommsMessages_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023CommsMessages.proto\022\rCommsMessages\"\025\n\004"
-    "Ping\022\r\n\005count\030\001 \002(\005\"\025\n\004Pong\022\r\n\005count\030\001 \002"
-    "(\005\")\n\010Response\022\014\n\004code\030\001 \002(\005\022\017\n\007message\030"
-    "\002 \001(\t\";\n\007NewUser\022\020\n\010username\030\001 \002(\t\022\020\n\010pa"
-    "ssword\030\002 \002(\t\022\014\n\004name\030\003 \002(\t\"+\n\005Login\022\020\n\010u"
-    "sername\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"\023\n\003Say\022\014"
-    "\n\004text\030\001 \002(\t\"5\n\006Header\022\017\n\007msgtype\030\001 \002(\005\022"
-    "\014\n\004from\030\002 \002(\t\022\014\n\004dest\030\003 \002(\t*R\n\007MsgType\022\r"
-    "\n\teResponse\020\001\022\t\n\005ePing\020\002\022\t\n\005ePong\020\003\022\014\n\010e"
-    "NewUser\020\004\022\n\n\006eLogin\020\005\022\010\n\004eSay\020\006B\002H\001", 395);
+    "\n\023CommsMessages.proto\022\rCommsMessages\"\307\003\n"
+    "\007Message\022\'\n\007msgtype\030\001 \002(\0162\026.CommsMessage"
+    "s.MsgType\022\014\n\004from\030\002 \002(\t\022\014\n\004dest\030\003 \002(\t\022)\n"
+    "\010response\030\004 \001(\0132\027.CommsMessages.Response"
+    "\022!\n\004ping\030\005 \001(\0132\023.CommsMessages.Ping\022!\n\004p"
+    "ong\030\006 \001(\0132\023.CommsMessages.Pong\022\'\n\007newUse"
+    "r\030\007 \001(\0132\026.CommsMessages.NewUser\022#\n\005login"
+    "\030\010 \001(\0132\024.CommsMessages.Login\022\037\n\003say\030\t \001("
+    "\0132\022.CommsMessages.Say\022;\n\021mapRequestUpdat"
+    "es\030\n \001(\0132 .CommsMessages.MapRequestUpdat"
+    "es\0229\n\020mapIgnoreUpdates\030\013 \001(\0132\037.CommsMess"
+    "ages.MapIgnoreUpdates\022\037\n\003map\030\014 \001(\0132\022.Com"
+    "msMessages.Map\"\025\n\004Ping\022\r\n\005count\030\001 \002(\005\"\025\n"
+    "\004Pong\022\r\n\005count\030\001 \002(\005\")\n\010Response\022\014\n\004code"
+    "\030\001 \002(\005\022\017\n\007message\030\002 \001(\t\";\n\007NewUser\022\020\n\010us"
+    "ername\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\022\014\n\004name\030\003"
+    " \002(\t\"+\n\005Login\022\020\n\010username\030\001 \002(\t\022\020\n\010passw"
+    "ord\030\002 \002(\t\"\023\n\003Say\022\014\n\004text\030\001 \002(\t\"/\n\021MapReq"
+    "uestUpdates\022\014\n\004mapX\030\001 \002(\005\022\014\n\004mapY\030\002 \002(\005\""
+    ".\n\020MapIgnoreUpdates\022\014\n\004mapX\030\001 \002(\005\022\014\n\004map"
+    "Y\030\002 \002(\005\"3\n\003Map\022\014\n\004mapX\030\001 \002(\005\022\014\n\004mapY\030\002 \002"
+    "(\005\022\020\n\010dataSize\030\003 \002(\005*\213\001\n\007MsgType\022\r\n\teRes"
+    "ponse\020\001\022\t\n\005ePing\020\002\022\t\n\005ePong\020\003\022\014\n\010eNewUse"
+    "r\020\004\022\n\n\006eLogin\020\005\022\010\n\004eSay\020\006\022\026\n\022eMapRequest"
+    "Updates\020\007\022\025\n\021eMapIgnoreUpdates\020\010\022\010\n\004eMap"
+    "\020\tB\002H\001", 1006);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "CommsMessages.proto", &protobuf_RegisterTypes);
+  Message::default_instance_ = new Message();
   Ping::default_instance_ = new Ping();
   Pong::default_instance_ = new Pong();
   Response::default_instance_ = new Response();
   NewUser::default_instance_ = new NewUser();
   Login::default_instance_ = new Login();
   Say::default_instance_ = new Say();
-  Header::default_instance_ = new Header();
+  MapRequestUpdates::default_instance_ = new MapRequestUpdates();
+  MapIgnoreUpdates::default_instance_ = new MapIgnoreUpdates();
+  Map::default_instance_ = new Map();
+  Message::default_instance_->InitAsDefaultInstance();
   Ping::default_instance_->InitAsDefaultInstance();
   Pong::default_instance_->InitAsDefaultInstance();
   Response::default_instance_->InitAsDefaultInstance();
   NewUser::default_instance_->InitAsDefaultInstance();
   Login::default_instance_->InitAsDefaultInstance();
   Say::default_instance_->InitAsDefaultInstance();
-  Header::default_instance_->InitAsDefaultInstance();
+  MapRequestUpdates::default_instance_->InitAsDefaultInstance();
+  MapIgnoreUpdates::default_instance_->InitAsDefaultInstance();
+  Map::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_CommsMessages_2eproto);
 }
 
@@ -265,10 +366,780 @@ bool MsgType_IsValid(int value) {
     case 4:
     case 5:
     case 6:
+    case 7:
+    case 8:
+    case 9:
       return true;
     default:
       return false;
   }
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int Message::kMsgtypeFieldNumber;
+const int Message::kFromFieldNumber;
+const int Message::kDestFieldNumber;
+const int Message::kResponseFieldNumber;
+const int Message::kPingFieldNumber;
+const int Message::kPongFieldNumber;
+const int Message::kNewUserFieldNumber;
+const int Message::kLoginFieldNumber;
+const int Message::kSayFieldNumber;
+const int Message::kMapRequestUpdatesFieldNumber;
+const int Message::kMapIgnoreUpdatesFieldNumber;
+const int Message::kMapFieldNumber;
+#endif  // !_MSC_VER
+
+Message::Message()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void Message::InitAsDefaultInstance() {
+  response_ = const_cast< ::CommsMessages::Response*>(&::CommsMessages::Response::default_instance());
+  ping_ = const_cast< ::CommsMessages::Ping*>(&::CommsMessages::Ping::default_instance());
+  pong_ = const_cast< ::CommsMessages::Pong*>(&::CommsMessages::Pong::default_instance());
+  newuser_ = const_cast< ::CommsMessages::NewUser*>(&::CommsMessages::NewUser::default_instance());
+  login_ = const_cast< ::CommsMessages::Login*>(&::CommsMessages::Login::default_instance());
+  say_ = const_cast< ::CommsMessages::Say*>(&::CommsMessages::Say::default_instance());
+  maprequestupdates_ = const_cast< ::CommsMessages::MapRequestUpdates*>(&::CommsMessages::MapRequestUpdates::default_instance());
+  mapignoreupdates_ = const_cast< ::CommsMessages::MapIgnoreUpdates*>(&::CommsMessages::MapIgnoreUpdates::default_instance());
+  map_ = const_cast< ::CommsMessages::Map*>(&::CommsMessages::Map::default_instance());
+}
+
+Message::Message(const Message& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void Message::SharedCtor() {
+  _cached_size_ = 0;
+  msgtype_ = 1;
+  from_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  dest_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  response_ = NULL;
+  ping_ = NULL;
+  pong_ = NULL;
+  newuser_ = NULL;
+  login_ = NULL;
+  say_ = NULL;
+  maprequestupdates_ = NULL;
+  mapignoreupdates_ = NULL;
+  map_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+Message::~Message() {
+  SharedDtor();
+}
+
+void Message::SharedDtor() {
+  if (from_ != &::google::protobuf::internal::kEmptyString) {
+    delete from_;
+  }
+  if (dest_ != &::google::protobuf::internal::kEmptyString) {
+    delete dest_;
+  }
+  if (this != default_instance_) {
+    delete response_;
+    delete ping_;
+    delete pong_;
+    delete newuser_;
+    delete login_;
+    delete say_;
+    delete maprequestupdates_;
+    delete mapignoreupdates_;
+    delete map_;
+  }
+}
+
+void Message::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* Message::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return Message_descriptor_;
+}
+
+const Message& Message::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_CommsMessages_2eproto();
+  return *default_instance_;
+}
+
+Message* Message::default_instance_ = NULL;
+
+Message* Message::New() const {
+  return new Message;
+}
+
+void Message::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    msgtype_ = 1;
+    if (has_from()) {
+      if (from_ != &::google::protobuf::internal::kEmptyString) {
+        from_->clear();
+      }
+    }
+    if (has_dest()) {
+      if (dest_ != &::google::protobuf::internal::kEmptyString) {
+        dest_->clear();
+      }
+    }
+    if (has_response()) {
+      if (response_ != NULL) response_->::CommsMessages::Response::Clear();
+    }
+    if (has_ping()) {
+      if (ping_ != NULL) ping_->::CommsMessages::Ping::Clear();
+    }
+    if (has_pong()) {
+      if (pong_ != NULL) pong_->::CommsMessages::Pong::Clear();
+    }
+    if (has_newuser()) {
+      if (newuser_ != NULL) newuser_->::CommsMessages::NewUser::Clear();
+    }
+    if (has_login()) {
+      if (login_ != NULL) login_->::CommsMessages::Login::Clear();
+    }
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (has_say()) {
+      if (say_ != NULL) say_->::CommsMessages::Say::Clear();
+    }
+    if (has_maprequestupdates()) {
+      if (maprequestupdates_ != NULL) maprequestupdates_->::CommsMessages::MapRequestUpdates::Clear();
+    }
+    if (has_mapignoreupdates()) {
+      if (mapignoreupdates_ != NULL) mapignoreupdates_->::CommsMessages::MapIgnoreUpdates::Clear();
+    }
+    if (has_map()) {
+      if (map_ != NULL) map_->::CommsMessages::Map::Clear();
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool Message::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .CommsMessages.MsgType msgtype = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::CommsMessages::MsgType_IsValid(value)) {
+            set_msgtype(static_cast< ::CommsMessages::MsgType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_from;
+        break;
+      }
+
+      // required string from = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_from:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_from()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->from().data(), this->from().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_dest;
+        break;
+      }
+
+      // required string dest = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_dest:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_dest()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->dest().data(), this->dest().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(34)) goto parse_response;
+        break;
+      }
+
+      // optional .CommsMessages.Response response = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_response:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_response()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(42)) goto parse_ping;
+        break;
+      }
+
+      // optional .CommsMessages.Ping ping = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_ping:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_ping()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(50)) goto parse_pong;
+        break;
+      }
+
+      // optional .CommsMessages.Pong pong = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_pong:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_pong()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(58)) goto parse_newUser;
+        break;
+      }
+
+      // optional .CommsMessages.NewUser newUser = 7;
+      case 7: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_newUser:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_newuser()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(66)) goto parse_login;
+        break;
+      }
+
+      // optional .CommsMessages.Login login = 8;
+      case 8: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_login:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_login()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(74)) goto parse_say;
+        break;
+      }
+
+      // optional .CommsMessages.Say say = 9;
+      case 9: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_say:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_say()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(82)) goto parse_mapRequestUpdates;
+        break;
+      }
+
+      // optional .CommsMessages.MapRequestUpdates mapRequestUpdates = 10;
+      case 10: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_mapRequestUpdates:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_maprequestupdates()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(90)) goto parse_mapIgnoreUpdates;
+        break;
+      }
+
+      // optional .CommsMessages.MapIgnoreUpdates mapIgnoreUpdates = 11;
+      case 11: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_mapIgnoreUpdates:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_mapignoreupdates()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(98)) goto parse_map;
+        break;
+      }
+
+      // optional .CommsMessages.Map map = 12;
+      case 12: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_map:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_map()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void Message::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .CommsMessages.MsgType msgtype = 1;
+  if (has_msgtype()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->msgtype(), output);
+  }
+
+  // required string from = 2;
+  if (has_from()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->from().data(), this->from().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->from(), output);
+  }
+
+  // required string dest = 3;
+  if (has_dest()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->dest().data(), this->dest().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->dest(), output);
+  }
+
+  // optional .CommsMessages.Response response = 4;
+  if (has_response()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->response(), output);
+  }
+
+  // optional .CommsMessages.Ping ping = 5;
+  if (has_ping()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      5, this->ping(), output);
+  }
+
+  // optional .CommsMessages.Pong pong = 6;
+  if (has_pong()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, this->pong(), output);
+  }
+
+  // optional .CommsMessages.NewUser newUser = 7;
+  if (has_newuser()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      7, this->newuser(), output);
+  }
+
+  // optional .CommsMessages.Login login = 8;
+  if (has_login()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      8, this->login(), output);
+  }
+
+  // optional .CommsMessages.Say say = 9;
+  if (has_say()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      9, this->say(), output);
+  }
+
+  // optional .CommsMessages.MapRequestUpdates mapRequestUpdates = 10;
+  if (has_maprequestupdates()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      10, this->maprequestupdates(), output);
+  }
+
+  // optional .CommsMessages.MapIgnoreUpdates mapIgnoreUpdates = 11;
+  if (has_mapignoreupdates()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      11, this->mapignoreupdates(), output);
+  }
+
+  // optional .CommsMessages.Map map = 12;
+  if (has_map()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      12, this->map(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* Message::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .CommsMessages.MsgType msgtype = 1;
+  if (has_msgtype()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->msgtype(), target);
+  }
+
+  // required string from = 2;
+  if (has_from()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->from().data(), this->from().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->from(), target);
+  }
+
+  // required string dest = 3;
+  if (has_dest()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->dest().data(), this->dest().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->dest(), target);
+  }
+
+  // optional .CommsMessages.Response response = 4;
+  if (has_response()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        4, this->response(), target);
+  }
+
+  // optional .CommsMessages.Ping ping = 5;
+  if (has_ping()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        5, this->ping(), target);
+  }
+
+  // optional .CommsMessages.Pong pong = 6;
+  if (has_pong()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        6, this->pong(), target);
+  }
+
+  // optional .CommsMessages.NewUser newUser = 7;
+  if (has_newuser()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        7, this->newuser(), target);
+  }
+
+  // optional .CommsMessages.Login login = 8;
+  if (has_login()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        8, this->login(), target);
+  }
+
+  // optional .CommsMessages.Say say = 9;
+  if (has_say()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        9, this->say(), target);
+  }
+
+  // optional .CommsMessages.MapRequestUpdates mapRequestUpdates = 10;
+  if (has_maprequestupdates()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        10, this->maprequestupdates(), target);
+  }
+
+  // optional .CommsMessages.MapIgnoreUpdates mapIgnoreUpdates = 11;
+  if (has_mapignoreupdates()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        11, this->mapignoreupdates(), target);
+  }
+
+  // optional .CommsMessages.Map map = 12;
+  if (has_map()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        12, this->map(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int Message::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .CommsMessages.MsgType msgtype = 1;
+    if (has_msgtype()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->msgtype());
+    }
+
+    // required string from = 2;
+    if (has_from()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->from());
+    }
+
+    // required string dest = 3;
+    if (has_dest()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->dest());
+    }
+
+    // optional .CommsMessages.Response response = 4;
+    if (has_response()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->response());
+    }
+
+    // optional .CommsMessages.Ping ping = 5;
+    if (has_ping()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->ping());
+    }
+
+    // optional .CommsMessages.Pong pong = 6;
+    if (has_pong()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->pong());
+    }
+
+    // optional .CommsMessages.NewUser newUser = 7;
+    if (has_newuser()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->newuser());
+    }
+
+    // optional .CommsMessages.Login login = 8;
+    if (has_login()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->login());
+    }
+
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    // optional .CommsMessages.Say say = 9;
+    if (has_say()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->say());
+    }
+
+    // optional .CommsMessages.MapRequestUpdates mapRequestUpdates = 10;
+    if (has_maprequestupdates()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->maprequestupdates());
+    }
+
+    // optional .CommsMessages.MapIgnoreUpdates mapIgnoreUpdates = 11;
+    if (has_mapignoreupdates()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->mapignoreupdates());
+    }
+
+    // optional .CommsMessages.Map map = 12;
+    if (has_map()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->map());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void Message::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const Message* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const Message*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void Message::MergeFrom(const Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_msgtype()) {
+      set_msgtype(from.msgtype());
+    }
+    if (from.has_from()) {
+      set_from(from.from());
+    }
+    if (from.has_dest()) {
+      set_dest(from.dest());
+    }
+    if (from.has_response()) {
+      mutable_response()->::CommsMessages::Response::MergeFrom(from.response());
+    }
+    if (from.has_ping()) {
+      mutable_ping()->::CommsMessages::Ping::MergeFrom(from.ping());
+    }
+    if (from.has_pong()) {
+      mutable_pong()->::CommsMessages::Pong::MergeFrom(from.pong());
+    }
+    if (from.has_newuser()) {
+      mutable_newuser()->::CommsMessages::NewUser::MergeFrom(from.newuser());
+    }
+    if (from.has_login()) {
+      mutable_login()->::CommsMessages::Login::MergeFrom(from.login());
+    }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (from.has_say()) {
+      mutable_say()->::CommsMessages::Say::MergeFrom(from.say());
+    }
+    if (from.has_maprequestupdates()) {
+      mutable_maprequestupdates()->::CommsMessages::MapRequestUpdates::MergeFrom(from.maprequestupdates());
+    }
+    if (from.has_mapignoreupdates()) {
+      mutable_mapignoreupdates()->::CommsMessages::MapIgnoreUpdates::MergeFrom(from.mapignoreupdates());
+    }
+    if (from.has_map()) {
+      mutable_map()->::CommsMessages::Map::MergeFrom(from.map());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void Message::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Message::CopyFrom(const Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Message::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+
+  if (has_response()) {
+    if (!this->response().IsInitialized()) return false;
+  }
+  if (has_ping()) {
+    if (!this->ping().IsInitialized()) return false;
+  }
+  if (has_pong()) {
+    if (!this->pong().IsInitialized()) return false;
+  }
+  if (has_newuser()) {
+    if (!this->newuser().IsInitialized()) return false;
+  }
+  if (has_login()) {
+    if (!this->login().IsInitialized()) return false;
+  }
+  if (has_say()) {
+    if (!this->say().IsInitialized()) return false;
+  }
+  if (has_maprequestupdates()) {
+    if (!this->maprequestupdates().IsInitialized()) return false;
+  }
+  if (has_mapignoreupdates()) {
+    if (!this->mapignoreupdates().IsInitialized()) return false;
+  }
+  if (has_map()) {
+    if (!this->map().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void Message::Swap(Message* other) {
+  if (other != this) {
+    std::swap(msgtype_, other->msgtype_);
+    std::swap(from_, other->from_);
+    std::swap(dest_, other->dest_);
+    std::swap(response_, other->response_);
+    std::swap(ping_, other->ping_);
+    std::swap(pong_, other->pong_);
+    std::swap(newuser_, other->newuser_);
+    std::swap(login_, other->login_);
+    std::swap(say_, other->say_);
+    std::swap(maprequestupdates_, other->maprequestupdates_);
+    std::swap(mapignoreupdates_, other->mapignoreupdates_);
+    std::swap(map_, other->map_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata Message::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = Message_descriptor_;
+  metadata.reflection = Message_reflection_;
+  return metadata;
 }
 
 
@@ -1808,135 +2679,100 @@ void Say::Swap(Say* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int Header::kMsgtypeFieldNumber;
-const int Header::kFromFieldNumber;
-const int Header::kDestFieldNumber;
+const int MapRequestUpdates::kMapXFieldNumber;
+const int MapRequestUpdates::kMapYFieldNumber;
 #endif  // !_MSC_VER
 
-Header::Header()
+MapRequestUpdates::MapRequestUpdates()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void Header::InitAsDefaultInstance() {
+void MapRequestUpdates::InitAsDefaultInstance() {
 }
 
-Header::Header(const Header& from)
+MapRequestUpdates::MapRequestUpdates(const MapRequestUpdates& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void Header::SharedCtor() {
+void MapRequestUpdates::SharedCtor() {
   _cached_size_ = 0;
-  msgtype_ = 0;
-  from_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  dest_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  mapx_ = 0;
+  mapy_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-Header::~Header() {
+MapRequestUpdates::~MapRequestUpdates() {
   SharedDtor();
 }
 
-void Header::SharedDtor() {
-  if (from_ != &::google::protobuf::internal::kEmptyString) {
-    delete from_;
-  }
-  if (dest_ != &::google::protobuf::internal::kEmptyString) {
-    delete dest_;
-  }
+void MapRequestUpdates::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-void Header::SetCachedSize(int size) const {
+void MapRequestUpdates::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* Header::descriptor() {
+const ::google::protobuf::Descriptor* MapRequestUpdates::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Header_descriptor_;
+  return MapRequestUpdates_descriptor_;
 }
 
-const Header& Header::default_instance() {
+const MapRequestUpdates& MapRequestUpdates::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_CommsMessages_2eproto();
   return *default_instance_;
 }
 
-Header* Header::default_instance_ = NULL;
+MapRequestUpdates* MapRequestUpdates::default_instance_ = NULL;
 
-Header* Header::New() const {
-  return new Header;
+MapRequestUpdates* MapRequestUpdates::New() const {
+  return new MapRequestUpdates;
 }
 
-void Header::Clear() {
+void MapRequestUpdates::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    msgtype_ = 0;
-    if (has_from()) {
-      if (from_ != &::google::protobuf::internal::kEmptyString) {
-        from_->clear();
-      }
-    }
-    if (has_dest()) {
-      if (dest_ != &::google::protobuf::internal::kEmptyString) {
-        dest_->clear();
-      }
-    }
+    mapx_ = 0;
+    mapy_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
 
-bool Header::MergePartialFromCodedStream(
+bool MapRequestUpdates::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 msgtype = 1;
+      // required int32 mapX = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &msgtype_)));
-          set_has_msgtype();
+                 input, &mapx_)));
+          set_has_mapx();
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_from;
+        if (input->ExpectTag(16)) goto parse_mapY;
         break;
       }
 
-      // required string from = 2;
+      // required int32 mapY = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_from:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_from()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->from().data(), this->from().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(26)) goto parse_dest;
-        break;
-      }
-
-      // required string dest = 3;
-      case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_dest:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_dest()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->dest().data(), this->dest().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_mapY:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &mapy_)));
+          set_has_mapy();
         } else {
           goto handle_uninterpreted;
         }
@@ -1960,29 +2796,16 @@ bool Header::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void Header::SerializeWithCachedSizes(
+void MapRequestUpdates::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int32 msgtype = 1;
-  if (has_msgtype()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->msgtype(), output);
+  // required int32 mapX = 1;
+  if (has_mapx()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->mapx(), output);
   }
 
-  // required string from = 2;
-  if (has_from()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->from().data(), this->from().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->from(), output);
-  }
-
-  // required string dest = 3;
-  if (has_dest()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->dest().data(), this->dest().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      3, this->dest(), output);
+  // required int32 mapY = 2;
+  if (has_mapy()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->mapy(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -1991,31 +2814,16 @@ void Header::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* Header::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* MapRequestUpdates::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int32 msgtype = 1;
-  if (has_msgtype()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->msgtype(), target);
+  // required int32 mapX = 1;
+  if (has_mapx()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->mapx(), target);
   }
 
-  // required string from = 2;
-  if (has_from()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->from().data(), this->from().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->from(), target);
-  }
-
-  // required string dest = 3;
-  if (has_dest()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->dest().data(), this->dest().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->dest(), target);
+  // required int32 mapY = 2;
+  if (has_mapy()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->mapy(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2025,29 +2833,22 @@ void Header::SerializeWithCachedSizes(
   return target;
 }
 
-int Header::ByteSize() const {
+int MapRequestUpdates::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 msgtype = 1;
-    if (has_msgtype()) {
+    // required int32 mapX = 1;
+    if (has_mapx()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->msgtype());
+          this->mapx());
     }
 
-    // required string from = 2;
-    if (has_from()) {
+    // required int32 mapY = 2;
+    if (has_mapy()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->from());
-    }
-
-    // required string dest = 3;
-    if (has_dest()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->dest());
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->mapy());
     }
 
   }
@@ -2062,10 +2863,10 @@ int Header::ByteSize() const {
   return total_size;
 }
 
-void Header::MergeFrom(const ::google::protobuf::Message& from) {
+void MapRequestUpdates::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const Header* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Header*>(
+  const MapRequestUpdates* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const MapRequestUpdates*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -2074,56 +2875,590 @@ void Header::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void Header::MergeFrom(const Header& from) {
+void MapRequestUpdates::MergeFrom(const MapRequestUpdates& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_msgtype()) {
-      set_msgtype(from.msgtype());
+    if (from.has_mapx()) {
+      set_mapx(from.mapx());
     }
-    if (from.has_from()) {
-      set_from(from.from());
-    }
-    if (from.has_dest()) {
-      set_dest(from.dest());
+    if (from.has_mapy()) {
+      set_mapy(from.mapy());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void Header::CopyFrom(const ::google::protobuf::Message& from) {
+void MapRequestUpdates::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Header::CopyFrom(const Header& from) {
+void MapRequestUpdates::CopyFrom(const MapRequestUpdates& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool Header::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+bool MapRequestUpdates::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
 
-void Header::Swap(Header* other) {
+void MapRequestUpdates::Swap(MapRequestUpdates* other) {
   if (other != this) {
-    std::swap(msgtype_, other->msgtype_);
-    std::swap(from_, other->from_);
-    std::swap(dest_, other->dest_);
+    std::swap(mapx_, other->mapx_);
+    std::swap(mapy_, other->mapy_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
-::google::protobuf::Metadata Header::GetMetadata() const {
+::google::protobuf::Metadata MapRequestUpdates::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = Header_descriptor_;
-  metadata.reflection = Header_reflection_;
+  metadata.descriptor = MapRequestUpdates_descriptor_;
+  metadata.reflection = MapRequestUpdates_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int MapIgnoreUpdates::kMapXFieldNumber;
+const int MapIgnoreUpdates::kMapYFieldNumber;
+#endif  // !_MSC_VER
+
+MapIgnoreUpdates::MapIgnoreUpdates()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void MapIgnoreUpdates::InitAsDefaultInstance() {
+}
+
+MapIgnoreUpdates::MapIgnoreUpdates(const MapIgnoreUpdates& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void MapIgnoreUpdates::SharedCtor() {
+  _cached_size_ = 0;
+  mapx_ = 0;
+  mapy_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+MapIgnoreUpdates::~MapIgnoreUpdates() {
+  SharedDtor();
+}
+
+void MapIgnoreUpdates::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void MapIgnoreUpdates::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* MapIgnoreUpdates::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return MapIgnoreUpdates_descriptor_;
+}
+
+const MapIgnoreUpdates& MapIgnoreUpdates::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_CommsMessages_2eproto();
+  return *default_instance_;
+}
+
+MapIgnoreUpdates* MapIgnoreUpdates::default_instance_ = NULL;
+
+MapIgnoreUpdates* MapIgnoreUpdates::New() const {
+  return new MapIgnoreUpdates;
+}
+
+void MapIgnoreUpdates::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    mapx_ = 0;
+    mapy_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool MapIgnoreUpdates::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 mapX = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &mapx_)));
+          set_has_mapx();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_mapY;
+        break;
+      }
+
+      // required int32 mapY = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_mapY:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &mapy_)));
+          set_has_mapy();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void MapIgnoreUpdates::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 mapX = 1;
+  if (has_mapx()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->mapx(), output);
+  }
+
+  // required int32 mapY = 2;
+  if (has_mapy()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->mapy(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* MapIgnoreUpdates::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int32 mapX = 1;
+  if (has_mapx()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->mapx(), target);
+  }
+
+  // required int32 mapY = 2;
+  if (has_mapy()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->mapy(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int MapIgnoreUpdates::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 mapX = 1;
+    if (has_mapx()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->mapx());
+    }
+
+    // required int32 mapY = 2;
+    if (has_mapy()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->mapy());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void MapIgnoreUpdates::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const MapIgnoreUpdates* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const MapIgnoreUpdates*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void MapIgnoreUpdates::MergeFrom(const MapIgnoreUpdates& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_mapx()) {
+      set_mapx(from.mapx());
+    }
+    if (from.has_mapy()) {
+      set_mapy(from.mapy());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void MapIgnoreUpdates::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void MapIgnoreUpdates::CopyFrom(const MapIgnoreUpdates& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool MapIgnoreUpdates::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void MapIgnoreUpdates::Swap(MapIgnoreUpdates* other) {
+  if (other != this) {
+    std::swap(mapx_, other->mapx_);
+    std::swap(mapy_, other->mapy_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata MapIgnoreUpdates::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = MapIgnoreUpdates_descriptor_;
+  metadata.reflection = MapIgnoreUpdates_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int Map::kMapXFieldNumber;
+const int Map::kMapYFieldNumber;
+const int Map::kDataSizeFieldNumber;
+#endif  // !_MSC_VER
+
+Map::Map()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void Map::InitAsDefaultInstance() {
+}
+
+Map::Map(const Map& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void Map::SharedCtor() {
+  _cached_size_ = 0;
+  mapx_ = 0;
+  mapy_ = 0;
+  datasize_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+Map::~Map() {
+  SharedDtor();
+}
+
+void Map::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void Map::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* Map::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return Map_descriptor_;
+}
+
+const Map& Map::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_CommsMessages_2eproto();
+  return *default_instance_;
+}
+
+Map* Map::default_instance_ = NULL;
+
+Map* Map::New() const {
+  return new Map;
+}
+
+void Map::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    mapx_ = 0;
+    mapy_ = 0;
+    datasize_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool Map::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 mapX = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &mapx_)));
+          set_has_mapx();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_mapY;
+        break;
+      }
+
+      // required int32 mapY = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_mapY:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &mapy_)));
+          set_has_mapy();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(24)) goto parse_dataSize;
+        break;
+      }
+
+      // required int32 dataSize = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_dataSize:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &datasize_)));
+          set_has_datasize();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void Map::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 mapX = 1;
+  if (has_mapx()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->mapx(), output);
+  }
+
+  // required int32 mapY = 2;
+  if (has_mapy()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->mapy(), output);
+  }
+
+  // required int32 dataSize = 3;
+  if (has_datasize()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->datasize(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* Map::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int32 mapX = 1;
+  if (has_mapx()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->mapx(), target);
+  }
+
+  // required int32 mapY = 2;
+  if (has_mapy()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->mapy(), target);
+  }
+
+  // required int32 dataSize = 3;
+  if (has_datasize()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->datasize(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int Map::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 mapX = 1;
+    if (has_mapx()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->mapx());
+    }
+
+    // required int32 mapY = 2;
+    if (has_mapy()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->mapy());
+    }
+
+    // required int32 dataSize = 3;
+    if (has_datasize()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->datasize());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void Map::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const Map* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const Map*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void Map::MergeFrom(const Map& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_mapx()) {
+      set_mapx(from.mapx());
+    }
+    if (from.has_mapy()) {
+      set_mapy(from.mapy());
+    }
+    if (from.has_datasize()) {
+      set_datasize(from.datasize());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void Map::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Map::CopyFrom(const Map& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Map::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+
+  return true;
+}
+
+void Map::Swap(Map* other) {
+  if (other != this) {
+    std::swap(mapx_, other->mapx_);
+    std::swap(mapy_, other->mapy_);
+    std::swap(datasize_, other->datasize_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata Map::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = Map_descriptor_;
+  metadata.reflection = Map_reflection_;
   return metadata;
 }
 

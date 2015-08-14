@@ -9,6 +9,34 @@
 # 
 # option optimize_for = SPEED;
 # 
+#   enum MsgType {
+#     eResponse = 1;
+#     ePing = 2;
+#     ePong = 3;
+#     eNewUser = 4;
+#     eLogin = 5;
+#     eSay = 6;
+#     eMapRequestUpdates = 7;
+#     eMapIgnoreUpdates = 8;
+#     eMap = 9;
+#   }
+# 
+#   message Message {
+#     required MsgType msgtype = 1;
+#     required string from = 2;
+#     required string dest = 3;
+# 
+#     optional Response response = 4;
+#     optional Ping ping = 5;
+#     optional Pong pong = 6;
+#     optional NewUser newUser = 7;
+#     optional Login login = 8;
+#     optional Say say = 9;
+#     optional MapRequestUpdates mapRequestUpdates = 10;
+#     optional MapIgnoreUpdates mapIgnoreUpdates = 11;
+#     optional Map map = 12;
+#   }
+# 
 #   message Ping
 #   {
 #     required int32 count = 1;
@@ -41,23 +69,27 @@
 #   {
 #     required string text = 1;
 #   }
+# 
+#   message MapRequestUpdates
+#   {
+#     required int32 mapX = 1;
+#     required int32 mapY = 2;
+#   }
+# 
+#   message MapIgnoreUpdates
+#   {
+#     required int32 mapX = 1;
+#     required int32 mapY = 2;
+#   }
+# 
+#   message Map
+#   {
+#     required int32 mapX = 1;
+#     required int32 mapY = 2;
+#     required int32 dataSize = 3;
+#     // binary data follows message
+#   }
 #   
-#   enum MsgType {
-#     eResponse = 1;
-#     ePing = 2;
-#     ePong = 3;
-#     eNewUser = 4;
-#     eLogin = 5;
-#     eSay = 6;
-#   }
-# 
-#   message Header {
-#     // Identifies type of following data
-#     required int32 msgtype = 1;
-#     required string from = 2;
-#     required string dest = 3;
-#   }
-# 
 
 require 'protobuf/message/message'
 require 'protobuf/message/enum'
@@ -66,6 +98,33 @@ require 'protobuf/message/extend'
 
 module CommsMessages
   ::Protobuf::OPTIONS[:"optimize_for"] = :SPEED
+  class MsgType < ::Protobuf::Enum
+    defined_in __FILE__
+    EResponse = value(:eResponse, 1)
+    EPing = value(:ePing, 2)
+    EPong = value(:ePong, 3)
+    ENewUser = value(:eNewUser, 4)
+    ELogin = value(:eLogin, 5)
+    ESay = value(:eSay, 6)
+    EMapRequestUpdates = value(:eMapRequestUpdates, 7)
+    EMapIgnoreUpdates = value(:eMapIgnoreUpdates, 8)
+    EMap = value(:eMap, 9)
+  end
+  class Message < ::Protobuf::Message
+    defined_in __FILE__
+    required :MsgType, :msgtype, 1
+    required :string, :from, 2
+    required :string, :dest, 3
+    optional :Response, :response, 4
+    optional :Ping, :ping, 5
+    optional :Pong, :pong, 6
+    optional :NewUser, :newUser, 7
+    optional :Login, :login, 8
+    optional :Say, :say, 9
+    optional :MapRequestUpdates, :mapRequestUpdates, 10
+    optional :MapIgnoreUpdates, :mapIgnoreUpdates, 11
+    optional :Map, :map, 12
+  end
   class Ping < ::Protobuf::Message
     defined_in __FILE__
     required :int32, :count, 1
@@ -94,19 +153,20 @@ module CommsMessages
     defined_in __FILE__
     required :string, :text, 1
   end
-  class MsgType < ::Protobuf::Enum
+  class MapRequestUpdates < ::Protobuf::Message
     defined_in __FILE__
-    EResponse = value(:eResponse, 1)
-    EPing = value(:ePing, 2)
-    EPong = value(:ePong, 3)
-    ENewUser = value(:eNewUser, 4)
-    ELogin = value(:eLogin, 5)
-    ESay = value(:eSay, 6)
+    required :int32, :mapX, 1
+    required :int32, :mapY, 2
   end
-  class Header < ::Protobuf::Message
+  class MapIgnoreUpdates < ::Protobuf::Message
     defined_in __FILE__
-    required :int32, :msgtype, 1
-    required :string, :from, 2
-    required :string, :dest, 3
+    required :int32, :mapX, 1
+    required :int32, :mapY, 2
+  end
+  class Map < ::Protobuf::Message
+    defined_in __FILE__
+    required :int32, :mapX, 1
+    required :int32, :mapY, 2
+    required :int32, :dataSize, 3
   end
 end
