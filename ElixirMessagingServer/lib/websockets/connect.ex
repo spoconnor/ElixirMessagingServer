@@ -32,20 +32,19 @@ def step2(clientS) do
       Lib.trace("Received binary:", bin1)
       str = to_string(decodeString(bin1))
       Lib.trace("Received:", str)
-      {header,body} = Packet.decode(str)
-      loginMsg(clientS, header, body)
+      message = Packet.decode(str)
+      loginMsg(clientS, message)
     after timeoutTime ->
       WebsocketWebsockets.die(clientS,"Timeout on Handshake")
   end
 end
 
-def loginMsg(clientS, %CommsMessages.Header{msgtype: 4, from: _from, dest: _dest}, login) do
+def loginMsg(clientS, %CommsMessages.Message{msgtype: CommsMessages.MsgType.ENewUser, from: _from, dest: _dest, login: login}) do
   Lib.trace("NewUser #{login.username}")
 end
 
 # LoginClient
-#def loginMsg(clientS, header, login) do
-def loginMsg(clientS, %CommsMessages.Header{msgtype: 5, from: _from, dest: _dest}, login) do
+def loginMsg(clientS, %CommsMessages.Message{msgtype: CommsMessages.MsgType.ELogin, from: _from, dest: _dest, login: login}) do
   Lib.trace("Login #{login.username}")
   #if (length(user.name)>25) do
   #  WebsocketWebsockets.die("Name too long")

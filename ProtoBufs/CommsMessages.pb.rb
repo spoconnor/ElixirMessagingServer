@@ -22,7 +22,7 @@
 #   }
 # 
 #   message Message {
-#     required MsgType msgtype = 1;
+#     required int32 msgtype = 1;
 #     required string from = 2;
 #     required string dest = 3;
 # 
@@ -112,7 +112,7 @@ module CommsMessages
   end
   class Message < ::Protobuf::Message
     defined_in __FILE__
-    required :MsgType, :msgtype, 1
+    required :int32, :msgtype, 1
     required :string, :from, 2
     required :string, :dest, 3
     optional :Response, :response, 4

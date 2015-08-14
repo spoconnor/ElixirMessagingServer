@@ -45,29 +45,28 @@ namespace CommsMessages {
     
     static CommsMessages() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
-          "ChNDb21tc01lc3NhZ2VzLnByb3RvEg1Db21tc01lc3NhZ2VzIscDCgdNZXNz" + 
-          "YWdlEicKB21zZ3R5cGUYASACKA4yFi5Db21tc01lc3NhZ2VzLk1zZ1R5cGUS" + 
-          "DAoEZnJvbRgCIAIoCRIMCgRkZXN0GAMgAigJEikKCHJlc3BvbnNlGAQgASgL" + 
-          "MhcuQ29tbXNNZXNzYWdlcy5SZXNwb25zZRIhCgRwaW5nGAUgASgLMhMuQ29t" + 
-          "bXNNZXNzYWdlcy5QaW5nEiEKBHBvbmcYBiABKAsyEy5Db21tc01lc3NhZ2Vz" + 
-          "LlBvbmcSJwoHbmV3VXNlchgHIAEoCzIWLkNvbW1zTWVzc2FnZXMuTmV3VXNl" + 
-          "chIjCgVsb2dpbhgIIAEoCzIULkNvbW1zTWVzc2FnZXMuTG9naW4SHwoDc2F5" + 
-          "GAkgASgLMhIuQ29tbXNNZXNzYWdlcy5TYXkSOwoRbWFwUmVxdWVzdFVwZGF0" + 
-          "ZXMYCiABKAsyIC5Db21tc01lc3NhZ2VzLk1hcFJlcXVlc3RVcGRhdGVzEjkK" + 
-          "EG1hcElnbm9yZVVwZGF0ZXMYCyABKAsyHy5Db21tc01lc3NhZ2VzLk1hcEln" + 
-          "bm9yZVVwZGF0ZXMSHwoDbWFwGAwgASgLMhIuQ29tbXNNZXNzYWdlcy5NYXAi" + 
-          "FQoEUGluZxINCgVjb3VudBgBIAIoBSIVCgRQb25nEg0KBWNvdW50GAEgAigF" + 
-          "IikKCFJlc3BvbnNlEgwKBGNvZGUYASACKAUSDwoHbWVzc2FnZRgCIAEoCSI7" + 
-          "CgdOZXdVc2VyEhAKCHVzZXJuYW1lGAEgAigJEhAKCHBhc3N3b3JkGAIgAigJ" + 
-          "EgwKBG5hbWUYAyACKAkiKwoFTG9naW4SEAoIdXNlcm5hbWUYASACKAkSEAoI" + 
-          "cGFzc3dvcmQYAiACKAkiEwoDU2F5EgwKBHRleHQYASACKAkiLwoRTWFwUmVx" + 
-          "dWVzdFVwZGF0ZXMSDAoEbWFwWBgBIAIoBRIMCgRtYXBZGAIgAigFIi4KEE1h" + 
-          "cElnbm9yZVVwZGF0ZXMSDAoEbWFwWBgBIAIoBRIMCgRtYXBZGAIgAigFIjMK" + 
-          "A01hcBIMCgRtYXBYGAEgAigFEgwKBG1hcFkYAiACKAUSEAoIZGF0YVNpemUY" + 
-          "AyACKAUqiwEKB01zZ1R5cGUSDQoJZVJlc3BvbnNlEAESCQoFZVBpbmcQAhIJ" + 
-          "CgVlUG9uZxADEgwKCGVOZXdVc2VyEAQSCgoGZUxvZ2luEAUSCAoEZVNheRAG" + 
-          "EhYKEmVNYXBSZXF1ZXN0VXBkYXRlcxAHEhUKEWVNYXBJZ25vcmVVcGRhdGVz" + 
-          "EAgSCAoEZU1hcBAJQgJIAQ==");
+          "ChNDb21tc01lc3NhZ2VzLnByb3RvEg1Db21tc01lc3NhZ2VzIq8DCgdNZXNz" + 
+          "YWdlEg8KB21zZ3R5cGUYASACKAUSDAoEZnJvbRgCIAIoCRIMCgRkZXN0GAMg" + 
+          "AigJEikKCHJlc3BvbnNlGAQgASgLMhcuQ29tbXNNZXNzYWdlcy5SZXNwb25z" + 
+          "ZRIhCgRwaW5nGAUgASgLMhMuQ29tbXNNZXNzYWdlcy5QaW5nEiEKBHBvbmcY" + 
+          "BiABKAsyEy5Db21tc01lc3NhZ2VzLlBvbmcSJwoHbmV3VXNlchgHIAEoCzIW" + 
+          "LkNvbW1zTWVzc2FnZXMuTmV3VXNlchIjCgVsb2dpbhgIIAEoCzIULkNvbW1z" + 
+          "TWVzc2FnZXMuTG9naW4SHwoDc2F5GAkgASgLMhIuQ29tbXNNZXNzYWdlcy5T" + 
+          "YXkSOwoRbWFwUmVxdWVzdFVwZGF0ZXMYCiABKAsyIC5Db21tc01lc3NhZ2Vz" + 
+          "Lk1hcFJlcXVlc3RVcGRhdGVzEjkKEG1hcElnbm9yZVVwZGF0ZXMYCyABKAsy" + 
+          "Hy5Db21tc01lc3NhZ2VzLk1hcElnbm9yZVVwZGF0ZXMSHwoDbWFwGAwgASgL" + 
+          "MhIuQ29tbXNNZXNzYWdlcy5NYXAiFQoEUGluZxINCgVjb3VudBgBIAIoBSIV" + 
+          "CgRQb25nEg0KBWNvdW50GAEgAigFIikKCFJlc3BvbnNlEgwKBGNvZGUYASAC" + 
+          "KAUSDwoHbWVzc2FnZRgCIAEoCSI7CgdOZXdVc2VyEhAKCHVzZXJuYW1lGAEg" + 
+          "AigJEhAKCHBhc3N3b3JkGAIgAigJEgwKBG5hbWUYAyACKAkiKwoFTG9naW4S" + 
+          "EAoIdXNlcm5hbWUYASACKAkSEAoIcGFzc3dvcmQYAiACKAkiEwoDU2F5EgwK" + 
+          "BHRleHQYASACKAkiLwoRTWFwUmVxdWVzdFVwZGF0ZXMSDAoEbWFwWBgBIAIo" + 
+          "BRIMCgRtYXBZGAIgAigFIi4KEE1hcElnbm9yZVVwZGF0ZXMSDAoEbWFwWBgB" + 
+          "IAIoBRIMCgRtYXBZGAIgAigFIjMKA01hcBIMCgRtYXBYGAEgAigFEgwKBG1h" + 
+          "cFkYAiACKAUSEAoIZGF0YVNpemUYAyACKAUqiwEKB01zZ1R5cGUSDQoJZVJl" + 
+          "c3BvbnNlEAESCQoFZVBpbmcQAhIJCgVlUG9uZxADEgwKCGVOZXdVc2VyEAQS" + 
+          "CgoGZUxvZ2luEAUSCAoEZVNheRAGEhYKEmVNYXBSZXF1ZXN0VXBkYXRlcxAH" + 
+          "EhUKEWVNYXBJZ25vcmVVcGRhdGVzEAgSCAoEZU1hcBAJQgJIAQ==");
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_CommsMessages_Message__Descriptor = Descriptor.MessageTypes[0];
@@ -163,11 +162,11 @@ namespace CommsMessages {
     
     public const int MsgtypeFieldNumber = 1;
     private bool hasMsgtype;
-    private global::CommsMessages.MsgType msgtype_ = global::CommsMessages.MsgType.eResponse;
+    private int msgtype_;
     public bool HasMsgtype {
       get { return hasMsgtype; }
     }
-    public global::CommsMessages.MsgType Msgtype {
+    public int Msgtype {
       get { return msgtype_; }
     }
     
@@ -321,7 +320,7 @@ namespace CommsMessages {
       int size = SerializedSize;
       string[] field_names = _messageFieldNames;
       if (hasMsgtype) {
-        output.WriteEnum(1, field_names[6], (int) Msgtype, Msgtype);
+        output.WriteInt32(1, field_names[6], Msgtype);
       }
       if (hasFrom) {
         output.WriteString(2, field_names[1], From);
@@ -367,7 +366,7 @@ namespace CommsMessages {
         
         size = 0;
         if (hasMsgtype) {
-          size += pb::CodedOutputStream.ComputeEnumSize(1, (int) Msgtype);
+          size += pb::CodedOutputStream.ComputeInt32Size(1, Msgtype);
         }
         if (hasFrom) {
           size += pb::CodedOutputStream.ComputeStringSize(2, From);
@@ -606,15 +605,7 @@ namespace CommsMessages {
               break;
             }
             case 8: {
-              object unknown;
-              if(input.ReadEnum(ref result.msgtype_, out unknown)) {
-                result.hasMsgtype = true;
-              } else if(unknown is int) {
-                if (unknownFields == null) {
-                  unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
-                }
-                unknownFields.MergeVarintField(1, (ulong)(int)unknown);
-              }
+              result.hasMsgtype = input.ReadInt32(ref result.msgtype_);
               break;
             }
             case 18: {
@@ -717,13 +708,13 @@ namespace CommsMessages {
       
       
       public bool HasMsgtype {
-       get { return result.hasMsgtype; }
+        get { return result.hasMsgtype; }
       }
-      public global::CommsMessages.MsgType Msgtype {
+      public int Msgtype {
         get { return result.Msgtype; }
         set { SetMsgtype(value); }
       }
-      public Builder SetMsgtype(global::CommsMessages.MsgType value) {
+      public Builder SetMsgtype(int value) {
         PrepareBuilder();
         result.hasMsgtype = true;
         result.msgtype_ = value;
@@ -732,7 +723,7 @@ namespace CommsMessages {
       public Builder ClearMsgtype() {
         PrepareBuilder();
         result.hasMsgtype = false;
-        result.msgtype_ = global::CommsMessages.MsgType.eResponse;
+        result.msgtype_ = 0;
         return this;
       }
       

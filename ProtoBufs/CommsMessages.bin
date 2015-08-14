@@ -1,8 +1,8 @@
 
-î
-CommsMessages.protoCommsMessages"Ç
-Message'
-msgtype (2.CommsMessages.MsgType
+Ö
+CommsMessages.protoCommsMessages"¯
+Message
+msgtype (
 from (	
 dest (	)
 response (2.CommsMessages.Response!

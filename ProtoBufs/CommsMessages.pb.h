@@ -127,12 +127,12 @@ class Message : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .CommsMessages.MsgType msgtype = 1;
+  // required int32 msgtype = 1;
   inline bool has_msgtype() const;
   inline void clear_msgtype();
   static const int kMsgtypeFieldNumber = 1;
-  inline ::CommsMessages::MsgType msgtype() const;
-  inline void set_msgtype(::CommsMessages::MsgType value);
+  inline ::google::protobuf::int32 msgtype() const;
+  inline void set_msgtype(::google::protobuf::int32 value);
 
   // required string from = 2;
   inline bool has_from() const;
@@ -279,7 +279,7 @@ class Message : public ::google::protobuf::Message {
   ::CommsMessages::MapRequestUpdates* maprequestupdates_;
   ::CommsMessages::MapIgnoreUpdates* mapignoreupdates_;
   ::CommsMessages::Map* map_;
-  int msgtype_;
+  ::google::protobuf::int32 msgtype_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(12 + 31) / 32];
@@ -1151,7 +1151,7 @@ class Map : public ::google::protobuf::Message {
 
 // Message
 
-// required .CommsMessages.MsgType msgtype = 1;
+// required int32 msgtype = 1;
 inline bool Message::has_msgtype() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1162,14 +1162,13 @@ inline void Message::clear_has_msgtype() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void Message::clear_msgtype() {
-  msgtype_ = 1;
+  msgtype_ = 0;
   clear_has_msgtype();
 }
-inline ::CommsMessages::MsgType Message::msgtype() const {
-  return static_cast< ::CommsMessages::MsgType >(msgtype_);
+inline ::google::protobuf::int32 Message::msgtype() const {
+  return msgtype_;
 }
-inline void Message::set_msgtype(::CommsMessages::MsgType value) {
-  assert(::CommsMessages::MsgType_IsValid(value));
+inline void Message::set_msgtype(::google::protobuf::int32 value) {
   set_has_msgtype();
   msgtype_ = value;
 }

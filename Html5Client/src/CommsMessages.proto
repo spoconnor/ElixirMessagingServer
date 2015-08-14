@@ -20,7 +20,7 @@ option optimize_for = SPEED;
   }
 
   message Message {
-    required MsgType msgtype = 1;
+    required int32 msgtype = 1;
     required string from = 2;
     required string dest = 3;
 

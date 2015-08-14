@@ -40,8 +40,8 @@ defmodule ElixirMessagingServer.Mixfile do
       {:eper, github: "massemanet/eper" , tag: "0.90.0" },
       {:mixer, github: "opscode/mixer", tag: "0.1.1" },
       {:sync, github: "rustyio/sync" }, # Note, in dev
-      {:exprotobuf, github: "bitwalker/exprotobuf", tag: "0.8.3"},
-      {:gpb, github: "tomas-abrahamsson/gpb", tag: "3.16.0", override: :true},
+      {:exprotobuf, github: "bitwalker/exprotobuf", tag: "0.11.0"},
+      {:gpb, github: "tomas-abrahamsson/gpb", tag: "3.18.8", override: :true},
       {:amqp, github: "pma/amqp", tag: "v0.0.6" },
       {:poison, github: "devinus/poison", tag: "1.4.0"},
     ]

@@ -29,6 +29,11 @@ client = WebSocket.new(serverurl)
 puts("Connected")
 objectid = 0
 
+ENewUser = 4
+ELogin = 5
+ESay = 6
+EResponse = 1
+
 # Login
   loggedin = false
   username = ""
@@ -40,7 +45,7 @@ objectid = 0
     case selection
     when "1"
       puts "New User"
-      message.msgtype = CommsMessages::MsgType::ENewUser
+      message.msgtype = ENewUser
       message.newUser = CommsMessages::NewUser.new
       printf("FullName:")
       message.newUser.name = gets.chomp
@@ -53,7 +58,7 @@ objectid = 0
     when "2"
       puts "Login"
       printf("Name:")
-      message.msgtype = CommsMessages::MsgType::ELogin
+      message.msgtype = ELogin
       message.login = CommsMessages::Login.new
       printf("UserName:")
       username = gets.chomp
@@ -75,7 +80,7 @@ objectid = 0
       messageSize = data[0].ord
       message = CommsMessages::Message.new
       message.parse_from_string(data[1,messageSize])
-      if (message.msgtype != CommsMessages::MsgType::EResponse) 
+      if (message.msgtype != EResponse) 
         puts("Unexcpected message type '#{message.msgtype}'")
         exit()
       end
@@ -97,9 +102,9 @@ objectid = 0
       message.parse_from_string(data[1,messageSize])
       puts("Received msgtype #{message.msgtype}")
       case message.msgtype
-      when CommsMessages::MsgType::EResponse
+      when EResponse
         puts("Response: (#{message.response.code}) #{message.response.message}")
-      when CommsMessages::MsgType::ESay
+      when ESay
         #puts("Say")
         puts("#{message.say.from}: #{message.say.text}")
       else
@@ -113,7 +118,7 @@ objectid = 0
 
   while (1) do
     message = CommsMessages::Message.new
-    message.msgtype = CommsMessages::MsgType::ESay
+    message.msgtype = ESay
     message.say = ComddmsMessages::Say.new
     message.from = username
     parsed = gets.chomp.split(/:/)

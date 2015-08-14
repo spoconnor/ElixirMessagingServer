@@ -28,10 +28,10 @@ defmodule WebsocketUsers do
   def handle_cast({:notify, payload}, users) do
     #todo
     Lib.trace("Notifying users", payload)
-    {header,data} = Packet.decode(payload)
-    Lib.trace("MessageType:", header.msgtype)
+    data = Packet.decode(payload)
+    Lib.trace("MessageType:", data.msgtype)
 #    actions(payload, msg)
-    notify_users(payload, header.dest, users)
+    notify_users(payload, data.dest, users)
     {:noreply, users}
   end
 
