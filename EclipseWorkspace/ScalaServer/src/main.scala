@@ -12,5 +12,5 @@ object main extends App {
   
   val port = Option(System.getenv("PORT")) map (_.toInt) getOrElse 9999
   val system = ActorSystem()
-  val server = system.actorOf(Props(new NetworkServer(port)))
+  val server = system.actorOf(Props(new NetworkService(port)))
 }
