@@ -18,9 +18,7 @@ defmodule Packet do
     end
   end
 
-  def encode(message,from,dest) do
-    #message.from = from
-    #message.dest = dest
+  def encode(message) do
     bodyData = CommsMessages.Message.encode(message)
     <<byte_size(bodyData)>> <> bodyData
   end

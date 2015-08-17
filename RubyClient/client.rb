@@ -119,7 +119,7 @@ EResponse = 1
   while (1) do
     message = CommsMessages::Message.new
     message.msgtype = ESay
-    message.say = ComddmsMessages::Say.new
+    message.say = CommsMessages::Say.new
     message.from = username
     parsed = gets.chomp.split(/:/)
     if (parsed[1] == nil)

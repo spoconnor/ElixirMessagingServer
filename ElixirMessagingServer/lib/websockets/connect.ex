@@ -39,12 +39,13 @@ def step2(clientS) do
   end
 end
 
-def loginMsg(clientS, %CommsMessages.Message{msgtype: CommsMessages.MsgType.ENewUser, from: _from, dest: _dest, login: login}) do
-  Lib.trace("NewUser #{login.username}")
+# New User
+def loginMsg(clientS, %CommsMessages.Message{msgtype: 4, from: _from, dest: _dest, newUser: newUser}) do
+  Lib.trace("NewUser #{newUser.username}")
 end
 
-# LoginClient
-def loginMsg(clientS, %CommsMessages.Message{msgtype: CommsMessages.MsgType.ELogin, from: _from, dest: _dest, login: login}) do
+# Login
+def loginMsg(clientS, %CommsMessages.Message{msgtype: 5, from: _from, dest: _dest, login: login}) do
   Lib.trace("Login #{login.username}")
   #if (length(user.name)>25) do
   #  WebsocketWebsockets.die("Name too long")
@@ -59,8 +60,8 @@ def loginMsg(clientS, %CommsMessages.Message{msgtype: CommsMessages.MsgType.ELog
     {:fail, _} -> WebsocketWebsockets.die(clientS,"Already Connected");
     id ->
       Lib.trace("ObjectId: #{id}")
-      response = CommsMessages.Response.new(code: 1, message: "Welcome #{login.username}!")
-      data = Packet.encode(response, "Elixir", login.username)
+      response = CommsMessages.Message.new(msgtype: 1, from: "Elixir", dest: login.username, response: CommsMessages.Response.new(code: 1, message: "Welcome #{login.username}!"))
+      data = Packet.encode(response)
       WebsocketWebsockets.sendTcpMsg(clientS, data)
       client(%WebsocketSimple{id: id, sock: clientS})
   end

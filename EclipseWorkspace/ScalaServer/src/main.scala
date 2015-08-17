@@ -1,4 +1,4 @@
-
+import akka.actor._
 
 /**
  * @author sean
@@ -9,4 +9,8 @@ object main extends App {
   //var noise = perlin.GenerateWhiteNoise(10,10)
   var noise = perlin.GetIntMap(80, 30, 0, 9, 3)
   noise.Dump()
+  
+  val port = Option(System.getenv("PORT")) map (_.toInt) getOrElse 9999
+  val system = ActorSystem()
+  val server = system.actorOf(Props(new NetworkServer(port)))
 }
