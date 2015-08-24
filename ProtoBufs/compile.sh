@@ -11,3 +11,4 @@ cp CommsMessages.pb.h ../EclipseWorkspace/WorldServer/include/CommsMessages.pb.h
 cp CommsMessages.proto ../ElixirMessagingServer/priv/CommsMessages.proto
 cp CommsMessages.cs ../DotNet/WorldServer/CommsMessages.cs
 cp CommsMessages.proto ../Html5Client/src/CommsMessages.proto
+cp CommsMessages.proto ../ScalaServer/src/main/protobuf/CommsMessages.proto

@@ -297,32 +297,31 @@ void protobuf_AddDesc_CommsMessages_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023CommsMessages.proto\022\rCommsMessages\"\307\003\n"
-    "\007Message\022\'\n\007msgtype\030\001 \002(\0162\026.CommsMessage"
-    "s.MsgType\022\014\n\004from\030\002 \002(\t\022\014\n\004dest\030\003 \002(\t\022)\n"
-    "\010response\030\004 \001(\0132\027.CommsMessages.Response"
-    "\022!\n\004ping\030\005 \001(\0132\023.CommsMessages.Ping\022!\n\004p"
-    "ong\030\006 \001(\0132\023.CommsMessages.Pong\022\'\n\007newUse"
-    "r\030\007 \001(\0132\026.CommsMessages.NewUser\022#\n\005login"
-    "\030\010 \001(\0132\024.CommsMessages.Login\022\037\n\003say\030\t \001("
-    "\0132\022.CommsMessages.Say\022;\n\021mapRequestUpdat"
-    "es\030\n \001(\0132 .CommsMessages.MapRequestUpdat"
-    "es\0229\n\020mapIgnoreUpdates\030\013 \001(\0132\037.CommsMess"
-    "ages.MapIgnoreUpdates\022\037\n\003map\030\014 \001(\0132\022.Com"
-    "msMessages.Map\"\025\n\004Ping\022\r\n\005count\030\001 \002(\005\"\025\n"
-    "\004Pong\022\r\n\005count\030\001 \002(\005\")\n\010Response\022\014\n\004code"
-    "\030\001 \002(\005\022\017\n\007message\030\002 \001(\t\";\n\007NewUser\022\020\n\010us"
-    "ername\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\022\014\n\004name\030\003"
-    " \002(\t\"+\n\005Login\022\020\n\010username\030\001 \002(\t\022\020\n\010passw"
-    "ord\030\002 \002(\t\"\023\n\003Say\022\014\n\004text\030\001 \002(\t\"/\n\021MapReq"
-    "uestUpdates\022\014\n\004mapX\030\001 \002(\005\022\014\n\004mapY\030\002 \002(\005\""
-    ".\n\020MapIgnoreUpdates\022\014\n\004mapX\030\001 \002(\005\022\014\n\004map"
-    "Y\030\002 \002(\005\"3\n\003Map\022\014\n\004mapX\030\001 \002(\005\022\014\n\004mapY\030\002 \002"
-    "(\005\022\020\n\010dataSize\030\003 \002(\005*\213\001\n\007MsgType\022\r\n\teRes"
-    "ponse\020\001\022\t\n\005ePing\020\002\022\t\n\005ePong\020\003\022\014\n\010eNewUse"
-    "r\020\004\022\n\n\006eLogin\020\005\022\010\n\004eSay\020\006\022\026\n\022eMapRequest"
-    "Updates\020\007\022\025\n\021eMapIgnoreUpdates\020\010\022\010\n\004eMap"
-    "\020\tB\002H\001", 1006);
+    "\n\023CommsMessages.proto\022\rCommsMessages\"\257\003\n"
+    "\007Message\022\017\n\007msgtype\030\001 \002(\005\022\014\n\004from\030\002 \002(\t\022"
+    "\014\n\004dest\030\003 \002(\t\022)\n\010response\030\004 \001(\0132\027.CommsM"
+    "essages.Response\022!\n\004ping\030\005 \001(\0132\023.CommsMe"
+    "ssages.Ping\022!\n\004pong\030\006 \001(\0132\023.CommsMessage"
+    "s.Pong\022\'\n\007newUser\030\007 \001(\0132\026.CommsMessages."
+    "NewUser\022#\n\005login\030\010 \001(\0132\024.CommsMessages.L"
+    "ogin\022\037\n\003say\030\t \001(\0132\022.CommsMessages.Say\022;\n"
+    "\021mapRequestUpdates\030\n \001(\0132 .CommsMessages"
+    ".MapRequestUpdates\0229\n\020mapIgnoreUpdates\030\013"
+    " \001(\0132\037.CommsMessages.MapIgnoreUpdates\022\037\n"
+    "\003map\030\014 \001(\0132\022.CommsMessages.Map\"\025\n\004Ping\022\r"
+    "\n\005count\030\001 \002(\005\"\025\n\004Pong\022\r\n\005count\030\001 \002(\005\")\n\010"
+    "Response\022\014\n\004code\030\001 \002(\005\022\017\n\007message\030\002 \001(\t\""
+    ";\n\007NewUser\022\020\n\010username\030\001 \002(\t\022\020\n\010password"
+    "\030\002 \002(\t\022\014\n\004name\030\003 \002(\t\"+\n\005Login\022\020\n\010usernam"
+    "e\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"\023\n\003Say\022\014\n\004text"
+    "\030\001 \002(\t\"/\n\021MapRequestUpdates\022\014\n\004mapX\030\001 \002("
+    "\005\022\014\n\004mapY\030\002 \002(\005\".\n\020MapIgnoreUpdates\022\014\n\004m"
+    "apX\030\001 \002(\005\022\014\n\004mapY\030\002 \002(\005\"3\n\003Map\022\014\n\004mapX\030\001"
+    " \002(\005\022\014\n\004mapY\030\002 \002(\005\022\020\n\010dataSize\030\003 \002(\005*\213\001\n"
+    "\007MsgType\022\r\n\teResponse\020\001\022\t\n\005ePing\020\002\022\t\n\005eP"
+    "ong\020\003\022\014\n\010eNewUser\020\004\022\n\n\006eLogin\020\005\022\010\n\004eSay\020"
+    "\006\022\026\n\022eMapRequestUpdates\020\007\022\025\n\021eMapIgnoreU"
+    "pdates\020\010\022\010\n\004eMap\020\tB\002H\001", 982);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "CommsMessages.proto", &protobuf_RegisterTypes);
   Message::default_instance_ = new Message();
@@ -418,7 +417,7 @@ Message::Message(const Message& from)
 
 void Message::SharedCtor() {
   _cached_size_ = 0;
-  msgtype_ = 1;
+  msgtype_ = 0;
   from_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   dest_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   response_ = NULL;
@@ -480,7 +479,7 @@ Message* Message::New() const {
 
 void Message::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    msgtype_ = 1;
+    msgtype_ = 0;
     if (has_from()) {
       if (from_ != &::google::protobuf::internal::kEmptyString) {
         from_->clear();
@@ -531,19 +530,14 @@ bool Message::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .CommsMessages.MsgType msgtype = 1;
+      // required int32 msgtype = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::CommsMessages::MsgType_IsValid(value)) {
-            set_msgtype(static_cast< ::CommsMessages::MsgType >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(1, value);
-          }
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &msgtype_)));
+          set_has_msgtype();
         } else {
           goto handle_uninterpreted;
         }
@@ -729,10 +723,9 @@ bool Message::MergePartialFromCodedStream(
 
 void Message::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .CommsMessages.MsgType msgtype = 1;
+  // required int32 msgtype = 1;
   if (has_msgtype()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->msgtype(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->msgtype(), output);
   }
 
   // required string from = 2;
@@ -815,10 +808,9 @@ void Message::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* Message::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required .CommsMessages.MsgType msgtype = 1;
+  // required int32 msgtype = 1;
   if (has_msgtype()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->msgtype(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->msgtype(), target);
   }
 
   // required string from = 2;
@@ -915,10 +907,11 @@ int Message::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .CommsMessages.MsgType msgtype = 1;
+    // required int32 msgtype = 1;
     if (has_msgtype()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->msgtype());
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->msgtype());
     }
 
     // required string from = 2;
