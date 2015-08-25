@@ -4,7 +4,10 @@ scalaVersion := "2.9.1"
 
 resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
  
-libraryDependencies ++== Seq(
-  "com.typesafe.akka" % "akka-actor" % "2.0.5",
-  "com.trueaccord.scalapb" % "sbt-scalapb" % "0.4.19"
-)
+libraryDependencies += "com.typesafe.akka" % "akka-actor" % "2.0.5"
+
+import scalabuff.ScalaBuffPlugin._
+
+object build extends Build {
+  lazy val root = Project("main", file("."), settings = Defaults.defaultSettings ++ scalabuffSettings).configs(ScalaBuff)
+}
