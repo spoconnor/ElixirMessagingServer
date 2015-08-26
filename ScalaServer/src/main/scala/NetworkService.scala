@@ -1,7 +1,6 @@
 import akka.actor._
 import akka.util.{ ByteString, ByteStringBuilder }
 import java.net.InetSocketAddress
-import akka.event.Logging
  
 class NetworkService(port: Int) extends Actor {
   import IO._
@@ -14,16 +13,16 @@ class NetworkService(port: Int) extends Actor {
 
   def receive = {
     case NewClient(server) =>
-      log.info("NewClient")
+      Console.println("NewClient")
       val socket = server.accept()
       state(socket) flatMap (_ => NetworkService.printMessage)
 
     case Read(socket, bytes) =>
-      log.info("Read")
+      Console.println("Read")
       state(socket)(Chunk(bytes))
 
     case Closed(socket, cause) =>
-      log.info("Close")
+      Console.println("Close")
       state(socket)(EOF(None))
       state -= socket
   }

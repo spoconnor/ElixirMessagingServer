@@ -1,13 +1,18 @@
 name := "ScalaServer"
+
 version := "1.0"
-scalaVersion := "2.9.1"
+
+scalaVersion := "2.11.7"
 
 resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
- 
-libraryDependencies += "com.typesafe.akka" % "akka-actor" % "2.0.5"
 
-import scalabuff.ScalaBuffPlugin._
+resolvers += "Akka Snapshot Repository" at "http://repo.akka.io/snapshots/"
 
-object build extends Build {
-  lazy val root = Project("main", file("."), settings = Defaults.defaultSettings ++ scalabuffSettings).configs(ScalaBuff)
-}
+libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.4-SNAPSHOT"
+
+libraryDependencies += "com.typesafe.akka" %% "akka-slf4j" % "2.4-SNAPSHOT"
+
+libraryDependencies += "net.sandrogrzicic" %% "scalabuff-runtime" % "1.4.0"
+
+libraryDependencies += "net.sandrogrzicic" %% "scalabuff-compiler" % "1.4.0"
+
