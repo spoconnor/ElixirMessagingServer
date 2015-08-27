@@ -10,7 +10,10 @@ object main extends App {
   var noise = perlin.GetIntMap(80, 30, 0, 9, 3)
   noise.Dump()
   
-  val port = Option(System.getenv("PORT")) map (_.toInt) getOrElse 9999
-  val system = ActorSystem()
-  val server = system.actorOf(Props(new NetworkService(port)))
+  val system = ActorSystem("NetworkServiceSystem")
+  val endpoint = new InetSocketAddress("localhost", 9999)
+  val server = system.actorOf(NetworkService.props(endpoint), "network-service")
+
+  readLine("Hit ENTER to exit...")
+  system.shutdown()
 }
