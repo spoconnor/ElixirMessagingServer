@@ -14,5 +14,3 @@ libraryDependencies += "com.typesafe.akka" %% "akka-slf4j" % "2.4-SNAPSHOT"
 
 libraryDependencies += "net.sandrogrzicic" %% "scalabuff-runtime" % "1.4.0"
 
-libraryDependencies += "net.sandrogrzicic" %% "scalabuff-compiler" % "1.4.0"
-

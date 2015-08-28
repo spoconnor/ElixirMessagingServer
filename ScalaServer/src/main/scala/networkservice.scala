@@ -25,7 +25,12 @@ class NetworkService extends Actor {
 class ServiceHandler extends Actor {
   import Tcp._
   def receive = {
-    case Received(data) => sender() ! Write(data)
-    case PeerClosed     => context stop self
+    case Received(data) => 
+      val text = data.utf8String.trim
+      Console.println("Received message")
+      Console.println(text)
+      sender() ! Write(data)
+    case PeerClosed     => 
+      context stop self
   }
 }

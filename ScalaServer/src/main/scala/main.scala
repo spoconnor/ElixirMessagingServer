@@ -20,7 +20,7 @@ object App extends App {
     val actorSystem = ActorSystem("NetworkServiceSystem")
 
     Console.println("Starting Network Service")
-
+    val networkService = Props[NetworkService]
 
     readLine("Hit ENTER to exit...")
     actorSystem.shutdown()
