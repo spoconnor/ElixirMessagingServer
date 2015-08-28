@@ -8,7 +8,7 @@ object App extends App {
 
   implicit var actorSystem: ActorSystem = _
 
-  override def main() 
+  override def main(args: Array[String]) 
   {
     Console.println("Hello World")
     var perlin = new perlinNoise.PerlinNoise()
@@ -20,9 +20,7 @@ object App extends App {
     val actorSystem = ActorSystem("NetworkServiceSystem")
 
     Console.println("Starting Network Service")
-    val endpoint = new InetSocketAddress("localhost", 9999)
-    val handler = actorSystem.actorOf(Props[NetworkService], name = "network-handler")
-    IO(Tcp) ! Tcp.Bind(handler, endpoint)
+
 
     readLine("Hit ENTER to exit...")
     actorSystem.shutdown()
