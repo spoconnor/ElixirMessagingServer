@@ -1,3 +1,5 @@
+package com.example.akkaTcpChat 
+
 object generator
 {
   class Generator

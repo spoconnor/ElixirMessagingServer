@@ -1,3 +1,5 @@
+package com.example.akkaTcpChat 
+
 object misc
 {
   class FloatArray(width:Int, height:Int)
