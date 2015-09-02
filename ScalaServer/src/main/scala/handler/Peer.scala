@@ -40,6 +40,29 @@ class Peer(clientId: String,
       context.stop(self)
   }
 
+
+//def readMessage: IO.Iteratee[ByteString] =
+// for {
+//    lengthBytes <- take(4)
+//    len = ascii(lengthBytes).toInt
+//    bytes <- take(len)
+// } yield {
+//    bytes
+// }
+//}
+//def printMessage: IO.Iteratee[Unit] =
+//   repeat {
+//      for {
+//        string <- readMessage
+//      }
+//      yield {
+//    val theBytes: Array[Byte] = string.toArray
+//    val theMessage = ZombieSighting.defaultInstance.mergeFrom(theBytes)
+//        println("name:" +theMessage.name)
+//     }
+// }
+
+
   def handleReceivedData(data: ByteString) {
     Common.Request.deserializeFromByteString(data) match {
       case Success(req) =>

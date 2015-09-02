@@ -76,15 +76,28 @@ class Client(interact: ActorRef, remote: InetSocketAddress) extends Actor {
 
   def chatLoop(connection: ActorRef): Actor.Receive = {
     case cmd @ UserInput(msg) =>
-      val req = new Common.Request(Common.CLIENT_MESSAGE)
-      req("msg") = msg
-      req.serializeAsByteString match {
-        case Success(b) =>
-          connection ! Tcp.Write(b)
-          interact ! CommandSuccess(cmd)
-        case Failure(e) =>
-          interact ! CommandFailed(cmd, e.getMessage)
-      }
+//      val req = new Common.Request(Common.CLIENT_MESSAGE)
+//      req("msg") = msg
+        val reqMsg = new CommsMessages.Message(CommsMessages.MsgType.eSay)
+        reqMsg.setSay(new CommsMessages.Say(msg))
+        val reqBytes = reqMsg.toByteArray()
+ 
+        // Write length delimited bytes
+        connection ! Tcp.Write(
+          ByteString("%04d%s".format(
+          reqMsg.getSerializedSize,    
+          new String(reqBytes))) 
+        )
+
+//        req.writeTo(codedOutputStream)
+
+//      req.serializeAsByteString match {
+//        case Success(b) =>
+//          connection ! Tcp.Write(b)
+//          interact ! CommandSuccess(cmd)
+//        case Failure(e) =>
+//          interact ! CommandFailed(cmd, e.getMessage)
+//      }
 
     case Disconnect =>
       log.debug("Disconnecting...")
