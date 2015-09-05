@@ -44,6 +44,8 @@ class Say;
 class MapRequestUpdates;
 class MapIgnoreUpdates;
 class Map;
+class QueryServer;
+class QueryServerResponse;
 
 enum MsgType {
   eResponse = 1,
@@ -54,11 +56,13 @@ enum MsgType {
   eSay = 6,
   eMapRequestUpdates = 7,
   eMapIgnoreUpdates = 8,
-  eMap = 9
+  eMap = 9,
+  eQueryServer = 10,
+  eQueryServerResponse = 11
 };
 bool MsgType_IsValid(int value);
 const MsgType MsgType_MIN = eResponse;
-const MsgType MsgType_MAX = eMap;
+const MsgType MsgType_MAX = eQueryServerResponse;
 const int MsgType_ARRAYSIZE = MsgType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* MsgType_descriptor();
@@ -239,6 +243,24 @@ class Message : public ::google::protobuf::Message {
   inline ::CommsMessages::Map* release_map();
   inline void set_allocated_map(::CommsMessages::Map* map);
 
+  // optional .CommsMessages.QueryServer queryServer = 13;
+  inline bool has_queryserver() const;
+  inline void clear_queryserver();
+  static const int kQueryServerFieldNumber = 13;
+  inline const ::CommsMessages::QueryServer& queryserver() const;
+  inline ::CommsMessages::QueryServer* mutable_queryserver();
+  inline ::CommsMessages::QueryServer* release_queryserver();
+  inline void set_allocated_queryserver(::CommsMessages::QueryServer* queryserver);
+
+  // optional .CommsMessages.QueryServerResponse queryServerResponse = 14;
+  inline bool has_queryserverresponse() const;
+  inline void clear_queryserverresponse();
+  static const int kQueryServerResponseFieldNumber = 14;
+  inline const ::CommsMessages::QueryServerResponse& queryserverresponse() const;
+  inline ::CommsMessages::QueryServerResponse* mutable_queryserverresponse();
+  inline ::CommsMessages::QueryServerResponse* release_queryserverresponse();
+  inline void set_allocated_queryserverresponse(::CommsMessages::QueryServerResponse* queryserverresponse);
+
   // @@protoc_insertion_point(class_scope:CommsMessages.Message)
  private:
   inline void set_has_msgtype();
@@ -265,6 +287,10 @@ class Message : public ::google::protobuf::Message {
   inline void clear_has_mapignoreupdates();
   inline void set_has_map();
   inline void clear_has_map();
+  inline void set_has_queryserver();
+  inline void clear_has_queryserver();
+  inline void set_has_queryserverresponse();
+  inline void clear_has_queryserverresponse();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -279,10 +305,12 @@ class Message : public ::google::protobuf::Message {
   ::CommsMessages::MapRequestUpdates* maprequestupdates_;
   ::CommsMessages::MapIgnoreUpdates* mapignoreupdates_;
   ::CommsMessages::Map* map_;
+  ::CommsMessages::QueryServer* queryserver_;
+  ::CommsMessages::QueryServerResponse* queryserverresponse_;
   ::google::protobuf::int32 msgtype_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(12 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(14 + 31) / 32];
 
   friend void  protobuf_AddDesc_CommsMessages_2eproto();
   friend void protobuf_AssignDesc_CommsMessages_2eproto();
@@ -914,31 +942,31 @@ class MapRequestUpdates : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 mapX = 1;
-  inline bool has_mapx() const;
-  inline void clear_mapx();
-  static const int kMapXFieldNumber = 1;
-  inline ::google::protobuf::int32 mapx() const;
-  inline void set_mapx(::google::protobuf::int32 value);
+  // required int32 mapChunkX = 1;
+  inline bool has_mapchunkx() const;
+  inline void clear_mapchunkx();
+  static const int kMapChunkXFieldNumber = 1;
+  inline ::google::protobuf::int32 mapchunkx() const;
+  inline void set_mapchunkx(::google::protobuf::int32 value);
 
-  // required int32 mapY = 2;
-  inline bool has_mapy() const;
-  inline void clear_mapy();
-  static const int kMapYFieldNumber = 2;
-  inline ::google::protobuf::int32 mapy() const;
-  inline void set_mapy(::google::protobuf::int32 value);
+  // required int32 mapChunkY = 2;
+  inline bool has_mapchunky() const;
+  inline void clear_mapchunky();
+  static const int kMapChunkYFieldNumber = 2;
+  inline ::google::protobuf::int32 mapchunky() const;
+  inline void set_mapchunky(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:CommsMessages.MapRequestUpdates)
  private:
-  inline void set_has_mapx();
-  inline void clear_has_mapx();
-  inline void set_has_mapy();
-  inline void clear_has_mapy();
+  inline void set_has_mapchunkx();
+  inline void clear_has_mapchunkx();
+  inline void set_has_mapchunky();
+  inline void clear_has_mapchunky();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 mapx_;
-  ::google::protobuf::int32 mapy_;
+  ::google::protobuf::int32 mapchunkx_;
+  ::google::protobuf::int32 mapchunky_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -1006,31 +1034,31 @@ class MapIgnoreUpdates : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 mapX = 1;
-  inline bool has_mapx() const;
-  inline void clear_mapx();
-  static const int kMapXFieldNumber = 1;
-  inline ::google::protobuf::int32 mapx() const;
-  inline void set_mapx(::google::protobuf::int32 value);
+  // required int32 mapChunkX = 1;
+  inline bool has_mapchunkx() const;
+  inline void clear_mapchunkx();
+  static const int kMapChunkXFieldNumber = 1;
+  inline ::google::protobuf::int32 mapchunkx() const;
+  inline void set_mapchunkx(::google::protobuf::int32 value);
 
-  // required int32 mapY = 2;
-  inline bool has_mapy() const;
-  inline void clear_mapy();
-  static const int kMapYFieldNumber = 2;
-  inline ::google::protobuf::int32 mapy() const;
-  inline void set_mapy(::google::protobuf::int32 value);
+  // required int32 mapChunkY = 2;
+  inline bool has_mapchunky() const;
+  inline void clear_mapchunky();
+  static const int kMapChunkYFieldNumber = 2;
+  inline ::google::protobuf::int32 mapchunky() const;
+  inline void set_mapchunky(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:CommsMessages.MapIgnoreUpdates)
  private:
-  inline void set_has_mapx();
-  inline void clear_has_mapx();
-  inline void set_has_mapy();
-  inline void clear_has_mapy();
+  inline void set_has_mapchunkx();
+  inline void clear_has_mapchunkx();
+  inline void set_has_mapchunky();
+  inline void clear_has_mapchunky();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 mapx_;
-  ::google::protobuf::int32 mapy_;
+  ::google::protobuf::int32 mapchunkx_;
+  ::google::protobuf::int32 mapchunky_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -1098,19 +1126,19 @@ class Map : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 mapX = 1;
-  inline bool has_mapx() const;
-  inline void clear_mapx();
-  static const int kMapXFieldNumber = 1;
-  inline ::google::protobuf::int32 mapx() const;
-  inline void set_mapx(::google::protobuf::int32 value);
+  // required int32 mapChunkX = 1;
+  inline bool has_mapchunkx() const;
+  inline void clear_mapchunkx();
+  static const int kMapChunkXFieldNumber = 1;
+  inline ::google::protobuf::int32 mapchunkx() const;
+  inline void set_mapchunkx(::google::protobuf::int32 value);
 
-  // required int32 mapY = 2;
-  inline bool has_mapy() const;
-  inline void clear_mapy();
-  static const int kMapYFieldNumber = 2;
-  inline ::google::protobuf::int32 mapy() const;
-  inline void set_mapy(::google::protobuf::int32 value);
+  // required int32 mapChunkY = 2;
+  inline bool has_mapchunky() const;
+  inline void clear_mapchunky();
+  static const int kMapChunkYFieldNumber = 2;
+  inline ::google::protobuf::int32 mapchunky() const;
+  inline void set_mapchunky(::google::protobuf::int32 value);
 
   // required int32 dataSize = 3;
   inline bool has_datasize() const;
@@ -1121,17 +1149,17 @@ class Map : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:CommsMessages.Map)
  private:
-  inline void set_has_mapx();
-  inline void clear_has_mapx();
-  inline void set_has_mapy();
-  inline void clear_has_mapy();
+  inline void set_has_mapchunkx();
+  inline void clear_has_mapchunkx();
+  inline void set_has_mapchunky();
+  inline void clear_has_mapchunky();
   inline void set_has_datasize();
   inline void clear_has_datasize();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 mapx_;
-  ::google::protobuf::int32 mapy_;
+  ::google::protobuf::int32 mapchunkx_;
+  ::google::protobuf::int32 mapchunky_;
   ::google::protobuf::int32 datasize_;
 
   mutable int _cached_size_;
@@ -1143,6 +1171,190 @@ class Map : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static Map* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class QueryServer : public ::google::protobuf::Message {
+ public:
+  QueryServer();
+  virtual ~QueryServer();
+
+  QueryServer(const QueryServer& from);
+
+  inline QueryServer& operator=(const QueryServer& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const QueryServer& default_instance();
+
+  void Swap(QueryServer* other);
+
+  // implements Message ----------------------------------------------
+
+  QueryServer* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const QueryServer& from);
+  void MergeFrom(const QueryServer& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:CommsMessages.QueryServer)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  friend void  protobuf_AddDesc_CommsMessages_2eproto();
+  friend void protobuf_AssignDesc_CommsMessages_2eproto();
+  friend void protobuf_ShutdownFile_CommsMessages_2eproto();
+
+  void InitAsDefaultInstance();
+  static QueryServer* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class QueryServerResponse : public ::google::protobuf::Message {
+ public:
+  QueryServerResponse();
+  virtual ~QueryServerResponse();
+
+  QueryServerResponse(const QueryServerResponse& from);
+
+  inline QueryServerResponse& operator=(const QueryServerResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const QueryServerResponse& default_instance();
+
+  void Swap(QueryServerResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  QueryServerResponse* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const QueryServerResponse& from);
+  void MergeFrom(const QueryServerResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 minMapChunkX = 1;
+  inline bool has_minmapchunkx() const;
+  inline void clear_minmapchunkx();
+  static const int kMinMapChunkXFieldNumber = 1;
+  inline ::google::protobuf::int32 minmapchunkx() const;
+  inline void set_minmapchunkx(::google::protobuf::int32 value);
+
+  // required int32 minMapChunkY = 2;
+  inline bool has_minmapchunky() const;
+  inline void clear_minmapchunky();
+  static const int kMinMapChunkYFieldNumber = 2;
+  inline ::google::protobuf::int32 minmapchunky() const;
+  inline void set_minmapchunky(::google::protobuf::int32 value);
+
+  // required int32 maxMapChunkX = 3;
+  inline bool has_maxmapchunkx() const;
+  inline void clear_maxmapchunkx();
+  static const int kMaxMapChunkXFieldNumber = 3;
+  inline ::google::protobuf::int32 maxmapchunkx() const;
+  inline void set_maxmapchunkx(::google::protobuf::int32 value);
+
+  // required int32 maxMapChunkY = 4;
+  inline bool has_maxmapchunky() const;
+  inline void clear_maxmapchunky();
+  static const int kMaxMapChunkYFieldNumber = 4;
+  inline ::google::protobuf::int32 maxmapchunky() const;
+  inline void set_maxmapchunky(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:CommsMessages.QueryServerResponse)
+ private:
+  inline void set_has_minmapchunkx();
+  inline void clear_has_minmapchunkx();
+  inline void set_has_minmapchunky();
+  inline void clear_has_minmapchunky();
+  inline void set_has_maxmapchunkx();
+  inline void clear_has_maxmapchunkx();
+  inline void set_has_maxmapchunky();
+  inline void clear_has_maxmapchunky();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 minmapchunkx_;
+  ::google::protobuf::int32 minmapchunky_;
+  ::google::protobuf::int32 maxmapchunkx_;
+  ::google::protobuf::int32 maxmapchunky_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_CommsMessages_2eproto();
+  friend void protobuf_AssignDesc_CommsMessages_2eproto();
+  friend void protobuf_ShutdownFile_CommsMessages_2eproto();
+
+  void InitAsDefaultInstance();
+  static QueryServerResponse* default_instance_;
 };
 // ===================================================================
 
@@ -1652,6 +1864,82 @@ inline void Message::set_allocated_map(::CommsMessages::Map* map) {
     set_has_map();
   } else {
     clear_has_map();
+  }
+}
+
+// optional .CommsMessages.QueryServer queryServer = 13;
+inline bool Message::has_queryserver() const {
+  return (_has_bits_[0] & 0x00001000u) != 0;
+}
+inline void Message::set_has_queryserver() {
+  _has_bits_[0] |= 0x00001000u;
+}
+inline void Message::clear_has_queryserver() {
+  _has_bits_[0] &= ~0x00001000u;
+}
+inline void Message::clear_queryserver() {
+  if (queryserver_ != NULL) queryserver_->::CommsMessages::QueryServer::Clear();
+  clear_has_queryserver();
+}
+inline const ::CommsMessages::QueryServer& Message::queryserver() const {
+  return queryserver_ != NULL ? *queryserver_ : *default_instance_->queryserver_;
+}
+inline ::CommsMessages::QueryServer* Message::mutable_queryserver() {
+  set_has_queryserver();
+  if (queryserver_ == NULL) queryserver_ = new ::CommsMessages::QueryServer;
+  return queryserver_;
+}
+inline ::CommsMessages::QueryServer* Message::release_queryserver() {
+  clear_has_queryserver();
+  ::CommsMessages::QueryServer* temp = queryserver_;
+  queryserver_ = NULL;
+  return temp;
+}
+inline void Message::set_allocated_queryserver(::CommsMessages::QueryServer* queryserver) {
+  delete queryserver_;
+  queryserver_ = queryserver;
+  if (queryserver) {
+    set_has_queryserver();
+  } else {
+    clear_has_queryserver();
+  }
+}
+
+// optional .CommsMessages.QueryServerResponse queryServerResponse = 14;
+inline bool Message::has_queryserverresponse() const {
+  return (_has_bits_[0] & 0x00002000u) != 0;
+}
+inline void Message::set_has_queryserverresponse() {
+  _has_bits_[0] |= 0x00002000u;
+}
+inline void Message::clear_has_queryserverresponse() {
+  _has_bits_[0] &= ~0x00002000u;
+}
+inline void Message::clear_queryserverresponse() {
+  if (queryserverresponse_ != NULL) queryserverresponse_->::CommsMessages::QueryServerResponse::Clear();
+  clear_has_queryserverresponse();
+}
+inline const ::CommsMessages::QueryServerResponse& Message::queryserverresponse() const {
+  return queryserverresponse_ != NULL ? *queryserverresponse_ : *default_instance_->queryserverresponse_;
+}
+inline ::CommsMessages::QueryServerResponse* Message::mutable_queryserverresponse() {
+  set_has_queryserverresponse();
+  if (queryserverresponse_ == NULL) queryserverresponse_ = new ::CommsMessages::QueryServerResponse;
+  return queryserverresponse_;
+}
+inline ::CommsMessages::QueryServerResponse* Message::release_queryserverresponse() {
+  clear_has_queryserverresponse();
+  ::CommsMessages::QueryServerResponse* temp = queryserverresponse_;
+  queryserverresponse_ = NULL;
+  return temp;
+}
+inline void Message::set_allocated_queryserverresponse(::CommsMessages::QueryServerResponse* queryserverresponse) {
+  delete queryserverresponse_;
+  queryserverresponse_ = queryserverresponse;
+  if (queryserverresponse) {
+    set_has_queryserverresponse();
+  } else {
+    clear_has_queryserverresponse();
   }
 }
 
@@ -2239,144 +2527,144 @@ inline void Say::set_allocated_text(::std::string* text) {
 
 // MapRequestUpdates
 
-// required int32 mapX = 1;
-inline bool MapRequestUpdates::has_mapx() const {
+// required int32 mapChunkX = 1;
+inline bool MapRequestUpdates::has_mapchunkx() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void MapRequestUpdates::set_has_mapx() {
+inline void MapRequestUpdates::set_has_mapchunkx() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void MapRequestUpdates::clear_has_mapx() {
+inline void MapRequestUpdates::clear_has_mapchunkx() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void MapRequestUpdates::clear_mapx() {
-  mapx_ = 0;
-  clear_has_mapx();
+inline void MapRequestUpdates::clear_mapchunkx() {
+  mapchunkx_ = 0;
+  clear_has_mapchunkx();
 }
-inline ::google::protobuf::int32 MapRequestUpdates::mapx() const {
-  return mapx_;
+inline ::google::protobuf::int32 MapRequestUpdates::mapchunkx() const {
+  return mapchunkx_;
 }
-inline void MapRequestUpdates::set_mapx(::google::protobuf::int32 value) {
-  set_has_mapx();
-  mapx_ = value;
+inline void MapRequestUpdates::set_mapchunkx(::google::protobuf::int32 value) {
+  set_has_mapchunkx();
+  mapchunkx_ = value;
 }
 
-// required int32 mapY = 2;
-inline bool MapRequestUpdates::has_mapy() const {
+// required int32 mapChunkY = 2;
+inline bool MapRequestUpdates::has_mapchunky() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void MapRequestUpdates::set_has_mapy() {
+inline void MapRequestUpdates::set_has_mapchunky() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void MapRequestUpdates::clear_has_mapy() {
+inline void MapRequestUpdates::clear_has_mapchunky() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void MapRequestUpdates::clear_mapy() {
-  mapy_ = 0;
-  clear_has_mapy();
+inline void MapRequestUpdates::clear_mapchunky() {
+  mapchunky_ = 0;
+  clear_has_mapchunky();
 }
-inline ::google::protobuf::int32 MapRequestUpdates::mapy() const {
-  return mapy_;
+inline ::google::protobuf::int32 MapRequestUpdates::mapchunky() const {
+  return mapchunky_;
 }
-inline void MapRequestUpdates::set_mapy(::google::protobuf::int32 value) {
-  set_has_mapy();
-  mapy_ = value;
+inline void MapRequestUpdates::set_mapchunky(::google::protobuf::int32 value) {
+  set_has_mapchunky();
+  mapchunky_ = value;
 }
 
 // -------------------------------------------------------------------
 
 // MapIgnoreUpdates
 
-// required int32 mapX = 1;
-inline bool MapIgnoreUpdates::has_mapx() const {
+// required int32 mapChunkX = 1;
+inline bool MapIgnoreUpdates::has_mapchunkx() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void MapIgnoreUpdates::set_has_mapx() {
+inline void MapIgnoreUpdates::set_has_mapchunkx() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void MapIgnoreUpdates::clear_has_mapx() {
+inline void MapIgnoreUpdates::clear_has_mapchunkx() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void MapIgnoreUpdates::clear_mapx() {
-  mapx_ = 0;
-  clear_has_mapx();
+inline void MapIgnoreUpdates::clear_mapchunkx() {
+  mapchunkx_ = 0;
+  clear_has_mapchunkx();
 }
-inline ::google::protobuf::int32 MapIgnoreUpdates::mapx() const {
-  return mapx_;
+inline ::google::protobuf::int32 MapIgnoreUpdates::mapchunkx() const {
+  return mapchunkx_;
 }
-inline void MapIgnoreUpdates::set_mapx(::google::protobuf::int32 value) {
-  set_has_mapx();
-  mapx_ = value;
+inline void MapIgnoreUpdates::set_mapchunkx(::google::protobuf::int32 value) {
+  set_has_mapchunkx();
+  mapchunkx_ = value;
 }
 
-// required int32 mapY = 2;
-inline bool MapIgnoreUpdates::has_mapy() const {
+// required int32 mapChunkY = 2;
+inline bool MapIgnoreUpdates::has_mapchunky() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void MapIgnoreUpdates::set_has_mapy() {
+inline void MapIgnoreUpdates::set_has_mapchunky() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void MapIgnoreUpdates::clear_has_mapy() {
+inline void MapIgnoreUpdates::clear_has_mapchunky() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void MapIgnoreUpdates::clear_mapy() {
-  mapy_ = 0;
-  clear_has_mapy();
+inline void MapIgnoreUpdates::clear_mapchunky() {
+  mapchunky_ = 0;
+  clear_has_mapchunky();
 }
-inline ::google::protobuf::int32 MapIgnoreUpdates::mapy() const {
-  return mapy_;
+inline ::google::protobuf::int32 MapIgnoreUpdates::mapchunky() const {
+  return mapchunky_;
 }
-inline void MapIgnoreUpdates::set_mapy(::google::protobuf::int32 value) {
-  set_has_mapy();
-  mapy_ = value;
+inline void MapIgnoreUpdates::set_mapchunky(::google::protobuf::int32 value) {
+  set_has_mapchunky();
+  mapchunky_ = value;
 }
 
 // -------------------------------------------------------------------
 
 // Map
 
-// required int32 mapX = 1;
-inline bool Map::has_mapx() const {
+// required int32 mapChunkX = 1;
+inline bool Map::has_mapchunkx() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Map::set_has_mapx() {
+inline void Map::set_has_mapchunkx() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Map::clear_has_mapx() {
+inline void Map::clear_has_mapchunkx() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void Map::clear_mapx() {
-  mapx_ = 0;
-  clear_has_mapx();
+inline void Map::clear_mapchunkx() {
+  mapchunkx_ = 0;
+  clear_has_mapchunkx();
 }
-inline ::google::protobuf::int32 Map::mapx() const {
-  return mapx_;
+inline ::google::protobuf::int32 Map::mapchunkx() const {
+  return mapchunkx_;
 }
-inline void Map::set_mapx(::google::protobuf::int32 value) {
-  set_has_mapx();
-  mapx_ = value;
+inline void Map::set_mapchunkx(::google::protobuf::int32 value) {
+  set_has_mapchunkx();
+  mapchunkx_ = value;
 }
 
-// required int32 mapY = 2;
-inline bool Map::has_mapy() const {
+// required int32 mapChunkY = 2;
+inline bool Map::has_mapchunky() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void Map::set_has_mapy() {
+inline void Map::set_has_mapchunky() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void Map::clear_has_mapy() {
+inline void Map::clear_has_mapchunky() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void Map::clear_mapy() {
-  mapy_ = 0;
-  clear_has_mapy();
+inline void Map::clear_mapchunky() {
+  mapchunky_ = 0;
+  clear_has_mapchunky();
 }
-inline ::google::protobuf::int32 Map::mapy() const {
-  return mapy_;
+inline ::google::protobuf::int32 Map::mapchunky() const {
+  return mapchunky_;
 }
-inline void Map::set_mapy(::google::protobuf::int32 value) {
-  set_has_mapy();
-  mapy_ = value;
+inline void Map::set_mapchunky(::google::protobuf::int32 value) {
+  set_has_mapchunky();
+  mapchunky_ = value;
 }
 
 // required int32 dataSize = 3;
@@ -2399,6 +2687,102 @@ inline ::google::protobuf::int32 Map::datasize() const {
 inline void Map::set_datasize(::google::protobuf::int32 value) {
   set_has_datasize();
   datasize_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// QueryServer
+
+// -------------------------------------------------------------------
+
+// QueryServerResponse
+
+// required int32 minMapChunkX = 1;
+inline bool QueryServerResponse::has_minmapchunkx() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void QueryServerResponse::set_has_minmapchunkx() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void QueryServerResponse::clear_has_minmapchunkx() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void QueryServerResponse::clear_minmapchunkx() {
+  minmapchunkx_ = 0;
+  clear_has_minmapchunkx();
+}
+inline ::google::protobuf::int32 QueryServerResponse::minmapchunkx() const {
+  return minmapchunkx_;
+}
+inline void QueryServerResponse::set_minmapchunkx(::google::protobuf::int32 value) {
+  set_has_minmapchunkx();
+  minmapchunkx_ = value;
+}
+
+// required int32 minMapChunkY = 2;
+inline bool QueryServerResponse::has_minmapchunky() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void QueryServerResponse::set_has_minmapchunky() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void QueryServerResponse::clear_has_minmapchunky() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void QueryServerResponse::clear_minmapchunky() {
+  minmapchunky_ = 0;
+  clear_has_minmapchunky();
+}
+inline ::google::protobuf::int32 QueryServerResponse::minmapchunky() const {
+  return minmapchunky_;
+}
+inline void QueryServerResponse::set_minmapchunky(::google::protobuf::int32 value) {
+  set_has_minmapchunky();
+  minmapchunky_ = value;
+}
+
+// required int32 maxMapChunkX = 3;
+inline bool QueryServerResponse::has_maxmapchunkx() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void QueryServerResponse::set_has_maxmapchunkx() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void QueryServerResponse::clear_has_maxmapchunkx() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void QueryServerResponse::clear_maxmapchunkx() {
+  maxmapchunkx_ = 0;
+  clear_has_maxmapchunkx();
+}
+inline ::google::protobuf::int32 QueryServerResponse::maxmapchunkx() const {
+  return maxmapchunkx_;
+}
+inline void QueryServerResponse::set_maxmapchunkx(::google::protobuf::int32 value) {
+  set_has_maxmapchunkx();
+  maxmapchunkx_ = value;
+}
+
+// required int32 maxMapChunkY = 4;
+inline bool QueryServerResponse::has_maxmapchunky() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void QueryServerResponse::set_has_maxmapchunky() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void QueryServerResponse::clear_has_maxmapchunky() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void QueryServerResponse::clear_maxmapchunky() {
+  maxmapchunky_ = 0;
+  clear_has_maxmapchunky();
+}
+inline ::google::protobuf::int32 QueryServerResponse::maxmapchunky() const {
+  return maxmapchunky_;
+}
+inline void QueryServerResponse::set_maxmapchunky(::google::protobuf::int32 value) {
+  set_has_maxmapchunky();
+  maxmapchunky_ = value;
 }
 
 

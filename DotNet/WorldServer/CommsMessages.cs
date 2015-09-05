@@ -36,6 +36,10 @@ namespace CommsMessages {
     internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapIgnoreUpdates, global::CommsMessages.MapIgnoreUpdates.Builder> internal__static_CommsMessages_MapIgnoreUpdates__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_CommsMessages_Map__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.Map, global::CommsMessages.Map.Builder> internal__static_CommsMessages_Map__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_CommsMessages_QueryServer__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.QueryServer, global::CommsMessages.QueryServer.Builder> internal__static_CommsMessages_QueryServer__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_CommsMessages_QueryServerResponse__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.QueryServerResponse, global::CommsMessages.QueryServerResponse.Builder> internal__static_CommsMessages_QueryServerResponse__FieldAccessorTable;
     #endregion
     #region Descriptor
     public static pbd::FileDescriptor Descriptor {
@@ -45,7 +49,7 @@ namespace CommsMessages {
     
     static CommsMessages() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
-          "ChNDb21tc01lc3NhZ2VzLnByb3RvEg1Db21tc01lc3NhZ2VzIq8DCgdNZXNz" + 
+          "ChNDb21tc01lc3NhZ2VzLnByb3RvEg1Db21tc01lc3NhZ2VzIqEECgdNZXNz" + 
           "YWdlEg8KB21zZ3R5cGUYASACKAUSDAoEZnJvbRgCIAIoCRIMCgRkZXN0GAMg" + 
           "AigJEikKCHJlc3BvbnNlGAQgASgLMhcuQ29tbXNNZXNzYWdlcy5SZXNwb25z" + 
           "ZRIhCgRwaW5nGAUgASgLMhMuQ29tbXNNZXNzYWdlcy5QaW5nEiEKBHBvbmcY" + 
@@ -55,24 +59,31 @@ namespace CommsMessages {
           "YXkSOwoRbWFwUmVxdWVzdFVwZGF0ZXMYCiABKAsyIC5Db21tc01lc3NhZ2Vz" + 
           "Lk1hcFJlcXVlc3RVcGRhdGVzEjkKEG1hcElnbm9yZVVwZGF0ZXMYCyABKAsy" + 
           "Hy5Db21tc01lc3NhZ2VzLk1hcElnbm9yZVVwZGF0ZXMSHwoDbWFwGAwgASgL" + 
-          "MhIuQ29tbXNNZXNzYWdlcy5NYXAiFQoEUGluZxINCgVjb3VudBgBIAIoBSIV" + 
-          "CgRQb25nEg0KBWNvdW50GAEgAigFIikKCFJlc3BvbnNlEgwKBGNvZGUYASAC" + 
-          "KAUSDwoHbWVzc2FnZRgCIAEoCSI7CgdOZXdVc2VyEhAKCHVzZXJuYW1lGAEg" + 
-          "AigJEhAKCHBhc3N3b3JkGAIgAigJEgwKBG5hbWUYAyACKAkiKwoFTG9naW4S" + 
-          "EAoIdXNlcm5hbWUYASACKAkSEAoIcGFzc3dvcmQYAiACKAkiEwoDU2F5EgwK" + 
-          "BHRleHQYASACKAkiLwoRTWFwUmVxdWVzdFVwZGF0ZXMSDAoEbWFwWBgBIAIo" + 
-          "BRIMCgRtYXBZGAIgAigFIi4KEE1hcElnbm9yZVVwZGF0ZXMSDAoEbWFwWBgB" + 
-          "IAIoBRIMCgRtYXBZGAIgAigFIjMKA01hcBIMCgRtYXBYGAEgAigFEgwKBG1h" + 
-          "cFkYAiACKAUSEAoIZGF0YVNpemUYAyACKAUqiwEKB01zZ1R5cGUSDQoJZVJl" + 
+          "MhIuQ29tbXNNZXNzYWdlcy5NYXASLwoLcXVlcnlTZXJ2ZXIYDSABKAsyGi5D" + 
+          "b21tc01lc3NhZ2VzLlF1ZXJ5U2VydmVyEj8KE3F1ZXJ5U2VydmVyUmVzcG9u" + 
+          "c2UYDiABKAsyIi5Db21tc01lc3NhZ2VzLlF1ZXJ5U2VydmVyUmVzcG9uc2Ui" + 
+          "FQoEUGluZxINCgVjb3VudBgBIAIoBSIVCgRQb25nEg0KBWNvdW50GAEgAigF" + 
+          "IikKCFJlc3BvbnNlEgwKBGNvZGUYASACKAUSDwoHbWVzc2FnZRgCIAEoCSI7" + 
+          "CgdOZXdVc2VyEhAKCHVzZXJuYW1lGAEgAigJEhAKCHBhc3N3b3JkGAIgAigJ" + 
+          "EgwKBG5hbWUYAyACKAkiKwoFTG9naW4SEAoIdXNlcm5hbWUYASACKAkSEAoI" + 
+          "cGFzc3dvcmQYAiACKAkiEwoDU2F5EgwKBHRleHQYASACKAkiOQoRTWFwUmVx" + 
+          "dWVzdFVwZGF0ZXMSEQoJbWFwQ2h1bmtYGAEgAigFEhEKCW1hcENodW5rWRgC" + 
+          "IAIoBSI4ChBNYXBJZ25vcmVVcGRhdGVzEhEKCW1hcENodW5rWBgBIAIoBRIR" + 
+          "CgltYXBDaHVua1kYAiACKAUiPQoDTWFwEhEKCW1hcENodW5rWBgBIAIoBRIR" + 
+          "CgltYXBDaHVua1kYAiACKAUSEAoIZGF0YVNpemUYAyACKAUiDQoLUXVlcnlT" + 
+          "ZXJ2ZXIibQoTUXVlcnlTZXJ2ZXJSZXNwb25zZRIUCgxtaW5NYXBDaHVua1gY" + 
+          "ASACKAUSFAoMbWluTWFwQ2h1bmtZGAIgAigFEhQKDG1heE1hcENodW5rWBgD" + 
+          "IAIoBRIUCgxtYXhNYXBDaHVua1kYBCACKAUqtwEKB01zZ1R5cGUSDQoJZVJl" + 
           "c3BvbnNlEAESCQoFZVBpbmcQAhIJCgVlUG9uZxADEgwKCGVOZXdVc2VyEAQS" + 
           "CgoGZUxvZ2luEAUSCAoEZVNheRAGEhYKEmVNYXBSZXF1ZXN0VXBkYXRlcxAH" + 
-          "EhUKEWVNYXBJZ25vcmVVcGRhdGVzEAgSCAoEZU1hcBAJQgJIAQ==");
+          "EhUKEWVNYXBJZ25vcmVVcGRhdGVzEAgSCAoEZU1hcBAJEhAKDGVRdWVyeVNl" + 
+          "cnZlchAKEhgKFGVRdWVyeVNlcnZlclJlc3BvbnNlEAtCAkgB");
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_CommsMessages_Message__Descriptor = Descriptor.MessageTypes[0];
         internal__static_CommsMessages_Message__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.Message, global::CommsMessages.Message.Builder>(internal__static_CommsMessages_Message__Descriptor,
-                new string[] { "Msgtype", "From", "Dest", "Response", "Ping", "Pong", "NewUser", "Login", "Say", "MapRequestUpdates", "MapIgnoreUpdates", "Map", });
+                new string[] { "Msgtype", "From", "Dest", "Response", "Ping", "Pong", "NewUser", "Login", "Say", "MapRequestUpdates", "MapIgnoreUpdates", "Map", "QueryServer", "QueryServerResponse", });
         internal__static_CommsMessages_Ping__Descriptor = Descriptor.MessageTypes[1];
         internal__static_CommsMessages_Ping__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.Ping, global::CommsMessages.Ping.Builder>(internal__static_CommsMessages_Ping__Descriptor,
@@ -100,15 +111,23 @@ namespace CommsMessages {
         internal__static_CommsMessages_MapRequestUpdates__Descriptor = Descriptor.MessageTypes[7];
         internal__static_CommsMessages_MapRequestUpdates__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapRequestUpdates, global::CommsMessages.MapRequestUpdates.Builder>(internal__static_CommsMessages_MapRequestUpdates__Descriptor,
-                new string[] { "MapX", "MapY", });
+                new string[] { "MapChunkX", "MapChunkY", });
         internal__static_CommsMessages_MapIgnoreUpdates__Descriptor = Descriptor.MessageTypes[8];
         internal__static_CommsMessages_MapIgnoreUpdates__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapIgnoreUpdates, global::CommsMessages.MapIgnoreUpdates.Builder>(internal__static_CommsMessages_MapIgnoreUpdates__Descriptor,
-                new string[] { "MapX", "MapY", });
+                new string[] { "MapChunkX", "MapChunkY", });
         internal__static_CommsMessages_Map__Descriptor = Descriptor.MessageTypes[9];
         internal__static_CommsMessages_Map__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.Map, global::CommsMessages.Map.Builder>(internal__static_CommsMessages_Map__Descriptor,
-                new string[] { "MapX", "MapY", "DataSize", });
+                new string[] { "MapChunkX", "MapChunkY", "DataSize", });
+        internal__static_CommsMessages_QueryServer__Descriptor = Descriptor.MessageTypes[10];
+        internal__static_CommsMessages_QueryServer__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.QueryServer, global::CommsMessages.QueryServer.Builder>(internal__static_CommsMessages_QueryServer__Descriptor,
+                new string[] { });
+        internal__static_CommsMessages_QueryServerResponse__Descriptor = Descriptor.MessageTypes[11];
+        internal__static_CommsMessages_QueryServerResponse__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.QueryServerResponse, global::CommsMessages.QueryServerResponse.Builder>(internal__static_CommsMessages_QueryServerResponse__Descriptor,
+                new string[] { "MinMapChunkX", "MinMapChunkY", "MaxMapChunkX", "MaxMapChunkY", });
         return null;
       };
       pbd::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
@@ -129,6 +148,8 @@ namespace CommsMessages {
     eMapRequestUpdates = 7,
     eMapIgnoreUpdates = 8,
     eMap = 9,
+    eQueryServer = 10,
+    eQueryServerResponse = 11,
   }
   
   #endregion
@@ -138,8 +159,8 @@ namespace CommsMessages {
   public sealed partial class Message : pb::GeneratedMessage<Message, Message.Builder> {
     private Message() { }
     private static readonly Message defaultInstance = new Message().MakeReadOnly();
-    private static readonly string[] _messageFieldNames = new string[] { "dest", "from", "login", "map", "mapIgnoreUpdates", "mapRequestUpdates", "msgtype", "newUser", "ping", "pong", "response", "say" };
-    private static readonly uint[] _messageFieldTags = new uint[] { 26, 18, 66, 98, 90, 82, 8, 58, 42, 50, 34, 74 };
+    private static readonly string[] _messageFieldNames = new string[] { "dest", "from", "login", "map", "mapIgnoreUpdates", "mapRequestUpdates", "msgtype", "newUser", "ping", "pong", "queryServer", "queryServerResponse", "response", "say" };
+    private static readonly uint[] _messageFieldTags = new uint[] { 26, 18, 66, 98, 90, 82, 8, 58, 42, 50, 106, 114, 34, 74 };
     public static Message DefaultInstance {
       get { return defaultInstance; }
     }
@@ -280,6 +301,26 @@ namespace CommsMessages {
       get { return map_ ?? global::CommsMessages.Map.DefaultInstance; }
     }
     
+    public const int QueryServerFieldNumber = 13;
+    private bool hasQueryServer;
+    private global::CommsMessages.QueryServer queryServer_;
+    public bool HasQueryServer {
+      get { return hasQueryServer; }
+    }
+    public global::CommsMessages.QueryServer QueryServer {
+      get { return queryServer_ ?? global::CommsMessages.QueryServer.DefaultInstance; }
+    }
+    
+    public const int QueryServerResponseFieldNumber = 14;
+    private bool hasQueryServerResponse;
+    private global::CommsMessages.QueryServerResponse queryServerResponse_;
+    public bool HasQueryServerResponse {
+      get { return hasQueryServerResponse; }
+    }
+    public global::CommsMessages.QueryServerResponse QueryServerResponse {
+      get { return queryServerResponse_ ?? global::CommsMessages.QueryServerResponse.DefaultInstance; }
+    }
+    
     public override bool IsInitialized {
       get {
         if (!hasMsgtype) return false;
@@ -312,6 +353,9 @@ namespace CommsMessages {
         if (HasMap) {
           if (!Map.IsInitialized) return false;
         }
+        if (HasQueryServerResponse) {
+          if (!QueryServerResponse.IsInitialized) return false;
+        }
         return true;
       }
     }
@@ -329,7 +373,7 @@ namespace CommsMessages {
         output.WriteString(3, field_names[0], Dest);
       }
       if (hasResponse) {
-        output.WriteMessage(4, field_names[10], Response);
+        output.WriteMessage(4, field_names[12], Response);
       }
       if (hasPing) {
         output.WriteMessage(5, field_names[8], Ping);
@@ -344,7 +388,7 @@ namespace CommsMessages {
         output.WriteMessage(8, field_names[2], Login);
       }
       if (hasSay) {
-        output.WriteMessage(9, field_names[11], Say);
+        output.WriteMessage(9, field_names[13], Say);
       }
       if (hasMapRequestUpdates) {
         output.WriteMessage(10, field_names[5], MapRequestUpdates);
@@ -354,6 +398,12 @@ namespace CommsMessages {
       }
       if (hasMap) {
         output.WriteMessage(12, field_names[3], Map);
+      }
+      if (hasQueryServer) {
+        output.WriteMessage(13, field_names[10], QueryServer);
+      }
+      if (hasQueryServerResponse) {
+        output.WriteMessage(14, field_names[11], QueryServerResponse);
       }
       UnknownFields.WriteTo(output);
     }
@@ -400,6 +450,12 @@ namespace CommsMessages {
         }
         if (hasMap) {
           size += pb::CodedOutputStream.ComputeMessageSize(12, Map);
+        }
+        if (hasQueryServer) {
+          size += pb::CodedOutputStream.ComputeMessageSize(13, QueryServer);
+        }
+        if (hasQueryServerResponse) {
+          size += pb::CodedOutputStream.ComputeMessageSize(14, QueryServerResponse);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -561,6 +617,12 @@ namespace CommsMessages {
         if (other.HasMap) {
           MergeMap(other.Map);
         }
+        if (other.HasQueryServer) {
+          MergeQueryServer(other.QueryServer);
+        }
+        if (other.HasQueryServerResponse) {
+          MergeQueryServerResponse(other.QueryServerResponse);
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -695,6 +757,24 @@ namespace CommsMessages {
               }
               input.ReadMessage(subBuilder, extensionRegistry);
               Map = subBuilder.BuildPartial();
+              break;
+            }
+            case 106: {
+              global::CommsMessages.QueryServer.Builder subBuilder = global::CommsMessages.QueryServer.CreateBuilder();
+              if (result.hasQueryServer) {
+                subBuilder.MergeFrom(QueryServer);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              QueryServer = subBuilder.BuildPartial();
+              break;
+            }
+            case 114: {
+              global::CommsMessages.QueryServerResponse.Builder subBuilder = global::CommsMessages.QueryServerResponse.CreateBuilder();
+              if (result.hasQueryServerResponse) {
+                subBuilder.MergeFrom(QueryServerResponse);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              QueryServerResponse = subBuilder.BuildPartial();
               break;
             }
           }
@@ -1126,6 +1206,86 @@ namespace CommsMessages {
         PrepareBuilder();
         result.hasMap = false;
         result.map_ = null;
+        return this;
+      }
+      
+      public bool HasQueryServer {
+       get { return result.hasQueryServer; }
+      }
+      public global::CommsMessages.QueryServer QueryServer {
+        get { return result.QueryServer; }
+        set { SetQueryServer(value); }
+      }
+      public Builder SetQueryServer(global::CommsMessages.QueryServer value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasQueryServer = true;
+        result.queryServer_ = value;
+        return this;
+      }
+      public Builder SetQueryServer(global::CommsMessages.QueryServer.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasQueryServer = true;
+        result.queryServer_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeQueryServer(global::CommsMessages.QueryServer value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasQueryServer &&
+            result.queryServer_ != global::CommsMessages.QueryServer.DefaultInstance) {
+            result.queryServer_ = global::CommsMessages.QueryServer.CreateBuilder(result.queryServer_).MergeFrom(value).BuildPartial();
+        } else {
+          result.queryServer_ = value;
+        }
+        result.hasQueryServer = true;
+        return this;
+      }
+      public Builder ClearQueryServer() {
+        PrepareBuilder();
+        result.hasQueryServer = false;
+        result.queryServer_ = null;
+        return this;
+      }
+      
+      public bool HasQueryServerResponse {
+       get { return result.hasQueryServerResponse; }
+      }
+      public global::CommsMessages.QueryServerResponse QueryServerResponse {
+        get { return result.QueryServerResponse; }
+        set { SetQueryServerResponse(value); }
+      }
+      public Builder SetQueryServerResponse(global::CommsMessages.QueryServerResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasQueryServerResponse = true;
+        result.queryServerResponse_ = value;
+        return this;
+      }
+      public Builder SetQueryServerResponse(global::CommsMessages.QueryServerResponse.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasQueryServerResponse = true;
+        result.queryServerResponse_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeQueryServerResponse(global::CommsMessages.QueryServerResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasQueryServerResponse &&
+            result.queryServerResponse_ != global::CommsMessages.QueryServerResponse.DefaultInstance) {
+            result.queryServerResponse_ = global::CommsMessages.QueryServerResponse.CreateBuilder(result.queryServerResponse_).MergeFrom(value).BuildPartial();
+        } else {
+          result.queryServerResponse_ = value;
+        }
+        result.hasQueryServerResponse = true;
+        return this;
+      }
+      public Builder ClearQueryServerResponse() {
+        PrepareBuilder();
+        result.hasQueryServerResponse = false;
+        result.queryServerResponse_ = null;
         return this;
       }
     }
@@ -2946,7 +3106,7 @@ namespace CommsMessages {
   public sealed partial class MapRequestUpdates : pb::GeneratedMessage<MapRequestUpdates, MapRequestUpdates.Builder> {
     private MapRequestUpdates() { }
     private static readonly MapRequestUpdates defaultInstance = new MapRequestUpdates().MakeReadOnly();
-    private static readonly string[] _mapRequestUpdatesFieldNames = new string[] { "mapX", "mapY" };
+    private static readonly string[] _mapRequestUpdatesFieldNames = new string[] { "mapChunkX", "mapChunkY" };
     private static readonly uint[] _mapRequestUpdatesFieldTags = new uint[] { 8, 16 };
     public static MapRequestUpdates DefaultInstance {
       get { return defaultInstance; }
@@ -2968,30 +3128,30 @@ namespace CommsMessages {
       get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapRequestUpdates__FieldAccessorTable; }
     }
     
-    public const int MapXFieldNumber = 1;
-    private bool hasMapX;
-    private int mapX_;
-    public bool HasMapX {
-      get { return hasMapX; }
+    public const int MapChunkXFieldNumber = 1;
+    private bool hasMapChunkX;
+    private int mapChunkX_;
+    public bool HasMapChunkX {
+      get { return hasMapChunkX; }
     }
-    public int MapX {
-      get { return mapX_; }
+    public int MapChunkX {
+      get { return mapChunkX_; }
     }
     
-    public const int MapYFieldNumber = 2;
-    private bool hasMapY;
-    private int mapY_;
-    public bool HasMapY {
-      get { return hasMapY; }
+    public const int MapChunkYFieldNumber = 2;
+    private bool hasMapChunkY;
+    private int mapChunkY_;
+    public bool HasMapChunkY {
+      get { return hasMapChunkY; }
     }
-    public int MapY {
-      get { return mapY_; }
+    public int MapChunkY {
+      get { return mapChunkY_; }
     }
     
     public override bool IsInitialized {
       get {
-        if (!hasMapX) return false;
-        if (!hasMapY) return false;
+        if (!hasMapChunkX) return false;
+        if (!hasMapChunkY) return false;
         return true;
       }
     }
@@ -2999,11 +3159,11 @@ namespace CommsMessages {
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
       string[] field_names = _mapRequestUpdatesFieldNames;
-      if (hasMapX) {
-        output.WriteInt32(1, field_names[0], MapX);
+      if (hasMapChunkX) {
+        output.WriteInt32(1, field_names[0], MapChunkX);
       }
-      if (hasMapY) {
-        output.WriteInt32(2, field_names[1], MapY);
+      if (hasMapChunkY) {
+        output.WriteInt32(2, field_names[1], MapChunkY);
       }
       UnknownFields.WriteTo(output);
     }
@@ -3015,11 +3175,11 @@ namespace CommsMessages {
         if (size != -1) return size;
         
         size = 0;
-        if (hasMapX) {
-          size += pb::CodedOutputStream.ComputeInt32Size(1, MapX);
+        if (hasMapChunkX) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, MapChunkX);
         }
-        if (hasMapY) {
-          size += pb::CodedOutputStream.ComputeInt32Size(2, MapY);
+        if (hasMapChunkY) {
+          size += pb::CodedOutputStream.ComputeInt32Size(2, MapChunkY);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -3145,11 +3305,11 @@ namespace CommsMessages {
       public override Builder MergeFrom(MapRequestUpdates other) {
         if (other == global::CommsMessages.MapRequestUpdates.DefaultInstance) return this;
         PrepareBuilder();
-        if (other.HasMapX) {
-          MapX = other.MapX;
+        if (other.HasMapChunkX) {
+          MapChunkX = other.MapChunkX;
         }
-        if (other.HasMapY) {
-          MapY = other.MapY;
+        if (other.HasMapChunkY) {
+          MapChunkY = other.MapChunkY;
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -3195,11 +3355,11 @@ namespace CommsMessages {
               break;
             }
             case 8: {
-              result.hasMapX = input.ReadInt32(ref result.mapX_);
+              result.hasMapChunkX = input.ReadInt32(ref result.mapChunkX_);
               break;
             }
             case 16: {
-              result.hasMapY = input.ReadInt32(ref result.mapY_);
+              result.hasMapChunkY = input.ReadInt32(ref result.mapChunkY_);
               break;
             }
           }
@@ -3212,43 +3372,43 @@ namespace CommsMessages {
       }
       
       
-      public bool HasMapX {
-        get { return result.hasMapX; }
+      public bool HasMapChunkX {
+        get { return result.hasMapChunkX; }
       }
-      public int MapX {
-        get { return result.MapX; }
-        set { SetMapX(value); }
+      public int MapChunkX {
+        get { return result.MapChunkX; }
+        set { SetMapChunkX(value); }
       }
-      public Builder SetMapX(int value) {
+      public Builder SetMapChunkX(int value) {
         PrepareBuilder();
-        result.hasMapX = true;
-        result.mapX_ = value;
+        result.hasMapChunkX = true;
+        result.mapChunkX_ = value;
         return this;
       }
-      public Builder ClearMapX() {
+      public Builder ClearMapChunkX() {
         PrepareBuilder();
-        result.hasMapX = false;
-        result.mapX_ = 0;
+        result.hasMapChunkX = false;
+        result.mapChunkX_ = 0;
         return this;
       }
       
-      public bool HasMapY {
-        get { return result.hasMapY; }
+      public bool HasMapChunkY {
+        get { return result.hasMapChunkY; }
       }
-      public int MapY {
-        get { return result.MapY; }
-        set { SetMapY(value); }
+      public int MapChunkY {
+        get { return result.MapChunkY; }
+        set { SetMapChunkY(value); }
       }
-      public Builder SetMapY(int value) {
+      public Builder SetMapChunkY(int value) {
         PrepareBuilder();
-        result.hasMapY = true;
-        result.mapY_ = value;
+        result.hasMapChunkY = true;
+        result.mapChunkY_ = value;
         return this;
       }
-      public Builder ClearMapY() {
+      public Builder ClearMapChunkY() {
         PrepareBuilder();
-        result.hasMapY = false;
-        result.mapY_ = 0;
+        result.hasMapChunkY = false;
+        result.mapChunkY_ = 0;
         return this;
       }
     }
@@ -3261,7 +3421,7 @@ namespace CommsMessages {
   public sealed partial class MapIgnoreUpdates : pb::GeneratedMessage<MapIgnoreUpdates, MapIgnoreUpdates.Builder> {
     private MapIgnoreUpdates() { }
     private static readonly MapIgnoreUpdates defaultInstance = new MapIgnoreUpdates().MakeReadOnly();
-    private static readonly string[] _mapIgnoreUpdatesFieldNames = new string[] { "mapX", "mapY" };
+    private static readonly string[] _mapIgnoreUpdatesFieldNames = new string[] { "mapChunkX", "mapChunkY" };
     private static readonly uint[] _mapIgnoreUpdatesFieldTags = new uint[] { 8, 16 };
     public static MapIgnoreUpdates DefaultInstance {
       get { return defaultInstance; }
@@ -3283,30 +3443,30 @@ namespace CommsMessages {
       get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapIgnoreUpdates__FieldAccessorTable; }
     }
     
-    public const int MapXFieldNumber = 1;
-    private bool hasMapX;
-    private int mapX_;
-    public bool HasMapX {
-      get { return hasMapX; }
+    public const int MapChunkXFieldNumber = 1;
+    private bool hasMapChunkX;
+    private int mapChunkX_;
+    public bool HasMapChunkX {
+      get { return hasMapChunkX; }
     }
-    public int MapX {
-      get { return mapX_; }
+    public int MapChunkX {
+      get { return mapChunkX_; }
     }
     
-    public const int MapYFieldNumber = 2;
-    private bool hasMapY;
-    private int mapY_;
-    public bool HasMapY {
-      get { return hasMapY; }
+    public const int MapChunkYFieldNumber = 2;
+    private bool hasMapChunkY;
+    private int mapChunkY_;
+    public bool HasMapChunkY {
+      get { return hasMapChunkY; }
     }
-    public int MapY {
-      get { return mapY_; }
+    public int MapChunkY {
+      get { return mapChunkY_; }
     }
     
     public override bool IsInitialized {
       get {
-        if (!hasMapX) return false;
-        if (!hasMapY) return false;
+        if (!hasMapChunkX) return false;
+        if (!hasMapChunkY) return false;
         return true;
       }
     }
@@ -3314,11 +3474,11 @@ namespace CommsMessages {
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
       string[] field_names = _mapIgnoreUpdatesFieldNames;
-      if (hasMapX) {
-        output.WriteInt32(1, field_names[0], MapX);
+      if (hasMapChunkX) {
+        output.WriteInt32(1, field_names[0], MapChunkX);
       }
-      if (hasMapY) {
-        output.WriteInt32(2, field_names[1], MapY);
+      if (hasMapChunkY) {
+        output.WriteInt32(2, field_names[1], MapChunkY);
       }
       UnknownFields.WriteTo(output);
     }
@@ -3330,11 +3490,11 @@ namespace CommsMessages {
         if (size != -1) return size;
         
         size = 0;
-        if (hasMapX) {
-          size += pb::CodedOutputStream.ComputeInt32Size(1, MapX);
+        if (hasMapChunkX) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, MapChunkX);
         }
-        if (hasMapY) {
-          size += pb::CodedOutputStream.ComputeInt32Size(2, MapY);
+        if (hasMapChunkY) {
+          size += pb::CodedOutputStream.ComputeInt32Size(2, MapChunkY);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -3460,11 +3620,11 @@ namespace CommsMessages {
       public override Builder MergeFrom(MapIgnoreUpdates other) {
         if (other == global::CommsMessages.MapIgnoreUpdates.DefaultInstance) return this;
         PrepareBuilder();
-        if (other.HasMapX) {
-          MapX = other.MapX;
+        if (other.HasMapChunkX) {
+          MapChunkX = other.MapChunkX;
         }
-        if (other.HasMapY) {
-          MapY = other.MapY;
+        if (other.HasMapChunkY) {
+          MapChunkY = other.MapChunkY;
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -3510,11 +3670,11 @@ namespace CommsMessages {
               break;
             }
             case 8: {
-              result.hasMapX = input.ReadInt32(ref result.mapX_);
+              result.hasMapChunkX = input.ReadInt32(ref result.mapChunkX_);
               break;
             }
             case 16: {
-              result.hasMapY = input.ReadInt32(ref result.mapY_);
+              result.hasMapChunkY = input.ReadInt32(ref result.mapChunkY_);
               break;
             }
           }
@@ -3527,43 +3687,43 @@ namespace CommsMessages {
       }
       
       
-      public bool HasMapX {
-        get { return result.hasMapX; }
+      public bool HasMapChunkX {
+        get { return result.hasMapChunkX; }
       }
-      public int MapX {
-        get { return result.MapX; }
-        set { SetMapX(value); }
+      public int MapChunkX {
+        get { return result.MapChunkX; }
+        set { SetMapChunkX(value); }
       }
-      public Builder SetMapX(int value) {
+      public Builder SetMapChunkX(int value) {
         PrepareBuilder();
-        result.hasMapX = true;
-        result.mapX_ = value;
+        result.hasMapChunkX = true;
+        result.mapChunkX_ = value;
         return this;
       }
-      public Builder ClearMapX() {
+      public Builder ClearMapChunkX() {
         PrepareBuilder();
-        result.hasMapX = false;
-        result.mapX_ = 0;
+        result.hasMapChunkX = false;
+        result.mapChunkX_ = 0;
         return this;
       }
       
-      public bool HasMapY {
-        get { return result.hasMapY; }
+      public bool HasMapChunkY {
+        get { return result.hasMapChunkY; }
       }
-      public int MapY {
-        get { return result.MapY; }
-        set { SetMapY(value); }
+      public int MapChunkY {
+        get { return result.MapChunkY; }
+        set { SetMapChunkY(value); }
       }
-      public Builder SetMapY(int value) {
+      public Builder SetMapChunkY(int value) {
         PrepareBuilder();
-        result.hasMapY = true;
-        result.mapY_ = value;
+        result.hasMapChunkY = true;
+        result.mapChunkY_ = value;
         return this;
       }
-      public Builder ClearMapY() {
+      public Builder ClearMapChunkY() {
         PrepareBuilder();
-        result.hasMapY = false;
-        result.mapY_ = 0;
+        result.hasMapChunkY = false;
+        result.mapChunkY_ = 0;
         return this;
       }
     }
@@ -3576,7 +3736,7 @@ namespace CommsMessages {
   public sealed partial class Map : pb::GeneratedMessage<Map, Map.Builder> {
     private Map() { }
     private static readonly Map defaultInstance = new Map().MakeReadOnly();
-    private static readonly string[] _mapFieldNames = new string[] { "dataSize", "mapX", "mapY" };
+    private static readonly string[] _mapFieldNames = new string[] { "dataSize", "mapChunkX", "mapChunkY" };
     private static readonly uint[] _mapFieldTags = new uint[] { 24, 8, 16 };
     public static Map DefaultInstance {
       get { return defaultInstance; }
@@ -3598,24 +3758,24 @@ namespace CommsMessages {
       get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_Map__FieldAccessorTable; }
     }
     
-    public const int MapXFieldNumber = 1;
-    private bool hasMapX;
-    private int mapX_;
-    public bool HasMapX {
-      get { return hasMapX; }
+    public const int MapChunkXFieldNumber = 1;
+    private bool hasMapChunkX;
+    private int mapChunkX_;
+    public bool HasMapChunkX {
+      get { return hasMapChunkX; }
     }
-    public int MapX {
-      get { return mapX_; }
+    public int MapChunkX {
+      get { return mapChunkX_; }
     }
     
-    public const int MapYFieldNumber = 2;
-    private bool hasMapY;
-    private int mapY_;
-    public bool HasMapY {
-      get { return hasMapY; }
+    public const int MapChunkYFieldNumber = 2;
+    private bool hasMapChunkY;
+    private int mapChunkY_;
+    public bool HasMapChunkY {
+      get { return hasMapChunkY; }
     }
-    public int MapY {
-      get { return mapY_; }
+    public int MapChunkY {
+      get { return mapChunkY_; }
     }
     
     public const int DataSizeFieldNumber = 3;
@@ -3630,8 +3790,8 @@ namespace CommsMessages {
     
     public override bool IsInitialized {
       get {
-        if (!hasMapX) return false;
-        if (!hasMapY) return false;
+        if (!hasMapChunkX) return false;
+        if (!hasMapChunkY) return false;
         if (!hasDataSize) return false;
         return true;
       }
@@ -3640,11 +3800,11 @@ namespace CommsMessages {
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
       string[] field_names = _mapFieldNames;
-      if (hasMapX) {
-        output.WriteInt32(1, field_names[1], MapX);
+      if (hasMapChunkX) {
+        output.WriteInt32(1, field_names[1], MapChunkX);
       }
-      if (hasMapY) {
-        output.WriteInt32(2, field_names[2], MapY);
+      if (hasMapChunkY) {
+        output.WriteInt32(2, field_names[2], MapChunkY);
       }
       if (hasDataSize) {
         output.WriteInt32(3, field_names[0], DataSize);
@@ -3659,11 +3819,11 @@ namespace CommsMessages {
         if (size != -1) return size;
         
         size = 0;
-        if (hasMapX) {
-          size += pb::CodedOutputStream.ComputeInt32Size(1, MapX);
+        if (hasMapChunkX) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, MapChunkX);
         }
-        if (hasMapY) {
-          size += pb::CodedOutputStream.ComputeInt32Size(2, MapY);
+        if (hasMapChunkY) {
+          size += pb::CodedOutputStream.ComputeInt32Size(2, MapChunkY);
         }
         if (hasDataSize) {
           size += pb::CodedOutputStream.ComputeInt32Size(3, DataSize);
@@ -3792,11 +3952,11 @@ namespace CommsMessages {
       public override Builder MergeFrom(Map other) {
         if (other == global::CommsMessages.Map.DefaultInstance) return this;
         PrepareBuilder();
-        if (other.HasMapX) {
-          MapX = other.MapX;
+        if (other.HasMapChunkX) {
+          MapChunkX = other.MapChunkX;
         }
-        if (other.HasMapY) {
-          MapY = other.MapY;
+        if (other.HasMapChunkY) {
+          MapChunkY = other.MapChunkY;
         }
         if (other.HasDataSize) {
           DataSize = other.DataSize;
@@ -3845,11 +4005,11 @@ namespace CommsMessages {
               break;
             }
             case 8: {
-              result.hasMapX = input.ReadInt32(ref result.mapX_);
+              result.hasMapChunkX = input.ReadInt32(ref result.mapChunkX_);
               break;
             }
             case 16: {
-              result.hasMapY = input.ReadInt32(ref result.mapY_);
+              result.hasMapChunkY = input.ReadInt32(ref result.mapChunkY_);
               break;
             }
             case 24: {
@@ -3866,43 +4026,43 @@ namespace CommsMessages {
       }
       
       
-      public bool HasMapX {
-        get { return result.hasMapX; }
+      public bool HasMapChunkX {
+        get { return result.hasMapChunkX; }
       }
-      public int MapX {
-        get { return result.MapX; }
-        set { SetMapX(value); }
+      public int MapChunkX {
+        get { return result.MapChunkX; }
+        set { SetMapChunkX(value); }
       }
-      public Builder SetMapX(int value) {
+      public Builder SetMapChunkX(int value) {
         PrepareBuilder();
-        result.hasMapX = true;
-        result.mapX_ = value;
+        result.hasMapChunkX = true;
+        result.mapChunkX_ = value;
         return this;
       }
-      public Builder ClearMapX() {
+      public Builder ClearMapChunkX() {
         PrepareBuilder();
-        result.hasMapX = false;
-        result.mapX_ = 0;
+        result.hasMapChunkX = false;
+        result.mapChunkX_ = 0;
         return this;
       }
       
-      public bool HasMapY {
-        get { return result.hasMapY; }
+      public bool HasMapChunkY {
+        get { return result.hasMapChunkY; }
       }
-      public int MapY {
-        get { return result.MapY; }
-        set { SetMapY(value); }
+      public int MapChunkY {
+        get { return result.MapChunkY; }
+        set { SetMapChunkY(value); }
       }
-      public Builder SetMapY(int value) {
+      public Builder SetMapChunkY(int value) {
         PrepareBuilder();
-        result.hasMapY = true;
-        result.mapY_ = value;
+        result.hasMapChunkY = true;
+        result.mapChunkY_ = value;
         return this;
       }
-      public Builder ClearMapY() {
+      public Builder ClearMapChunkY() {
         PrepareBuilder();
-        result.hasMapY = false;
-        result.mapY_ = 0;
+        result.hasMapChunkY = false;
+        result.mapChunkY_ = 0;
         return this;
       }
       
@@ -3927,6 +4087,636 @@ namespace CommsMessages {
       }
     }
     static Map() {
+      object.ReferenceEquals(global::CommsMessages.CommsMessages.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class QueryServer : pb::GeneratedMessage<QueryServer, QueryServer.Builder> {
+    private QueryServer() { }
+    private static readonly QueryServer defaultInstance = new QueryServer().MakeReadOnly();
+    private static readonly string[] _queryServerFieldNames = new string[] {  };
+    private static readonly uint[] _queryServerFieldTags = new uint[] {  };
+    public static QueryServer DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override QueryServer DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override QueryServer ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_QueryServer__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<QueryServer, QueryServer.Builder> InternalFieldAccessors {
+      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_QueryServer__FieldAccessorTable; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _queryServerFieldNames;
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        size += UnknownFields.SerializedSize;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    public static QueryServer ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static QueryServer ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static QueryServer ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static QueryServer ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static QueryServer ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static QueryServer ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static QueryServer ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static QueryServer ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static QueryServer ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static QueryServer ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private QueryServer MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(QueryServer prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<QueryServer, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(QueryServer cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private QueryServer result;
+      
+      private QueryServer PrepareBuilder() {
+        if (resultIsReadOnly) {
+          QueryServer original = result;
+          result = new QueryServer();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override QueryServer MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::CommsMessages.QueryServer.Descriptor; }
+      }
+      
+      public override QueryServer DefaultInstanceForType {
+        get { return global::CommsMessages.QueryServer.DefaultInstance; }
+      }
+      
+      public override QueryServer BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is QueryServer) {
+          return MergeFrom((QueryServer) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(QueryServer other) {
+        if (other == global::CommsMessages.QueryServer.DefaultInstance) return this;
+        PrepareBuilder();
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_queryServerFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _queryServerFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+    }
+    static QueryServer() {
+      object.ReferenceEquals(global::CommsMessages.CommsMessages.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class QueryServerResponse : pb::GeneratedMessage<QueryServerResponse, QueryServerResponse.Builder> {
+    private QueryServerResponse() { }
+    private static readonly QueryServerResponse defaultInstance = new QueryServerResponse().MakeReadOnly();
+    private static readonly string[] _queryServerResponseFieldNames = new string[] { "maxMapChunkX", "maxMapChunkY", "minMapChunkX", "minMapChunkY" };
+    private static readonly uint[] _queryServerResponseFieldTags = new uint[] { 24, 32, 8, 16 };
+    public static QueryServerResponse DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override QueryServerResponse DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override QueryServerResponse ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_QueryServerResponse__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<QueryServerResponse, QueryServerResponse.Builder> InternalFieldAccessors {
+      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_QueryServerResponse__FieldAccessorTable; }
+    }
+    
+    public const int MinMapChunkXFieldNumber = 1;
+    private bool hasMinMapChunkX;
+    private int minMapChunkX_;
+    public bool HasMinMapChunkX {
+      get { return hasMinMapChunkX; }
+    }
+    public int MinMapChunkX {
+      get { return minMapChunkX_; }
+    }
+    
+    public const int MinMapChunkYFieldNumber = 2;
+    private bool hasMinMapChunkY;
+    private int minMapChunkY_;
+    public bool HasMinMapChunkY {
+      get { return hasMinMapChunkY; }
+    }
+    public int MinMapChunkY {
+      get { return minMapChunkY_; }
+    }
+    
+    public const int MaxMapChunkXFieldNumber = 3;
+    private bool hasMaxMapChunkX;
+    private int maxMapChunkX_;
+    public bool HasMaxMapChunkX {
+      get { return hasMaxMapChunkX; }
+    }
+    public int MaxMapChunkX {
+      get { return maxMapChunkX_; }
+    }
+    
+    public const int MaxMapChunkYFieldNumber = 4;
+    private bool hasMaxMapChunkY;
+    private int maxMapChunkY_;
+    public bool HasMaxMapChunkY {
+      get { return hasMaxMapChunkY; }
+    }
+    public int MaxMapChunkY {
+      get { return maxMapChunkY_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        if (!hasMinMapChunkX) return false;
+        if (!hasMinMapChunkY) return false;
+        if (!hasMaxMapChunkX) return false;
+        if (!hasMaxMapChunkY) return false;
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _queryServerResponseFieldNames;
+      if (hasMinMapChunkX) {
+        output.WriteInt32(1, field_names[2], MinMapChunkX);
+      }
+      if (hasMinMapChunkY) {
+        output.WriteInt32(2, field_names[3], MinMapChunkY);
+      }
+      if (hasMaxMapChunkX) {
+        output.WriteInt32(3, field_names[0], MaxMapChunkX);
+      }
+      if (hasMaxMapChunkY) {
+        output.WriteInt32(4, field_names[1], MaxMapChunkY);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasMinMapChunkX) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, MinMapChunkX);
+        }
+        if (hasMinMapChunkY) {
+          size += pb::CodedOutputStream.ComputeInt32Size(2, MinMapChunkY);
+        }
+        if (hasMaxMapChunkX) {
+          size += pb::CodedOutputStream.ComputeInt32Size(3, MaxMapChunkX);
+        }
+        if (hasMaxMapChunkY) {
+          size += pb::CodedOutputStream.ComputeInt32Size(4, MaxMapChunkY);
+        }
+        size += UnknownFields.SerializedSize;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    public static QueryServerResponse ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static QueryServerResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static QueryServerResponse ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static QueryServerResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static QueryServerResponse ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static QueryServerResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static QueryServerResponse ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static QueryServerResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static QueryServerResponse ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static QueryServerResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private QueryServerResponse MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(QueryServerResponse prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<QueryServerResponse, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(QueryServerResponse cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private QueryServerResponse result;
+      
+      private QueryServerResponse PrepareBuilder() {
+        if (resultIsReadOnly) {
+          QueryServerResponse original = result;
+          result = new QueryServerResponse();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override QueryServerResponse MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::CommsMessages.QueryServerResponse.Descriptor; }
+      }
+      
+      public override QueryServerResponse DefaultInstanceForType {
+        get { return global::CommsMessages.QueryServerResponse.DefaultInstance; }
+      }
+      
+      public override QueryServerResponse BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is QueryServerResponse) {
+          return MergeFrom((QueryServerResponse) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(QueryServerResponse other) {
+        if (other == global::CommsMessages.QueryServerResponse.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasMinMapChunkX) {
+          MinMapChunkX = other.MinMapChunkX;
+        }
+        if (other.HasMinMapChunkY) {
+          MinMapChunkY = other.MinMapChunkY;
+        }
+        if (other.HasMaxMapChunkX) {
+          MaxMapChunkX = other.MaxMapChunkX;
+        }
+        if (other.HasMaxMapChunkY) {
+          MaxMapChunkY = other.MaxMapChunkY;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_queryServerResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _queryServerResponseFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasMinMapChunkX = input.ReadInt32(ref result.minMapChunkX_);
+              break;
+            }
+            case 16: {
+              result.hasMinMapChunkY = input.ReadInt32(ref result.minMapChunkY_);
+              break;
+            }
+            case 24: {
+              result.hasMaxMapChunkX = input.ReadInt32(ref result.maxMapChunkX_);
+              break;
+            }
+            case 32: {
+              result.hasMaxMapChunkY = input.ReadInt32(ref result.maxMapChunkY_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasMinMapChunkX {
+        get { return result.hasMinMapChunkX; }
+      }
+      public int MinMapChunkX {
+        get { return result.MinMapChunkX; }
+        set { SetMinMapChunkX(value); }
+      }
+      public Builder SetMinMapChunkX(int value) {
+        PrepareBuilder();
+        result.hasMinMapChunkX = true;
+        result.minMapChunkX_ = value;
+        return this;
+      }
+      public Builder ClearMinMapChunkX() {
+        PrepareBuilder();
+        result.hasMinMapChunkX = false;
+        result.minMapChunkX_ = 0;
+        return this;
+      }
+      
+      public bool HasMinMapChunkY {
+        get { return result.hasMinMapChunkY; }
+      }
+      public int MinMapChunkY {
+        get { return result.MinMapChunkY; }
+        set { SetMinMapChunkY(value); }
+      }
+      public Builder SetMinMapChunkY(int value) {
+        PrepareBuilder();
+        result.hasMinMapChunkY = true;
+        result.minMapChunkY_ = value;
+        return this;
+      }
+      public Builder ClearMinMapChunkY() {
+        PrepareBuilder();
+        result.hasMinMapChunkY = false;
+        result.minMapChunkY_ = 0;
+        return this;
+      }
+      
+      public bool HasMaxMapChunkX {
+        get { return result.hasMaxMapChunkX; }
+      }
+      public int MaxMapChunkX {
+        get { return result.MaxMapChunkX; }
+        set { SetMaxMapChunkX(value); }
+      }
+      public Builder SetMaxMapChunkX(int value) {
+        PrepareBuilder();
+        result.hasMaxMapChunkX = true;
+        result.maxMapChunkX_ = value;
+        return this;
+      }
+      public Builder ClearMaxMapChunkX() {
+        PrepareBuilder();
+        result.hasMaxMapChunkX = false;
+        result.maxMapChunkX_ = 0;
+        return this;
+      }
+      
+      public bool HasMaxMapChunkY {
+        get { return result.hasMaxMapChunkY; }
+      }
+      public int MaxMapChunkY {
+        get { return result.MaxMapChunkY; }
+        set { SetMaxMapChunkY(value); }
+      }
+      public Builder SetMaxMapChunkY(int value) {
+        PrepareBuilder();
+        result.hasMaxMapChunkY = true;
+        result.maxMapChunkY_ = value;
+        return this;
+      }
+      public Builder ClearMaxMapChunkY() {
+        PrepareBuilder();
+        result.hasMaxMapChunkY = false;
+        result.maxMapChunkY_ = 0;
+        return this;
+      }
+    }
+    static QueryServerResponse() {
       object.ReferenceEquals(global::CommsMessages.CommsMessages.Descriptor, null);
     }
   }

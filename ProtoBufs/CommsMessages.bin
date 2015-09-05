@@ -1,6 +1,7 @@
 
-÷
-CommsMessages.protoCommsMessages"Ø
+ê
+
+CommsMessages.protoCommsMessages"°
 Message
 msgtype (
 from (	
@@ -14,7 +15,9 @@
 mapRequestUpdates
  (2 .CommsMessages.MapRequestUpdates9
 mapIgnoreUpdates (2.CommsMessages.MapIgnoreUpdates
-map (2.CommsMessages.Map"
+map (2.CommsMessages.Map/
+queryServer (2.CommsMessages.QueryServer?
+queryServerResponse (2".CommsMessages.QueryServerResponse"
 Ping
 count ("
 Pong
@@ -30,17 +33,23 @@
 username (	
 password (	"
 Say
-text (	"/
-MapRequestUpdates
-mapX (
-mapY (".
-MapIgnoreUpdates
-mapX (
-mapY ("3
-Map
-mapX (
-mapY (
-dataSize (*ã
+text (	"9
+MapRequestUpdates
+	mapChunkX (
+	mapChunkY ("8
+MapIgnoreUpdates
+	mapChunkX (
+	mapChunkY ("=
+Map
+	mapChunkX (
+	mapChunkY (
+dataSize ("
+QueryServer"m
+QueryServerResponse
+minMapChunkX (
+minMapChunkY (
+maxMapChunkX (
+maxMapChunkY (*∑
 MsgType
 	eResponse	
 ePing	
@@ -51,4 +60,7 @@
 eSay
 eMapRequestUpdates
 eMapIgnoreUpdates
-eMap	BH
+eMap	
+eQueryServer
+
+eQueryServerResponseBH

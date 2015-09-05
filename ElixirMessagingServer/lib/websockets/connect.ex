@@ -113,8 +113,8 @@ def client(state) do
       Lib.trace("type:", Packet.msgType(str))
 
       # Send message thru Tcp connection to server
-      {:ok, socket} = :gen_udp.open(9998, [:binary, {:active, true}])
-      :gen_udp.send(socket, {127,0,0,1}, 9999, "hey there!")
+      {:ok, socket} = :gen_udp.open(8841, [:binary, {:active, true}])
+      :gen_udp.send(socket, {127,0,0,1}, 8842, "hey there!")
       :gen_udp.close(socket)
 
       ## Send message thru rabbit queue
