@@ -52,10 +52,13 @@ object Main extends App {
     actorSystem.actorOf(Server.props(addr), "server")
    
     // TODO - Move to own actor
-    var perlin = new perlinNoise.PerlinNoise()
-    //var noise = perlin.GenerateWhiteNoise(10,10)
-    var noise = perlin.GetIntMap(80, 30, 0, 9, 3)
-    noise.Dump()
+    val world = actorSystem.actorOf(World.props())
+    world ! "get"
+
+    //var perlin = new perlinNoise.PerlinNoise()
+    ////var noise = perlin.GenerateWhiteNoise(10,10)
+    //var noise = perlin.GetIntMap(80, 30, 0, 9, 3)
+    //noise.Dump()
   }
 
   /**
