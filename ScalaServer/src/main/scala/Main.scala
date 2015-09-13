@@ -53,7 +53,8 @@ object Main extends App {
    
     // TODO - Move to own actor
     val world = actorSystem.actorOf(World.props())
-    world ! "get"
+    world ! "dump"
+    
 
     //var perlin = new perlinNoise.PerlinNoise()
     ////var noise = perlin.GenerateWhiteNoise(10,10)
