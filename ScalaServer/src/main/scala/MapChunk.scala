@@ -4,14 +4,12 @@ import akka.actor.Actor
 import akka.actor.Props
 import akka.event.Logging
 
-case class GetChunk(xc: Int, yc: Int)
-
 class Column {
-  val data = Map[Int, Int]()
-  def Set(h:Int, v:Int) = data + (h -> v)
+  val data = scala.collection.mutable.Map.empty[Int, Int]
+  def Set(h:Int, v:Int) = data += (h -> v)
   def Get(h:Int):Int = data(h)
 
-  def Dump() = { for ((k,v) <- data) Console.print("%s ", k) }
+  def Dump() = { data foreach {case (key, value) => Console.print(key)}}
 }
 
 class MapChunk(xc: Int, yc: Int) extends Actor {
@@ -26,12 +24,14 @@ class MapChunk(xc: Int, yc: Int) extends Actor {
 
   def receive = {
     case "init" => log.info("init")
-    case GetChunk(x,y) => getChunk(x,y)
+    case Get(w,l) => get(w,l)
+    case Set(w,l,h,v) => set(w,l,h,v) 
     case "dump" => Dump()
     case _ => log.info("MapChunk received unknown message")
   }
   
   override def preStart() = {
+    log.info("MapChunk preStart (" + chunkX + "," + chunkY + ")")
     // Initialization code
     var perlin = new perlinNoise.PerlinNoise()
     //var noise = perlin.GenerateWhiteNoise(10,10)
@@ -50,21 +50,34 @@ class MapChunk(xc: Int, yc: Int) extends Actor {
     }    
   }
 
-  def getChunk(x: Int, y: Int) {
-    log.info("Get " + x + "," + y)
+  def get(w:Int, l:Int) {
+    data(w)(l)
+  }
+
+  def set(w:Int, l:Int, h:Int, v:Int) {
+    data(w)(l).Set(h,v)
   }
 
   override def toString(): String = "Chunk " + width + "," + length;
 
   def Dump() =
   {
+    Console.println("MapChunk dump (" + chunkX + "," + chunkY + ")")
+    for (l <- 0 to length-1) { Console.print("-") }
+    Console.print("--")
+    Console.println()
     for (w <- 0 to width-1)
     {
+      Console.print("|")
       for (l <- 0 to length-1)
       {
         data(w)(l).Dump()
       }
+      Console.print("|")
       Console.println()
     }
+    for (l <- 0 to length-1) { Console.print("-") }
+    Console.print("--")
+    Console.println()
   }
 }

@@ -10,6 +10,9 @@ object World {
   }
 }
 
+case class Get(w:Int, l:Int)
+case class Set(w:Int, l:Int, h:Int ,v:Int) 
+
 class World() extends Actor {
   import context.system
   var log = Logging(context.system, this)
@@ -18,12 +21,13 @@ class World() extends Actor {
 
   def receive = {
     case "init" => init
-    case "get" => chunk ! new GetChunk(1,1)
+    case Get(w,l) => chunk ! new Get(w,l)
+    case Set(w,l,h,v) => chunk ! new Set(w,l,h,v)
     case "dump" => chunk ! "dump"
     case _ => log.info("World received unknown message")
   }
 
   def init = {
-    log.info("init")
+    log.info("World init")
   }
 }

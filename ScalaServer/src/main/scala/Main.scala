@@ -54,6 +54,10 @@ object Main extends App {
     // TODO - Move to own actor
     val world = actorSystem.actorOf(World.props())
     world ! "dump"
+    //val d = world ! new Get(1,1)
+    //Console.println("Data:"+d)
+    //world ! new Set(1,1,9,1)
+    world ! "dump"
     
 
     //var perlin = new perlinNoise.PerlinNoise()
