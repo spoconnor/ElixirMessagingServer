@@ -56,7 +56,7 @@ object Main extends App {
     world ! "dump"
     //val d = world ! new Get(1,1)
     //Console.println("Data:"+d)
-    //world ! new Set(1,1,9,1)
+    world ! new Set(1,1,9,1)
     world ! "dump"
     
 
