@@ -30,10 +30,10 @@ namespace CommsMessages {
     internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.Login, global::CommsMessages.Login.Builder> internal__static_CommsMessages_Login__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_CommsMessages_Say__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.Say, global::CommsMessages.Say.Builder> internal__static_CommsMessages_Say__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_CommsMessages_MapRequestUpdates__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapRequestUpdates, global::CommsMessages.MapRequestUpdates.Builder> internal__static_CommsMessages_MapRequestUpdates__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_CommsMessages_MapIgnoreUpdates__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapIgnoreUpdates, global::CommsMessages.MapIgnoreUpdates.Builder> internal__static_CommsMessages_MapIgnoreUpdates__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_CommsMessages_MapRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapRequest, global::CommsMessages.MapRequest.Builder> internal__static_CommsMessages_MapRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_CommsMessages_MapIgnore__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapIgnore, global::CommsMessages.MapIgnore.Builder> internal__static_CommsMessages_MapIgnore__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_CommsMessages_Map__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.Map, global::CommsMessages.Map.Builder> internal__static_CommsMessages_Map__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_CommsMessages_QueryServer__Descriptor;
@@ -49,41 +49,40 @@ namespace CommsMessages {
     
     static CommsMessages() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
-          "ChNDb21tc01lc3NhZ2VzLnByb3RvEg1Db21tc01lc3NhZ2VzIqEECgdNZXNz" + 
+          "ChNDb21tc01lc3NhZ2VzLnByb3RvEg1Db21tc01lc3NhZ2VzIoUECgdNZXNz" + 
           "YWdlEg8KB21zZ3R5cGUYASACKAUSDAoEZnJvbRgCIAIoCRIMCgRkZXN0GAMg" + 
           "AigJEikKCHJlc3BvbnNlGAQgASgLMhcuQ29tbXNNZXNzYWdlcy5SZXNwb25z" + 
           "ZRIhCgRwaW5nGAUgASgLMhMuQ29tbXNNZXNzYWdlcy5QaW5nEiEKBHBvbmcY" + 
           "BiABKAsyEy5Db21tc01lc3NhZ2VzLlBvbmcSJwoHbmV3VXNlchgHIAEoCzIW" + 
           "LkNvbW1zTWVzc2FnZXMuTmV3VXNlchIjCgVsb2dpbhgIIAEoCzIULkNvbW1z" + 
           "TWVzc2FnZXMuTG9naW4SHwoDc2F5GAkgASgLMhIuQ29tbXNNZXNzYWdlcy5T" + 
-          "YXkSOwoRbWFwUmVxdWVzdFVwZGF0ZXMYCiABKAsyIC5Db21tc01lc3NhZ2Vz" + 
-          "Lk1hcFJlcXVlc3RVcGRhdGVzEjkKEG1hcElnbm9yZVVwZGF0ZXMYCyABKAsy" + 
-          "Hy5Db21tc01lc3NhZ2VzLk1hcElnbm9yZVVwZGF0ZXMSHwoDbWFwGAwgASgL" + 
-          "MhIuQ29tbXNNZXNzYWdlcy5NYXASLwoLcXVlcnlTZXJ2ZXIYDSABKAsyGi5D" + 
-          "b21tc01lc3NhZ2VzLlF1ZXJ5U2VydmVyEj8KE3F1ZXJ5U2VydmVyUmVzcG9u" + 
-          "c2UYDiABKAsyIi5Db21tc01lc3NhZ2VzLlF1ZXJ5U2VydmVyUmVzcG9uc2Ui" + 
-          "FQoEUGluZxINCgVjb3VudBgBIAIoBSIVCgRQb25nEg0KBWNvdW50GAEgAigF" + 
-          "IikKCFJlc3BvbnNlEgwKBGNvZGUYASACKAUSDwoHbWVzc2FnZRgCIAEoCSI7" + 
-          "CgdOZXdVc2VyEhAKCHVzZXJuYW1lGAEgAigJEhAKCHBhc3N3b3JkGAIgAigJ" + 
-          "EgwKBG5hbWUYAyACKAkiKwoFTG9naW4SEAoIdXNlcm5hbWUYASACKAkSEAoI" + 
-          "cGFzc3dvcmQYAiACKAkiEwoDU2F5EgwKBHRleHQYASACKAkiOQoRTWFwUmVx" + 
-          "dWVzdFVwZGF0ZXMSEQoJbWFwQ2h1bmtYGAEgAigFEhEKCW1hcENodW5rWRgC" + 
-          "IAIoBSI4ChBNYXBJZ25vcmVVcGRhdGVzEhEKCW1hcENodW5rWBgBIAIoBRIR" + 
-          "CgltYXBDaHVua1kYAiACKAUiPQoDTWFwEhEKCW1hcENodW5rWBgBIAIoBRIR" + 
-          "CgltYXBDaHVua1kYAiACKAUSEAoIZGF0YVNpemUYAyACKAUiDQoLUXVlcnlT" + 
-          "ZXJ2ZXIibQoTUXVlcnlTZXJ2ZXJSZXNwb25zZRIUCgxtaW5NYXBDaHVua1gY" + 
-          "ASACKAUSFAoMbWluTWFwQ2h1bmtZGAIgAigFEhQKDG1heE1hcENodW5rWBgD" + 
-          "IAIoBRIUCgxtYXhNYXBDaHVua1kYBCACKAUqtwEKB01zZ1R5cGUSDQoJZVJl" + 
-          "c3BvbnNlEAESCQoFZVBpbmcQAhIJCgVlUG9uZxADEgwKCGVOZXdVc2VyEAQS" + 
-          "CgoGZUxvZ2luEAUSCAoEZVNheRAGEhYKEmVNYXBSZXF1ZXN0VXBkYXRlcxAH" + 
-          "EhUKEWVNYXBJZ25vcmVVcGRhdGVzEAgSCAoEZU1hcBAJEhAKDGVRdWVyeVNl" + 
-          "cnZlchAKEhgKFGVRdWVyeVNlcnZlclJlc3BvbnNlEAtCAkgB");
+          "YXkSLQoKbWFwUmVxdWVzdBgKIAEoCzIZLkNvbW1zTWVzc2FnZXMuTWFwUmVx" + 
+          "dWVzdBIrCgltYXBJZ25vcmUYCyABKAsyGC5Db21tc01lc3NhZ2VzLk1hcEln" + 
+          "bm9yZRIfCgNtYXAYDCABKAsyEi5Db21tc01lc3NhZ2VzLk1hcBIvCgtxdWVy" + 
+          "eVNlcnZlchgNIAEoCzIaLkNvbW1zTWVzc2FnZXMuUXVlcnlTZXJ2ZXISPwoT" + 
+          "cXVlcnlTZXJ2ZXJSZXNwb25zZRgOIAEoCzIiLkNvbW1zTWVzc2FnZXMuUXVl" + 
+          "cnlTZXJ2ZXJSZXNwb25zZSIVCgRQaW5nEg0KBWNvdW50GAEgAigFIhUKBFBv" + 
+          "bmcSDQoFY291bnQYASACKAUiKQoIUmVzcG9uc2USDAoEY29kZRgBIAIoBRIP" + 
+          "CgdtZXNzYWdlGAIgASgJIjsKB05ld1VzZXISEAoIdXNlcm5hbWUYASACKAkS" + 
+          "EAoIcGFzc3dvcmQYAiACKAkSDAoEbmFtZRgDIAIoCSIrCgVMb2dpbhIQCgh1" + 
+          "c2VybmFtZRgBIAIoCRIQCghwYXNzd29yZBgCIAIoCSITCgNTYXkSDAoEdGV4" + 
+          "dBgBIAIoCSIyCgpNYXBSZXF1ZXN0EhEKCW1hcENodW5rWBgBIAIoBRIRCglt" + 
+          "YXBDaHVua1kYAiACKAUiMQoJTWFwSWdub3JlEhEKCW1hcENodW5rWBgBIAIo" + 
+          "BRIRCgltYXBDaHVua1kYAiACKAUiPQoDTWFwEhEKCW1hcENodW5rWBgBIAIo" + 
+          "BRIRCgltYXBDaHVua1kYAiACKAUSEAoIZGF0YVNpemUYAyACKAUiDQoLUXVl" + 
+          "cnlTZXJ2ZXIibQoTUXVlcnlTZXJ2ZXJSZXNwb25zZRIUCgxtaW5NYXBDaHVu" + 
+          "a1gYASACKAUSFAoMbWluTWFwQ2h1bmtZGAIgAigFEhQKDG1heE1hcENodW5r" + 
+          "WBgDIAIoBRIUCgxtYXhNYXBDaHVua1kYBCACKAUqqQEKB01zZ1R5cGUSDQoJ" + 
+          "ZVJlc3BvbnNlEAESCQoFZVBpbmcQAhIJCgVlUG9uZxADEgwKCGVOZXdVc2Vy" + 
+          "EAQSCgoGZUxvZ2luEAUSCAoEZVNheRAGEg8KC2VNYXBSZXF1ZXN0EAcSDgoK" + 
+          "ZU1hcElnbm9yZRAIEggKBGVNYXAQCRIQCgxlUXVlcnlTZXJ2ZXIQChIYChRl" + 
+          "UXVlcnlTZXJ2ZXJSZXNwb25zZRALQgJIAQ==");
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_CommsMessages_Message__Descriptor = Descriptor.MessageTypes[0];
         internal__static_CommsMessages_Message__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.Message, global::CommsMessages.Message.Builder>(internal__static_CommsMessages_Message__Descriptor,
-                new string[] { "Msgtype", "From", "Dest", "Response", "Ping", "Pong", "NewUser", "Login", "Say", "MapRequestUpdates", "MapIgnoreUpdates", "Map", "QueryServer", "QueryServerResponse", });
+                new string[] { "Msgtype", "From", "Dest", "Response", "Ping", "Pong", "NewUser", "Login", "Say", "MapRequest", "MapIgnore", "Map", "QueryServer", "QueryServerResponse", });
         internal__static_CommsMessages_Ping__Descriptor = Descriptor.MessageTypes[1];
         internal__static_CommsMessages_Ping__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.Ping, global::CommsMessages.Ping.Builder>(internal__static_CommsMessages_Ping__Descriptor,
@@ -108,13 +107,13 @@ namespace CommsMessages {
         internal__static_CommsMessages_Say__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.Say, global::CommsMessages.Say.Builder>(internal__static_CommsMessages_Say__Descriptor,
                 new string[] { "Text", });
-        internal__static_CommsMessages_MapRequestUpdates__Descriptor = Descriptor.MessageTypes[7];
-        internal__static_CommsMessages_MapRequestUpdates__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapRequestUpdates, global::CommsMessages.MapRequestUpdates.Builder>(internal__static_CommsMessages_MapRequestUpdates__Descriptor,
+        internal__static_CommsMessages_MapRequest__Descriptor = Descriptor.MessageTypes[7];
+        internal__static_CommsMessages_MapRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapRequest, global::CommsMessages.MapRequest.Builder>(internal__static_CommsMessages_MapRequest__Descriptor,
                 new string[] { "MapChunkX", "MapChunkY", });
-        internal__static_CommsMessages_MapIgnoreUpdates__Descriptor = Descriptor.MessageTypes[8];
-        internal__static_CommsMessages_MapIgnoreUpdates__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapIgnoreUpdates, global::CommsMessages.MapIgnoreUpdates.Builder>(internal__static_CommsMessages_MapIgnoreUpdates__Descriptor,
+        internal__static_CommsMessages_MapIgnore__Descriptor = Descriptor.MessageTypes[8];
+        internal__static_CommsMessages_MapIgnore__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapIgnore, global::CommsMessages.MapIgnore.Builder>(internal__static_CommsMessages_MapIgnore__Descriptor,
                 new string[] { "MapChunkX", "MapChunkY", });
         internal__static_CommsMessages_Map__Descriptor = Descriptor.MessageTypes[9];
         internal__static_CommsMessages_Map__FieldAccessorTable = 
@@ -145,8 +144,8 @@ namespace CommsMessages {
     eNewUser = 4,
     eLogin = 5,
     eSay = 6,
-    eMapRequestUpdates = 7,
-    eMapIgnoreUpdates = 8,
+    eMapRequest = 7,
+    eMapIgnore = 8,
     eMap = 9,
     eQueryServer = 10,
     eQueryServerResponse = 11,
@@ -159,7 +158,7 @@ namespace CommsMessages {
   public sealed partial class Message : pb::GeneratedMessage<Message, Message.Builder> {
     private Message() { }
     private static readonly Message defaultInstance = new Message().MakeReadOnly();
-    private static readonly string[] _messageFieldNames = new string[] { "dest", "from", "login", "map", "mapIgnoreUpdates", "mapRequestUpdates", "msgtype", "newUser", "ping", "pong", "queryServer", "queryServerResponse", "response", "say" };
+    private static readonly string[] _messageFieldNames = new string[] { "dest", "from", "login", "map", "mapIgnore", "mapRequest", "msgtype", "newUser", "ping", "pong", "queryServer", "queryServerResponse", "response", "say" };
     private static readonly uint[] _messageFieldTags = new uint[] { 26, 18, 66, 98, 90, 82, 8, 58, 42, 50, 106, 114, 34, 74 };
     public static Message DefaultInstance {
       get { return defaultInstance; }
@@ -271,24 +270,24 @@ namespace CommsMessages {
       get { return say_ ?? global::CommsMessages.Say.DefaultInstance; }
     }
     
-    public const int MapRequestUpdatesFieldNumber = 10;
-    private bool hasMapRequestUpdates;
-    private global::CommsMessages.MapRequestUpdates mapRequestUpdates_;
-    public bool HasMapRequestUpdates {
-      get { return hasMapRequestUpdates; }
+    public const int MapRequestFieldNumber = 10;
+    private bool hasMapRequest;
+    private global::CommsMessages.MapRequest mapRequest_;
+    public bool HasMapRequest {
+      get { return hasMapRequest; }
     }
-    public global::CommsMessages.MapRequestUpdates MapRequestUpdates {
-      get { return mapRequestUpdates_ ?? global::CommsMessages.MapRequestUpdates.DefaultInstance; }
+    public global::CommsMessages.MapRequest MapRequest {
+      get { return mapRequest_ ?? global::CommsMessages.MapRequest.DefaultInstance; }
     }
     
-    public const int MapIgnoreUpdatesFieldNumber = 11;
-    private bool hasMapIgnoreUpdates;
-    private global::CommsMessages.MapIgnoreUpdates mapIgnoreUpdates_;
-    public bool HasMapIgnoreUpdates {
-      get { return hasMapIgnoreUpdates; }
+    public const int MapIgnoreFieldNumber = 11;
+    private bool hasMapIgnore;
+    private global::CommsMessages.MapIgnore mapIgnore_;
+    public bool HasMapIgnore {
+      get { return hasMapIgnore; }
     }
-    public global::CommsMessages.MapIgnoreUpdates MapIgnoreUpdates {
-      get { return mapIgnoreUpdates_ ?? global::CommsMessages.MapIgnoreUpdates.DefaultInstance; }
+    public global::CommsMessages.MapIgnore MapIgnore {
+      get { return mapIgnore_ ?? global::CommsMessages.MapIgnore.DefaultInstance; }
     }
     
     public const int MapFieldNumber = 12;
@@ -344,11 +343,11 @@ namespace CommsMessages {
         if (HasSay) {
           if (!Say.IsInitialized) return false;
         }
-        if (HasMapRequestUpdates) {
-          if (!MapRequestUpdates.IsInitialized) return false;
+        if (HasMapRequest) {
+          if (!MapRequest.IsInitialized) return false;
         }
-        if (HasMapIgnoreUpdates) {
-          if (!MapIgnoreUpdates.IsInitialized) return false;
+        if (HasMapIgnore) {
+          if (!MapIgnore.IsInitialized) return false;
         }
         if (HasMap) {
           if (!Map.IsInitialized) return false;
@@ -390,11 +389,11 @@ namespace CommsMessages {
       if (hasSay) {
         output.WriteMessage(9, field_names[13], Say);
       }
-      if (hasMapRequestUpdates) {
-        output.WriteMessage(10, field_names[5], MapRequestUpdates);
+      if (hasMapRequest) {
+        output.WriteMessage(10, field_names[5], MapRequest);
       }
-      if (hasMapIgnoreUpdates) {
-        output.WriteMessage(11, field_names[4], MapIgnoreUpdates);
+      if (hasMapIgnore) {
+        output.WriteMessage(11, field_names[4], MapIgnore);
       }
       if (hasMap) {
         output.WriteMessage(12, field_names[3], Map);
@@ -442,11 +441,11 @@ namespace CommsMessages {
         if (hasSay) {
           size += pb::CodedOutputStream.ComputeMessageSize(9, Say);
         }
-        if (hasMapRequestUpdates) {
-          size += pb::CodedOutputStream.ComputeMessageSize(10, MapRequestUpdates);
+        if (hasMapRequest) {
+          size += pb::CodedOutputStream.ComputeMessageSize(10, MapRequest);
         }
-        if (hasMapIgnoreUpdates) {
-          size += pb::CodedOutputStream.ComputeMessageSize(11, MapIgnoreUpdates);
+        if (hasMapIgnore) {
+          size += pb::CodedOutputStream.ComputeMessageSize(11, MapIgnore);
         }
         if (hasMap) {
           size += pb::CodedOutputStream.ComputeMessageSize(12, Map);
@@ -608,11 +607,11 @@ namespace CommsMessages {
         if (other.HasSay) {
           MergeSay(other.Say);
         }
-        if (other.HasMapRequestUpdates) {
-          MergeMapRequestUpdates(other.MapRequestUpdates);
+        if (other.HasMapRequest) {
+          MergeMapRequest(other.MapRequest);
         }
-        if (other.HasMapIgnoreUpdates) {
-          MergeMapIgnoreUpdates(other.MapIgnoreUpdates);
+        if (other.HasMapIgnore) {
+          MergeMapIgnore(other.MapIgnore);
         }
         if (other.HasMap) {
           MergeMap(other.Map);
@@ -733,21 +732,21 @@ namespace CommsMessages {
               break;
             }
             case 82: {
-              global::CommsMessages.MapRequestUpdates.Builder subBuilder = global::CommsMessages.MapRequestUpdates.CreateBuilder();
-              if (result.hasMapRequestUpdates) {
-                subBuilder.MergeFrom(MapRequestUpdates);
+              global::CommsMessages.MapRequest.Builder subBuilder = global::CommsMessages.MapRequest.CreateBuilder();
+              if (result.hasMapRequest) {
+                subBuilder.MergeFrom(MapRequest);
               }
               input.ReadMessage(subBuilder, extensionRegistry);
-              MapRequestUpdates = subBuilder.BuildPartial();
+              MapRequest = subBuilder.BuildPartial();
               break;
             }
             case 90: {
-              global::CommsMessages.MapIgnoreUpdates.Builder subBuilder = global::CommsMessages.MapIgnoreUpdates.CreateBuilder();
-              if (result.hasMapIgnoreUpdates) {
-                subBuilder.MergeFrom(MapIgnoreUpdates);
+              global::CommsMessages.MapIgnore.Builder subBuilder = global::CommsMessages.MapIgnore.CreateBuilder();
+              if (result.hasMapIgnore) {
+                subBuilder.MergeFrom(MapIgnore);
               }
               input.ReadMessage(subBuilder, extensionRegistry);
-              MapIgnoreUpdates = subBuilder.BuildPartial();
+              MapIgnore = subBuilder.BuildPartial();
               break;
             }
             case 98: {
@@ -1089,83 +1088,83 @@ namespace CommsMessages {
         return this;
       }
       
-      public bool HasMapRequestUpdates {
-       get { return result.hasMapRequestUpdates; }
+      public bool HasMapRequest {
+       get { return result.hasMapRequest; }
       }
-      public global::CommsMessages.MapRequestUpdates MapRequestUpdates {
-        get { return result.MapRequestUpdates; }
-        set { SetMapRequestUpdates(value); }
+      public global::CommsMessages.MapRequest MapRequest {
+        get { return result.MapRequest; }
+        set { SetMapRequest(value); }
       }
-      public Builder SetMapRequestUpdates(global::CommsMessages.MapRequestUpdates value) {
+      public Builder SetMapRequest(global::CommsMessages.MapRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.hasMapRequestUpdates = true;
-        result.mapRequestUpdates_ = value;
+        result.hasMapRequest = true;
+        result.mapRequest_ = value;
         return this;
       }
-      public Builder SetMapRequestUpdates(global::CommsMessages.MapRequestUpdates.Builder builderForValue) {
+      public Builder SetMapRequest(global::CommsMessages.MapRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
-        result.hasMapRequestUpdates = true;
-        result.mapRequestUpdates_ = builderForValue.Build();
+        result.hasMapRequest = true;
+        result.mapRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeMapRequestUpdates(global::CommsMessages.MapRequestUpdates value) {
+      public Builder MergeMapRequest(global::CommsMessages.MapRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        if (result.hasMapRequestUpdates &&
-            result.mapRequestUpdates_ != global::CommsMessages.MapRequestUpdates.DefaultInstance) {
-            result.mapRequestUpdates_ = global::CommsMessages.MapRequestUpdates.CreateBuilder(result.mapRequestUpdates_).MergeFrom(value).BuildPartial();
+        if (result.hasMapRequest &&
+            result.mapRequest_ != global::CommsMessages.MapRequest.DefaultInstance) {
+            result.mapRequest_ = global::CommsMessages.MapRequest.CreateBuilder(result.mapRequest_).MergeFrom(value).BuildPartial();
         } else {
-          result.mapRequestUpdates_ = value;
+          result.mapRequest_ = value;
         }
-        result.hasMapRequestUpdates = true;
+        result.hasMapRequest = true;
         return this;
       }
-      public Builder ClearMapRequestUpdates() {
+      public Builder ClearMapRequest() {
         PrepareBuilder();
-        result.hasMapRequestUpdates = false;
-        result.mapRequestUpdates_ = null;
+        result.hasMapRequest = false;
+        result.mapRequest_ = null;
         return this;
       }
       
-      public bool HasMapIgnoreUpdates {
-       get { return result.hasMapIgnoreUpdates; }
+      public bool HasMapIgnore {
+       get { return result.hasMapIgnore; }
       }
-      public global::CommsMessages.MapIgnoreUpdates MapIgnoreUpdates {
-        get { return result.MapIgnoreUpdates; }
-        set { SetMapIgnoreUpdates(value); }
+      public global::CommsMessages.MapIgnore MapIgnore {
+        get { return result.MapIgnore; }
+        set { SetMapIgnore(value); }
       }
-      public Builder SetMapIgnoreUpdates(global::CommsMessages.MapIgnoreUpdates value) {
+      public Builder SetMapIgnore(global::CommsMessages.MapIgnore value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.hasMapIgnoreUpdates = true;
-        result.mapIgnoreUpdates_ = value;
+        result.hasMapIgnore = true;
+        result.mapIgnore_ = value;
         return this;
       }
-      public Builder SetMapIgnoreUpdates(global::CommsMessages.MapIgnoreUpdates.Builder builderForValue) {
+      public Builder SetMapIgnore(global::CommsMessages.MapIgnore.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
-        result.hasMapIgnoreUpdates = true;
-        result.mapIgnoreUpdates_ = builderForValue.Build();
+        result.hasMapIgnore = true;
+        result.mapIgnore_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeMapIgnoreUpdates(global::CommsMessages.MapIgnoreUpdates value) {
+      public Builder MergeMapIgnore(global::CommsMessages.MapIgnore value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        if (result.hasMapIgnoreUpdates &&
-            result.mapIgnoreUpdates_ != global::CommsMessages.MapIgnoreUpdates.DefaultInstance) {
-            result.mapIgnoreUpdates_ = global::CommsMessages.MapIgnoreUpdates.CreateBuilder(result.mapIgnoreUpdates_).MergeFrom(value).BuildPartial();
+        if (result.hasMapIgnore &&
+            result.mapIgnore_ != global::CommsMessages.MapIgnore.DefaultInstance) {
+            result.mapIgnore_ = global::CommsMessages.MapIgnore.CreateBuilder(result.mapIgnore_).MergeFrom(value).BuildPartial();
         } else {
-          result.mapIgnoreUpdates_ = value;
+          result.mapIgnore_ = value;
         }
-        result.hasMapIgnoreUpdates = true;
+        result.hasMapIgnore = true;
         return this;
       }
-      public Builder ClearMapIgnoreUpdates() {
+      public Builder ClearMapIgnore() {
         PrepareBuilder();
-        result.hasMapIgnoreUpdates = false;
-        result.mapIgnoreUpdates_ = null;
+        result.hasMapIgnore = false;
+        result.mapIgnore_ = null;
         return this;
       }
       
@@ -3103,29 +3102,29 @@ namespace CommsMessages {
   }
   
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  public sealed partial class MapRequestUpdates : pb::GeneratedMessage<MapRequestUpdates, MapRequestUpdates.Builder> {
-    private MapRequestUpdates() { }
-    private static readonly MapRequestUpdates defaultInstance = new MapRequestUpdates().MakeReadOnly();
-    private static readonly string[] _mapRequestUpdatesFieldNames = new string[] { "mapChunkX", "mapChunkY" };
-    private static readonly uint[] _mapRequestUpdatesFieldTags = new uint[] { 8, 16 };
-    public static MapRequestUpdates DefaultInstance {
+  public sealed partial class MapRequest : pb::GeneratedMessage<MapRequest, MapRequest.Builder> {
+    private MapRequest() { }
+    private static readonly MapRequest defaultInstance = new MapRequest().MakeReadOnly();
+    private static readonly string[] _mapRequestFieldNames = new string[] { "mapChunkX", "mapChunkY" };
+    private static readonly uint[] _mapRequestFieldTags = new uint[] { 8, 16 };
+    public static MapRequest DefaultInstance {
       get { return defaultInstance; }
     }
     
-    public override MapRequestUpdates DefaultInstanceForType {
+    public override MapRequest DefaultInstanceForType {
       get { return DefaultInstance; }
     }
     
-    protected override MapRequestUpdates ThisMessage {
+    protected override MapRequest ThisMessage {
       get { return this; }
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapRequestUpdates__Descriptor; }
+      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapRequest__Descriptor; }
     }
     
-    protected override pb::FieldAccess.FieldAccessorTable<MapRequestUpdates, MapRequestUpdates.Builder> InternalFieldAccessors {
-      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapRequestUpdates__FieldAccessorTable; }
+    protected override pb::FieldAccess.FieldAccessorTable<MapRequest, MapRequest.Builder> InternalFieldAccessors {
+      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapRequest__FieldAccessorTable; }
     }
     
     public const int MapChunkXFieldNumber = 1;
@@ -3158,7 +3157,7 @@ namespace CommsMessages {
     
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
-      string[] field_names = _mapRequestUpdatesFieldNames;
+      string[] field_names = _mapRequestFieldNames;
       if (hasMapChunkX) {
         output.WriteInt32(1, field_names[0], MapChunkX);
       }
@@ -3187,49 +3186,49 @@ namespace CommsMessages {
       }
     }
     
-    public static MapRequestUpdates ParseFrom(pb::ByteString data) {
+    public static MapRequest ParseFrom(pb::ByteString data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
-    public static MapRequestUpdates ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+    public static MapRequest ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
-    public static MapRequestUpdates ParseFrom(byte[] data) {
+    public static MapRequest ParseFrom(byte[] data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
-    public static MapRequestUpdates ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+    public static MapRequest ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
-    public static MapRequestUpdates ParseFrom(global::System.IO.Stream input) {
+    public static MapRequest ParseFrom(global::System.IO.Stream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
-    public static MapRequestUpdates ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static MapRequest ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    public static MapRequestUpdates ParseDelimitedFrom(global::System.IO.Stream input) {
+    public static MapRequest ParseDelimitedFrom(global::System.IO.Stream input) {
       return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
     }
-    public static MapRequestUpdates ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static MapRequest ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
     }
-    public static MapRequestUpdates ParseFrom(pb::ICodedInputStream input) {
+    public static MapRequest ParseFrom(pb::ICodedInputStream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
-    public static MapRequestUpdates ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+    public static MapRequest ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    private MapRequestUpdates MakeReadOnly() {
+    private MapRequest MakeReadOnly() {
       return this;
     }
     
     public static Builder CreateBuilder() { return new Builder(); }
     public override Builder ToBuilder() { return CreateBuilder(this); }
     public override Builder CreateBuilderForType() { return new Builder(); }
-    public static Builder CreateBuilder(MapRequestUpdates prototype) {
+    public static Builder CreateBuilder(MapRequest prototype) {
       return new Builder(prototype);
     }
     
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    public sealed partial class Builder : pb::GeneratedBuilder<MapRequestUpdates, Builder> {
+    public sealed partial class Builder : pb::GeneratedBuilder<MapRequest, Builder> {
       protected override Builder ThisBuilder {
         get { return this; }
       }
@@ -3237,18 +3236,18 @@ namespace CommsMessages {
         result = DefaultInstance;
         resultIsReadOnly = true;
       }
-      internal Builder(MapRequestUpdates cloneFrom) {
+      internal Builder(MapRequest cloneFrom) {
         result = cloneFrom;
         resultIsReadOnly = true;
       }
       
       private bool resultIsReadOnly;
-      private MapRequestUpdates result;
+      private MapRequest result;
       
-      private MapRequestUpdates PrepareBuilder() {
+      private MapRequest PrepareBuilder() {
         if (resultIsReadOnly) {
-          MapRequestUpdates original = result;
-          result = new MapRequestUpdates();
+          MapRequest original = result;
+          result = new MapRequest();
           resultIsReadOnly = false;
           MergeFrom(original);
         }
@@ -3259,7 +3258,7 @@ namespace CommsMessages {
         get { return result.IsInitialized; }
       }
       
-      protected override MapRequestUpdates MessageBeingBuilt {
+      protected override MapRequest MessageBeingBuilt {
         get { return PrepareBuilder(); }
       }
       
@@ -3278,14 +3277,14 @@ namespace CommsMessages {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::CommsMessages.MapRequestUpdates.Descriptor; }
+        get { return global::CommsMessages.MapRequest.Descriptor; }
       }
       
-      public override MapRequestUpdates DefaultInstanceForType {
-        get { return global::CommsMessages.MapRequestUpdates.DefaultInstance; }
+      public override MapRequest DefaultInstanceForType {
+        get { return global::CommsMessages.MapRequest.DefaultInstance; }
       }
       
-      public override MapRequestUpdates BuildPartial() {
+      public override MapRequest BuildPartial() {
         if (resultIsReadOnly) {
           return result;
         }
@@ -3294,16 +3293,16 @@ namespace CommsMessages {
       }
       
       public override Builder MergeFrom(pb::IMessage other) {
-        if (other is MapRequestUpdates) {
-          return MergeFrom((MapRequestUpdates) other);
+        if (other is MapRequest) {
+          return MergeFrom((MapRequest) other);
         } else {
           base.MergeFrom(other);
           return this;
         }
       }
       
-      public override Builder MergeFrom(MapRequestUpdates other) {
-        if (other == global::CommsMessages.MapRequestUpdates.DefaultInstance) return this;
+      public override Builder MergeFrom(MapRequest other) {
+        if (other == global::CommsMessages.MapRequest.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasMapChunkX) {
           MapChunkX = other.MapChunkX;
@@ -3326,9 +3325,9 @@ namespace CommsMessages {
         string field_name;
         while (input.ReadTag(out tag, out field_name)) {
           if(tag == 0 && field_name != null) {
-            int field_ordinal = global::System.Array.BinarySearch(_mapRequestUpdatesFieldNames, field_name, global::System.StringComparer.Ordinal);
+            int field_ordinal = global::System.Array.BinarySearch(_mapRequestFieldNames, field_name, global::System.StringComparer.Ordinal);
             if(field_ordinal >= 0)
-              tag = _mapRequestUpdatesFieldTags[field_ordinal];
+              tag = _mapRequestFieldTags[field_ordinal];
             else {
               if (unknownFields == null) {
                 unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
@@ -3412,35 +3411,35 @@ namespace CommsMessages {
         return this;
       }
     }
-    static MapRequestUpdates() {
+    static MapRequest() {
       object.ReferenceEquals(global::CommsMessages.CommsMessages.Descriptor, null);
     }
   }
   
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  public sealed partial class MapIgnoreUpdates : pb::GeneratedMessage<MapIgnoreUpdates, MapIgnoreUpdates.Builder> {
-    private MapIgnoreUpdates() { }
-    private static readonly MapIgnoreUpdates defaultInstance = new MapIgnoreUpdates().MakeReadOnly();
-    private static readonly string[] _mapIgnoreUpdatesFieldNames = new string[] { "mapChunkX", "mapChunkY" };
-    private static readonly uint[] _mapIgnoreUpdatesFieldTags = new uint[] { 8, 16 };
-    public static MapIgnoreUpdates DefaultInstance {
+  public sealed partial class MapIgnore : pb::GeneratedMessage<MapIgnore, MapIgnore.Builder> {
+    private MapIgnore() { }
+    private static readonly MapIgnore defaultInstance = new MapIgnore().MakeReadOnly();
+    private static readonly string[] _mapIgnoreFieldNames = new string[] { "mapChunkX", "mapChunkY" };
+    private static readonly uint[] _mapIgnoreFieldTags = new uint[] { 8, 16 };
+    public static MapIgnore DefaultInstance {
       get { return defaultInstance; }
     }
     
-    public override MapIgnoreUpdates DefaultInstanceForType {
+    public override MapIgnore DefaultInstanceForType {
       get { return DefaultInstance; }
     }
     
-    protected override MapIgnoreUpdates ThisMessage {
+    protected override MapIgnore ThisMessage {
       get { return this; }
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapIgnoreUpdates__Descriptor; }
+      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapIgnore__Descriptor; }
     }
     
-    protected override pb::FieldAccess.FieldAccessorTable<MapIgnoreUpdates, MapIgnoreUpdates.Builder> InternalFieldAccessors {
-      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapIgnoreUpdates__FieldAccessorTable; }
+    protected override pb::FieldAccess.FieldAccessorTable<MapIgnore, MapIgnore.Builder> InternalFieldAccessors {
+      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapIgnore__FieldAccessorTable; }
     }
     
     public const int MapChunkXFieldNumber = 1;
@@ -3473,7 +3472,7 @@ namespace CommsMessages {
     
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
-      string[] field_names = _mapIgnoreUpdatesFieldNames;
+      string[] field_names = _mapIgnoreFieldNames;
       if (hasMapChunkX) {
         output.WriteInt32(1, field_names[0], MapChunkX);
       }
@@ -3502,49 +3501,49 @@ namespace CommsMessages {
       }
     }
     
-    public static MapIgnoreUpdates ParseFrom(pb::ByteString data) {
+    public static MapIgnore ParseFrom(pb::ByteString data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
-    public static MapIgnoreUpdates ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+    public static MapIgnore ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
-    public static MapIgnoreUpdates ParseFrom(byte[] data) {
+    public static MapIgnore ParseFrom(byte[] data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
-    public static MapIgnoreUpdates ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+    public static MapIgnore ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
-    public static MapIgnoreUpdates ParseFrom(global::System.IO.Stream input) {
+    public static MapIgnore ParseFrom(global::System.IO.Stream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
-    public static MapIgnoreUpdates ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static MapIgnore ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    public static MapIgnoreUpdates ParseDelimitedFrom(global::System.IO.Stream input) {
+    public static MapIgnore ParseDelimitedFrom(global::System.IO.Stream input) {
       return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
     }
-    public static MapIgnoreUpdates ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static MapIgnore ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
     }
-    public static MapIgnoreUpdates ParseFrom(pb::ICodedInputStream input) {
+    public static MapIgnore ParseFrom(pb::ICodedInputStream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
-    public static MapIgnoreUpdates ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+    public static MapIgnore ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    private MapIgnoreUpdates MakeReadOnly() {
+    private MapIgnore MakeReadOnly() {
       return this;
     }
     
     public static Builder CreateBuilder() { return new Builder(); }
     public override Builder ToBuilder() { return CreateBuilder(this); }
     public override Builder CreateBuilderForType() { return new Builder(); }
-    public static Builder CreateBuilder(MapIgnoreUpdates prototype) {
+    public static Builder CreateBuilder(MapIgnore prototype) {
       return new Builder(prototype);
     }
     
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    public sealed partial class Builder : pb::GeneratedBuilder<MapIgnoreUpdates, Builder> {
+    public sealed partial class Builder : pb::GeneratedBuilder<MapIgnore, Builder> {
       protected override Builder ThisBuilder {
         get { return this; }
       }
@@ -3552,18 +3551,18 @@ namespace CommsMessages {
         result = DefaultInstance;
         resultIsReadOnly = true;
       }
-      internal Builder(MapIgnoreUpdates cloneFrom) {
+      internal Builder(MapIgnore cloneFrom) {
         result = cloneFrom;
         resultIsReadOnly = true;
       }
       
       private bool resultIsReadOnly;
-      private MapIgnoreUpdates result;
+      private MapIgnore result;
       
-      private MapIgnoreUpdates PrepareBuilder() {
+      private MapIgnore PrepareBuilder() {
         if (resultIsReadOnly) {
-          MapIgnoreUpdates original = result;
-          result = new MapIgnoreUpdates();
+          MapIgnore original = result;
+          result = new MapIgnore();
           resultIsReadOnly = false;
           MergeFrom(original);
         }
@@ -3574,7 +3573,7 @@ namespace CommsMessages {
         get { return result.IsInitialized; }
       }
       
-      protected override MapIgnoreUpdates MessageBeingBuilt {
+      protected override MapIgnore MessageBeingBuilt {
         get { return PrepareBuilder(); }
       }
       
@@ -3593,14 +3592,14 @@ namespace CommsMessages {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::CommsMessages.MapIgnoreUpdates.Descriptor; }
+        get { return global::CommsMessages.MapIgnore.Descriptor; }
       }
       
-      public override MapIgnoreUpdates DefaultInstanceForType {
-        get { return global::CommsMessages.MapIgnoreUpdates.DefaultInstance; }
+      public override MapIgnore DefaultInstanceForType {
+        get { return global::CommsMessages.MapIgnore.DefaultInstance; }
       }
       
-      public override MapIgnoreUpdates BuildPartial() {
+      public override MapIgnore BuildPartial() {
         if (resultIsReadOnly) {
           return result;
         }
@@ -3609,16 +3608,16 @@ namespace CommsMessages {
       }
       
       public override Builder MergeFrom(pb::IMessage other) {
-        if (other is MapIgnoreUpdates) {
-          return MergeFrom((MapIgnoreUpdates) other);
+        if (other is MapIgnore) {
+          return MergeFrom((MapIgnore) other);
         } else {
           base.MergeFrom(other);
           return this;
         }
       }
       
-      public override Builder MergeFrom(MapIgnoreUpdates other) {
-        if (other == global::CommsMessages.MapIgnoreUpdates.DefaultInstance) return this;
+      public override Builder MergeFrom(MapIgnore other) {
+        if (other == global::CommsMessages.MapIgnore.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasMapChunkX) {
           MapChunkX = other.MapChunkX;
@@ -3641,9 +3640,9 @@ namespace CommsMessages {
         string field_name;
         while (input.ReadTag(out tag, out field_name)) {
           if(tag == 0 && field_name != null) {
-            int field_ordinal = global::System.Array.BinarySearch(_mapIgnoreUpdatesFieldNames, field_name, global::System.StringComparer.Ordinal);
+            int field_ordinal = global::System.Array.BinarySearch(_mapIgnoreFieldNames, field_name, global::System.StringComparer.Ordinal);
             if(field_ordinal >= 0)
-              tag = _mapIgnoreUpdatesFieldTags[field_ordinal];
+              tag = _mapIgnoreFieldTags[field_ordinal];
             else {
               if (unknownFields == null) {
                 unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
@@ -3727,7 +3726,7 @@ namespace CommsMessages {
         return this;
       }
     }
-    static MapIgnoreUpdates() {
+    static MapIgnore() {
       object.ReferenceEquals(global::CommsMessages.CommsMessages.Descriptor, null);
     }
   }

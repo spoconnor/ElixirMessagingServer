@@ -29,10 +29,17 @@ client = WebSocket.new(serverurl)
 puts("Connected")
 objectid = 0
 
+EResponse = 1
+EPing = 2
+EPong = 3
 ENewUser = 4
 ELogin = 5
 ESay = 6
-EResponse = 1
+EMapRequest = 7
+EMapIgnore = 8
+EMap = 9
+EQueryServer = 10
+EQueryServerResponse = 11
 
 # Login
   loggedin = false
@@ -107,6 +114,8 @@ EResponse = 1
       when ESay
         #puts("Say")
         puts("#{message.say.from}: #{message.say.text}")
+      when EMap
+        puts("Map message received for #{message.map.mapChunkX},#{message.map.mapChunkY}")
       else
         puts("Unknown")
       end
@@ -115,6 +124,16 @@ EResponse = 1
     exit()
   end
 
+  # Request map
+  message = CommsMessages::Message.new
+  message.msgtype = EMapRequest
+  message.from = username
+  message.dest = "MapServer"
+  message.mapRequest = CommsMessages::MapRequest.new
+  message.mapRequest.mapChunkX = 1
+  message.mapRequest.mapChunkY = 1
+  messageStr = message.to_s
+  client.send(messageStr.length.chr + messageStr)
 
   while (1) do
     message = CommsMessages::Message.new

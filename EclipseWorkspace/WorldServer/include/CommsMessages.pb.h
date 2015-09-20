@@ -41,8 +41,8 @@ class Response;
 class NewUser;
 class Login;
 class Say;
-class MapRequestUpdates;
-class MapIgnoreUpdates;
+class MapRequest;
+class MapIgnore;
 class Map;
 class QueryServer;
 class QueryServerResponse;
@@ -54,8 +54,8 @@ enum MsgType {
   eNewUser = 4,
   eLogin = 5,
   eSay = 6,
-  eMapRequestUpdates = 7,
-  eMapIgnoreUpdates = 8,
+  eMapRequest = 7,
+  eMapIgnore = 8,
   eMap = 9,
   eQueryServer = 10,
   eQueryServerResponse = 11
@@ -216,23 +216,23 @@ class Message : public ::google::protobuf::Message {
   inline ::CommsMessages::Say* release_say();
   inline void set_allocated_say(::CommsMessages::Say* say);
 
-  // optional .CommsMessages.MapRequestUpdates mapRequestUpdates = 10;
-  inline bool has_maprequestupdates() const;
-  inline void clear_maprequestupdates();
-  static const int kMapRequestUpdatesFieldNumber = 10;
-  inline const ::CommsMessages::MapRequestUpdates& maprequestupdates() const;
-  inline ::CommsMessages::MapRequestUpdates* mutable_maprequestupdates();
-  inline ::CommsMessages::MapRequestUpdates* release_maprequestupdates();
-  inline void set_allocated_maprequestupdates(::CommsMessages::MapRequestUpdates* maprequestupdates);
+  // optional .CommsMessages.MapRequest mapRequest = 10;
+  inline bool has_maprequest() const;
+  inline void clear_maprequest();
+  static const int kMapRequestFieldNumber = 10;
+  inline const ::CommsMessages::MapRequest& maprequest() const;
+  inline ::CommsMessages::MapRequest* mutable_maprequest();
+  inline ::CommsMessages::MapRequest* release_maprequest();
+  inline void set_allocated_maprequest(::CommsMessages::MapRequest* maprequest);
 
-  // optional .CommsMessages.MapIgnoreUpdates mapIgnoreUpdates = 11;
-  inline bool has_mapignoreupdates() const;
-  inline void clear_mapignoreupdates();
-  static const int kMapIgnoreUpdatesFieldNumber = 11;
-  inline const ::CommsMessages::MapIgnoreUpdates& mapignoreupdates() const;
-  inline ::CommsMessages::MapIgnoreUpdates* mutable_mapignoreupdates();
-  inline ::CommsMessages::MapIgnoreUpdates* release_mapignoreupdates();
-  inline void set_allocated_mapignoreupdates(::CommsMessages::MapIgnoreUpdates* mapignoreupdates);
+  // optional .CommsMessages.MapIgnore mapIgnore = 11;
+  inline bool has_mapignore() const;
+  inline void clear_mapignore();
+  static const int kMapIgnoreFieldNumber = 11;
+  inline const ::CommsMessages::MapIgnore& mapignore() const;
+  inline ::CommsMessages::MapIgnore* mutable_mapignore();
+  inline ::CommsMessages::MapIgnore* release_mapignore();
+  inline void set_allocated_mapignore(::CommsMessages::MapIgnore* mapignore);
 
   // optional .CommsMessages.Map map = 12;
   inline bool has_map() const;
@@ -281,10 +281,10 @@ class Message : public ::google::protobuf::Message {
   inline void clear_has_login();
   inline void set_has_say();
   inline void clear_has_say();
-  inline void set_has_maprequestupdates();
-  inline void clear_has_maprequestupdates();
-  inline void set_has_mapignoreupdates();
-  inline void clear_has_mapignoreupdates();
+  inline void set_has_maprequest();
+  inline void clear_has_maprequest();
+  inline void set_has_mapignore();
+  inline void clear_has_mapignore();
   inline void set_has_map();
   inline void clear_has_map();
   inline void set_has_queryserver();
@@ -302,8 +302,8 @@ class Message : public ::google::protobuf::Message {
   ::CommsMessages::NewUser* newuser_;
   ::CommsMessages::Login* login_;
   ::CommsMessages::Say* say_;
-  ::CommsMessages::MapRequestUpdates* maprequestupdates_;
-  ::CommsMessages::MapIgnoreUpdates* mapignoreupdates_;
+  ::CommsMessages::MapRequest* maprequest_;
+  ::CommsMessages::MapIgnore* mapignore_;
   ::CommsMessages::Map* map_;
   ::CommsMessages::QueryServer* queryserver_;
   ::CommsMessages::QueryServerResponse* queryserverresponse_;
@@ -888,14 +888,14 @@ class Say : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class MapRequestUpdates : public ::google::protobuf::Message {
+class MapRequest : public ::google::protobuf::Message {
  public:
-  MapRequestUpdates();
-  virtual ~MapRequestUpdates();
+  MapRequest();
+  virtual ~MapRequest();
 
-  MapRequestUpdates(const MapRequestUpdates& from);
+  MapRequest(const MapRequest& from);
 
-  inline MapRequestUpdates& operator=(const MapRequestUpdates& from) {
+  inline MapRequest& operator=(const MapRequest& from) {
     CopyFrom(from);
     return *this;
   }
@@ -909,17 +909,17 @@ class MapRequestUpdates : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const MapRequestUpdates& default_instance();
+  static const MapRequest& default_instance();
 
-  void Swap(MapRequestUpdates* other);
+  void Swap(MapRequest* other);
 
   // implements Message ----------------------------------------------
 
-  MapRequestUpdates* New() const;
+  MapRequest* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const MapRequestUpdates& from);
-  void MergeFrom(const MapRequestUpdates& from);
+  void CopyFrom(const MapRequest& from);
+  void MergeFrom(const MapRequest& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -956,7 +956,7 @@ class MapRequestUpdates : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 mapchunky() const;
   inline void set_mapchunky(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:CommsMessages.MapRequestUpdates)
+  // @@protoc_insertion_point(class_scope:CommsMessages.MapRequest)
  private:
   inline void set_has_mapchunkx();
   inline void clear_has_mapchunkx();
@@ -976,18 +976,18 @@ class MapRequestUpdates : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_CommsMessages_2eproto();
 
   void InitAsDefaultInstance();
-  static MapRequestUpdates* default_instance_;
+  static MapRequest* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class MapIgnoreUpdates : public ::google::protobuf::Message {
+class MapIgnore : public ::google::protobuf::Message {
  public:
-  MapIgnoreUpdates();
-  virtual ~MapIgnoreUpdates();
+  MapIgnore();
+  virtual ~MapIgnore();
 
-  MapIgnoreUpdates(const MapIgnoreUpdates& from);
+  MapIgnore(const MapIgnore& from);
 
-  inline MapIgnoreUpdates& operator=(const MapIgnoreUpdates& from) {
+  inline MapIgnore& operator=(const MapIgnore& from) {
     CopyFrom(from);
     return *this;
   }
@@ -1001,17 +1001,17 @@ class MapIgnoreUpdates : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const MapIgnoreUpdates& default_instance();
+  static const MapIgnore& default_instance();
 
-  void Swap(MapIgnoreUpdates* other);
+  void Swap(MapIgnore* other);
 
   // implements Message ----------------------------------------------
 
-  MapIgnoreUpdates* New() const;
+  MapIgnore* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const MapIgnoreUpdates& from);
-  void MergeFrom(const MapIgnoreUpdates& from);
+  void CopyFrom(const MapIgnore& from);
+  void MergeFrom(const MapIgnore& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -1048,7 +1048,7 @@ class MapIgnoreUpdates : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 mapchunky() const;
   inline void set_mapchunky(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:CommsMessages.MapIgnoreUpdates)
+  // @@protoc_insertion_point(class_scope:CommsMessages.MapIgnore)
  private:
   inline void set_has_mapchunkx();
   inline void clear_has_mapchunkx();
@@ -1068,7 +1068,7 @@ class MapIgnoreUpdates : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_CommsMessages_2eproto();
 
   void InitAsDefaultInstance();
-  static MapIgnoreUpdates* default_instance_;
+  static MapIgnore* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -1753,79 +1753,79 @@ inline void Message::set_allocated_say(::CommsMessages::Say* say) {
   }
 }
 
-// optional .CommsMessages.MapRequestUpdates mapRequestUpdates = 10;
-inline bool Message::has_maprequestupdates() const {
+// optional .CommsMessages.MapRequest mapRequest = 10;
+inline bool Message::has_maprequest() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
-inline void Message::set_has_maprequestupdates() {
+inline void Message::set_has_maprequest() {
   _has_bits_[0] |= 0x00000200u;
 }
-inline void Message::clear_has_maprequestupdates() {
+inline void Message::clear_has_maprequest() {
   _has_bits_[0] &= ~0x00000200u;
 }
-inline void Message::clear_maprequestupdates() {
-  if (maprequestupdates_ != NULL) maprequestupdates_->::CommsMessages::MapRequestUpdates::Clear();
-  clear_has_maprequestupdates();
+inline void Message::clear_maprequest() {
+  if (maprequest_ != NULL) maprequest_->::CommsMessages::MapRequest::Clear();
+  clear_has_maprequest();
 }
-inline const ::CommsMessages::MapRequestUpdates& Message::maprequestupdates() const {
-  return maprequestupdates_ != NULL ? *maprequestupdates_ : *default_instance_->maprequestupdates_;
+inline const ::CommsMessages::MapRequest& Message::maprequest() const {
+  return maprequest_ != NULL ? *maprequest_ : *default_instance_->maprequest_;
 }
-inline ::CommsMessages::MapRequestUpdates* Message::mutable_maprequestupdates() {
-  set_has_maprequestupdates();
-  if (maprequestupdates_ == NULL) maprequestupdates_ = new ::CommsMessages::MapRequestUpdates;
-  return maprequestupdates_;
+inline ::CommsMessages::MapRequest* Message::mutable_maprequest() {
+  set_has_maprequest();
+  if (maprequest_ == NULL) maprequest_ = new ::CommsMessages::MapRequest;
+  return maprequest_;
 }
-inline ::CommsMessages::MapRequestUpdates* Message::release_maprequestupdates() {
-  clear_has_maprequestupdates();
-  ::CommsMessages::MapRequestUpdates* temp = maprequestupdates_;
-  maprequestupdates_ = NULL;
+inline ::CommsMessages::MapRequest* Message::release_maprequest() {
+  clear_has_maprequest();
+  ::CommsMessages::MapRequest* temp = maprequest_;
+  maprequest_ = NULL;
   return temp;
 }
-inline void Message::set_allocated_maprequestupdates(::CommsMessages::MapRequestUpdates* maprequestupdates) {
-  delete maprequestupdates_;
-  maprequestupdates_ = maprequestupdates;
-  if (maprequestupdates) {
-    set_has_maprequestupdates();
+inline void Message::set_allocated_maprequest(::CommsMessages::MapRequest* maprequest) {
+  delete maprequest_;
+  maprequest_ = maprequest;
+  if (maprequest) {
+    set_has_maprequest();
   } else {
-    clear_has_maprequestupdates();
+    clear_has_maprequest();
   }
 }
 
-// optional .CommsMessages.MapIgnoreUpdates mapIgnoreUpdates = 11;
-inline bool Message::has_mapignoreupdates() const {
+// optional .CommsMessages.MapIgnore mapIgnore = 11;
+inline bool Message::has_mapignore() const {
   return (_has_bits_[0] & 0x00000400u) != 0;
 }
-inline void Message::set_has_mapignoreupdates() {
+inline void Message::set_has_mapignore() {
   _has_bits_[0] |= 0x00000400u;
 }
-inline void Message::clear_has_mapignoreupdates() {
+inline void Message::clear_has_mapignore() {
   _has_bits_[0] &= ~0x00000400u;
 }
-inline void Message::clear_mapignoreupdates() {
-  if (mapignoreupdates_ != NULL) mapignoreupdates_->::CommsMessages::MapIgnoreUpdates::Clear();
-  clear_has_mapignoreupdates();
+inline void Message::clear_mapignore() {
+  if (mapignore_ != NULL) mapignore_->::CommsMessages::MapIgnore::Clear();
+  clear_has_mapignore();
 }
-inline const ::CommsMessages::MapIgnoreUpdates& Message::mapignoreupdates() const {
-  return mapignoreupdates_ != NULL ? *mapignoreupdates_ : *default_instance_->mapignoreupdates_;
+inline const ::CommsMessages::MapIgnore& Message::mapignore() const {
+  return mapignore_ != NULL ? *mapignore_ : *default_instance_->mapignore_;
 }
-inline ::CommsMessages::MapIgnoreUpdates* Message::mutable_mapignoreupdates() {
-  set_has_mapignoreupdates();
-  if (mapignoreupdates_ == NULL) mapignoreupdates_ = new ::CommsMessages::MapIgnoreUpdates;
-  return mapignoreupdates_;
+inline ::CommsMessages::MapIgnore* Message::mutable_mapignore() {
+  set_has_mapignore();
+  if (mapignore_ == NULL) mapignore_ = new ::CommsMessages::MapIgnore;
+  return mapignore_;
 }
-inline ::CommsMessages::MapIgnoreUpdates* Message::release_mapignoreupdates() {
-  clear_has_mapignoreupdates();
-  ::CommsMessages::MapIgnoreUpdates* temp = mapignoreupdates_;
-  mapignoreupdates_ = NULL;
+inline ::CommsMessages::MapIgnore* Message::release_mapignore() {
+  clear_has_mapignore();
+  ::CommsMessages::MapIgnore* temp = mapignore_;
+  mapignore_ = NULL;
   return temp;
 }
-inline void Message::set_allocated_mapignoreupdates(::CommsMessages::MapIgnoreUpdates* mapignoreupdates) {
-  delete mapignoreupdates_;
-  mapignoreupdates_ = mapignoreupdates;
-  if (mapignoreupdates) {
-    set_has_mapignoreupdates();
+inline void Message::set_allocated_mapignore(::CommsMessages::MapIgnore* mapignore) {
+  delete mapignore_;
+  mapignore_ = mapignore;
+  if (mapignore) {
+    set_has_mapignore();
   } else {
-    clear_has_mapignoreupdates();
+    clear_has_mapignore();
   }
 }
 
@@ -2525,96 +2525,96 @@ inline void Say::set_allocated_text(::std::string* text) {
 
 // -------------------------------------------------------------------
 
-// MapRequestUpdates
+// MapRequest
 
 // required int32 mapChunkX = 1;
-inline bool MapRequestUpdates::has_mapchunkx() const {
+inline bool MapRequest::has_mapchunkx() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void MapRequestUpdates::set_has_mapchunkx() {
+inline void MapRequest::set_has_mapchunkx() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void MapRequestUpdates::clear_has_mapchunkx() {
+inline void MapRequest::clear_has_mapchunkx() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void MapRequestUpdates::clear_mapchunkx() {
+inline void MapRequest::clear_mapchunkx() {
   mapchunkx_ = 0;
   clear_has_mapchunkx();
 }
-inline ::google::protobuf::int32 MapRequestUpdates::mapchunkx() const {
+inline ::google::protobuf::int32 MapRequest::mapchunkx() const {
   return mapchunkx_;
 }
-inline void MapRequestUpdates::set_mapchunkx(::google::protobuf::int32 value) {
+inline void MapRequest::set_mapchunkx(::google::protobuf::int32 value) {
   set_has_mapchunkx();
   mapchunkx_ = value;
 }
 
 // required int32 mapChunkY = 2;
-inline bool MapRequestUpdates::has_mapchunky() const {
+inline bool MapRequest::has_mapchunky() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void MapRequestUpdates::set_has_mapchunky() {
+inline void MapRequest::set_has_mapchunky() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void MapRequestUpdates::clear_has_mapchunky() {
+inline void MapRequest::clear_has_mapchunky() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void MapRequestUpdates::clear_mapchunky() {
+inline void MapRequest::clear_mapchunky() {
   mapchunky_ = 0;
   clear_has_mapchunky();
 }
-inline ::google::protobuf::int32 MapRequestUpdates::mapchunky() const {
+inline ::google::protobuf::int32 MapRequest::mapchunky() const {
   return mapchunky_;
 }
-inline void MapRequestUpdates::set_mapchunky(::google::protobuf::int32 value) {
+inline void MapRequest::set_mapchunky(::google::protobuf::int32 value) {
   set_has_mapchunky();
   mapchunky_ = value;
 }
 
 // -------------------------------------------------------------------
 
-// MapIgnoreUpdates
+// MapIgnore
 
 // required int32 mapChunkX = 1;
-inline bool MapIgnoreUpdates::has_mapchunkx() const {
+inline bool MapIgnore::has_mapchunkx() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void MapIgnoreUpdates::set_has_mapchunkx() {
+inline void MapIgnore::set_has_mapchunkx() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void MapIgnoreUpdates::clear_has_mapchunkx() {
+inline void MapIgnore::clear_has_mapchunkx() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void MapIgnoreUpdates::clear_mapchunkx() {
+inline void MapIgnore::clear_mapchunkx() {
   mapchunkx_ = 0;
   clear_has_mapchunkx();
 }
-inline ::google::protobuf::int32 MapIgnoreUpdates::mapchunkx() const {
+inline ::google::protobuf::int32 MapIgnore::mapchunkx() const {
   return mapchunkx_;
 }
-inline void MapIgnoreUpdates::set_mapchunkx(::google::protobuf::int32 value) {
+inline void MapIgnore::set_mapchunkx(::google::protobuf::int32 value) {
   set_has_mapchunkx();
   mapchunkx_ = value;
 }
 
 // required int32 mapChunkY = 2;
-inline bool MapIgnoreUpdates::has_mapchunky() const {
+inline bool MapIgnore::has_mapchunky() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void MapIgnoreUpdates::set_has_mapchunky() {
+inline void MapIgnore::set_has_mapchunky() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void MapIgnoreUpdates::clear_has_mapchunky() {
+inline void MapIgnore::clear_has_mapchunky() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void MapIgnoreUpdates::clear_mapchunky() {
+inline void MapIgnore::clear_mapchunky() {
   mapchunky_ = 0;
   clear_has_mapchunky();
 }
-inline ::google::protobuf::int32 MapIgnoreUpdates::mapchunky() const {
+inline ::google::protobuf::int32 MapIgnore::mapchunky() const {
   return mapchunky_;
 }
-inline void MapIgnoreUpdates::set_mapchunky(::google::protobuf::int32 value) {
+inline void MapIgnore::set_mapchunky(::google::protobuf::int32 value) {
   set_has_mapchunky();
   mapchunky_ = value;
 }

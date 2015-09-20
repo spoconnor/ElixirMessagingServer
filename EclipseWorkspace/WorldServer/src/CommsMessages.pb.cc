@@ -41,12 +41,12 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* Say_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Say_reflection_ = NULL;
-const ::google::protobuf::Descriptor* MapRequestUpdates_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* MapRequest_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  MapRequestUpdates_reflection_ = NULL;
-const ::google::protobuf::Descriptor* MapIgnoreUpdates_descriptor_ = NULL;
+  MapRequest_reflection_ = NULL;
+const ::google::protobuf::Descriptor* MapIgnore_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  MapIgnoreUpdates_reflection_ = NULL;
+  MapIgnore_reflection_ = NULL;
 const ::google::protobuf::Descriptor* Map_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Map_reflection_ = NULL;
@@ -78,8 +78,8 @@ void protobuf_AssignDesc_CommsMessages_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, newuser_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, login_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, say_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, maprequestupdates_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, mapignoreupdates_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, maprequest_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, mapignore_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, map_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, queryserver_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, queryserverresponse_),
@@ -189,38 +189,38 @@ void protobuf_AssignDesc_CommsMessages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Say));
-  MapRequestUpdates_descriptor_ = file->message_type(7);
-  static const int MapRequestUpdates_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequestUpdates, mapchunkx_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequestUpdates, mapchunky_),
+  MapRequest_descriptor_ = file->message_type(7);
+  static const int MapRequest_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequest, mapchunkx_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequest, mapchunky_),
   };
-  MapRequestUpdates_reflection_ =
+  MapRequest_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      MapRequestUpdates_descriptor_,
-      MapRequestUpdates::default_instance_,
-      MapRequestUpdates_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequestUpdates, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequestUpdates, _unknown_fields_),
+      MapRequest_descriptor_,
+      MapRequest::default_instance_,
+      MapRequest_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequest, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequest, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(MapRequestUpdates));
-  MapIgnoreUpdates_descriptor_ = file->message_type(8);
-  static const int MapIgnoreUpdates_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnoreUpdates, mapchunkx_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnoreUpdates, mapchunky_),
+      sizeof(MapRequest));
+  MapIgnore_descriptor_ = file->message_type(8);
+  static const int MapIgnore_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnore, mapchunkx_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnore, mapchunky_),
   };
-  MapIgnoreUpdates_reflection_ =
+  MapIgnore_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      MapIgnoreUpdates_descriptor_,
-      MapIgnoreUpdates::default_instance_,
-      MapIgnoreUpdates_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnoreUpdates, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnoreUpdates, _unknown_fields_),
+      MapIgnore_descriptor_,
+      MapIgnore::default_instance_,
+      MapIgnore_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnore, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnore, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(MapIgnoreUpdates));
+      sizeof(MapIgnore));
   Map_descriptor_ = file->message_type(9);
   static const int Map_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, mapchunkx_),
@@ -298,9 +298,9 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Say_descriptor_, &Say::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    MapRequestUpdates_descriptor_, &MapRequestUpdates::default_instance());
+    MapRequest_descriptor_, &MapRequest::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    MapIgnoreUpdates_descriptor_, &MapIgnoreUpdates::default_instance());
+    MapIgnore_descriptor_, &MapIgnore::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Map_descriptor_, &Map::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -326,10 +326,10 @@ void protobuf_ShutdownFile_CommsMessages_2eproto() {
   delete Login_reflection_;
   delete Say::default_instance_;
   delete Say_reflection_;
-  delete MapRequestUpdates::default_instance_;
-  delete MapRequestUpdates_reflection_;
-  delete MapIgnoreUpdates::default_instance_;
-  delete MapIgnoreUpdates_reflection_;
+  delete MapRequest::default_instance_;
+  delete MapRequest_reflection_;
+  delete MapIgnore::default_instance_;
+  delete MapIgnore_reflection_;
   delete Map::default_instance_;
   delete Map_reflection_;
   delete QueryServer::default_instance_;
@@ -345,39 +345,37 @@ void protobuf_AddDesc_CommsMessages_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023CommsMessages.proto\022\rCommsMessages\"\241\004\n"
+    "\n\023CommsMessages.proto\022\rCommsMessages\"\205\004\n"
     "\007Message\022\017\n\007msgtype\030\001 \002(\005\022\014\n\004from\030\002 \002(\t\022"
     "\014\n\004dest\030\003 \002(\t\022)\n\010response\030\004 \001(\0132\027.CommsM"
     "essages.Response\022!\n\004ping\030\005 \001(\0132\023.CommsMe"
     "ssages.Ping\022!\n\004pong\030\006 \001(\0132\023.CommsMessage"
     "s.Pong\022\'\n\007newUser\030\007 \001(\0132\026.CommsMessages."
     "NewUser\022#\n\005login\030\010 \001(\0132\024.CommsMessages.L"
-    "ogin\022\037\n\003say\030\t \001(\0132\022.CommsMessages.Say\022;\n"
-    "\021mapRequestUpdates\030\n \001(\0132 .CommsMessages"
-    ".MapRequestUpdates\0229\n\020mapIgnoreUpdates\030\013"
-    " \001(\0132\037.CommsMessages.MapIgnoreUpdates\022\037\n"
-    "\003map\030\014 \001(\0132\022.CommsMessages.Map\022/\n\013queryS"
-    "erver\030\r \001(\0132\032.CommsMessages.QueryServer\022"
-    "\?\n\023queryServerResponse\030\016 \001(\0132\".CommsMess"
-    "ages.QueryServerResponse\"\025\n\004Ping\022\r\n\005coun"
-    "t\030\001 \002(\005\"\025\n\004Pong\022\r\n\005count\030\001 \002(\005\")\n\010Respon"
-    "se\022\014\n\004code\030\001 \002(\005\022\017\n\007message\030\002 \001(\t\";\n\007New"
-    "User\022\020\n\010username\030\001 \002(\t\022\020\n\010password\030\002 \002(\t"
-    "\022\014\n\004name\030\003 \002(\t\"+\n\005Login\022\020\n\010username\030\001 \002("
-    "\t\022\020\n\010password\030\002 \002(\t\"\023\n\003Say\022\014\n\004text\030\001 \002(\t"
-    "\"9\n\021MapRequestUpdates\022\021\n\tmapChunkX\030\001 \002(\005"
-    "\022\021\n\tmapChunkY\030\002 \002(\005\"8\n\020MapIgnoreUpdates\022"
-    "\021\n\tmapChunkX\030\001 \002(\005\022\021\n\tmapChunkY\030\002 \002(\005\"=\n"
-    "\003Map\022\021\n\tmapChunkX\030\001 \002(\005\022\021\n\tmapChunkY\030\002 \002"
-    "(\005\022\020\n\010dataSize\030\003 \002(\005\"\r\n\013QueryServer\"m\n\023Q"
-    "ueryServerResponse\022\024\n\014minMapChunkX\030\001 \002(\005"
-    "\022\024\n\014minMapChunkY\030\002 \002(\005\022\024\n\014maxMapChunkX\030\003"
-    " \002(\005\022\024\n\014maxMapChunkY\030\004 \002(\005*\267\001\n\007MsgType\022\r"
-    "\n\teResponse\020\001\022\t\n\005ePing\020\002\022\t\n\005ePong\020\003\022\014\n\010e"
-    "NewUser\020\004\022\n\n\006eLogin\020\005\022\010\n\004eSay\020\006\022\026\n\022eMapR"
-    "equestUpdates\020\007\022\025\n\021eMapIgnoreUpdates\020\010\022\010"
-    "\n\004eMap\020\t\022\020\n\014eQueryServer\020\n\022\030\n\024eQueryServ"
-    "erResponse\020\013B\002H\001", 1296);
+    "ogin\022\037\n\003say\030\t \001(\0132\022.CommsMessages.Say\022-\n"
+    "\nmapRequest\030\n \001(\0132\031.CommsMessages.MapReq"
+    "uest\022+\n\tmapIgnore\030\013 \001(\0132\030.CommsMessages."
+    "MapIgnore\022\037\n\003map\030\014 \001(\0132\022.CommsMessages.M"
+    "ap\022/\n\013queryServer\030\r \001(\0132\032.CommsMessages."
+    "QueryServer\022\?\n\023queryServerResponse\030\016 \001(\013"
+    "2\".CommsMessages.QueryServerResponse\"\025\n\004"
+    "Ping\022\r\n\005count\030\001 \002(\005\"\025\n\004Pong\022\r\n\005count\030\001 \002"
+    "(\005\")\n\010Response\022\014\n\004code\030\001 \002(\005\022\017\n\007message\030"
+    "\002 \001(\t\";\n\007NewUser\022\020\n\010username\030\001 \002(\t\022\020\n\010pa"
+    "ssword\030\002 \002(\t\022\014\n\004name\030\003 \002(\t\"+\n\005Login\022\020\n\010u"
+    "sername\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"\023\n\003Say\022\014"
+    "\n\004text\030\001 \002(\t\"2\n\nMapRequest\022\021\n\tmapChunkX\030"
+    "\001 \002(\005\022\021\n\tmapChunkY\030\002 \002(\005\"1\n\tMapIgnore\022\021\n"
+    "\tmapChunkX\030\001 \002(\005\022\021\n\tmapChunkY\030\002 \002(\005\"=\n\003M"
+    "ap\022\021\n\tmapChunkX\030\001 \002(\005\022\021\n\tmapChunkY\030\002 \002(\005"
+    "\022\020\n\010dataSize\030\003 \002(\005\"\r\n\013QueryServer\"m\n\023Que"
+    "ryServerResponse\022\024\n\014minMapChunkX\030\001 \002(\005\022\024"
+    "\n\014minMapChunkY\030\002 \002(\005\022\024\n\014maxMapChunkX\030\003 \002"
+    "(\005\022\024\n\014maxMapChunkY\030\004 \002(\005*\251\001\n\007MsgType\022\r\n\t"
+    "eResponse\020\001\022\t\n\005ePing\020\002\022\t\n\005ePong\020\003\022\014\n\010eNe"
+    "wUser\020\004\022\n\n\006eLogin\020\005\022\010\n\004eSay\020\006\022\017\n\013eMapReq"
+    "uest\020\007\022\016\n\neMapIgnore\020\010\022\010\n\004eMap\020\t\022\020\n\014eQue"
+    "ryServer\020\n\022\030\n\024eQueryServerResponse\020\013B\002H\001", 1240);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "CommsMessages.proto", &protobuf_RegisterTypes);
   Message::default_instance_ = new Message();
@@ -387,8 +385,8 @@ void protobuf_AddDesc_CommsMessages_2eproto() {
   NewUser::default_instance_ = new NewUser();
   Login::default_instance_ = new Login();
   Say::default_instance_ = new Say();
-  MapRequestUpdates::default_instance_ = new MapRequestUpdates();
-  MapIgnoreUpdates::default_instance_ = new MapIgnoreUpdates();
+  MapRequest::default_instance_ = new MapRequest();
+  MapIgnore::default_instance_ = new MapIgnore();
   Map::default_instance_ = new Map();
   QueryServer::default_instance_ = new QueryServer();
   QueryServerResponse::default_instance_ = new QueryServerResponse();
@@ -399,8 +397,8 @@ void protobuf_AddDesc_CommsMessages_2eproto() {
   NewUser::default_instance_->InitAsDefaultInstance();
   Login::default_instance_->InitAsDefaultInstance();
   Say::default_instance_->InitAsDefaultInstance();
-  MapRequestUpdates::default_instance_->InitAsDefaultInstance();
-  MapIgnoreUpdates::default_instance_->InitAsDefaultInstance();
+  MapRequest::default_instance_->InitAsDefaultInstance();
+  MapIgnore::default_instance_->InitAsDefaultInstance();
   Map::default_instance_->InitAsDefaultInstance();
   QueryServer::default_instance_->InitAsDefaultInstance();
   QueryServerResponse::default_instance_->InitAsDefaultInstance();
@@ -449,8 +447,8 @@ const int Message::kPongFieldNumber;
 const int Message::kNewUserFieldNumber;
 const int Message::kLoginFieldNumber;
 const int Message::kSayFieldNumber;
-const int Message::kMapRequestUpdatesFieldNumber;
-const int Message::kMapIgnoreUpdatesFieldNumber;
+const int Message::kMapRequestFieldNumber;
+const int Message::kMapIgnoreFieldNumber;
 const int Message::kMapFieldNumber;
 const int Message::kQueryServerFieldNumber;
 const int Message::kQueryServerResponseFieldNumber;
@@ -468,8 +466,8 @@ void Message::InitAsDefaultInstance() {
   newuser_ = const_cast< ::CommsMessages::NewUser*>(&::CommsMessages::NewUser::default_instance());
   login_ = const_cast< ::CommsMessages::Login*>(&::CommsMessages::Login::default_instance());
   say_ = const_cast< ::CommsMessages::Say*>(&::CommsMessages::Say::default_instance());
-  maprequestupdates_ = const_cast< ::CommsMessages::MapRequestUpdates*>(&::CommsMessages::MapRequestUpdates::default_instance());
-  mapignoreupdates_ = const_cast< ::CommsMessages::MapIgnoreUpdates*>(&::CommsMessages::MapIgnoreUpdates::default_instance());
+  maprequest_ = const_cast< ::CommsMessages::MapRequest*>(&::CommsMessages::MapRequest::default_instance());
+  mapignore_ = const_cast< ::CommsMessages::MapIgnore*>(&::CommsMessages::MapIgnore::default_instance());
   map_ = const_cast< ::CommsMessages::Map*>(&::CommsMessages::Map::default_instance());
   queryserver_ = const_cast< ::CommsMessages::QueryServer*>(&::CommsMessages::QueryServer::default_instance());
   queryserverresponse_ = const_cast< ::CommsMessages::QueryServerResponse*>(&::CommsMessages::QueryServerResponse::default_instance());
@@ -492,8 +490,8 @@ void Message::SharedCtor() {
   newuser_ = NULL;
   login_ = NULL;
   say_ = NULL;
-  maprequestupdates_ = NULL;
-  mapignoreupdates_ = NULL;
+  maprequest_ = NULL;
+  mapignore_ = NULL;
   map_ = NULL;
   queryserver_ = NULL;
   queryserverresponse_ = NULL;
@@ -518,8 +516,8 @@ void Message::SharedDtor() {
     delete newuser_;
     delete login_;
     delete say_;
-    delete maprequestupdates_;
-    delete mapignoreupdates_;
+    delete maprequest_;
+    delete mapignore_;
     delete map_;
     delete queryserver_;
     delete queryserverresponse_;
@@ -580,11 +578,11 @@ void Message::Clear() {
     if (has_say()) {
       if (say_ != NULL) say_->::CommsMessages::Say::Clear();
     }
-    if (has_maprequestupdates()) {
-      if (maprequestupdates_ != NULL) maprequestupdates_->::CommsMessages::MapRequestUpdates::Clear();
+    if (has_maprequest()) {
+      if (maprequest_ != NULL) maprequest_->::CommsMessages::MapRequest::Clear();
     }
-    if (has_mapignoreupdates()) {
-      if (mapignoreupdates_ != NULL) mapignoreupdates_->::CommsMessages::MapIgnoreUpdates::Clear();
+    if (has_mapignore()) {
+      if (mapignore_ != NULL) mapignore_->::CommsMessages::MapIgnore::Clear();
     }
     if (has_map()) {
       if (map_ != NULL) map_->::CommsMessages::Map::Clear();
@@ -735,31 +733,31 @@ bool Message::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(82)) goto parse_mapRequestUpdates;
+        if (input->ExpectTag(82)) goto parse_mapRequest;
         break;
       }
 
-      // optional .CommsMessages.MapRequestUpdates mapRequestUpdates = 10;
+      // optional .CommsMessages.MapRequest mapRequest = 10;
       case 10: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_mapRequestUpdates:
+         parse_mapRequest:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_maprequestupdates()));
+               input, mutable_maprequest()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(90)) goto parse_mapIgnoreUpdates;
+        if (input->ExpectTag(90)) goto parse_mapIgnore;
         break;
       }
 
-      // optional .CommsMessages.MapIgnoreUpdates mapIgnoreUpdates = 11;
+      // optional .CommsMessages.MapIgnore mapIgnore = 11;
       case 11: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_mapIgnoreUpdates:
+         parse_mapIgnore:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_mapignoreupdates()));
+               input, mutable_mapignore()));
         } else {
           goto handle_uninterpreted;
         }
@@ -886,16 +884,16 @@ void Message::SerializeWithCachedSizes(
       9, this->say(), output);
   }
 
-  // optional .CommsMessages.MapRequestUpdates mapRequestUpdates = 10;
-  if (has_maprequestupdates()) {
+  // optional .CommsMessages.MapRequest mapRequest = 10;
+  if (has_maprequest()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, this->maprequestupdates(), output);
+      10, this->maprequest(), output);
   }
 
-  // optional .CommsMessages.MapIgnoreUpdates mapIgnoreUpdates = 11;
-  if (has_mapignoreupdates()) {
+  // optional .CommsMessages.MapIgnore mapIgnore = 11;
+  if (has_mapignore()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, this->mapignoreupdates(), output);
+      11, this->mapignore(), output);
   }
 
   // optional .CommsMessages.Map map = 12;
@@ -991,18 +989,18 @@ void Message::SerializeWithCachedSizes(
         9, this->say(), target);
   }
 
-  // optional .CommsMessages.MapRequestUpdates mapRequestUpdates = 10;
-  if (has_maprequestupdates()) {
+  // optional .CommsMessages.MapRequest mapRequest = 10;
+  if (has_maprequest()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        10, this->maprequestupdates(), target);
+        10, this->maprequest(), target);
   }
 
-  // optional .CommsMessages.MapIgnoreUpdates mapIgnoreUpdates = 11;
-  if (has_mapignoreupdates()) {
+  // optional .CommsMessages.MapIgnore mapIgnore = 11;
+  if (has_mapignore()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        11, this->mapignoreupdates(), target);
+        11, this->mapignore(), target);
   }
 
   // optional .CommsMessages.Map map = 12;
@@ -1102,18 +1100,18 @@ int Message::ByteSize() const {
           this->say());
     }
 
-    // optional .CommsMessages.MapRequestUpdates mapRequestUpdates = 10;
-    if (has_maprequestupdates()) {
+    // optional .CommsMessages.MapRequest mapRequest = 10;
+    if (has_maprequest()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->maprequestupdates());
+          this->maprequest());
     }
 
-    // optional .CommsMessages.MapIgnoreUpdates mapIgnoreUpdates = 11;
-    if (has_mapignoreupdates()) {
+    // optional .CommsMessages.MapIgnore mapIgnore = 11;
+    if (has_mapignore()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->mapignoreupdates());
+          this->mapignore());
     }
 
     // optional .CommsMessages.Map map = 12;
@@ -1193,11 +1191,11 @@ void Message::MergeFrom(const Message& from) {
     if (from.has_say()) {
       mutable_say()->::CommsMessages::Say::MergeFrom(from.say());
     }
-    if (from.has_maprequestupdates()) {
-      mutable_maprequestupdates()->::CommsMessages::MapRequestUpdates::MergeFrom(from.maprequestupdates());
+    if (from.has_maprequest()) {
+      mutable_maprequest()->::CommsMessages::MapRequest::MergeFrom(from.maprequest());
     }
-    if (from.has_mapignoreupdates()) {
-      mutable_mapignoreupdates()->::CommsMessages::MapIgnoreUpdates::MergeFrom(from.mapignoreupdates());
+    if (from.has_mapignore()) {
+      mutable_mapignore()->::CommsMessages::MapIgnore::MergeFrom(from.mapignore());
     }
     if (from.has_map()) {
       mutable_map()->::CommsMessages::Map::MergeFrom(from.map());
@@ -1245,11 +1243,11 @@ bool Message::IsInitialized() const {
   if (has_say()) {
     if (!this->say().IsInitialized()) return false;
   }
-  if (has_maprequestupdates()) {
-    if (!this->maprequestupdates().IsInitialized()) return false;
+  if (has_maprequest()) {
+    if (!this->maprequest().IsInitialized()) return false;
   }
-  if (has_mapignoreupdates()) {
-    if (!this->mapignoreupdates().IsInitialized()) return false;
+  if (has_mapignore()) {
+    if (!this->mapignore().IsInitialized()) return false;
   }
   if (has_map()) {
     if (!this->map().IsInitialized()) return false;
@@ -1271,8 +1269,8 @@ void Message::Swap(Message* other) {
     std::swap(newuser_, other->newuser_);
     std::swap(login_, other->login_);
     std::swap(say_, other->say_);
-    std::swap(maprequestupdates_, other->maprequestupdates_);
-    std::swap(mapignoreupdates_, other->mapignoreupdates_);
+    std::swap(maprequest_, other->maprequest_);
+    std::swap(mapignore_, other->mapignore_);
     std::swap(map_, other->map_);
     std::swap(queryserver_, other->queryserver_);
     std::swap(queryserverresponse_, other->queryserverresponse_);
@@ -2827,62 +2825,62 @@ void Say::Swap(Say* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int MapRequestUpdates::kMapChunkXFieldNumber;
-const int MapRequestUpdates::kMapChunkYFieldNumber;
+const int MapRequest::kMapChunkXFieldNumber;
+const int MapRequest::kMapChunkYFieldNumber;
 #endif  // !_MSC_VER
 
-MapRequestUpdates::MapRequestUpdates()
+MapRequest::MapRequest()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void MapRequestUpdates::InitAsDefaultInstance() {
+void MapRequest::InitAsDefaultInstance() {
 }
 
-MapRequestUpdates::MapRequestUpdates(const MapRequestUpdates& from)
+MapRequest::MapRequest(const MapRequest& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void MapRequestUpdates::SharedCtor() {
+void MapRequest::SharedCtor() {
   _cached_size_ = 0;
   mapchunkx_ = 0;
   mapchunky_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-MapRequestUpdates::~MapRequestUpdates() {
+MapRequest::~MapRequest() {
   SharedDtor();
 }
 
-void MapRequestUpdates::SharedDtor() {
+void MapRequest::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-void MapRequestUpdates::SetCachedSize(int size) const {
+void MapRequest::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* MapRequestUpdates::descriptor() {
+const ::google::protobuf::Descriptor* MapRequest::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return MapRequestUpdates_descriptor_;
+  return MapRequest_descriptor_;
 }
 
-const MapRequestUpdates& MapRequestUpdates::default_instance() {
+const MapRequest& MapRequest::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_CommsMessages_2eproto();
   return *default_instance_;
 }
 
-MapRequestUpdates* MapRequestUpdates::default_instance_ = NULL;
+MapRequest* MapRequest::default_instance_ = NULL;
 
-MapRequestUpdates* MapRequestUpdates::New() const {
-  return new MapRequestUpdates;
+MapRequest* MapRequest::New() const {
+  return new MapRequest;
 }
 
-void MapRequestUpdates::Clear() {
+void MapRequest::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     mapchunkx_ = 0;
     mapchunky_ = 0;
@@ -2891,7 +2889,7 @@ void MapRequestUpdates::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool MapRequestUpdates::MergePartialFromCodedStream(
+bool MapRequest::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
@@ -2944,7 +2942,7 @@ bool MapRequestUpdates::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void MapRequestUpdates::SerializeWithCachedSizes(
+void MapRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required int32 mapChunkX = 1;
   if (has_mapchunkx()) {
@@ -2962,7 +2960,7 @@ void MapRequestUpdates::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* MapRequestUpdates::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* MapRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // required int32 mapChunkX = 1;
   if (has_mapchunkx()) {
@@ -2981,7 +2979,7 @@ void MapRequestUpdates::SerializeWithCachedSizes(
   return target;
 }
 
-int MapRequestUpdates::ByteSize() const {
+int MapRequest::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -3011,10 +3009,10 @@ int MapRequestUpdates::ByteSize() const {
   return total_size;
 }
 
-void MapRequestUpdates::MergeFrom(const ::google::protobuf::Message& from) {
+void MapRequest::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const MapRequestUpdates* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const MapRequestUpdates*>(
+  const MapRequest* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const MapRequest*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -3023,7 +3021,7 @@ void MapRequestUpdates::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void MapRequestUpdates::MergeFrom(const MapRequestUpdates& from) {
+void MapRequest::MergeFrom(const MapRequest& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_mapchunkx()) {
@@ -3036,25 +3034,25 @@ void MapRequestUpdates::MergeFrom(const MapRequestUpdates& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void MapRequestUpdates::CopyFrom(const ::google::protobuf::Message& from) {
+void MapRequest::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void MapRequestUpdates::CopyFrom(const MapRequestUpdates& from) {
+void MapRequest::CopyFrom(const MapRequest& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool MapRequestUpdates::IsInitialized() const {
+bool MapRequest::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
 
-void MapRequestUpdates::Swap(MapRequestUpdates* other) {
+void MapRequest::Swap(MapRequest* other) {
   if (other != this) {
     std::swap(mapchunkx_, other->mapchunkx_);
     std::swap(mapchunky_, other->mapchunky_);
@@ -3064,11 +3062,11 @@ void MapRequestUpdates::Swap(MapRequestUpdates* other) {
   }
 }
 
-::google::protobuf::Metadata MapRequestUpdates::GetMetadata() const {
+::google::protobuf::Metadata MapRequest::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = MapRequestUpdates_descriptor_;
-  metadata.reflection = MapRequestUpdates_reflection_;
+  metadata.descriptor = MapRequest_descriptor_;
+  metadata.reflection = MapRequest_reflection_;
   return metadata;
 }
 
@@ -3076,62 +3074,62 @@ void MapRequestUpdates::Swap(MapRequestUpdates* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int MapIgnoreUpdates::kMapChunkXFieldNumber;
-const int MapIgnoreUpdates::kMapChunkYFieldNumber;
+const int MapIgnore::kMapChunkXFieldNumber;
+const int MapIgnore::kMapChunkYFieldNumber;
 #endif  // !_MSC_VER
 
-MapIgnoreUpdates::MapIgnoreUpdates()
+MapIgnore::MapIgnore()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void MapIgnoreUpdates::InitAsDefaultInstance() {
+void MapIgnore::InitAsDefaultInstance() {
 }
 
-MapIgnoreUpdates::MapIgnoreUpdates(const MapIgnoreUpdates& from)
+MapIgnore::MapIgnore(const MapIgnore& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void MapIgnoreUpdates::SharedCtor() {
+void MapIgnore::SharedCtor() {
   _cached_size_ = 0;
   mapchunkx_ = 0;
   mapchunky_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-MapIgnoreUpdates::~MapIgnoreUpdates() {
+MapIgnore::~MapIgnore() {
   SharedDtor();
 }
 
-void MapIgnoreUpdates::SharedDtor() {
+void MapIgnore::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-void MapIgnoreUpdates::SetCachedSize(int size) const {
+void MapIgnore::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* MapIgnoreUpdates::descriptor() {
+const ::google::protobuf::Descriptor* MapIgnore::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return MapIgnoreUpdates_descriptor_;
+  return MapIgnore_descriptor_;
 }
 
-const MapIgnoreUpdates& MapIgnoreUpdates::default_instance() {
+const MapIgnore& MapIgnore::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_CommsMessages_2eproto();
   return *default_instance_;
 }
 
-MapIgnoreUpdates* MapIgnoreUpdates::default_instance_ = NULL;
+MapIgnore* MapIgnore::default_instance_ = NULL;
 
-MapIgnoreUpdates* MapIgnoreUpdates::New() const {
-  return new MapIgnoreUpdates;
+MapIgnore* MapIgnore::New() const {
+  return new MapIgnore;
 }
 
-void MapIgnoreUpdates::Clear() {
+void MapIgnore::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     mapchunkx_ = 0;
     mapchunky_ = 0;
@@ -3140,7 +3138,7 @@ void MapIgnoreUpdates::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool MapIgnoreUpdates::MergePartialFromCodedStream(
+bool MapIgnore::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
@@ -3193,7 +3191,7 @@ bool MapIgnoreUpdates::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void MapIgnoreUpdates::SerializeWithCachedSizes(
+void MapIgnore::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required int32 mapChunkX = 1;
   if (has_mapchunkx()) {
@@ -3211,7 +3209,7 @@ void MapIgnoreUpdates::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* MapIgnoreUpdates::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* MapIgnore::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // required int32 mapChunkX = 1;
   if (has_mapchunkx()) {
@@ -3230,7 +3228,7 @@ void MapIgnoreUpdates::SerializeWithCachedSizes(
   return target;
 }
 
-int MapIgnoreUpdates::ByteSize() const {
+int MapIgnore::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -3260,10 +3258,10 @@ int MapIgnoreUpdates::ByteSize() const {
   return total_size;
 }
 
-void MapIgnoreUpdates::MergeFrom(const ::google::protobuf::Message& from) {
+void MapIgnore::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const MapIgnoreUpdates* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const MapIgnoreUpdates*>(
+  const MapIgnore* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const MapIgnore*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -3272,7 +3270,7 @@ void MapIgnoreUpdates::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void MapIgnoreUpdates::MergeFrom(const MapIgnoreUpdates& from) {
+void MapIgnore::MergeFrom(const MapIgnore& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_mapchunkx()) {
@@ -3285,25 +3283,25 @@ void MapIgnoreUpdates::MergeFrom(const MapIgnoreUpdates& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void MapIgnoreUpdates::CopyFrom(const ::google::protobuf::Message& from) {
+void MapIgnore::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void MapIgnoreUpdates::CopyFrom(const MapIgnoreUpdates& from) {
+void MapIgnore::CopyFrom(const MapIgnore& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool MapIgnoreUpdates::IsInitialized() const {
+bool MapIgnore::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
 
-void MapIgnoreUpdates::Swap(MapIgnoreUpdates* other) {
+void MapIgnore::Swap(MapIgnore* other) {
   if (other != this) {
     std::swap(mapchunkx_, other->mapchunkx_);
     std::swap(mapchunky_, other->mapchunky_);
@@ -3313,11 +3311,11 @@ void MapIgnoreUpdates::Swap(MapIgnoreUpdates* other) {
   }
 }
 
-::google::protobuf::Metadata MapIgnoreUpdates::GetMetadata() const {
+::google::protobuf::Metadata MapIgnore::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = MapIgnoreUpdates_descriptor_;
-  metadata.reflection = MapIgnoreUpdates_reflection_;
+  metadata.descriptor = MapIgnore_descriptor_;
+  metadata.reflection = MapIgnore_reflection_;
   return metadata;
 }
 

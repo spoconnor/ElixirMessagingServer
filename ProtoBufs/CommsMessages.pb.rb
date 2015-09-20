@@ -16,8 +16,8 @@
 #     eNewUser = 4;
 #     eLogin = 5;
 #     eSay = 6;
-#     eMapRequestUpdates = 7;
-#     eMapIgnoreUpdates = 8;
+#     eMapRequest = 7;
+#     eMapIgnore = 8;
 #     eMap = 9;
 #     eQueryServer = 10;
 #     eQueryServerResponse = 11;
@@ -34,8 +34,8 @@
 #     optional NewUser newUser = 7;
 #     optional Login login = 8;
 #     optional Say say = 9;
-#     optional MapRequestUpdates mapRequestUpdates = 10;
-#     optional MapIgnoreUpdates mapIgnoreUpdates = 11;
+#     optional MapRequest mapRequest = 10;
+#     optional MapIgnore mapIgnore = 11;
 #     optional Map map = 12;
 #     optional QueryServer queryServer = 13;
 #     optional QueryServerResponse queryServerResponse = 14;
@@ -74,13 +74,13 @@
 #     required string text = 1;
 #   }
 # 
-#   message MapRequestUpdates
+#   message MapRequest
 #   {
 #     required int32 mapChunkX = 1;
 #     required int32 mapChunkY = 2;
 #   }
 # 
-#   message MapIgnoreUpdates
+#   message MapIgnore
 #   {
 #     required int32 mapChunkX = 1;
 #     required int32 mapChunkY = 2;
@@ -121,8 +121,8 @@ module CommsMessages
     ENewUser = value(:eNewUser, 4)
     ELogin = value(:eLogin, 5)
     ESay = value(:eSay, 6)
-    EMapRequestUpdates = value(:eMapRequestUpdates, 7)
-    EMapIgnoreUpdates = value(:eMapIgnoreUpdates, 8)
+    EMapRequest = value(:eMapRequest, 7)
+    EMapIgnore = value(:eMapIgnore, 8)
     EMap = value(:eMap, 9)
     EQueryServer = value(:eQueryServer, 10)
     EQueryServerResponse = value(:eQueryServerResponse, 11)
@@ -138,8 +138,8 @@ module CommsMessages
     optional :NewUser, :newUser, 7
     optional :Login, :login, 8
     optional :Say, :say, 9
-    optional :MapRequestUpdates, :mapRequestUpdates, 10
-    optional :MapIgnoreUpdates, :mapIgnoreUpdates, 11
+    optional :MapRequest, :mapRequest, 10
+    optional :MapIgnore, :mapIgnore, 11
     optional :Map, :map, 12
     optional :QueryServer, :queryServer, 13
     optional :QueryServerResponse, :queryServerResponse, 14
@@ -172,12 +172,12 @@ module CommsMessages
     defined_in __FILE__
     required :string, :text, 1
   end
-  class MapRequestUpdates < ::Protobuf::Message
+  class MapRequest < ::Protobuf::Message
     defined_in __FILE__
     required :int32, :mapChunkX, 1
     required :int32, :mapChunkY, 2
   end
-  class MapIgnoreUpdates < ::Protobuf::Message
+  class MapIgnore < ::Protobuf::Message
     defined_in __FILE__
     required :int32, :mapChunkX, 1
     required :int32, :mapChunkY, 2

@@ -1,7 +1,6 @@
 
-ê
-
-CommsMessages.protoCommsMessages"°
+ÿ	
+CommsMessages.protoCommsMessages"Ö
 Message
 msgtype (
 from (	
@@ -11,10 +10,11 @@
 pong (2.CommsMessages.Pong'
 newUser (2.CommsMessages.NewUser#
 login (2.CommsMessages.Login
-say	 (2.CommsMessages.Say;
-mapRequestUpdates
- (2 .CommsMessages.MapRequestUpdates9
-mapIgnoreUpdates (2.CommsMessages.MapIgnoreUpdates
+say	 (2.CommsMessages.Say-
+
+mapRequest
+ (2.CommsMessages.MapRequest+
+	mapIgnore (2.CommsMessages.MapIgnore
 map (2.CommsMessages.Map/
 queryServer (2.CommsMessages.QueryServer?
 queryServerResponse (2".CommsMessages.QueryServerResponse"
@@ -33,11 +33,12 @@
 username (	
 password (	"
 Say
-text (	"9
-MapRequestUpdates
+text (	"2
+
+MapRequest
 	mapChunkX (
-	mapChunkY ("8
-MapIgnoreUpdates
+	mapChunkY ("1
+	MapIgnore
 	mapChunkX (
 	mapChunkY ("=
 Map
@@ -49,7 +50,7 @@
 minMapChunkX (
 minMapChunkY (
 maxMapChunkX (
-maxMapChunkY (*∑
+maxMapChunkY (*©
 MsgType
 	eResponse	
 ePing	
@@ -57,9 +58,10 @@
 eNewUser
 
 eLogin
-eSay
-eMapRequestUpdates
-eMapIgnoreUpdates
+eSay
+eMapRequest
+
+eMapIgnore
 eMap	
 eQueryServer
 

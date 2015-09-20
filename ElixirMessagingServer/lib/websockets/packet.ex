@@ -15,6 +15,11 @@ defmodule Packet do
       4 -> "NewUser"
       5 -> "Login"
       6 -> "Say"
+      7 -> "MapRequest"
+      8 -> "MapIgnore"
+      9 -> "QueryServer"
+     10 -> "QueryServerResponse"
+      _ -> "Unknown"
     end
   end
 

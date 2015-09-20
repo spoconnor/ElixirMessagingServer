@@ -13,8 +13,8 @@ object MsgType extends net.sandrogrzicic.scalabuff.Enum {
 	val eNewUser = new EnumVal { val name = "eNewUser"; val id = 4 }
 	val eLogin = new EnumVal { val name = "eLogin"; val id = 5 }
 	val eSay = new EnumVal { val name = "eSay"; val id = 6 }
-	val eMapRequestUpdates = new EnumVal { val name = "eMapRequestUpdates"; val id = 7 }
-	val eMapIgnoreUpdates = new EnumVal { val name = "eMapIgnoreUpdates"; val id = 8 }
+	val eMapRequest = new EnumVal { val name = "eMapRequest"; val id = 7 }
+	val eMapIgnore = new EnumVal { val name = "eMapIgnore"; val id = 8 }
 	val eMap = new EnumVal { val name = "eMap"; val id = 9 }
 	val eQueryServer = new EnumVal { val name = "eQueryServer"; val id = 10 }
 	val eQueryServerResponse = new EnumVal { val name = "eQueryServerResponse"; val id = 11 }
@@ -25,8 +25,8 @@ object MsgType extends net.sandrogrzicic.scalabuff.Enum {
 	val eNewUser_VALUE = 4
 	val eLogin_VALUE = 5
 	val eSay_VALUE = 6
-	val eMapRequestUpdates_VALUE = 7
-	val eMapIgnoreUpdates_VALUE = 8
+	val eMapRequest_VALUE = 7
+	val eMapIgnore_VALUE = 8
 	val eMap_VALUE = 9
 	val eQueryServer_VALUE = 10
 	val eQueryServerResponse_VALUE = 11
@@ -38,8 +38,8 @@ object MsgType extends net.sandrogrzicic.scalabuff.Enum {
 		case 4 => eNewUser
 		case 5 => eLogin
 		case 6 => eSay
-		case 7 => eMapRequestUpdates
-		case 8 => eMapIgnoreUpdates
+		case 7 => eMapRequest
+		case 8 => eMapIgnore
 		case 9 => eMap
 		case 10 => eQueryServer
 		case 11 => eQueryServerResponse
@@ -59,8 +59,8 @@ final case class Message (
 	`newUser`: Option[NewUser] = None,
 	`login`: Option[Login] = None,
 	`say`: Option[Say] = None,
-	`mapRequestUpdates`: Option[MapRequestUpdates] = None,
-	`mapIgnoreUpdates`: Option[MapIgnoreUpdates] = None,
+	`mapRequest`: Option[MapRequest] = None,
+	`mapIgnore`: Option[MapIgnore] = None,
 	`map`: Option[Map] = None,
 	`queryServer`: Option[QueryServer] = None,
 	`queryServerResponse`: Option[QueryServerResponse] = None
@@ -75,8 +75,8 @@ final case class Message (
 	def setNewUser(_f: NewUser) = copy(`newUser` = Some(_f))
 	def setLogin(_f: Login) = copy(`login` = Some(_f))
 	def setSay(_f: Say) = copy(`say` = Some(_f))
-	def setMapRequestUpdates(_f: MapRequestUpdates) = copy(`mapRequestUpdates` = Some(_f))
-	def setMapIgnoreUpdates(_f: MapIgnoreUpdates) = copy(`mapIgnoreUpdates` = Some(_f))
+	def setMapRequest(_f: MapRequest) = copy(`mapRequest` = Some(_f))
+	def setMapIgnore(_f: MapIgnore) = copy(`mapIgnore` = Some(_f))
 	def setMap(_f: Map) = copy(`map` = Some(_f))
 	def setQueryServer(_f: QueryServer) = copy(`queryServer` = Some(_f))
 	def setQueryServerResponse(_f: QueryServerResponse) = copy(`queryServerResponse` = Some(_f))
@@ -87,8 +87,8 @@ final case class Message (
 	def clearNewUser = copy(`newUser` = None)
 	def clearLogin = copy(`login` = None)
 	def clearSay = copy(`say` = None)
-	def clearMapRequestUpdates = copy(`mapRequestUpdates` = None)
-	def clearMapIgnoreUpdates = copy(`mapIgnoreUpdates` = None)
+	def clearMapRequest = copy(`mapRequest` = None)
+	def clearMapIgnore = copy(`mapIgnore` = None)
 	def clearMap = copy(`map` = None)
 	def clearQueryServer = copy(`queryServer` = None)
 	def clearQueryServerResponse = copy(`queryServerResponse` = None)
@@ -103,8 +103,8 @@ final case class Message (
 		if (`newUser`.isDefined) output.writeMessage(7, `newUser`.get)
 		if (`login`.isDefined) output.writeMessage(8, `login`.get)
 		if (`say`.isDefined) output.writeMessage(9, `say`.get)
-		if (`mapRequestUpdates`.isDefined) output.writeMessage(10, `mapRequestUpdates`.get)
-		if (`mapIgnoreUpdates`.isDefined) output.writeMessage(11, `mapIgnoreUpdates`.get)
+		if (`mapRequest`.isDefined) output.writeMessage(10, `mapRequest`.get)
+		if (`mapIgnore`.isDefined) output.writeMessage(11, `mapIgnore`.get)
 		if (`map`.isDefined) output.writeMessage(12, `map`.get)
 		if (`queryServer`.isDefined) output.writeMessage(13, `queryServer`.get)
 		if (`queryServerResponse`.isDefined) output.writeMessage(14, `queryServerResponse`.get)
@@ -122,8 +122,8 @@ final case class Message (
 		if (`newUser`.isDefined) __size += computeMessageSize(7, `newUser`.get)
 		if (`login`.isDefined) __size += computeMessageSize(8, `login`.get)
 		if (`say`.isDefined) __size += computeMessageSize(9, `say`.get)
-		if (`mapRequestUpdates`.isDefined) __size += computeMessageSize(10, `mapRequestUpdates`.get)
-		if (`mapIgnoreUpdates`.isDefined) __size += computeMessageSize(11, `mapIgnoreUpdates`.get)
+		if (`mapRequest`.isDefined) __size += computeMessageSize(10, `mapRequest`.get)
+		if (`mapIgnore`.isDefined) __size += computeMessageSize(11, `mapIgnore`.get)
 		if (`map`.isDefined) __size += computeMessageSize(12, `map`.get)
 		if (`queryServer`.isDefined) __size += computeMessageSize(13, `queryServer`.get)
 		if (`queryServerResponse`.isDefined) __size += computeMessageSize(14, `queryServerResponse`.get)
@@ -142,8 +142,8 @@ final case class Message (
 		var __newUser: Option[NewUser] = `newUser`
 		var __login: Option[Login] = `login`
 		var __say: Option[Say] = `say`
-		var __mapRequestUpdates: Option[MapRequestUpdates] = `mapRequestUpdates`
-		var __mapIgnoreUpdates: Option[MapIgnoreUpdates] = `mapIgnoreUpdates`
+		var __mapRequest: Option[MapRequest] = `mapRequest`
+		var __mapIgnore: Option[MapIgnore] = `mapIgnore`
 		var __map: Option[Map] = `map`
 		var __queryServer: Option[QueryServer] = `queryServer`
 		var __queryServerResponse: Option[QueryServerResponse] = `queryServerResponse`
@@ -158,8 +158,8 @@ final case class Message (
 			__newUser,
 			__login,
 			__say,
-			__mapRequestUpdates,
-			__mapIgnoreUpdates,
+			__mapRequest,
+			__mapIgnore,
 			__map,
 			__queryServer,
 			__queryServerResponse
@@ -193,13 +193,13 @@ final case class Message (
 				__say = Say.defaultInstance
 				__say
 			}).get, _emptyRegistry))
-			case 82 => __mapRequestUpdates = Some(readMessage[MapRequestUpdates](in, __mapRequestUpdates.orElse({
-				__mapRequestUpdates = MapRequestUpdates.defaultInstance
-				__mapRequestUpdates
+			case 82 => __mapRequest = Some(readMessage[MapRequest](in, __mapRequest.orElse({
+				__mapRequest = MapRequest.defaultInstance
+				__mapRequest
 			}).get, _emptyRegistry))
-			case 90 => __mapIgnoreUpdates = Some(readMessage[MapIgnoreUpdates](in, __mapIgnoreUpdates.orElse({
-				__mapIgnoreUpdates = MapIgnoreUpdates.defaultInstance
-				__mapIgnoreUpdates
+			case 90 => __mapIgnore = Some(readMessage[MapIgnore](in, __mapIgnore.orElse({
+				__mapIgnore = MapIgnore.defaultInstance
+				__mapIgnore
 			}).get, _emptyRegistry))
 			case 98 => __map = Some(readMessage[Map](in, __map.orElse({
 				__map = Map.defaultInstance
@@ -229,8 +229,8 @@ final case class Message (
 			m.`newUser`.orElse(`newUser`),
 			m.`login`.orElse(`login`),
 			m.`say`.orElse(`say`),
-			m.`mapRequestUpdates`.orElse(`mapRequestUpdates`),
-			m.`mapIgnoreUpdates`.orElse(`mapIgnoreUpdates`),
+			m.`mapRequest`.orElse(`mapRequest`),
+			m.`mapIgnore`.orElse(`mapIgnore`),
 			m.`map`.orElse(`map`),
 			m.`queryServer`.orElse(`queryServer`),
 			m.`queryServerResponse`.orElse(`queryServerResponse`)
@@ -267,8 +267,8 @@ object Message {
 	val NEWUSER_FIELD_NUMBER = 7
 	val LOGIN_FIELD_NUMBER = 8
 	val SAY_FIELD_NUMBER = 9
-	val MAPREQUESTUPDATES_FIELD_NUMBER = 10
-	val MAPIGNOREUPDATES_FIELD_NUMBER = 11
+	val MAPREQUEST_FIELD_NUMBER = 10
+	val MAPIGNORE_FIELD_NUMBER = 11
 	val MAP_FIELD_NUMBER = 12
 	val QUERYSERVER_FIELD_NUMBER = 13
 	val QUERYSERVERRESPONSE_FIELD_NUMBER = 14
@@ -725,13 +725,13 @@ object Say {
 	def newBuilder(prototype: Say) = defaultInstance.mergeFrom(prototype)
 
 }
-final case class MapRequestUpdates (
+final case class MapRequest (
 	`mapChunkX`: Int = 0,
 	`mapChunkY`: Int = 0
 ) extends com.google.protobuf.GeneratedMessageLite
 	with com.google.protobuf.MessageLite.Builder
-	with net.sandrogrzicic.scalabuff.Message[MapRequestUpdates]
-	with net.sandrogrzicic.scalabuff.Parser[MapRequestUpdates] {
+	with net.sandrogrzicic.scalabuff.Message[MapRequest]
+	with net.sandrogrzicic.scalabuff.Parser[MapRequest] {
 
 
 
@@ -749,12 +749,12 @@ final case class MapRequestUpdates (
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): MapRequestUpdates = {
+	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): MapRequest = {
 		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __mapChunkX: Int = 0
 		var __mapChunkY: Int = 0
 
-		def __newMerged = MapRequestUpdates(
+		def __newMerged = MapRequest(
 			__mapChunkX,
 			__mapChunkY
 		)
@@ -767,14 +767,14 @@ final case class MapRequestUpdates (
 		null
 	}
 
-	def mergeFrom(m: MapRequestUpdates) = {
-		MapRequestUpdates(
+	def mergeFrom(m: MapRequest) = {
+		MapRequest(
 			m.`mapChunkX`,
 			m.`mapChunkY`
 		)
 	}
 
-	def getDefaultInstanceForType = MapRequestUpdates.defaultInstance
+	def getDefaultInstanceForType = MapRequest.defaultInstance
 	def clear = getDefaultInstanceForType
 	def isInitialized = true
 	def build = this
@@ -786,29 +786,29 @@ final case class MapRequestUpdates (
 	def toJson(indent: Int = 0): String = "ScalaBuff JSON generation not enabled. Use --generate_json_method to enable."
 }
 
-object MapRequestUpdates {
-	@scala.beans.BeanProperty val defaultInstance = new MapRequestUpdates()
+object MapRequest {
+	@scala.beans.BeanProperty val defaultInstance = new MapRequest()
 
-	def parseFrom(data: Array[Byte]): MapRequestUpdates = defaultInstance.mergeFrom(data)
-	def parseFrom(data: Array[Byte], offset: Int, length: Int): MapRequestUpdates = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): MapRequestUpdates = defaultInstance.mergeFrom(byteString)
-	def parseFrom(stream: java.io.InputStream): MapRequestUpdates = defaultInstance.mergeFrom(stream)
-	def parseDelimitedFrom(stream: java.io.InputStream): Option[MapRequestUpdates] = defaultInstance.mergeDelimitedFromStream(stream)
+	def parseFrom(data: Array[Byte]): MapRequest = defaultInstance.mergeFrom(data)
+	def parseFrom(data: Array[Byte], offset: Int, length: Int): MapRequest = defaultInstance.mergeFrom(data, offset, length)
+	def parseFrom(byteString: com.google.protobuf.ByteString): MapRequest = defaultInstance.mergeFrom(byteString)
+	def parseFrom(stream: java.io.InputStream): MapRequest = defaultInstance.mergeFrom(stream)
+	def parseDelimitedFrom(stream: java.io.InputStream): Option[MapRequest] = defaultInstance.mergeDelimitedFromStream(stream)
 
 	val MAPCHUNKX_FIELD_NUMBER = 1
 	val MAPCHUNKY_FIELD_NUMBER = 2
 
 	def newBuilder = defaultInstance.newBuilderForType
-	def newBuilder(prototype: MapRequestUpdates) = defaultInstance.mergeFrom(prototype)
+	def newBuilder(prototype: MapRequest) = defaultInstance.mergeFrom(prototype)
 
 }
-final case class MapIgnoreUpdates (
+final case class MapIgnore (
 	`mapChunkX`: Int = 0,
 	`mapChunkY`: Int = 0
 ) extends com.google.protobuf.GeneratedMessageLite
 	with com.google.protobuf.MessageLite.Builder
-	with net.sandrogrzicic.scalabuff.Message[MapIgnoreUpdates]
-	with net.sandrogrzicic.scalabuff.Parser[MapIgnoreUpdates] {
+	with net.sandrogrzicic.scalabuff.Message[MapIgnore]
+	with net.sandrogrzicic.scalabuff.Parser[MapIgnore] {
 
 
 
@@ -826,12 +826,12 @@ final case class MapIgnoreUpdates (
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): MapIgnoreUpdates = {
+	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): MapIgnore = {
 		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __mapChunkX: Int = 0
 		var __mapChunkY: Int = 0
 
-		def __newMerged = MapIgnoreUpdates(
+		def __newMerged = MapIgnore(
 			__mapChunkX,
 			__mapChunkY
 		)
@@ -844,14 +844,14 @@ final case class MapIgnoreUpdates (
 		null
 	}
 
-	def mergeFrom(m: MapIgnoreUpdates) = {
-		MapIgnoreUpdates(
+	def mergeFrom(m: MapIgnore) = {
+		MapIgnore(
 			m.`mapChunkX`,
 			m.`mapChunkY`
 		)
 	}
 
-	def getDefaultInstanceForType = MapIgnoreUpdates.defaultInstance
+	def getDefaultInstanceForType = MapIgnore.defaultInstance
 	def clear = getDefaultInstanceForType
 	def isInitialized = true
 	def build = this
@@ -863,20 +863,20 @@ final case class MapIgnoreUpdates (
 	def toJson(indent: Int = 0): String = "ScalaBuff JSON generation not enabled. Use --generate_json_method to enable."
 }
 
-object MapIgnoreUpdates {
-	@scala.beans.BeanProperty val defaultInstance = new MapIgnoreUpdates()
+object MapIgnore {
+	@scala.beans.BeanProperty val defaultInstance = new MapIgnore()
 
-	def parseFrom(data: Array[Byte]): MapIgnoreUpdates = defaultInstance.mergeFrom(data)
-	def parseFrom(data: Array[Byte], offset: Int, length: Int): MapIgnoreUpdates = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): MapIgnoreUpdates = defaultInstance.mergeFrom(byteString)
-	def parseFrom(stream: java.io.InputStream): MapIgnoreUpdates = defaultInstance.mergeFrom(stream)
-	def parseDelimitedFrom(stream: java.io.InputStream): Option[MapIgnoreUpdates] = defaultInstance.mergeDelimitedFromStream(stream)
+	def parseFrom(data: Array[Byte]): MapIgnore = defaultInstance.mergeFrom(data)
+	def parseFrom(data: Array[Byte], offset: Int, length: Int): MapIgnore = defaultInstance.mergeFrom(data, offset, length)
+	def parseFrom(byteString: com.google.protobuf.ByteString): MapIgnore = defaultInstance.mergeFrom(byteString)
+	def parseFrom(stream: java.io.InputStream): MapIgnore = defaultInstance.mergeFrom(stream)
+	def parseDelimitedFrom(stream: java.io.InputStream): Option[MapIgnore] = defaultInstance.mergeDelimitedFromStream(stream)
 
 	val MAPCHUNKX_FIELD_NUMBER = 1
 	val MAPCHUNKY_FIELD_NUMBER = 2
 
 	def newBuilder = defaultInstance.newBuilderForType
-	def newBuilder(prototype: MapIgnoreUpdates) = defaultInstance.mergeFrom(prototype)
+	def newBuilder(prototype: MapIgnore) = defaultInstance.mergeFrom(prototype)
 
 }
 final case class Map (
@@ -1134,8 +1134,8 @@ object CommsMessages {
 		 "NewUser" -> (bytes ⇒ NewUser.parseFrom(bytes)),
 		 "Login" -> (bytes ⇒ Login.parseFrom(bytes)),
 		 "Say" -> (bytes ⇒ Say.parseFrom(bytes)),
-		 "MapRequestUpdates" -> (bytes ⇒ MapRequestUpdates.parseFrom(bytes)),
-		 "MapIgnoreUpdates" -> (bytes ⇒ MapIgnoreUpdates.parseFrom(bytes)),
+		 "MapRequest" -> (bytes ⇒ MapRequest.parseFrom(bytes)),
+		 "MapIgnore" -> (bytes ⇒ MapIgnore.parseFrom(bytes)),
 		 "Map" -> (bytes ⇒ Map.parseFrom(bytes)),
 		 "QueryServer" -> (bytes ⇒ QueryServer.parseFrom(bytes)),
 		 "QueryServerResponse" -> (bytes ⇒ QueryServerResponse.parseFrom(bytes))
