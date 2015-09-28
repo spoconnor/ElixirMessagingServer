@@ -13,7 +13,8 @@ Curses.init_pair(COLOR_RED,COLOR_RED,COLOR_BLACK)
 
 class Spr
   attr_accessor :chr, :col
-  def initialize(chr, col)
+  def initialize(name, chr, col)
+    @name = name
     @chr = chr
     @col = col
   end
@@ -27,13 +28,31 @@ puts "Draw #{chr} at #{x},#{y}"
 end
 
 class Sprites
-  def initialize()
+  def initialize(file)
     @sprs = Hash.new()
-    @sprs[0] = Spr.new(' ', COLOR_WHITE)
-    @sprs[1] = Spr.new('@', COLOR_RED)
-    @sprs[2] = Spr.new('#', COLOR_WHITE)
-    @sprs[3] = Spr.new('o', COLOR_WHITE)
-    @sprs[4] = Spr.new('-', COLOR_BLUE)
+    File.readlines(file).each do |line|
+      args = line.split(',')
+      id = args[0].to_i
+      name = args[1]
+      a = args[2]
+      if (a.length == 1)
+        chr = a
+      else
+        chr = a.force_encoding('utf-8')
+      end
+      c = args[3].to_i
+      case (c)
+      when 0
+        col = COLOR_WHITE
+      when 1
+        col = COLOR_BLUE
+      when 2
+        col = COLOR_RED
+      when 3
+        col = COLOR_RED
+      end
+      @sprs[id] = Spr.new(name, chr, col)
+    end
   end
   def get(id)
     @sprs[id]
@@ -42,14 +61,14 @@ end
 
 class Map
   def initialize()
-    @sprs = Sprites.new()
+    @sprs = Sprites.new("sprites.csv")
     @map = Array[
-      Array[0,0,0,0,0],
-      Array[0,0,0,2,0],
-      Array[3,0,1,2,0],
+      Array[6,6,6,6,6],
+      Array[6,3,3,2,6],
+      Array[6,0,1,2,6],
       Array[0,0,0,2,4],
-      Array[3,0,2,2,4],
-      Array[0,0,4,4,4],
+      Array[6,0,2,2,4],
+      Array[6,6,4,4,4],
     ]
   end
   def draw()
