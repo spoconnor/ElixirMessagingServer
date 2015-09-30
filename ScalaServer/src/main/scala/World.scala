@@ -4,6 +4,7 @@ import akka.actor.Actor
 import akka.actor.ActorRef
 import akka.actor.Props
 import akka.event.Logging
+import scala.collection.mutable.Map
 
 object World {
   def props(): Props = {
@@ -11,26 +12,32 @@ object World {
   }
 }
 
-case class ChunkLoc(x:Int, y:Int)
 case class Get(w:Int, l:Int)
 case class Set(w:Int, l:Int, h:Int ,v:Int) 
 
 class World() extends Actor {
   import context.system
   var log = Logging(context.system, this)
-  //val chunk = system.actorOf(Props[MapChunk], name = "chunk1")
-  val chunks = scala.collection.mutable.Map.empty[ChunkLoc, ActorRef]
+  val chunks = Map.empty[(Int,Int), ActorRef]
+
+  def chunk(x:Int, y:Int) = {
+    val loc = (x/MapChunk.chunkSize, y/MapChunk.chunkSize) 
+    if ( ! (chunks contains loc)) {
+      chunks += (loc -> system.actorOf(Props(new MapChunk(x,y))))
+    }
+    chunks(loc)
+  }
 
   def receive = {
     case "init" => init
-    case Get(w,l) => chunks(new ChunkLoc(1,1)) ! new Get(w,l)
-    case Set(w,l,h,v) => chunks(new ChunkLoc(1,1)) ! new Set(w,l,h,v)
-    case "dump" => chunks(new ChunkLoc(1,1)) ! "dump"
+    case "dump" => chunks.values.foreach(c => c ! "dump")
+    case Get(w,l) => chunk(w,l) ! new Get(w,l)
+    case Set(w,l,h,v) => chunk(w,l) ! new Set(w,l,h,v)
     case _ => log.info("World received unknown message")
   }
 
   def init = {
     log.info("World init")
-    chunks += (new ChunkLoc(1,1) -> system.actorOf(Props(new MapChunk(1,1))))
+    chunks += ((1,1) -> system.actorOf(Props(new MapChunk(1,1))))
   }
 }

@@ -53,6 +53,7 @@ object Main extends App {
    
     // TODO - Move to own actor
     val world = actorSystem.actorOf(World.props())
+    world ! "init"
     world ! "dump"
     //val d = world ! new Get(1,1)
     //Console.println("Data:"+d)

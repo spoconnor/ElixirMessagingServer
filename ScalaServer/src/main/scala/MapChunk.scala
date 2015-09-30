@@ -3,30 +3,35 @@ package com.example.akkaTcpChat
 import akka.actor.Actor
 import akka.actor.Props
 import akka.event.Logging
+import scala.collection.mutable.Map
 
 class Column {
-  val data = scala.collection.mutable.Map.empty[Int, Int]
+  val data = Map.empty[Int, Int]
   def Set(h:Int, v:Int) = data += (h -> v)
   def Get(h:Int):Int = data(h)
 
   def Dump() = { data foreach {case (key, value) => Console.print(key)}}
 }
 
+object MapChunk {
+  def chunkSize() = 10
+}
+
 class MapChunk(xc: Int, yc: Int) extends Actor {
   import context.system
   val chunkX: Int = xc
   val chunkY: Int = yc
-  val width: Int = 10
-  val length: Int = 10
+  val width: Int = MapChunk.chunkSize()
+  val length: Int = MapChunk.chunkSize()
   val height: Int = 10
   var log = Logging(context.system, this)
   private val data = Array.ofDim[Column](width,length)
 
   def receive = {
     case "init" => log.info("init")
+    case "dump" => Dump()
     case Get(w,l) => get(w,l)
     case Set(w,l,h,v) => set(w,l,h,v) 
-    case "dump" => Dump()
     case _ => log.info("MapChunk received unknown message")
   }
   
