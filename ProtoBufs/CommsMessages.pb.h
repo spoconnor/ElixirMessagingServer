@@ -942,31 +942,31 @@ class MapRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 mapChunkX = 1;
-  inline bool has_mapchunkx() const;
-  inline void clear_mapchunkx();
-  static const int kMapChunkXFieldNumber = 1;
-  inline ::google::protobuf::int32 mapchunkx() const;
-  inline void set_mapchunkx(::google::protobuf::int32 value);
+  // required int32 x = 1;
+  inline bool has_x() const;
+  inline void clear_x();
+  static const int kXFieldNumber = 1;
+  inline ::google::protobuf::int32 x() const;
+  inline void set_x(::google::protobuf::int32 value);
 
-  // required int32 mapChunkY = 2;
-  inline bool has_mapchunky() const;
-  inline void clear_mapchunky();
-  static const int kMapChunkYFieldNumber = 2;
-  inline ::google::protobuf::int32 mapchunky() const;
-  inline void set_mapchunky(::google::protobuf::int32 value);
+  // required int32 y = 2;
+  inline bool has_y() const;
+  inline void clear_y();
+  static const int kYFieldNumber = 2;
+  inline ::google::protobuf::int32 y() const;
+  inline void set_y(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:CommsMessages.MapRequest)
  private:
-  inline void set_has_mapchunkx();
-  inline void clear_has_mapchunkx();
-  inline void set_has_mapchunky();
-  inline void clear_has_mapchunky();
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 mapchunkx_;
-  ::google::protobuf::int32 mapchunky_;
+  ::google::protobuf::int32 x_;
+  ::google::protobuf::int32 y_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -1034,31 +1034,31 @@ class MapIgnore : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 mapChunkX = 1;
-  inline bool has_mapchunkx() const;
-  inline void clear_mapchunkx();
-  static const int kMapChunkXFieldNumber = 1;
-  inline ::google::protobuf::int32 mapchunkx() const;
-  inline void set_mapchunkx(::google::protobuf::int32 value);
+  // required int32 x = 1;
+  inline bool has_x() const;
+  inline void clear_x();
+  static const int kXFieldNumber = 1;
+  inline ::google::protobuf::int32 x() const;
+  inline void set_x(::google::protobuf::int32 value);
 
-  // required int32 mapChunkY = 2;
-  inline bool has_mapchunky() const;
-  inline void clear_mapchunky();
-  static const int kMapChunkYFieldNumber = 2;
-  inline ::google::protobuf::int32 mapchunky() const;
-  inline void set_mapchunky(::google::protobuf::int32 value);
+  // required int32 y = 2;
+  inline bool has_y() const;
+  inline void clear_y();
+  static const int kYFieldNumber = 2;
+  inline ::google::protobuf::int32 y() const;
+  inline void set_y(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:CommsMessages.MapIgnore)
  private:
-  inline void set_has_mapchunkx();
-  inline void clear_has_mapchunkx();
-  inline void set_has_mapchunky();
-  inline void clear_has_mapchunky();
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 mapchunkx_;
-  ::google::protobuf::int32 mapchunky_;
+  ::google::protobuf::int32 x_;
+  ::google::protobuf::int32 y_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -1126,44 +1126,64 @@ class Map : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 mapChunkX = 1;
-  inline bool has_mapchunkx() const;
-  inline void clear_mapchunkx();
-  static const int kMapChunkXFieldNumber = 1;
-  inline ::google::protobuf::int32 mapchunkx() const;
-  inline void set_mapchunkx(::google::protobuf::int32 value);
+  // required int32 minX = 1;
+  inline bool has_minx() const;
+  inline void clear_minx();
+  static const int kMinXFieldNumber = 1;
+  inline ::google::protobuf::int32 minx() const;
+  inline void set_minx(::google::protobuf::int32 value);
 
-  // required int32 mapChunkY = 2;
-  inline bool has_mapchunky() const;
-  inline void clear_mapchunky();
-  static const int kMapChunkYFieldNumber = 2;
-  inline ::google::protobuf::int32 mapchunky() const;
-  inline void set_mapchunky(::google::protobuf::int32 value);
+  // required int32 minY = 2;
+  inline bool has_miny() const;
+  inline void clear_miny();
+  static const int kMinYFieldNumber = 2;
+  inline ::google::protobuf::int32 miny() const;
+  inline void set_miny(::google::protobuf::int32 value);
 
-  // required int32 dataSize = 3;
+  // required int32 maxX = 3;
+  inline bool has_maxx() const;
+  inline void clear_maxx();
+  static const int kMaxXFieldNumber = 3;
+  inline ::google::protobuf::int32 maxx() const;
+  inline void set_maxx(::google::protobuf::int32 value);
+
+  // required int32 maxY = 4;
+  inline bool has_maxy() const;
+  inline void clear_maxy();
+  static const int kMaxYFieldNumber = 4;
+  inline ::google::protobuf::int32 maxy() const;
+  inline void set_maxy(::google::protobuf::int32 value);
+
+  // required int32 dataSize = 5;
   inline bool has_datasize() const;
   inline void clear_datasize();
-  static const int kDataSizeFieldNumber = 3;
+  static const int kDataSizeFieldNumber = 5;
   inline ::google::protobuf::int32 datasize() const;
   inline void set_datasize(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:CommsMessages.Map)
  private:
-  inline void set_has_mapchunkx();
-  inline void clear_has_mapchunkx();
-  inline void set_has_mapchunky();
-  inline void clear_has_mapchunky();
+  inline void set_has_minx();
+  inline void clear_has_minx();
+  inline void set_has_miny();
+  inline void clear_has_miny();
+  inline void set_has_maxx();
+  inline void clear_has_maxx();
+  inline void set_has_maxy();
+  inline void clear_has_maxy();
   inline void set_has_datasize();
   inline void clear_has_datasize();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 mapchunkx_;
-  ::google::protobuf::int32 mapchunky_;
+  ::google::protobuf::int32 minx_;
+  ::google::protobuf::int32 miny_;
+  ::google::protobuf::int32 maxx_;
+  ::google::protobuf::int32 maxy_;
   ::google::protobuf::int32 datasize_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_CommsMessages_2eproto();
   friend void protobuf_AssignDesc_CommsMessages_2eproto();
@@ -2527,155 +2547,199 @@ inline void Say::set_allocated_text(::std::string* text) {
 
 // MapRequest
 
-// required int32 mapChunkX = 1;
-inline bool MapRequest::has_mapchunkx() const {
+// required int32 x = 1;
+inline bool MapRequest::has_x() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void MapRequest::set_has_mapchunkx() {
+inline void MapRequest::set_has_x() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void MapRequest::clear_has_mapchunkx() {
+inline void MapRequest::clear_has_x() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void MapRequest::clear_mapchunkx() {
-  mapchunkx_ = 0;
-  clear_has_mapchunkx();
+inline void MapRequest::clear_x() {
+  x_ = 0;
+  clear_has_x();
 }
-inline ::google::protobuf::int32 MapRequest::mapchunkx() const {
-  return mapchunkx_;
+inline ::google::protobuf::int32 MapRequest::x() const {
+  return x_;
 }
-inline void MapRequest::set_mapchunkx(::google::protobuf::int32 value) {
-  set_has_mapchunkx();
-  mapchunkx_ = value;
+inline void MapRequest::set_x(::google::protobuf::int32 value) {
+  set_has_x();
+  x_ = value;
 }
 
-// required int32 mapChunkY = 2;
-inline bool MapRequest::has_mapchunky() const {
+// required int32 y = 2;
+inline bool MapRequest::has_y() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void MapRequest::set_has_mapchunky() {
+inline void MapRequest::set_has_y() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void MapRequest::clear_has_mapchunky() {
+inline void MapRequest::clear_has_y() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void MapRequest::clear_mapchunky() {
-  mapchunky_ = 0;
-  clear_has_mapchunky();
+inline void MapRequest::clear_y() {
+  y_ = 0;
+  clear_has_y();
 }
-inline ::google::protobuf::int32 MapRequest::mapchunky() const {
-  return mapchunky_;
+inline ::google::protobuf::int32 MapRequest::y() const {
+  return y_;
 }
-inline void MapRequest::set_mapchunky(::google::protobuf::int32 value) {
-  set_has_mapchunky();
-  mapchunky_ = value;
+inline void MapRequest::set_y(::google::protobuf::int32 value) {
+  set_has_y();
+  y_ = value;
 }
 
 // -------------------------------------------------------------------
 
 // MapIgnore
 
-// required int32 mapChunkX = 1;
-inline bool MapIgnore::has_mapchunkx() const {
+// required int32 x = 1;
+inline bool MapIgnore::has_x() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void MapIgnore::set_has_mapchunkx() {
+inline void MapIgnore::set_has_x() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void MapIgnore::clear_has_mapchunkx() {
+inline void MapIgnore::clear_has_x() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void MapIgnore::clear_mapchunkx() {
-  mapchunkx_ = 0;
-  clear_has_mapchunkx();
+inline void MapIgnore::clear_x() {
+  x_ = 0;
+  clear_has_x();
 }
-inline ::google::protobuf::int32 MapIgnore::mapchunkx() const {
-  return mapchunkx_;
+inline ::google::protobuf::int32 MapIgnore::x() const {
+  return x_;
 }
-inline void MapIgnore::set_mapchunkx(::google::protobuf::int32 value) {
-  set_has_mapchunkx();
-  mapchunkx_ = value;
+inline void MapIgnore::set_x(::google::protobuf::int32 value) {
+  set_has_x();
+  x_ = value;
 }
 
-// required int32 mapChunkY = 2;
-inline bool MapIgnore::has_mapchunky() const {
+// required int32 y = 2;
+inline bool MapIgnore::has_y() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void MapIgnore::set_has_mapchunky() {
+inline void MapIgnore::set_has_y() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void MapIgnore::clear_has_mapchunky() {
+inline void MapIgnore::clear_has_y() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void MapIgnore::clear_mapchunky() {
-  mapchunky_ = 0;
-  clear_has_mapchunky();
+inline void MapIgnore::clear_y() {
+  y_ = 0;
+  clear_has_y();
 }
-inline ::google::protobuf::int32 MapIgnore::mapchunky() const {
-  return mapchunky_;
+inline ::google::protobuf::int32 MapIgnore::y() const {
+  return y_;
 }
-inline void MapIgnore::set_mapchunky(::google::protobuf::int32 value) {
-  set_has_mapchunky();
-  mapchunky_ = value;
+inline void MapIgnore::set_y(::google::protobuf::int32 value) {
+  set_has_y();
+  y_ = value;
 }
 
 // -------------------------------------------------------------------
 
 // Map
 
-// required int32 mapChunkX = 1;
-inline bool Map::has_mapchunkx() const {
+// required int32 minX = 1;
+inline bool Map::has_minx() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Map::set_has_mapchunkx() {
+inline void Map::set_has_minx() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Map::clear_has_mapchunkx() {
+inline void Map::clear_has_minx() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void Map::clear_mapchunkx() {
-  mapchunkx_ = 0;
-  clear_has_mapchunkx();
+inline void Map::clear_minx() {
+  minx_ = 0;
+  clear_has_minx();
 }
-inline ::google::protobuf::int32 Map::mapchunkx() const {
-  return mapchunkx_;
+inline ::google::protobuf::int32 Map::minx() const {
+  return minx_;
 }
-inline void Map::set_mapchunkx(::google::protobuf::int32 value) {
-  set_has_mapchunkx();
-  mapchunkx_ = value;
+inline void Map::set_minx(::google::protobuf::int32 value) {
+  set_has_minx();
+  minx_ = value;
 }
 
-// required int32 mapChunkY = 2;
-inline bool Map::has_mapchunky() const {
+// required int32 minY = 2;
+inline bool Map::has_miny() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void Map::set_has_mapchunky() {
+inline void Map::set_has_miny() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void Map::clear_has_mapchunky() {
+inline void Map::clear_has_miny() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void Map::clear_mapchunky() {
-  mapchunky_ = 0;
-  clear_has_mapchunky();
+inline void Map::clear_miny() {
+  miny_ = 0;
+  clear_has_miny();
 }
-inline ::google::protobuf::int32 Map::mapchunky() const {
-  return mapchunky_;
+inline ::google::protobuf::int32 Map::miny() const {
+  return miny_;
 }
-inline void Map::set_mapchunky(::google::protobuf::int32 value) {
-  set_has_mapchunky();
-  mapchunky_ = value;
+inline void Map::set_miny(::google::protobuf::int32 value) {
+  set_has_miny();
+  miny_ = value;
 }
 
-// required int32 dataSize = 3;
-inline bool Map::has_datasize() const {
+// required int32 maxX = 3;
+inline bool Map::has_maxx() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void Map::set_has_datasize() {
+inline void Map::set_has_maxx() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void Map::clear_has_datasize() {
+inline void Map::clear_has_maxx() {
   _has_bits_[0] &= ~0x00000004u;
+}
+inline void Map::clear_maxx() {
+  maxx_ = 0;
+  clear_has_maxx();
+}
+inline ::google::protobuf::int32 Map::maxx() const {
+  return maxx_;
+}
+inline void Map::set_maxx(::google::protobuf::int32 value) {
+  set_has_maxx();
+  maxx_ = value;
+}
+
+// required int32 maxY = 4;
+inline bool Map::has_maxy() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void Map::set_has_maxy() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void Map::clear_has_maxy() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void Map::clear_maxy() {
+  maxy_ = 0;
+  clear_has_maxy();
+}
+inline ::google::protobuf::int32 Map::maxy() const {
+  return maxy_;
+}
+inline void Map::set_maxy(::google::protobuf::int32 value) {
+  set_has_maxy();
+  maxy_ = value;
+}
+
+// required int32 dataSize = 5;
+inline bool Map::has_datasize() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void Map::set_has_datasize() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void Map::clear_has_datasize() {
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void Map::clear_datasize() {
   datasize_ = 0;

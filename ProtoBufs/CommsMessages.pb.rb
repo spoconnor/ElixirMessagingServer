@@ -76,21 +76,23 @@
 # 
 #   message MapRequest
 #   {
-#     required int32 mapChunkX = 1;
-#     required int32 mapChunkY = 2;
+#     required int32 x = 1;
+#     required int32 y = 2;
 #   }
 # 
 #   message MapIgnore
 #   {
-#     required int32 mapChunkX = 1;
-#     required int32 mapChunkY = 2;
+#     required int32 x = 1;
+#     required int32 y = 2;
 #   }
 # 
 #   message Map
 #   {
-#     required int32 mapChunkX = 1;
-#     required int32 mapChunkY = 2;
-#     required int32 dataSize = 3;
+#     required int32 minX = 1;
+#     required int32 minY = 2;
+#     required int32 maxX = 3;
+#     required int32 maxY = 4;
+#     required int32 dataSize = 5;
 #     // binary data follows message
 #   }
 # 
@@ -174,19 +176,21 @@ module CommsMessages
   end
   class MapRequest < ::Protobuf::Message
     defined_in __FILE__
-    required :int32, :mapChunkX, 1
-    required :int32, :mapChunkY, 2
+    required :int32, :x, 1
+    required :int32, :y, 2
   end
   class MapIgnore < ::Protobuf::Message
     defined_in __FILE__
-    required :int32, :mapChunkX, 1
-    required :int32, :mapChunkY, 2
+    required :int32, :x, 1
+    required :int32, :y, 2
   end
   class Map < ::Protobuf::Message
     defined_in __FILE__
-    required :int32, :mapChunkX, 1
-    required :int32, :mapChunkY, 2
-    required :int32, :dataSize, 3
+    required :int32, :minX, 1
+    required :int32, :minY, 2
+    required :int32, :maxX, 3
+    required :int32, :maxY, 4
+    required :int32, :dataSize, 5
   end
   class QueryServer < ::Protobuf::Message
     defined_in __FILE__

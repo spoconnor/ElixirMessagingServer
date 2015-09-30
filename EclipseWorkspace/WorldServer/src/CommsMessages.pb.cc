@@ -191,8 +191,8 @@ void protobuf_AssignDesc_CommsMessages_2eproto() {
       sizeof(Say));
   MapRequest_descriptor_ = file->message_type(7);
   static const int MapRequest_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequest, mapchunkx_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequest, mapchunky_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequest, x_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapRequest, y_),
   };
   MapRequest_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -207,8 +207,8 @@ void protobuf_AssignDesc_CommsMessages_2eproto() {
       sizeof(MapRequest));
   MapIgnore_descriptor_ = file->message_type(8);
   static const int MapIgnore_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnore, mapchunkx_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnore, mapchunky_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnore, x_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapIgnore, y_),
   };
   MapIgnore_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -222,9 +222,11 @@ void protobuf_AssignDesc_CommsMessages_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MapIgnore));
   Map_descriptor_ = file->message_type(9);
-  static const int Map_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, mapchunkx_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, mapchunky_),
+  static const int Map_offsets_[5] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, minx_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, miny_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, maxx_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, maxy_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, datasize_),
   };
   Map_reflection_ =
@@ -364,18 +366,18 @@ void protobuf_AddDesc_CommsMessages_2eproto() {
     "\002 \001(\t\";\n\007NewUser\022\020\n\010username\030\001 \002(\t\022\020\n\010pa"
     "ssword\030\002 \002(\t\022\014\n\004name\030\003 \002(\t\"+\n\005Login\022\020\n\010u"
     "sername\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"\023\n\003Say\022\014"
-    "\n\004text\030\001 \002(\t\"2\n\nMapRequest\022\021\n\tmapChunkX\030"
-    "\001 \002(\005\022\021\n\tmapChunkY\030\002 \002(\005\"1\n\tMapIgnore\022\021\n"
-    "\tmapChunkX\030\001 \002(\005\022\021\n\tmapChunkY\030\002 \002(\005\"=\n\003M"
-    "ap\022\021\n\tmapChunkX\030\001 \002(\005\022\021\n\tmapChunkY\030\002 \002(\005"
-    "\022\020\n\010dataSize\030\003 \002(\005\"\r\n\013QueryServer\"m\n\023Que"
-    "ryServerResponse\022\024\n\014minMapChunkX\030\001 \002(\005\022\024"
-    "\n\014minMapChunkY\030\002 \002(\005\022\024\n\014maxMapChunkX\030\003 \002"
-    "(\005\022\024\n\014maxMapChunkY\030\004 \002(\005*\251\001\n\007MsgType\022\r\n\t"
-    "eResponse\020\001\022\t\n\005ePing\020\002\022\t\n\005ePong\020\003\022\014\n\010eNe"
-    "wUser\020\004\022\n\n\006eLogin\020\005\022\010\n\004eSay\020\006\022\017\n\013eMapReq"
-    "uest\020\007\022\016\n\neMapIgnore\020\010\022\010\n\004eMap\020\t\022\020\n\014eQue"
-    "ryServer\020\n\022\030\n\024eQueryServerResponse\020\013B\002H\001", 1240);
+    "\n\004text\030\001 \002(\t\"\"\n\nMapRequest\022\t\n\001x\030\001 \002(\005\022\t\n"
+    "\001y\030\002 \002(\005\"!\n\tMapIgnore\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 "
+    "\002(\005\"O\n\003Map\022\014\n\004minX\030\001 \002(\005\022\014\n\004minY\030\002 \002(\005\022\014"
+    "\n\004maxX\030\003 \002(\005\022\014\n\004maxY\030\004 \002(\005\022\020\n\010dataSize\030\005"
+    " \002(\005\"\r\n\013QueryServer\"m\n\023QueryServerRespon"
+    "se\022\024\n\014minMapChunkX\030\001 \002(\005\022\024\n\014minMapChunkY"
+    "\030\002 \002(\005\022\024\n\014maxMapChunkX\030\003 \002(\005\022\024\n\014maxMapCh"
+    "unkY\030\004 \002(\005*\251\001\n\007MsgType\022\r\n\teResponse\020\001\022\t\n"
+    "\005ePing\020\002\022\t\n\005ePong\020\003\022\014\n\010eNewUser\020\004\022\n\n\006eLo"
+    "gin\020\005\022\010\n\004eSay\020\006\022\017\n\013eMapRequest\020\007\022\016\n\neMap"
+    "Ignore\020\010\022\010\n\004eMap\020\t\022\020\n\014eQueryServer\020\n\022\030\n\024"
+    "eQueryServerResponse\020\013B\002H\001", 1226);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "CommsMessages.proto", &protobuf_RegisterTypes);
   Message::default_instance_ = new Message();
@@ -2825,8 +2827,8 @@ void Say::Swap(Say* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int MapRequest::kMapChunkXFieldNumber;
-const int MapRequest::kMapChunkYFieldNumber;
+const int MapRequest::kXFieldNumber;
+const int MapRequest::kYFieldNumber;
 #endif  // !_MSC_VER
 
 MapRequest::MapRequest()
@@ -2845,8 +2847,8 @@ MapRequest::MapRequest(const MapRequest& from)
 
 void MapRequest::SharedCtor() {
   _cached_size_ = 0;
-  mapchunkx_ = 0;
-  mapchunky_ = 0;
+  x_ = 0;
+  y_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -2882,8 +2884,8 @@ MapRequest* MapRequest::New() const {
 
 void MapRequest::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    mapchunkx_ = 0;
-    mapchunky_ = 0;
+    x_ = 0;
+    y_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -2895,30 +2897,30 @@ bool MapRequest::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 mapChunkX = 1;
+      // required int32 x = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &mapchunkx_)));
-          set_has_mapchunkx();
+                 input, &x_)));
+          set_has_x();
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_mapChunkY;
+        if (input->ExpectTag(16)) goto parse_y;
         break;
       }
 
-      // required int32 mapChunkY = 2;
+      // required int32 y = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_mapChunkY:
+         parse_y:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &mapchunky_)));
-          set_has_mapchunky();
+                 input, &y_)));
+          set_has_y();
         } else {
           goto handle_uninterpreted;
         }
@@ -2944,14 +2946,14 @@ bool MapRequest::MergePartialFromCodedStream(
 
 void MapRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int32 mapChunkX = 1;
-  if (has_mapchunkx()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->mapchunkx(), output);
+  // required int32 x = 1;
+  if (has_x()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->x(), output);
   }
 
-  // required int32 mapChunkY = 2;
-  if (has_mapchunky()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->mapchunky(), output);
+  // required int32 y = 2;
+  if (has_y()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->y(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -2962,14 +2964,14 @@ void MapRequest::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* MapRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int32 mapChunkX = 1;
-  if (has_mapchunkx()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->mapchunkx(), target);
+  // required int32 x = 1;
+  if (has_x()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->x(), target);
   }
 
-  // required int32 mapChunkY = 2;
-  if (has_mapchunky()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->mapchunky(), target);
+  // required int32 y = 2;
+  if (has_y()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->y(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2983,18 +2985,18 @@ int MapRequest::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 mapChunkX = 1;
-    if (has_mapchunkx()) {
+    // required int32 x = 1;
+    if (has_x()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->mapchunkx());
+          this->x());
     }
 
-    // required int32 mapChunkY = 2;
-    if (has_mapchunky()) {
+    // required int32 y = 2;
+    if (has_y()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->mapchunky());
+          this->y());
     }
 
   }
@@ -3024,11 +3026,11 @@ void MapRequest::MergeFrom(const ::google::protobuf::Message& from) {
 void MapRequest::MergeFrom(const MapRequest& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_mapchunkx()) {
-      set_mapchunkx(from.mapchunkx());
+    if (from.has_x()) {
+      set_x(from.x());
     }
-    if (from.has_mapchunky()) {
-      set_mapchunky(from.mapchunky());
+    if (from.has_y()) {
+      set_y(from.y());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -3054,8 +3056,8 @@ bool MapRequest::IsInitialized() const {
 
 void MapRequest::Swap(MapRequest* other) {
   if (other != this) {
-    std::swap(mapchunkx_, other->mapchunkx_);
-    std::swap(mapchunky_, other->mapchunky_);
+    std::swap(x_, other->x_);
+    std::swap(y_, other->y_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -3074,8 +3076,8 @@ void MapRequest::Swap(MapRequest* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int MapIgnore::kMapChunkXFieldNumber;
-const int MapIgnore::kMapChunkYFieldNumber;
+const int MapIgnore::kXFieldNumber;
+const int MapIgnore::kYFieldNumber;
 #endif  // !_MSC_VER
 
 MapIgnore::MapIgnore()
@@ -3094,8 +3096,8 @@ MapIgnore::MapIgnore(const MapIgnore& from)
 
 void MapIgnore::SharedCtor() {
   _cached_size_ = 0;
-  mapchunkx_ = 0;
-  mapchunky_ = 0;
+  x_ = 0;
+  y_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -3131,8 +3133,8 @@ MapIgnore* MapIgnore::New() const {
 
 void MapIgnore::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    mapchunkx_ = 0;
-    mapchunky_ = 0;
+    x_ = 0;
+    y_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -3144,30 +3146,30 @@ bool MapIgnore::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 mapChunkX = 1;
+      // required int32 x = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &mapchunkx_)));
-          set_has_mapchunkx();
+                 input, &x_)));
+          set_has_x();
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_mapChunkY;
+        if (input->ExpectTag(16)) goto parse_y;
         break;
       }
 
-      // required int32 mapChunkY = 2;
+      // required int32 y = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_mapChunkY:
+         parse_y:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &mapchunky_)));
-          set_has_mapchunky();
+                 input, &y_)));
+          set_has_y();
         } else {
           goto handle_uninterpreted;
         }
@@ -3193,14 +3195,14 @@ bool MapIgnore::MergePartialFromCodedStream(
 
 void MapIgnore::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int32 mapChunkX = 1;
-  if (has_mapchunkx()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->mapchunkx(), output);
+  // required int32 x = 1;
+  if (has_x()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->x(), output);
   }
 
-  // required int32 mapChunkY = 2;
-  if (has_mapchunky()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->mapchunky(), output);
+  // required int32 y = 2;
+  if (has_y()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->y(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -3211,14 +3213,14 @@ void MapIgnore::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* MapIgnore::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int32 mapChunkX = 1;
-  if (has_mapchunkx()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->mapchunkx(), target);
+  // required int32 x = 1;
+  if (has_x()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->x(), target);
   }
 
-  // required int32 mapChunkY = 2;
-  if (has_mapchunky()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->mapchunky(), target);
+  // required int32 y = 2;
+  if (has_y()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->y(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -3232,18 +3234,18 @@ int MapIgnore::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 mapChunkX = 1;
-    if (has_mapchunkx()) {
+    // required int32 x = 1;
+    if (has_x()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->mapchunkx());
+          this->x());
     }
 
-    // required int32 mapChunkY = 2;
-    if (has_mapchunky()) {
+    // required int32 y = 2;
+    if (has_y()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->mapchunky());
+          this->y());
     }
 
   }
@@ -3273,11 +3275,11 @@ void MapIgnore::MergeFrom(const ::google::protobuf::Message& from) {
 void MapIgnore::MergeFrom(const MapIgnore& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_mapchunkx()) {
-      set_mapchunkx(from.mapchunkx());
+    if (from.has_x()) {
+      set_x(from.x());
     }
-    if (from.has_mapchunky()) {
-      set_mapchunky(from.mapchunky());
+    if (from.has_y()) {
+      set_y(from.y());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -3303,8 +3305,8 @@ bool MapIgnore::IsInitialized() const {
 
 void MapIgnore::Swap(MapIgnore* other) {
   if (other != this) {
-    std::swap(mapchunkx_, other->mapchunkx_);
-    std::swap(mapchunky_, other->mapchunky_);
+    std::swap(x_, other->x_);
+    std::swap(y_, other->y_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -3323,8 +3325,10 @@ void MapIgnore::Swap(MapIgnore* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int Map::kMapChunkXFieldNumber;
-const int Map::kMapChunkYFieldNumber;
+const int Map::kMinXFieldNumber;
+const int Map::kMinYFieldNumber;
+const int Map::kMaxXFieldNumber;
+const int Map::kMaxYFieldNumber;
 const int Map::kDataSizeFieldNumber;
 #endif  // !_MSC_VER
 
@@ -3344,8 +3348,10 @@ Map::Map(const Map& from)
 
 void Map::SharedCtor() {
   _cached_size_ = 0;
-  mapchunkx_ = 0;
-  mapchunky_ = 0;
+  minx_ = 0;
+  miny_ = 0;
+  maxx_ = 0;
+  maxy_ = 0;
   datasize_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -3382,8 +3388,10 @@ Map* Map::New() const {
 
 void Map::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    mapchunkx_ = 0;
-    mapchunky_ = 0;
+    minx_ = 0;
+    miny_ = 0;
+    maxx_ = 0;
+    maxy_ = 0;
     datasize_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -3396,39 +3404,71 @@ bool Map::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 mapChunkX = 1;
+      // required int32 minX = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &mapchunkx_)));
-          set_has_mapchunkx();
+                 input, &minx_)));
+          set_has_minx();
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_mapChunkY;
+        if (input->ExpectTag(16)) goto parse_minY;
         break;
       }
 
-      // required int32 mapChunkY = 2;
+      // required int32 minY = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_mapChunkY:
+         parse_minY:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &mapchunky_)));
-          set_has_mapchunky();
+                 input, &miny_)));
+          set_has_miny();
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_dataSize;
+        if (input->ExpectTag(24)) goto parse_maxX;
         break;
       }
 
-      // required int32 dataSize = 3;
+      // required int32 maxX = 3;
       case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_maxX:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &maxx_)));
+          set_has_maxx();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(32)) goto parse_maxY;
+        break;
+      }
+
+      // required int32 maxY = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_maxY:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &maxy_)));
+          set_has_maxy();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(40)) goto parse_dataSize;
+        break;
+      }
+
+      // required int32 dataSize = 5;
+      case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_dataSize:
@@ -3461,19 +3501,29 @@ bool Map::MergePartialFromCodedStream(
 
 void Map::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int32 mapChunkX = 1;
-  if (has_mapchunkx()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->mapchunkx(), output);
+  // required int32 minX = 1;
+  if (has_minx()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->minx(), output);
   }
 
-  // required int32 mapChunkY = 2;
-  if (has_mapchunky()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->mapchunky(), output);
+  // required int32 minY = 2;
+  if (has_miny()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->miny(), output);
   }
 
-  // required int32 dataSize = 3;
+  // required int32 maxX = 3;
+  if (has_maxx()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->maxx(), output);
+  }
+
+  // required int32 maxY = 4;
+  if (has_maxy()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->maxy(), output);
+  }
+
+  // required int32 dataSize = 5;
   if (has_datasize()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->datasize(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->datasize(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -3484,19 +3534,29 @@ void Map::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* Map::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int32 mapChunkX = 1;
-  if (has_mapchunkx()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->mapchunkx(), target);
+  // required int32 minX = 1;
+  if (has_minx()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->minx(), target);
   }
 
-  // required int32 mapChunkY = 2;
-  if (has_mapchunky()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->mapchunky(), target);
+  // required int32 minY = 2;
+  if (has_miny()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->miny(), target);
   }
 
-  // required int32 dataSize = 3;
+  // required int32 maxX = 3;
+  if (has_maxx()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->maxx(), target);
+  }
+
+  // required int32 maxY = 4;
+  if (has_maxy()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->maxy(), target);
+  }
+
+  // required int32 dataSize = 5;
   if (has_datasize()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->datasize(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->datasize(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -3510,21 +3570,35 @@ int Map::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 mapChunkX = 1;
-    if (has_mapchunkx()) {
+    // required int32 minX = 1;
+    if (has_minx()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->mapchunkx());
+          this->minx());
     }
 
-    // required int32 mapChunkY = 2;
-    if (has_mapchunky()) {
+    // required int32 minY = 2;
+    if (has_miny()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->mapchunky());
+          this->miny());
     }
 
-    // required int32 dataSize = 3;
+    // required int32 maxX = 3;
+    if (has_maxx()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->maxx());
+    }
+
+    // required int32 maxY = 4;
+    if (has_maxy()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->maxy());
+    }
+
+    // required int32 dataSize = 5;
     if (has_datasize()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -3558,11 +3632,17 @@ void Map::MergeFrom(const ::google::protobuf::Message& from) {
 void Map::MergeFrom(const Map& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_mapchunkx()) {
-      set_mapchunkx(from.mapchunkx());
+    if (from.has_minx()) {
+      set_minx(from.minx());
     }
-    if (from.has_mapchunky()) {
-      set_mapchunky(from.mapchunky());
+    if (from.has_miny()) {
+      set_miny(from.miny());
+    }
+    if (from.has_maxx()) {
+      set_maxx(from.maxx());
+    }
+    if (from.has_maxy()) {
+      set_maxy(from.maxy());
     }
     if (from.has_datasize()) {
       set_datasize(from.datasize());
@@ -3584,15 +3664,17 @@ void Map::CopyFrom(const Map& from) {
 }
 
 bool Map::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
 
   return true;
 }
 
 void Map::Swap(Map* other) {
   if (other != this) {
-    std::swap(mapchunkx_, other->mapchunkx_);
-    std::swap(mapchunky_, other->mapchunky_);
+    std::swap(minx_, other->minx_);
+    std::swap(miny_, other->miny_);
+    std::swap(maxx_, other->maxx_);
+    std::swap(maxy_, other->maxy_);
     std::swap(datasize_, other->datasize_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);

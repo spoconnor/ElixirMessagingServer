@@ -726,8 +726,8 @@ object Say {
 
 }
 final case class MapRequest (
-	`mapChunkX`: Int = 0,
-	`mapChunkY`: Int = 0
+	`x`: Int = 0,
+	`y`: Int = 0
 ) extends com.google.protobuf.GeneratedMessageLite
 	with com.google.protobuf.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[MapRequest]
@@ -736,32 +736,32 @@ final case class MapRequest (
 
 
 	def writeTo(output: com.google.protobuf.CodedOutputStream) {
-		output.writeInt32(1, `mapChunkX`)
-		output.writeInt32(2, `mapChunkY`)
+		output.writeInt32(1, `x`)
+		output.writeInt32(2, `y`)
 	}
 
 	def getSerializedSize = {
 		import com.google.protobuf.CodedOutputStream._
 		var __size = 0
-		__size += computeInt32Size(1, `mapChunkX`)
-		__size += computeInt32Size(2, `mapChunkY`)
+		__size += computeInt32Size(1, `x`)
+		__size += computeInt32Size(2, `y`)
 
 		__size
 	}
 
 	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): MapRequest = {
 		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
-		var __mapChunkX: Int = 0
-		var __mapChunkY: Int = 0
+		var __x: Int = 0
+		var __y: Int = 0
 
 		def __newMerged = MapRequest(
-			__mapChunkX,
-			__mapChunkY
+			__x,
+			__y
 		)
 		while (true) in.readTag match {
 			case 0 => return __newMerged
-			case 8 => __mapChunkX = in.readInt32()
-			case 16 => __mapChunkY = in.readInt32()
+			case 8 => __x = in.readInt32()
+			case 16 => __y = in.readInt32()
 			case default => if (!in.skipField(default)) return __newMerged
 		}
 		null
@@ -769,8 +769,8 @@ final case class MapRequest (
 
 	def mergeFrom(m: MapRequest) = {
 		MapRequest(
-			m.`mapChunkX`,
-			m.`mapChunkY`
+			m.`x`,
+			m.`y`
 		)
 	}
 
@@ -795,16 +795,16 @@ object MapRequest {
 	def parseFrom(stream: java.io.InputStream): MapRequest = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[MapRequest] = defaultInstance.mergeDelimitedFromStream(stream)
 
-	val MAPCHUNKX_FIELD_NUMBER = 1
-	val MAPCHUNKY_FIELD_NUMBER = 2
+	val X_FIELD_NUMBER = 1
+	val Y_FIELD_NUMBER = 2
 
 	def newBuilder = defaultInstance.newBuilderForType
 	def newBuilder(prototype: MapRequest) = defaultInstance.mergeFrom(prototype)
 
 }
 final case class MapIgnore (
-	`mapChunkX`: Int = 0,
-	`mapChunkY`: Int = 0
+	`x`: Int = 0,
+	`y`: Int = 0
 ) extends com.google.protobuf.GeneratedMessageLite
 	with com.google.protobuf.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[MapIgnore]
@@ -813,32 +813,32 @@ final case class MapIgnore (
 
 
 	def writeTo(output: com.google.protobuf.CodedOutputStream) {
-		output.writeInt32(1, `mapChunkX`)
-		output.writeInt32(2, `mapChunkY`)
+		output.writeInt32(1, `x`)
+		output.writeInt32(2, `y`)
 	}
 
 	def getSerializedSize = {
 		import com.google.protobuf.CodedOutputStream._
 		var __size = 0
-		__size += computeInt32Size(1, `mapChunkX`)
-		__size += computeInt32Size(2, `mapChunkY`)
+		__size += computeInt32Size(1, `x`)
+		__size += computeInt32Size(2, `y`)
 
 		__size
 	}
 
 	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): MapIgnore = {
 		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
-		var __mapChunkX: Int = 0
-		var __mapChunkY: Int = 0
+		var __x: Int = 0
+		var __y: Int = 0
 
 		def __newMerged = MapIgnore(
-			__mapChunkX,
-			__mapChunkY
+			__x,
+			__y
 		)
 		while (true) in.readTag match {
 			case 0 => return __newMerged
-			case 8 => __mapChunkX = in.readInt32()
-			case 16 => __mapChunkY = in.readInt32()
+			case 8 => __x = in.readInt32()
+			case 16 => __y = in.readInt32()
 			case default => if (!in.skipField(default)) return __newMerged
 		}
 		null
@@ -846,8 +846,8 @@ final case class MapIgnore (
 
 	def mergeFrom(m: MapIgnore) = {
 		MapIgnore(
-			m.`mapChunkX`,
-			m.`mapChunkY`
+			m.`x`,
+			m.`y`
 		)
 	}
 
@@ -872,16 +872,18 @@ object MapIgnore {
 	def parseFrom(stream: java.io.InputStream): MapIgnore = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[MapIgnore] = defaultInstance.mergeDelimitedFromStream(stream)
 
-	val MAPCHUNKX_FIELD_NUMBER = 1
-	val MAPCHUNKY_FIELD_NUMBER = 2
+	val X_FIELD_NUMBER = 1
+	val Y_FIELD_NUMBER = 2
 
 	def newBuilder = defaultInstance.newBuilderForType
 	def newBuilder(prototype: MapIgnore) = defaultInstance.mergeFrom(prototype)
 
 }
 final case class Map (
-	`mapChunkX`: Int = 0,
-	`mapChunkY`: Int = 0,
+	`minX`: Int = 0,
+	`minY`: Int = 0,
+	`maxX`: Int = 0,
+	`maxY`: Int = 0,
 	`dataSize`: Int = 0
 ) extends com.google.protobuf.GeneratedMessageLite
 	with com.google.protobuf.MessageLite.Builder
@@ -891,37 +893,47 @@ final case class Map (
 
 
 	def writeTo(output: com.google.protobuf.CodedOutputStream) {
-		output.writeInt32(1, `mapChunkX`)
-		output.writeInt32(2, `mapChunkY`)
-		output.writeInt32(3, `dataSize`)
+		output.writeInt32(1, `minX`)
+		output.writeInt32(2, `minY`)
+		output.writeInt32(3, `maxX`)
+		output.writeInt32(4, `maxY`)
+		output.writeInt32(5, `dataSize`)
 	}
 
 	def getSerializedSize = {
 		import com.google.protobuf.CodedOutputStream._
 		var __size = 0
-		__size += computeInt32Size(1, `mapChunkX`)
-		__size += computeInt32Size(2, `mapChunkY`)
-		__size += computeInt32Size(3, `dataSize`)
+		__size += computeInt32Size(1, `minX`)
+		__size += computeInt32Size(2, `minY`)
+		__size += computeInt32Size(3, `maxX`)
+		__size += computeInt32Size(4, `maxY`)
+		__size += computeInt32Size(5, `dataSize`)
 
 		__size
 	}
 
 	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): Map = {
 		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
-		var __mapChunkX: Int = 0
-		var __mapChunkY: Int = 0
+		var __minX: Int = 0
+		var __minY: Int = 0
+		var __maxX: Int = 0
+		var __maxY: Int = 0
 		var __dataSize: Int = 0
 
 		def __newMerged = Map(
-			__mapChunkX,
-			__mapChunkY,
+			__minX,
+			__minY,
+			__maxX,
+			__maxY,
 			__dataSize
 		)
 		while (true) in.readTag match {
 			case 0 => return __newMerged
-			case 8 => __mapChunkX = in.readInt32()
-			case 16 => __mapChunkY = in.readInt32()
-			case 24 => __dataSize = in.readInt32()
+			case 8 => __minX = in.readInt32()
+			case 16 => __minY = in.readInt32()
+			case 24 => __maxX = in.readInt32()
+			case 32 => __maxY = in.readInt32()
+			case 40 => __dataSize = in.readInt32()
 			case default => if (!in.skipField(default)) return __newMerged
 		}
 		null
@@ -929,8 +941,10 @@ final case class Map (
 
 	def mergeFrom(m: Map) = {
 		Map(
-			m.`mapChunkX`,
-			m.`mapChunkY`,
+			m.`minX`,
+			m.`minY`,
+			m.`maxX`,
+			m.`maxY`,
 			m.`dataSize`
 		)
 	}
@@ -956,9 +970,11 @@ object Map {
 	def parseFrom(stream: java.io.InputStream): Map = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[Map] = defaultInstance.mergeDelimitedFromStream(stream)
 
-	val MAPCHUNKX_FIELD_NUMBER = 1
-	val MAPCHUNKY_FIELD_NUMBER = 2
-	val DATASIZE_FIELD_NUMBER = 3
+	val MINX_FIELD_NUMBER = 1
+	val MINY_FIELD_NUMBER = 2
+	val MAXX_FIELD_NUMBER = 3
+	val MAXY_FIELD_NUMBER = 4
+	val DATASIZE_FIELD_NUMBER = 5
 
 	def newBuilder = defaultInstance.newBuilderForType
 	def newBuilder(prototype: Map) = defaultInstance.mergeFrom(prototype)

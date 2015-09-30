@@ -66,17 +66,17 @@ namespace CommsMessages {
           "CgdtZXNzYWdlGAIgASgJIjsKB05ld1VzZXISEAoIdXNlcm5hbWUYASACKAkS" + 
           "EAoIcGFzc3dvcmQYAiACKAkSDAoEbmFtZRgDIAIoCSIrCgVMb2dpbhIQCgh1" + 
           "c2VybmFtZRgBIAIoCRIQCghwYXNzd29yZBgCIAIoCSITCgNTYXkSDAoEdGV4" + 
-          "dBgBIAIoCSIyCgpNYXBSZXF1ZXN0EhEKCW1hcENodW5rWBgBIAIoBRIRCglt" + 
-          "YXBDaHVua1kYAiACKAUiMQoJTWFwSWdub3JlEhEKCW1hcENodW5rWBgBIAIo" + 
-          "BRIRCgltYXBDaHVua1kYAiACKAUiPQoDTWFwEhEKCW1hcENodW5rWBgBIAIo" + 
-          "BRIRCgltYXBDaHVua1kYAiACKAUSEAoIZGF0YVNpemUYAyACKAUiDQoLUXVl" + 
-          "cnlTZXJ2ZXIibQoTUXVlcnlTZXJ2ZXJSZXNwb25zZRIUCgxtaW5NYXBDaHVu" + 
-          "a1gYASACKAUSFAoMbWluTWFwQ2h1bmtZGAIgAigFEhQKDG1heE1hcENodW5r" + 
-          "WBgDIAIoBRIUCgxtYXhNYXBDaHVua1kYBCACKAUqqQEKB01zZ1R5cGUSDQoJ" + 
-          "ZVJlc3BvbnNlEAESCQoFZVBpbmcQAhIJCgVlUG9uZxADEgwKCGVOZXdVc2Vy" + 
-          "EAQSCgoGZUxvZ2luEAUSCAoEZVNheRAGEg8KC2VNYXBSZXF1ZXN0EAcSDgoK" + 
-          "ZU1hcElnbm9yZRAIEggKBGVNYXAQCRIQCgxlUXVlcnlTZXJ2ZXIQChIYChRl" + 
-          "UXVlcnlTZXJ2ZXJSZXNwb25zZRALQgJIAQ==");
+          "dBgBIAIoCSIiCgpNYXBSZXF1ZXN0EgkKAXgYASACKAUSCQoBeRgCIAIoBSIh" + 
+          "CglNYXBJZ25vcmUSCQoBeBgBIAIoBRIJCgF5GAIgAigFIk8KA01hcBIMCgRt" + 
+          "aW5YGAEgAigFEgwKBG1pblkYAiACKAUSDAoEbWF4WBgDIAIoBRIMCgRtYXhZ" + 
+          "GAQgAigFEhAKCGRhdGFTaXplGAUgAigFIg0KC1F1ZXJ5U2VydmVyIm0KE1F1" + 
+          "ZXJ5U2VydmVyUmVzcG9uc2USFAoMbWluTWFwQ2h1bmtYGAEgAigFEhQKDG1p" + 
+          "bk1hcENodW5rWRgCIAIoBRIUCgxtYXhNYXBDaHVua1gYAyACKAUSFAoMbWF4" + 
+          "TWFwQ2h1bmtZGAQgAigFKqkBCgdNc2dUeXBlEg0KCWVSZXNwb25zZRABEgkK" + 
+          "BWVQaW5nEAISCQoFZVBvbmcQAxIMCghlTmV3VXNlchAEEgoKBmVMb2dpbhAF" + 
+          "EggKBGVTYXkQBhIPCgtlTWFwUmVxdWVzdBAHEg4KCmVNYXBJZ25vcmUQCBII" + 
+          "CgRlTWFwEAkSEAoMZVF1ZXJ5U2VydmVyEAoSGAoUZVF1ZXJ5U2VydmVyUmVz" + 
+          "cG9uc2UQC0ICSAE=");
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_CommsMessages_Message__Descriptor = Descriptor.MessageTypes[0];
@@ -110,15 +110,15 @@ namespace CommsMessages {
         internal__static_CommsMessages_MapRequest__Descriptor = Descriptor.MessageTypes[7];
         internal__static_CommsMessages_MapRequest__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapRequest, global::CommsMessages.MapRequest.Builder>(internal__static_CommsMessages_MapRequest__Descriptor,
-                new string[] { "MapChunkX", "MapChunkY", });
+                new string[] { "X", "Y", });
         internal__static_CommsMessages_MapIgnore__Descriptor = Descriptor.MessageTypes[8];
         internal__static_CommsMessages_MapIgnore__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapIgnore, global::CommsMessages.MapIgnore.Builder>(internal__static_CommsMessages_MapIgnore__Descriptor,
-                new string[] { "MapChunkX", "MapChunkY", });
+                new string[] { "X", "Y", });
         internal__static_CommsMessages_Map__Descriptor = Descriptor.MessageTypes[9];
         internal__static_CommsMessages_Map__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.Map, global::CommsMessages.Map.Builder>(internal__static_CommsMessages_Map__Descriptor,
-                new string[] { "MapChunkX", "MapChunkY", "DataSize", });
+                new string[] { "MinX", "MinY", "MaxX", "MaxY", "DataSize", });
         internal__static_CommsMessages_QueryServer__Descriptor = Descriptor.MessageTypes[10];
         internal__static_CommsMessages_QueryServer__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.QueryServer, global::CommsMessages.QueryServer.Builder>(internal__static_CommsMessages_QueryServer__Descriptor,
@@ -3105,7 +3105,7 @@ namespace CommsMessages {
   public sealed partial class MapRequest : pb::GeneratedMessage<MapRequest, MapRequest.Builder> {
     private MapRequest() { }
     private static readonly MapRequest defaultInstance = new MapRequest().MakeReadOnly();
-    private static readonly string[] _mapRequestFieldNames = new string[] { "mapChunkX", "mapChunkY" };
+    private static readonly string[] _mapRequestFieldNames = new string[] { "x", "y" };
     private static readonly uint[] _mapRequestFieldTags = new uint[] { 8, 16 };
     public static MapRequest DefaultInstance {
       get { return defaultInstance; }
@@ -3127,30 +3127,30 @@ namespace CommsMessages {
       get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapRequest__FieldAccessorTable; }
     }
     
-    public const int MapChunkXFieldNumber = 1;
-    private bool hasMapChunkX;
-    private int mapChunkX_;
-    public bool HasMapChunkX {
-      get { return hasMapChunkX; }
+    public const int XFieldNumber = 1;
+    private bool hasX;
+    private int x_;
+    public bool HasX {
+      get { return hasX; }
     }
-    public int MapChunkX {
-      get { return mapChunkX_; }
+    public int X {
+      get { return x_; }
     }
     
-    public const int MapChunkYFieldNumber = 2;
-    private bool hasMapChunkY;
-    private int mapChunkY_;
-    public bool HasMapChunkY {
-      get { return hasMapChunkY; }
+    public const int YFieldNumber = 2;
+    private bool hasY;
+    private int y_;
+    public bool HasY {
+      get { return hasY; }
     }
-    public int MapChunkY {
-      get { return mapChunkY_; }
+    public int Y {
+      get { return y_; }
     }
     
     public override bool IsInitialized {
       get {
-        if (!hasMapChunkX) return false;
-        if (!hasMapChunkY) return false;
+        if (!hasX) return false;
+        if (!hasY) return false;
         return true;
       }
     }
@@ -3158,11 +3158,11 @@ namespace CommsMessages {
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
       string[] field_names = _mapRequestFieldNames;
-      if (hasMapChunkX) {
-        output.WriteInt32(1, field_names[0], MapChunkX);
+      if (hasX) {
+        output.WriteInt32(1, field_names[0], X);
       }
-      if (hasMapChunkY) {
-        output.WriteInt32(2, field_names[1], MapChunkY);
+      if (hasY) {
+        output.WriteInt32(2, field_names[1], Y);
       }
       UnknownFields.WriteTo(output);
     }
@@ -3174,11 +3174,11 @@ namespace CommsMessages {
         if (size != -1) return size;
         
         size = 0;
-        if (hasMapChunkX) {
-          size += pb::CodedOutputStream.ComputeInt32Size(1, MapChunkX);
+        if (hasX) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, X);
         }
-        if (hasMapChunkY) {
-          size += pb::CodedOutputStream.ComputeInt32Size(2, MapChunkY);
+        if (hasY) {
+          size += pb::CodedOutputStream.ComputeInt32Size(2, Y);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -3304,11 +3304,11 @@ namespace CommsMessages {
       public override Builder MergeFrom(MapRequest other) {
         if (other == global::CommsMessages.MapRequest.DefaultInstance) return this;
         PrepareBuilder();
-        if (other.HasMapChunkX) {
-          MapChunkX = other.MapChunkX;
+        if (other.HasX) {
+          X = other.X;
         }
-        if (other.HasMapChunkY) {
-          MapChunkY = other.MapChunkY;
+        if (other.HasY) {
+          Y = other.Y;
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -3354,11 +3354,11 @@ namespace CommsMessages {
               break;
             }
             case 8: {
-              result.hasMapChunkX = input.ReadInt32(ref result.mapChunkX_);
+              result.hasX = input.ReadInt32(ref result.x_);
               break;
             }
             case 16: {
-              result.hasMapChunkY = input.ReadInt32(ref result.mapChunkY_);
+              result.hasY = input.ReadInt32(ref result.y_);
               break;
             }
           }
@@ -3371,43 +3371,43 @@ namespace CommsMessages {
       }
       
       
-      public bool HasMapChunkX {
-        get { return result.hasMapChunkX; }
+      public bool HasX {
+        get { return result.hasX; }
       }
-      public int MapChunkX {
-        get { return result.MapChunkX; }
-        set { SetMapChunkX(value); }
+      public int X {
+        get { return result.X; }
+        set { SetX(value); }
       }
-      public Builder SetMapChunkX(int value) {
+      public Builder SetX(int value) {
         PrepareBuilder();
-        result.hasMapChunkX = true;
-        result.mapChunkX_ = value;
+        result.hasX = true;
+        result.x_ = value;
         return this;
       }
-      public Builder ClearMapChunkX() {
+      public Builder ClearX() {
         PrepareBuilder();
-        result.hasMapChunkX = false;
-        result.mapChunkX_ = 0;
+        result.hasX = false;
+        result.x_ = 0;
         return this;
       }
       
-      public bool HasMapChunkY {
-        get { return result.hasMapChunkY; }
+      public bool HasY {
+        get { return result.hasY; }
       }
-      public int MapChunkY {
-        get { return result.MapChunkY; }
-        set { SetMapChunkY(value); }
+      public int Y {
+        get { return result.Y; }
+        set { SetY(value); }
       }
-      public Builder SetMapChunkY(int value) {
+      public Builder SetY(int value) {
         PrepareBuilder();
-        result.hasMapChunkY = true;
-        result.mapChunkY_ = value;
+        result.hasY = true;
+        result.y_ = value;
         return this;
       }
-      public Builder ClearMapChunkY() {
+      public Builder ClearY() {
         PrepareBuilder();
-        result.hasMapChunkY = false;
-        result.mapChunkY_ = 0;
+        result.hasY = false;
+        result.y_ = 0;
         return this;
       }
     }
@@ -3420,7 +3420,7 @@ namespace CommsMessages {
   public sealed partial class MapIgnore : pb::GeneratedMessage<MapIgnore, MapIgnore.Builder> {
     private MapIgnore() { }
     private static readonly MapIgnore defaultInstance = new MapIgnore().MakeReadOnly();
-    private static readonly string[] _mapIgnoreFieldNames = new string[] { "mapChunkX", "mapChunkY" };
+    private static readonly string[] _mapIgnoreFieldNames = new string[] { "x", "y" };
     private static readonly uint[] _mapIgnoreFieldTags = new uint[] { 8, 16 };
     public static MapIgnore DefaultInstance {
       get { return defaultInstance; }
@@ -3442,30 +3442,30 @@ namespace CommsMessages {
       get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapIgnore__FieldAccessorTable; }
     }
     
-    public const int MapChunkXFieldNumber = 1;
-    private bool hasMapChunkX;
-    private int mapChunkX_;
-    public bool HasMapChunkX {
-      get { return hasMapChunkX; }
+    public const int XFieldNumber = 1;
+    private bool hasX;
+    private int x_;
+    public bool HasX {
+      get { return hasX; }
     }
-    public int MapChunkX {
-      get { return mapChunkX_; }
+    public int X {
+      get { return x_; }
     }
     
-    public const int MapChunkYFieldNumber = 2;
-    private bool hasMapChunkY;
-    private int mapChunkY_;
-    public bool HasMapChunkY {
-      get { return hasMapChunkY; }
+    public const int YFieldNumber = 2;
+    private bool hasY;
+    private int y_;
+    public bool HasY {
+      get { return hasY; }
     }
-    public int MapChunkY {
-      get { return mapChunkY_; }
+    public int Y {
+      get { return y_; }
     }
     
     public override bool IsInitialized {
       get {
-        if (!hasMapChunkX) return false;
-        if (!hasMapChunkY) return false;
+        if (!hasX) return false;
+        if (!hasY) return false;
         return true;
       }
     }
@@ -3473,11 +3473,11 @@ namespace CommsMessages {
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
       string[] field_names = _mapIgnoreFieldNames;
-      if (hasMapChunkX) {
-        output.WriteInt32(1, field_names[0], MapChunkX);
+      if (hasX) {
+        output.WriteInt32(1, field_names[0], X);
       }
-      if (hasMapChunkY) {
-        output.WriteInt32(2, field_names[1], MapChunkY);
+      if (hasY) {
+        output.WriteInt32(2, field_names[1], Y);
       }
       UnknownFields.WriteTo(output);
     }
@@ -3489,11 +3489,11 @@ namespace CommsMessages {
         if (size != -1) return size;
         
         size = 0;
-        if (hasMapChunkX) {
-          size += pb::CodedOutputStream.ComputeInt32Size(1, MapChunkX);
+        if (hasX) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, X);
         }
-        if (hasMapChunkY) {
-          size += pb::CodedOutputStream.ComputeInt32Size(2, MapChunkY);
+        if (hasY) {
+          size += pb::CodedOutputStream.ComputeInt32Size(2, Y);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -3619,11 +3619,11 @@ namespace CommsMessages {
       public override Builder MergeFrom(MapIgnore other) {
         if (other == global::CommsMessages.MapIgnore.DefaultInstance) return this;
         PrepareBuilder();
-        if (other.HasMapChunkX) {
-          MapChunkX = other.MapChunkX;
+        if (other.HasX) {
+          X = other.X;
         }
-        if (other.HasMapChunkY) {
-          MapChunkY = other.MapChunkY;
+        if (other.HasY) {
+          Y = other.Y;
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -3669,11 +3669,11 @@ namespace CommsMessages {
               break;
             }
             case 8: {
-              result.hasMapChunkX = input.ReadInt32(ref result.mapChunkX_);
+              result.hasX = input.ReadInt32(ref result.x_);
               break;
             }
             case 16: {
-              result.hasMapChunkY = input.ReadInt32(ref result.mapChunkY_);
+              result.hasY = input.ReadInt32(ref result.y_);
               break;
             }
           }
@@ -3686,43 +3686,43 @@ namespace CommsMessages {
       }
       
       
-      public bool HasMapChunkX {
-        get { return result.hasMapChunkX; }
+      public bool HasX {
+        get { return result.hasX; }
       }
-      public int MapChunkX {
-        get { return result.MapChunkX; }
-        set { SetMapChunkX(value); }
+      public int X {
+        get { return result.X; }
+        set { SetX(value); }
       }
-      public Builder SetMapChunkX(int value) {
+      public Builder SetX(int value) {
         PrepareBuilder();
-        result.hasMapChunkX = true;
-        result.mapChunkX_ = value;
+        result.hasX = true;
+        result.x_ = value;
         return this;
       }
-      public Builder ClearMapChunkX() {
+      public Builder ClearX() {
         PrepareBuilder();
-        result.hasMapChunkX = false;
-        result.mapChunkX_ = 0;
+        result.hasX = false;
+        result.x_ = 0;
         return this;
       }
       
-      public bool HasMapChunkY {
-        get { return result.hasMapChunkY; }
+      public bool HasY {
+        get { return result.hasY; }
       }
-      public int MapChunkY {
-        get { return result.MapChunkY; }
-        set { SetMapChunkY(value); }
+      public int Y {
+        get { return result.Y; }
+        set { SetY(value); }
       }
-      public Builder SetMapChunkY(int value) {
+      public Builder SetY(int value) {
         PrepareBuilder();
-        result.hasMapChunkY = true;
-        result.mapChunkY_ = value;
+        result.hasY = true;
+        result.y_ = value;
         return this;
       }
-      public Builder ClearMapChunkY() {
+      public Builder ClearY() {
         PrepareBuilder();
-        result.hasMapChunkY = false;
-        result.mapChunkY_ = 0;
+        result.hasY = false;
+        result.y_ = 0;
         return this;
       }
     }
@@ -3735,8 +3735,8 @@ namespace CommsMessages {
   public sealed partial class Map : pb::GeneratedMessage<Map, Map.Builder> {
     private Map() { }
     private static readonly Map defaultInstance = new Map().MakeReadOnly();
-    private static readonly string[] _mapFieldNames = new string[] { "dataSize", "mapChunkX", "mapChunkY" };
-    private static readonly uint[] _mapFieldTags = new uint[] { 24, 8, 16 };
+    private static readonly string[] _mapFieldNames = new string[] { "dataSize", "maxX", "maxY", "minX", "minY" };
+    private static readonly uint[] _mapFieldTags = new uint[] { 40, 24, 32, 8, 16 };
     public static Map DefaultInstance {
       get { return defaultInstance; }
     }
@@ -3757,27 +3757,47 @@ namespace CommsMessages {
       get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_Map__FieldAccessorTable; }
     }
     
-    public const int MapChunkXFieldNumber = 1;
-    private bool hasMapChunkX;
-    private int mapChunkX_;
-    public bool HasMapChunkX {
-      get { return hasMapChunkX; }
+    public const int MinXFieldNumber = 1;
+    private bool hasMinX;
+    private int minX_;
+    public bool HasMinX {
+      get { return hasMinX; }
     }
-    public int MapChunkX {
-      get { return mapChunkX_; }
-    }
-    
-    public const int MapChunkYFieldNumber = 2;
-    private bool hasMapChunkY;
-    private int mapChunkY_;
-    public bool HasMapChunkY {
-      get { return hasMapChunkY; }
-    }
-    public int MapChunkY {
-      get { return mapChunkY_; }
+    public int MinX {
+      get { return minX_; }
     }
     
-    public const int DataSizeFieldNumber = 3;
+    public const int MinYFieldNumber = 2;
+    private bool hasMinY;
+    private int minY_;
+    public bool HasMinY {
+      get { return hasMinY; }
+    }
+    public int MinY {
+      get { return minY_; }
+    }
+    
+    public const int MaxXFieldNumber = 3;
+    private bool hasMaxX;
+    private int maxX_;
+    public bool HasMaxX {
+      get { return hasMaxX; }
+    }
+    public int MaxX {
+      get { return maxX_; }
+    }
+    
+    public const int MaxYFieldNumber = 4;
+    private bool hasMaxY;
+    private int maxY_;
+    public bool HasMaxY {
+      get { return hasMaxY; }
+    }
+    public int MaxY {
+      get { return maxY_; }
+    }
+    
+    public const int DataSizeFieldNumber = 5;
     private bool hasDataSize;
     private int dataSize_;
     public bool HasDataSize {
@@ -3789,8 +3809,10 @@ namespace CommsMessages {
     
     public override bool IsInitialized {
       get {
-        if (!hasMapChunkX) return false;
-        if (!hasMapChunkY) return false;
+        if (!hasMinX) return false;
+        if (!hasMinY) return false;
+        if (!hasMaxX) return false;
+        if (!hasMaxY) return false;
         if (!hasDataSize) return false;
         return true;
       }
@@ -3799,14 +3821,20 @@ namespace CommsMessages {
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
       string[] field_names = _mapFieldNames;
-      if (hasMapChunkX) {
-        output.WriteInt32(1, field_names[1], MapChunkX);
+      if (hasMinX) {
+        output.WriteInt32(1, field_names[3], MinX);
       }
-      if (hasMapChunkY) {
-        output.WriteInt32(2, field_names[2], MapChunkY);
+      if (hasMinY) {
+        output.WriteInt32(2, field_names[4], MinY);
+      }
+      if (hasMaxX) {
+        output.WriteInt32(3, field_names[1], MaxX);
+      }
+      if (hasMaxY) {
+        output.WriteInt32(4, field_names[2], MaxY);
       }
       if (hasDataSize) {
-        output.WriteInt32(3, field_names[0], DataSize);
+        output.WriteInt32(5, field_names[0], DataSize);
       }
       UnknownFields.WriteTo(output);
     }
@@ -3818,14 +3846,20 @@ namespace CommsMessages {
         if (size != -1) return size;
         
         size = 0;
-        if (hasMapChunkX) {
-          size += pb::CodedOutputStream.ComputeInt32Size(1, MapChunkX);
+        if (hasMinX) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, MinX);
         }
-        if (hasMapChunkY) {
-          size += pb::CodedOutputStream.ComputeInt32Size(2, MapChunkY);
+        if (hasMinY) {
+          size += pb::CodedOutputStream.ComputeInt32Size(2, MinY);
+        }
+        if (hasMaxX) {
+          size += pb::CodedOutputStream.ComputeInt32Size(3, MaxX);
+        }
+        if (hasMaxY) {
+          size += pb::CodedOutputStream.ComputeInt32Size(4, MaxY);
         }
         if (hasDataSize) {
-          size += pb::CodedOutputStream.ComputeInt32Size(3, DataSize);
+          size += pb::CodedOutputStream.ComputeInt32Size(5, DataSize);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -3951,11 +3985,17 @@ namespace CommsMessages {
       public override Builder MergeFrom(Map other) {
         if (other == global::CommsMessages.Map.DefaultInstance) return this;
         PrepareBuilder();
-        if (other.HasMapChunkX) {
-          MapChunkX = other.MapChunkX;
+        if (other.HasMinX) {
+          MinX = other.MinX;
         }
-        if (other.HasMapChunkY) {
-          MapChunkY = other.MapChunkY;
+        if (other.HasMinY) {
+          MinY = other.MinY;
+        }
+        if (other.HasMaxX) {
+          MaxX = other.MaxX;
+        }
+        if (other.HasMaxY) {
+          MaxY = other.MaxY;
         }
         if (other.HasDataSize) {
           DataSize = other.DataSize;
@@ -4004,14 +4044,22 @@ namespace CommsMessages {
               break;
             }
             case 8: {
-              result.hasMapChunkX = input.ReadInt32(ref result.mapChunkX_);
+              result.hasMinX = input.ReadInt32(ref result.minX_);
               break;
             }
             case 16: {
-              result.hasMapChunkY = input.ReadInt32(ref result.mapChunkY_);
+              result.hasMinY = input.ReadInt32(ref result.minY_);
               break;
             }
             case 24: {
+              result.hasMaxX = input.ReadInt32(ref result.maxX_);
+              break;
+            }
+            case 32: {
+              result.hasMaxY = input.ReadInt32(ref result.maxY_);
+              break;
+            }
+            case 40: {
               result.hasDataSize = input.ReadInt32(ref result.dataSize_);
               break;
             }
@@ -4025,43 +4073,83 @@ namespace CommsMessages {
       }
       
       
-      public bool HasMapChunkX {
-        get { return result.hasMapChunkX; }
+      public bool HasMinX {
+        get { return result.hasMinX; }
       }
-      public int MapChunkX {
-        get { return result.MapChunkX; }
-        set { SetMapChunkX(value); }
+      public int MinX {
+        get { return result.MinX; }
+        set { SetMinX(value); }
       }
-      public Builder SetMapChunkX(int value) {
+      public Builder SetMinX(int value) {
         PrepareBuilder();
-        result.hasMapChunkX = true;
-        result.mapChunkX_ = value;
+        result.hasMinX = true;
+        result.minX_ = value;
         return this;
       }
-      public Builder ClearMapChunkX() {
+      public Builder ClearMinX() {
         PrepareBuilder();
-        result.hasMapChunkX = false;
-        result.mapChunkX_ = 0;
+        result.hasMinX = false;
+        result.minX_ = 0;
         return this;
       }
       
-      public bool HasMapChunkY {
-        get { return result.hasMapChunkY; }
+      public bool HasMinY {
+        get { return result.hasMinY; }
       }
-      public int MapChunkY {
-        get { return result.MapChunkY; }
-        set { SetMapChunkY(value); }
+      public int MinY {
+        get { return result.MinY; }
+        set { SetMinY(value); }
       }
-      public Builder SetMapChunkY(int value) {
+      public Builder SetMinY(int value) {
         PrepareBuilder();
-        result.hasMapChunkY = true;
-        result.mapChunkY_ = value;
+        result.hasMinY = true;
+        result.minY_ = value;
         return this;
       }
-      public Builder ClearMapChunkY() {
+      public Builder ClearMinY() {
         PrepareBuilder();
-        result.hasMapChunkY = false;
-        result.mapChunkY_ = 0;
+        result.hasMinY = false;
+        result.minY_ = 0;
+        return this;
+      }
+      
+      public bool HasMaxX {
+        get { return result.hasMaxX; }
+      }
+      public int MaxX {
+        get { return result.MaxX; }
+        set { SetMaxX(value); }
+      }
+      public Builder SetMaxX(int value) {
+        PrepareBuilder();
+        result.hasMaxX = true;
+        result.maxX_ = value;
+        return this;
+      }
+      public Builder ClearMaxX() {
+        PrepareBuilder();
+        result.hasMaxX = false;
+        result.maxX_ = 0;
+        return this;
+      }
+      
+      public bool HasMaxY {
+        get { return result.hasMaxY; }
+      }
+      public int MaxY {
+        get { return result.MaxY; }
+        set { SetMaxY(value); }
+      }
+      public Builder SetMaxY(int value) {
+        PrepareBuilder();
+        result.hasMaxY = true;
+        result.maxY_ = value;
+        return this;
+      }
+      public Builder ClearMaxY() {
+        PrepareBuilder();
+        result.hasMaxY = false;
+        result.maxY_ = 0;
         return this;
       }
       

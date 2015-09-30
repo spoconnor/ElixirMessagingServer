@@ -1,5 +1,5 @@
 
-Ø	
+Ê	
 CommsMessages.protoCommsMessages"…
 Message
 msgtype (
@@ -33,18 +33,20 @@ mapRequest
 username (	
 password (	"
 Say
-text (	"2
+text (	""
 
-MapRequest
-	mapChunkX (
-	mapChunkY ("1
-	MapIgnore
-	mapChunkX (
-	mapChunkY ("=
-Map
-	mapChunkX (
-	mapChunkY (
-dataSize ("
+MapRequest	
+x (	
+y ("!
+	MapIgnore	
+x (	
+y ("O
+Map
+minX (
+minY (
+maxX (
+maxY (
+dataSize ("
 QueryServer"m
 QueryServerResponse
 minMapChunkX (

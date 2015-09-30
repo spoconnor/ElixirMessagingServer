@@ -5,9 +5,6 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'Html5Client', { preload: prel
 var ProtoBuf = dcodeIO.ProtoBuf;
 var builder = ProtoBuf.loadProtoFile("CommsMessages.proto")
 var CommsMessages = builder.build("CommsMessages")
-var Ping = CommsMessages.Ping;
-var Header = CommsMessages.Header;
-var Login = CommsMessages.Login;
 var socket;
 
 //var socket = new WebSocket("ws://localhost:8000/socket/server/startDaemon.php");
@@ -37,7 +34,7 @@ var _appendBuffer = function(buffer1, buffer2) {
 function connect() {
     try {
         var host = "ws://zen:8081";// /socket/server/startDaemon.php";
-        var socket = new WebSocket(host);
+        socket = new WebSocket(host);
 
         console.log('Socket Status: '+socket.readyState);
 
@@ -61,11 +58,33 @@ function connect() {
 function login(socket) {
     try {
         console.log('Login...');
-        var hdr = new Header({"msgtype":5, "from":"html5", "dest":"cloud" });
-        var msg = new Login({"username":"sean", "password":"pass"});
-        var hdrBuffer = hdr.encodeDelimited().toArrayBuffer();
-        var msgBuffer = msg.encodeDelimited().toArrayBuffer();
-        var data = _appendBuffer(hdrBuffer, msgBuffer); 
+        var msg = new CommsMessages.Message({"msgtype":5, "from":"html5", "dest":"cloud" });
+        msg.login = new CommsMessages.Login({"username":"sean", "password":"pass"});
+        var data = msg.encodeDelimited().toArrayBuffer();
+        socket.send(data);
+    } catch(exception) {
+       console.log('Error:' + exception);
+    }
+}
+
+function say(text) {
+    try {
+        console.log('Say...');
+        var msg = new CommsMessages.Message({"msgtype":6, "from":"html5", "dest":"cloud" });
+        msg.say = new CommsMessages.Say({"text":text});
+        var data = msg.encodeDelimited().toArrayBuffer();
+        socket.send(data);
+    } catch(exception) {
+       console.log('Error:' + exception);
+    }
+}
+
+function getMap(x,y) {
+    try {
+        console.log('GetMap...');
+        var msg = new CommsMessages.Message({"msgtype":7, "from":"html5", "dest":"cloud" });
+        msg.mapRequest = new CommsMessages.MapRequest({"x":x, "y":y});
+        var data = msg.encodeDelimited().toArrayBuffer();
         socket.send(data);
     } catch(exception) {
        console.log('Error:' + exception);
@@ -95,7 +114,13 @@ var cop;
 
 function create() {
 
-    //connect();
+    connect();
+
+    // TODO - wait for open state, then send these
+    setTimeout(function () {
+      say("Hello World!");
+      getMap(1,1);
+    }, 5000);
 
     game.stage.backgroundColor = '#404040';
 
@@ -156,7 +181,7 @@ function create() {
         for (var y=0; y<10; y++){
             for (var z=1; z<=mapdata[y*10+x]; z++){
                 var block = game.add.sprite(400+(x-y)*32,128+(x+y)*16-z*21, 'iso-outside');
-                console.log('frameName: ' + x + ',' + y + '=' + mapsprites[y*10+x] + '=>' + sprites[mapsprites[y*10+x]])
+                //console.log('frameName: ' + x + ',' + y + '=' + mapsprites[y*10+x] + '=>' + sprites[mapsprites[y*10+x]])
                 block.frameName = sprites[mapsprites[y*10+x]]
                 block.anchor.setTo(0.5, 0.5);
             }
