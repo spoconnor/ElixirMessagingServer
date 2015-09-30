@@ -21,23 +21,26 @@ class World() extends Actor {
   val chunks = Map.empty[(Int,Int), ActorRef]
 
   def chunk(x:Int, y:Int) = {
-    val loc = (x/MapChunk.chunkSize, y/MapChunk.chunkSize) 
-    if ( ! (chunks contains loc)) {
-      chunks += (loc -> system.actorOf(Props(new MapChunk(x,y))))
-    }
-    chunks(loc)
+    chunks.getOrElseUpdate(
+       (x/MapChunk.chunkSize, y/MapChunk.chunkSize),
+       system.actorOf(Props(new MapChunk(x,y))))
   }
 
   def receive = {
     case "init" => init
-    case "dump" => chunks.values.foreach(c => c ! "dump")
+    case "dump" => dump
     case Get(w,l) => chunk(w,l) ! new Get(w,l)
     case Set(w,l,h,v) => chunk(w,l) ! new Set(w,l,h,v)
     case _ => log.info("World received unknown message")
   }
 
+  def dump = {
+    log.info("Dump:")
+    chunks.keys.foreach(k => log.info(k.toString))
+    chunks.values.foreach(c => c ! "dump")
+  }
+
   def init = {
     log.info("World init")
-    chunks += ((1,1) -> system.actorOf(Props(new MapChunk(1,1))))
   }
 }

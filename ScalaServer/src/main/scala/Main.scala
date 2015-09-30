@@ -60,7 +60,6 @@ object Main extends App {
     world ! new Set(1,1,9,1)
     world ! "dump"
     
-
     //var perlin = new perlinNoise.PerlinNoise()
     ////var noise = perlin.GenerateWhiteNoise(10,10)
     //var noise = perlin.GetIntMap(80, 30, 0, 9, 3)
