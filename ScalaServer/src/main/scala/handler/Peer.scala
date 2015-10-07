@@ -3,6 +3,7 @@ package com.example.akkaTcpChat.handler
 import akka.actor.{Props, ActorRef, Actor}
 import akka.io.Tcp.{Write, PeerClosed, Received}
 import akka.util.ByteString
+import akka.event.Logging
 import com.example.akkaTcpChat.Common
 import scala.util.{Failure, Success}
 
@@ -21,11 +22,14 @@ class Peer(clientId: String,
            var clientName: String = "Unknown") extends Actor {
 
   import context.system
+  var log = Logging(context.system, this)
 
   def receive = {
     case Received(data) =>
+      log.debug("Received: " + data)
       handleReceivedData(data)
     case Peer.PeerMessage(name, msg) =>
+      log.debug("PeerMessage: " + name + ":" + msg)
       val req = new Common.Request(Common.OTHER_CLIENT_MESSAGE)
       req("name") = name
       req("msg") = msg
@@ -64,6 +68,7 @@ class Peer(clientId: String,
 
 
   def handleReceivedData(data: ByteString) {
+    log.debug("ReceivedData")
     Common.Request.deserializeFromByteString(data) match {
       case Success(req) =>
         req.request match {

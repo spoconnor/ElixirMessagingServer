@@ -51,6 +51,7 @@ object Main extends App {
     val actorSystem = createActorSystem()
     actorSystem.actorOf(Server.props(addr), "server")
    
+
     // TODO - Move to own actor
     val world = actorSystem.actorOf(World.props())
     world ! "init"
