@@ -1,59 +1,29 @@
 package com.example.akkaTcpChat
 
 import akka.actor.{Props, ActorSystem}
+import scala.concurrent.duration._
 import java.net.InetSocketAddress
-import com.example.akkaTcpChat.client.{InputUserMessage, UserInteract}
+//import com.example.akkaTcpChat.client.{InputUserMessage, UserInteract}
 
-object Main extends App {
+class Application extends Bootable 
+{
+  implicit val actorSystem = ActorSystem("tcpserver")
+  implicit val executor = actorSystem.dispatcher
 
   lazy val addr = {
     new InetSocketAddress("localhost", 8842)
   }
 
-  override def main(args: Array[String]) = {
+  def startup() = 
+  {
+    // Register all needed actors
+    val server = actorSystem.actorOf(Server.props(addr), "server")
+    val world = actorSystem.actorOf(World.props())
 
-    try {
-      if (args.length < 1) {
-        exit("Run option is not specified")
-      }
-
-      println("Started as " + args(0))
-
-      args(0) match {
-        case "server" => runServer()
-        case "client" => runClient()
-        case _ =>
-          exit("Unknown run option")
-      }
-    } catch {
-      case _: InterruptedException =>
-        exit("We got an interrupted exception")
-      case e: DisplayException =>
-        exit(e.getMessage)
-    }
-
-  }
-
-  def exit(msg: String, code: Int) {
-    println(msg)
-    sys.exit(code)
-  }
-
-  def exit(msg: String) {
-    exit(msg, 1)
-  }
-
-  /**
-   * Server role
-   */
-  def runServer() {
-    println(addr)
-    val actorSystem = createActorSystem()
-    actorSystem.actorOf(Server.props(addr), "server")
-   
+    val tcpServer = actorSystem.actorOf(Props(
+      new TcpServer(addr, conn => Props(new EchoTcpHandler(conn)))))
 
     // TODO - Move to own actor
-    val world = actorSystem.actorOf(World.props())
     world ! "init"
     world ! "dump"
     //val d = world ! new Get(1,1)
@@ -65,25 +35,30 @@ object Main extends App {
     ////var noise = perlin.GenerateWhiteNoise(10,10)
     //var noise = perlin.GetIntMap(80, 30, 0, 9, 3)
     //noise.Dump()
+ 
   }
 
-  /**
-   * Client role
-   */
-  def runClient() {
-    val actorSystem = createActorSystem()
-    implicit def system: ActorSystem = actorSystem
-
-    val userInteract = actorSystem.actorOf(Props[UserInteract], "user-interact")
-    while (true) {
-      userInteract ! InputUserMessage(readLine())
-    }
+  def shutdown() =
+  {
+    actorSystem.shutdown()
+    actorSystem.awaitTermination(3.seconds)
   }
-
-  protected def createActorSystem() = {
-    ActorSystem("client-server")
-  }
-
 }
 
-class DisplayException(message: String = null, cause: Throwable = null) extends RuntimeException(message, cause)
+object Application 
+{
+  def main(args: Array[String])
+  {
+    val app = new Application()
+    app.startup()
+  }
+}
+
+trait Bootable
+{
+  def startup(): Unit
+  def shutdown(): Unit
+
+  sys.ShutdownHookThread(shutdown())
+}
+
