@@ -26,16 +26,18 @@ use GenServer
        {
          :_,
          [
-            {"/html5/[...]", :cowboy_static, {:priv_dir, :ElixirMessagingServer, "html5"}},
+            {"/html5/CommsMessages.proto", :cowboy_static, {:priv_file, :ElixirMessagingServer, "html5/CommsMessages.proto", [{:mimetypes, {<<"text">>, <<"plain">>, []}}]}},
+            {"/html5/[...]", :cowboy_static, {:priv_dir, :ElixirMessagingServer, "html5", 
+              [{:mimetypes, :cow_mimetypes, :all}]
+            }},
             {"/events", WebserverEventsHandler, []},
             {"/foobar", WebserverFoobarHandler, []},
             #{"/api", WebserverRestApiHandler, []},
             #{"/ws", :cowboy_static, {:file, "priv/ws_index.html"}},
             #{"/websocket", WebserverWebsocketHandler, []},
-            #{"/static/CommsMessages.proto", :cowboy_static, {:priv_file, :ElixirMessagingServer, "static/CommsMessages.proto", [{:mimetypes, {<<"text">>, <<"plain">>, []}}]}},
             #{"/static/[...]", :cowboy_static, {:priv_dir, :ElixirMessagingServer, "static"}},
             #{"/api/[:id]", [{:v1, :int}], WebserverToppageHandler, []},
-            {"/[...]", :cowboy_static, {:file, "priv/index.html"}},
+            #{"/[...]", :cowboy_static, {:file, "html5/index.html"}},
          ]
        }
     ])

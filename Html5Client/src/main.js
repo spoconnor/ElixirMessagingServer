@@ -33,7 +33,7 @@ var _appendBuffer = function(buffer1, buffer2) {
 
 function connect() {
     try {
-        var host = "ws://zen:8081";// /socket/server/startDaemon.php";
+        var host = "ws://localhost:8081";// /socket/server/startDaemon.php";
         socket = new WebSocket(host);
 
         console.log('Socket Status: '+socket.readyState);
