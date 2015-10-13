@@ -12,16 +12,18 @@ class TcpServer(bind: InetSocketAddress, handler: ActorRef => Props)
   implicit val system = context.system
   IO(Tcp) ! Bind(self, bind)
 
+  log.info("TcpServer: initializing")
+
   def receive = {
     case Bound(local) =>
-      log.debug("Bound to {}", local)
+      log.info("TcpServer: Bound to {}", local)
 
     case CommandFailed(cmd, reason) =>
-      log.error("Command Failed: {}", reason)
+      log.error("TcpServer: Command Failed: {}", reason)
       context.stop(self)
 
     case Connected(remote, local) =>
-      log.debug("New connection from {}", remote)
+      log.info("TcpServer: New connection from {}", remote)
       val connection = sender()
       context.actorOf(handler(connection))
   }
