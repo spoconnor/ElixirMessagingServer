@@ -8,6 +8,6 @@ class EchoTcpHandler(connection: ActorRef) extends Actor {
   connection ! Register(self)
 
   def receive = {
-    case Received(data) ⇒ connection ! Write(data)
+    case Received(data) => connection ! Write(data)
   }
 }
