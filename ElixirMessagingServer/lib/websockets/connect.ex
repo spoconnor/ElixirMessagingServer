@@ -113,12 +113,7 @@ def client(state) do
       Lib.trace("type:", Packet.msgType(str))
 
       # Send message thru Tcp connection to server
-      Lib.trace("Sending message to Scala server...")
-      {:ok, socket} = :gen_tcp.connect({127,0,0,1}, 8842, [:binary, {:active, true}])
-      :gen_tcp.send(socket, str)
-      reply = :gen_tcp.wait_reply(socket)
-      Lib.trace("Scala server returned:", reply)
-      :gen_tcp.close(socket)
+      WorldServerClient.send(WorldServerClient, str)
 
       ## Send message thru rabbit queue
       #{:ok, conn} = AMQP.Connection.open("amqp://guest:guest@localhost")
