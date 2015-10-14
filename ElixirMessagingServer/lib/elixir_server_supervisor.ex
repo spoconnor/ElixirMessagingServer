@@ -25,7 +25,7 @@ def init(:ok) do
       worker(WebsocketEsWebsock, [[name: @es_websock]]), 
       worker(WebsocketQConsumer, [[name: @q_consumer]]), 
       worker(WebsocketUsers, [[name: @users]]), 
-      worker(WorldServerClient, [[name: @worldserverclient]]),
+      worker(WorldServerClient, [[name: @worldserverclient]], restart: :transient ),
       worker(WorldServerListener, [[name: @worldserverlistener]]),
 
       #, [restart: :permanent, shutdown: 1000])
