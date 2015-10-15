@@ -1,11 +1,13 @@
 package com.example.akkaTcpChat
 
 // EchoTcpHandler.scala
-import akka.actor._
-import akka.io.Tcp._
 
-class EchoTcpHandler(connection: ActorRef) extends Actor with ActorLogging {
-  connection ! Register(self)
+import java.net.InetSocketAddress
+import akka.actor._
+import akka.io.{ IO, Tcp }
+
+class EchoTcpHandler(connection: ActorRef, remote: InetSocketAddress) extends Actor with ActorLogging {
+
 
   log.info("EchoTcpHandler: initializing")
 

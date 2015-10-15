@@ -24,7 +24,7 @@ class TcpServer(bind: InetSocketAddress, handler: ActorRef => Props)
 
     case Connected(remote, local) =>
       log.info("TcpServer: New connection from {}", remote)
-      val connection = sender()
-      context.actorOf(handler(connection))
+      val handler = context.actorOf(handler(sender(), remote))
+      sender() ! Register(self)
   }
 }

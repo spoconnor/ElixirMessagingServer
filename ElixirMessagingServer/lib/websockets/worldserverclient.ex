@@ -23,7 +23,7 @@ defmodule WorldServerClient do
   end
 
   def send(server, msg) do
-    GenServer.cast(server, {:send,msg})
+    GenServer.call(server, {:send,msg})
   end
 
   def handle_call({:send,msg}, from, %{socket: socket, queue: q} = state) do
@@ -41,6 +41,11 @@ defmodule WorldServerClient do
     # Reply to the correct client
     GenServer.reply(client, msg)
     {:noreply, %{state | queue: new_queue}}
+  end
+
+  def handle_info({:tcp_closed, socket}, %{socket: socket} = state) do
+    Lib.trace("WorldServerClient: Connection closed")
+    {:noreply, state}
   end
 end
 
