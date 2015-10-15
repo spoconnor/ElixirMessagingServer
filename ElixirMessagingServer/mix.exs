@@ -44,6 +44,7 @@ defmodule ElixirMessagingServer.Mixfile do
       {:gpb, github: "tomas-abrahamsson/gpb", tag: "3.18.8", override: :true},
       {:amqp, github: "pma/amqp", tag: "v0.0.6" },
       {:poison, github: "devinus/poison", tag: "1.4.0"},
+      {:connection, github: "fishcakez/connection", tag: "v1.0.1"},
     ]
   end
 end

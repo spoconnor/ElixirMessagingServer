@@ -1,42 +1,46 @@
 defmodule WorldServerClient do
-  use GenServer
+  use Connection
+
+  @initial_state %{socket: nil, queue: :queue.new()}
 
   def start_link(opts \\ []) do
-    GenServer.start_link(__MODULE__, :ok, opts)
+    Connection.start_link(__MODULE__, @initial_state)
   end
 
-  def connect(server) do
-    GenServer.cast(server, :connect)
+  def init(state) do
+    {:connect, nil, state}
+  end
+
+  def connect(_info, state) do
+    opts = [:binary, {:active, :once}]
+    case :gen_tcp.connect({127,0,0,1}, 8842, opts) do
+      {:ok, socket} ->
+        {:ok, %{state | socket: socket}}
+      {:error, reason} ->
+        Lib.trace("WorldServerClient.init: Connection failed - #{inspect reason}")
+        {:backoff, 5000, state} # try again in 5 seconds
+    end
   end
 
   def send(server, msg) do
     GenServer.cast(server, {:send,msg})
   end
 
-  def init(state) do
-    {:ok, state}
-  end
-
-  def terminate(reason, state) do
-    Lib.trace("WorldServerClient.terminate")
-    #:gen_tcp.close(state)  
-  end
-
-  def handle_cast(:connect, state) do
-    Lib.trace("WorldServerClient.init Initiating connection...")
-    opts = [:binary, {:active, true}]
-    case :gen_tcp.connect({127,0,0,1}, 8842, opts) do
-      {:ok, socket} -> {:ok, %{state | socket: socket}}
-      {:error, reason} ->
-        Lib.trace("WorldServerClient.init: Connection failed - #{inspect reason}")
-        {:error, reason}
-    end
-  end
-
-  def handle_cast({:send,msg}, %{socket: socket} = state) do
+  def handle_call({:send,msg}, from, %{socket: socket, queue: q} = state) do
     Lib.trace("WorldServerClient: Sending message to World server...")
-    :gen_tcp.send(socket, msg)
+    :ok = :gen_tcp.send(socket, msg)
+    # enqueue client to send reponse to
+    state = %{state | queue: :queue.in(from, q)}
+    {:noreply, state} # dont reply yet
   end
 
+  def handle_info({:tcp, socket, msg}, %{socket: socket} = state) do
+    # Allow the socket to send us the next message. avoids client being flooded
+    :inet.setopts(socket, active: :once)
+    {{:value, client}, new_queue} = :queue.out(state.queue)
+    # Reply to the correct client
+    GenServer.reply(client, msg)
+    {:noreply, %{state | queue: new_queue}}
+  end
 end
 

@@ -16,10 +16,10 @@ end
 
     fields = :binary.split(httpReq, <<0x0d0a::16>>, [:global])
 
-    Websocket.Websockets.parseKeys(fields, %Websocket.Websock{allowed: allowedOrigin, callback: :false})
+    WebsocketWebsockets.parseKeys(fields, %WebsocketWebsock{allowed: allowedOrigin, callback: :false})
 
     IO.puts(fields)
-    assert(:true)
+    assert(1==1)
   end
 
 
