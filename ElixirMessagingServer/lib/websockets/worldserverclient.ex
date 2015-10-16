@@ -1,14 +1,13 @@
 defmodule WorldServerClient do
   use Connection
 
-  @initial_state %{socket: nil}
-
-  def start_link(opts \\ []) do
-    Connection.start_link(__MODULE__, @initial_state)
+  def start_link(host, port, opts, timeout \\ 5000) do
+    Connection.start_link(__MODULE__, {host, port, opts, timeout})
   end
 
-  def init(state) do
-    {:connect, nil, state}
+  def init({host, port, opts, timeout}) do
+    state = %{host: host, port: port, opts: opts, timeout: timeout, sock: nil}
+    {:connect, :init, state}
   end
 
 
@@ -27,49 +26,49 @@ defmodule WorldServerClient do
   end
 
 
-  def connect(_info, state) do
-    opts = [:binary, {:active, :false}]
-    case :gen_tcp.connect({127,0,0,1}, 8842, opts) do
-      {:ok, socket} ->
+  def connect(_info, %{sock: nil, host: host, port: port, opts: opts, timeout: timeout} = state) do
+    case :gen_tcp.connect(host, port, [active: false] ++ opts, timeout) do
+      {:ok, sock} ->
         Lib.trace("WorldServerClient.init: Connected")
-        {:ok, %{state | socket: socket}}
+        {:ok, %{state | sock: sock}}
       {:error, reason} ->
         Lib.trace("WorldServerClient.init: Connection failed - #{inspect reason}")
         {:backoff, 5000, state} # try again in 5 seconds
     end
   end
 
- def disconnect(info, %{socket: socket} = state) do
-    :ok = :gen_tcp.close(socket)
+ def disconnect(info, %{sock: sock} = state) do
+    :ok = :gen_tcp.close(sock)
     case info do
       {:close, from} ->
+        Lib.trace("WorldServerClient Close connection")
         Connection.reply(from, :ok)
       {:error, :closed} ->
-        Lib.trace("WorldServerClient Connection closed")
+        Lib.trace("WorldServerClient Error Connection closed")
       {:error, reason} ->
         reason = :inet.format_error(reason)
-        Lib.trace("WorldServerClient Connection error - #{inspect reason}")
+        Lib.trace("WorldServerClient Disconnect error - #{inspect reason}")
     end
-    {:connect, :reconnect, %{state | socket: nil}}
+    {:connect, :reconnect, %{state | sock: :nil}}
   end
 
 
-  def handle_call(_, _, %{socket: nil} = state) do
+  def handle_call(_, _, %{sock: :nil} = state) do
     Lib.trace("WorldServerClient connection is closed")
     {:reply, {:error, :closed}, state}
   end
-  def handle_call({:send, data}, _, %{socket: socket} = state) do
+  def handle_call({:send, data}, _, %{sock: sock} = state) do
     Lib.trace("WorldServerClient sending data")
-    case :gen_tcp.send(socket, data) do
+    case :gen_tcp.send(sock, data) do
       :ok ->
         {:reply, :ok, state}
       {:error, _} = error ->
         {:disconnect, error, error, state}
     end
   end
-  def handle_call({:recv, bytes, timeout}, _, %{socket: socket} = state) do
+  def handle_call({:recv, bytes, timeout}, _, %{sock: sock} = state) do
     Lib.trace("WorldServerClient waiting for recv")
-    case :gen_tcp.recv(socket, bytes, timeout) do
+    case :gen_tcp.recv(sock, bytes, timeout) do
       {:ok, _} = ok ->
         {:reply, ok, state}
       {:error, :timeout} = timeout ->

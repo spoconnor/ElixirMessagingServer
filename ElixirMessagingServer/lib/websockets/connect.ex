@@ -113,7 +113,9 @@ def client(state) do
       Lib.trace("type:", Packet.msgType(str))
 
       # Send message thru Tcp connection to server
-      WorldServerClient.send(WorldServerClient, str)
+
+      {:ok, pid} = WorldServerClient.start_link({127,0,0,1}, 8842, [mode: :binary], 3000)
+      WorldServerClient.send(pid, str)
 
       ## Send message thru rabbit queue
       #{:ok, conn} = AMQP.Connection.open("amqp://guest:guest@localhost")
