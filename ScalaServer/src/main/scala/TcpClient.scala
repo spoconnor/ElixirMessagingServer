@@ -11,7 +11,7 @@ class TcpClient(remote: InetSocketAddress) extends Actor with ActorLogging {
   import Tcp._
   import context.system
  
-  log.info("TcpClient: initializing")
+  log.info("TcpClient: initializing connection to {}", remote)
   IO(Tcp) ! Connect(remote)
  
   def receive = {

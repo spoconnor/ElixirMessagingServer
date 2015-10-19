@@ -12,7 +12,7 @@ class TcpServer(bind: InetSocketAddress, handlerClass: Class[_]) extends Actor w
   import Tcp._
   import context.system
 
-  log.info("TcpServer: initializing")
+  log.info("TcpServer: initializing lister at {}", bind)
   // there is not recovery for broken connections
   override val supervisorStrategy = SupervisorStrategy.stoppingStrategy
 

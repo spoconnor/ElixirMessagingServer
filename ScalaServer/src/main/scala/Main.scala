@@ -14,7 +14,7 @@ class Application extends Bootable
     new InetSocketAddress("localhost", 8842)
   }
   lazy val webServerAddr = {
-    new InetSocketAddress("localhost", 8843)
+    new InetSocketAddress("localhost", 8083)
   }
 
   def startup() = 
@@ -23,7 +23,7 @@ class Application extends Bootable
     //val server = actorSystem.actorOf(Server.props(addr), "server")
     val world = actorSystem.actorOf(World.props())
 
-    val tcpServer = actorSystem.actorOf(Props(classOf[TcpServer], addr, classOf[SimpleEchoHandler]), "simple")
+    val tcpServer = actorSystem.actorOf(Props(classOf[TcpServer], addr, classOf[TcpHandler]), "simple")
 
     var tcpClient = actorSystem.actorOf(Props(new TcpClient(webServerAddr)))
 

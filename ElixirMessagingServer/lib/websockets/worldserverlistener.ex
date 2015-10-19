@@ -10,7 +10,7 @@ defmodule WorldServerListener do
     :erlang.process_flag(:trap_exit, :true)
     port = 8083
     {:ok, sock} = :gen_tcp.listen(port, [:binary, {:packet, 0}, {:active, :true}, {:reuseaddr, :true}, {:packet_size,1024*2}, {:keepalive,:true}])
-    Lib.trace("Accepting connections on port #{port}")
+    Lib.trace("WorldServerListener Accepting connections on port #{port}")
     spawn(fn() -> accept_connections(sock) end)
     {:ok, sock}
   end
@@ -29,7 +29,7 @@ defmodule WorldServerListener do
   end
 
   def accept_connections(sock) do
-    Lib.trace("Accepting connections")
+    Lib.trace("WorldServerListener Accepting connections")
     {:ok, client} = :gen_tcp.accept(sock)
     spawn(fn() -> accept_connections(sock) end)
     recv_connection(client)
