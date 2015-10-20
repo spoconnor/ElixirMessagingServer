@@ -17,13 +17,14 @@ object MapChunk {
   def chunkSize() = 10
 }
 
-class MapChunk(xc: Int, yc: Int) extends Actor {
+class MapChunk(xc: Int, yc: Int, outComms: ActorRef) extends Actor {
   import context.system
   val chunkX: Int = xc
   val chunkY: Int = yc
   val width: Int = MapChunk.chunkSize()
   val length: Int = MapChunk.chunkSize()
   val height: Int = 10
+  val tcpClient: ActorRef = outComms
   var log = Logging(context.system, this)
   private val data = Array.ofDim[Column](width,length)
 
@@ -52,7 +53,8 @@ class MapChunk(xc: Int, yc: Int) extends Actor {
         c.Set(noise.Get(w,l), 1)
         data(w)(l) = c
       }
-    }    
+    }
+    tcpClient ! "chunk"
   }
 
   def get(w:Int, l:Int) {
@@ -60,6 +62,7 @@ class MapChunk(xc: Int, yc: Int) extends Actor {
   }
 
   def set(w:Int, l:Int, h:Int, v:Int) {
+    tcpClient ! "set"
     data(w)(l).Set(h,v)
   }
 

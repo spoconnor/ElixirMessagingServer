@@ -16,8 +16,10 @@ object MsgType extends net.sandrogrzicic.scalabuff.Enum {
 	val eMapRequest = new EnumVal { val name = "eMapRequest"; val id = 7 }
 	val eMapIgnore = new EnumVal { val name = "eMapIgnore"; val id = 8 }
 	val eMap = new EnumVal { val name = "eMap"; val id = 9 }
-	val eQueryServer = new EnumVal { val name = "eQueryServer"; val id = 10 }
-	val eQueryServerResponse = new EnumVal { val name = "eQueryServerResponse"; val id = 11 }
+	val eMapUpdate = new EnumVal { val name = "eMapUpdate"; val id = 10 }
+	val eMapCharacterUpdate = new EnumVal { val name = "eMapCharacterUpdate"; val id = 11 }
+	val eQueryServer = new EnumVal { val name = "eQueryServer"; val id = 12 }
+	val eQueryServerResponse = new EnumVal { val name = "eQueryServerResponse"; val id = 13 }
 
 	val eResponse_VALUE = 1
 	val ePing_VALUE = 2
@@ -28,8 +30,10 @@ object MsgType extends net.sandrogrzicic.scalabuff.Enum {
 	val eMapRequest_VALUE = 7
 	val eMapIgnore_VALUE = 8
 	val eMap_VALUE = 9
-	val eQueryServer_VALUE = 10
-	val eQueryServerResponse_VALUE = 11
+	val eMapUpdate_VALUE = 10
+	val eMapCharacterUpdate_VALUE = 11
+	val eQueryServer_VALUE = 12
+	val eQueryServerResponse_VALUE = 13
 
 	def valueOf(id: Int) = id match {
 		case 1 => eResponse
@@ -41,8 +45,10 @@ object MsgType extends net.sandrogrzicic.scalabuff.Enum {
 		case 7 => eMapRequest
 		case 8 => eMapIgnore
 		case 9 => eMap
-		case 10 => eQueryServer
-		case 11 => eQueryServerResponse
+		case 10 => eMapUpdate
+		case 11 => eMapCharacterUpdate
+		case 12 => eQueryServer
+		case 13 => eQueryServerResponse
 		case _default => throw new net.sandrogrzicic.scalabuff.UnknownEnumException(_default)
 	}
 	val internalGetValueMap = new com.google.protobuf.Internal.EnumLiteMap[EnumVal] {
@@ -62,6 +68,8 @@ final case class Message (
 	`mapRequest`: Option[MapRequest] = None,
 	`mapIgnore`: Option[MapIgnore] = None,
 	`map`: Option[Map] = None,
+	`mapUpdate`: Option[MapUpdate] = None,
+	`mapCharacterUpdate`: Option[MapCharacterUpdate] = None,
 	`queryServer`: Option[QueryServer] = None,
 	`queryServerResponse`: Option[QueryServerResponse] = None
 ) extends com.google.protobuf.GeneratedMessageLite
@@ -78,6 +86,8 @@ final case class Message (
 	def setMapRequest(_f: MapRequest) = copy(`mapRequest` = Some(_f))
 	def setMapIgnore(_f: MapIgnore) = copy(`mapIgnore` = Some(_f))
 	def setMap(_f: Map) = copy(`map` = Some(_f))
+	def setMapUpdate(_f: MapUpdate) = copy(`mapUpdate` = Some(_f))
+	def setMapCharacterUpdate(_f: MapCharacterUpdate) = copy(`mapCharacterUpdate` = Some(_f))
 	def setQueryServer(_f: QueryServer) = copy(`queryServer` = Some(_f))
 	def setQueryServerResponse(_f: QueryServerResponse) = copy(`queryServerResponse` = Some(_f))
 
@@ -90,6 +100,8 @@ final case class Message (
 	def clearMapRequest = copy(`mapRequest` = None)
 	def clearMapIgnore = copy(`mapIgnore` = None)
 	def clearMap = copy(`map` = None)
+	def clearMapUpdate = copy(`mapUpdate` = None)
+	def clearMapCharacterUpdate = copy(`mapCharacterUpdate` = None)
 	def clearQueryServer = copy(`queryServer` = None)
 	def clearQueryServerResponse = copy(`queryServerResponse` = None)
 
@@ -106,8 +118,10 @@ final case class Message (
 		if (`mapRequest`.isDefined) output.writeMessage(10, `mapRequest`.get)
 		if (`mapIgnore`.isDefined) output.writeMessage(11, `mapIgnore`.get)
 		if (`map`.isDefined) output.writeMessage(12, `map`.get)
-		if (`queryServer`.isDefined) output.writeMessage(13, `queryServer`.get)
-		if (`queryServerResponse`.isDefined) output.writeMessage(14, `queryServerResponse`.get)
+		if (`mapUpdate`.isDefined) output.writeMessage(13, `mapUpdate`.get)
+		if (`mapCharacterUpdate`.isDefined) output.writeMessage(14, `mapCharacterUpdate`.get)
+		if (`queryServer`.isDefined) output.writeMessage(15, `queryServer`.get)
+		if (`queryServerResponse`.isDefined) output.writeMessage(16, `queryServerResponse`.get)
 	}
 
 	def getSerializedSize = {
@@ -125,8 +139,10 @@ final case class Message (
 		if (`mapRequest`.isDefined) __size += computeMessageSize(10, `mapRequest`.get)
 		if (`mapIgnore`.isDefined) __size += computeMessageSize(11, `mapIgnore`.get)
 		if (`map`.isDefined) __size += computeMessageSize(12, `map`.get)
-		if (`queryServer`.isDefined) __size += computeMessageSize(13, `queryServer`.get)
-		if (`queryServerResponse`.isDefined) __size += computeMessageSize(14, `queryServerResponse`.get)
+		if (`mapUpdate`.isDefined) __size += computeMessageSize(13, `mapUpdate`.get)
+		if (`mapCharacterUpdate`.isDefined) __size += computeMessageSize(14, `mapCharacterUpdate`.get)
+		if (`queryServer`.isDefined) __size += computeMessageSize(15, `queryServer`.get)
+		if (`queryServerResponse`.isDefined) __size += computeMessageSize(16, `queryServerResponse`.get)
 
 		__size
 	}
@@ -145,6 +161,8 @@ final case class Message (
 		var __mapRequest: Option[MapRequest] = `mapRequest`
 		var __mapIgnore: Option[MapIgnore] = `mapIgnore`
 		var __map: Option[Map] = `map`
+		var __mapUpdate: Option[MapUpdate] = `mapUpdate`
+		var __mapCharacterUpdate: Option[MapCharacterUpdate] = `mapCharacterUpdate`
 		var __queryServer: Option[QueryServer] = `queryServer`
 		var __queryServerResponse: Option[QueryServerResponse] = `queryServerResponse`
 
@@ -161,6 +179,8 @@ final case class Message (
 			__mapRequest,
 			__mapIgnore,
 			__map,
+			__mapUpdate,
+			__mapCharacterUpdate,
 			__queryServer,
 			__queryServerResponse
 		)
@@ -205,11 +225,19 @@ final case class Message (
 				__map = Map.defaultInstance
 				__map
 			}).get, _emptyRegistry))
-			case 106 => __queryServer = Some(readMessage[QueryServer](in, __queryServer.orElse({
+			case 106 => __mapUpdate = Some(readMessage[MapUpdate](in, __mapUpdate.orElse({
+				__mapUpdate = MapUpdate.defaultInstance
+				__mapUpdate
+			}).get, _emptyRegistry))
+			case 114 => __mapCharacterUpdate = Some(readMessage[MapCharacterUpdate](in, __mapCharacterUpdate.orElse({
+				__mapCharacterUpdate = MapCharacterUpdate.defaultInstance
+				__mapCharacterUpdate
+			}).get, _emptyRegistry))
+			case 122 => __queryServer = Some(readMessage[QueryServer](in, __queryServer.orElse({
 				__queryServer = QueryServer.defaultInstance
 				__queryServer
 			}).get, _emptyRegistry))
-			case 114 => __queryServerResponse = Some(readMessage[QueryServerResponse](in, __queryServerResponse.orElse({
+			case 130 => __queryServerResponse = Some(readMessage[QueryServerResponse](in, __queryServerResponse.orElse({
 				__queryServerResponse = QueryServerResponse.defaultInstance
 				__queryServerResponse
 			}).get, _emptyRegistry))
@@ -232,6 +260,8 @@ final case class Message (
 			m.`mapRequest`.orElse(`mapRequest`),
 			m.`mapIgnore`.orElse(`mapIgnore`),
 			m.`map`.orElse(`map`),
+			m.`mapUpdate`.orElse(`mapUpdate`),
+			m.`mapCharacterUpdate`.orElse(`mapCharacterUpdate`),
 			m.`queryServer`.orElse(`queryServer`),
 			m.`queryServerResponse`.orElse(`queryServerResponse`)
 		)
@@ -270,8 +300,10 @@ object Message {
 	val MAPREQUEST_FIELD_NUMBER = 10
 	val MAPIGNORE_FIELD_NUMBER = 11
 	val MAP_FIELD_NUMBER = 12
-	val QUERYSERVER_FIELD_NUMBER = 13
-	val QUERYSERVERRESPONSE_FIELD_NUMBER = 14
+	val MAPUPDATE_FIELD_NUMBER = 13
+	val MAPCHARACTERUPDATE_FIELD_NUMBER = 14
+	val QUERYSERVER_FIELD_NUMBER = 15
+	val QUERYSERVERRESPONSE_FIELD_NUMBER = 16
 
 	def newBuilder = defaultInstance.newBuilderForType
 	def newBuilder(prototype: Message) = defaultInstance.mergeFrom(prototype)
@@ -980,6 +1012,192 @@ object Map {
 	def newBuilder(prototype: Map) = defaultInstance.mergeFrom(prototype)
 
 }
+final case class MapUpdate (
+	`x`: Int = 0,
+	`y`: Int = 0,
+	`z`: Int = 0,
+	`newBlock`: Int = 0
+) extends com.google.protobuf.GeneratedMessageLite
+	with com.google.protobuf.MessageLite.Builder
+	with net.sandrogrzicic.scalabuff.Message[MapUpdate]
+	with net.sandrogrzicic.scalabuff.Parser[MapUpdate] {
+
+
+
+	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+		output.writeInt32(1, `x`)
+		output.writeInt32(2, `y`)
+		output.writeInt32(3, `z`)
+		output.writeInt32(4, `newBlock`)
+	}
+
+	def getSerializedSize = {
+		import com.google.protobuf.CodedOutputStream._
+		var __size = 0
+		__size += computeInt32Size(1, `x`)
+		__size += computeInt32Size(2, `y`)
+		__size += computeInt32Size(3, `z`)
+		__size += computeInt32Size(4, `newBlock`)
+
+		__size
+	}
+
+	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): MapUpdate = {
+		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+		var __x: Int = 0
+		var __y: Int = 0
+		var __z: Int = 0
+		var __newBlock: Int = 0
+
+		def __newMerged = MapUpdate(
+			__x,
+			__y,
+			__z,
+			__newBlock
+		)
+		while (true) in.readTag match {
+			case 0 => return __newMerged
+			case 8 => __x = in.readInt32()
+			case 16 => __y = in.readInt32()
+			case 24 => __z = in.readInt32()
+			case 32 => __newBlock = in.readInt32()
+			case default => if (!in.skipField(default)) return __newMerged
+		}
+		null
+	}
+
+	def mergeFrom(m: MapUpdate) = {
+		MapUpdate(
+			m.`x`,
+			m.`y`,
+			m.`z`,
+			m.`newBlock`
+		)
+	}
+
+	def getDefaultInstanceForType = MapUpdate.defaultInstance
+	def clear = getDefaultInstanceForType
+	def isInitialized = true
+	def build = this
+	def buildPartial = this
+	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	override def getParserForType = this
+	def newBuilderForType = getDefaultInstanceForType
+	def toBuilder = this
+	def toJson(indent: Int = 0): String = "ScalaBuff JSON generation not enabled. Use --generate_json_method to enable."
+}
+
+object MapUpdate {
+	@scala.beans.BeanProperty val defaultInstance = new MapUpdate()
+
+	def parseFrom(data: Array[Byte]): MapUpdate = defaultInstance.mergeFrom(data)
+	def parseFrom(data: Array[Byte], offset: Int, length: Int): MapUpdate = defaultInstance.mergeFrom(data, offset, length)
+	def parseFrom(byteString: com.google.protobuf.ByteString): MapUpdate = defaultInstance.mergeFrom(byteString)
+	def parseFrom(stream: java.io.InputStream): MapUpdate = defaultInstance.mergeFrom(stream)
+	def parseDelimitedFrom(stream: java.io.InputStream): Option[MapUpdate] = defaultInstance.mergeDelimitedFromStream(stream)
+
+	val X_FIELD_NUMBER = 1
+	val Y_FIELD_NUMBER = 2
+	val Z_FIELD_NUMBER = 3
+	val NEWBLOCK_FIELD_NUMBER = 4
+
+	def newBuilder = defaultInstance.newBuilderForType
+	def newBuilder(prototype: MapUpdate) = defaultInstance.mergeFrom(prototype)
+
+}
+final case class MapCharacterUpdate (
+	`id`: Int = 0,
+	`x`: Int = 0,
+	`y`: Int = 0,
+	`z`: Int = 0
+) extends com.google.protobuf.GeneratedMessageLite
+	with com.google.protobuf.MessageLite.Builder
+	with net.sandrogrzicic.scalabuff.Message[MapCharacterUpdate]
+	with net.sandrogrzicic.scalabuff.Parser[MapCharacterUpdate] {
+
+
+
+	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+		output.writeInt32(1, `id`)
+		output.writeInt32(2, `x`)
+		output.writeInt32(3, `y`)
+		output.writeInt32(4, `z`)
+	}
+
+	def getSerializedSize = {
+		import com.google.protobuf.CodedOutputStream._
+		var __size = 0
+		__size += computeInt32Size(1, `id`)
+		__size += computeInt32Size(2, `x`)
+		__size += computeInt32Size(3, `y`)
+		__size += computeInt32Size(4, `z`)
+
+		__size
+	}
+
+	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): MapCharacterUpdate = {
+		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+		var __id: Int = 0
+		var __x: Int = 0
+		var __y: Int = 0
+		var __z: Int = 0
+
+		def __newMerged = MapCharacterUpdate(
+			__id,
+			__x,
+			__y,
+			__z
+		)
+		while (true) in.readTag match {
+			case 0 => return __newMerged
+			case 8 => __id = in.readInt32()
+			case 16 => __x = in.readInt32()
+			case 24 => __y = in.readInt32()
+			case 32 => __z = in.readInt32()
+			case default => if (!in.skipField(default)) return __newMerged
+		}
+		null
+	}
+
+	def mergeFrom(m: MapCharacterUpdate) = {
+		MapCharacterUpdate(
+			m.`id`,
+			m.`x`,
+			m.`y`,
+			m.`z`
+		)
+	}
+
+	def getDefaultInstanceForType = MapCharacterUpdate.defaultInstance
+	def clear = getDefaultInstanceForType
+	def isInitialized = true
+	def build = this
+	def buildPartial = this
+	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	override def getParserForType = this
+	def newBuilderForType = getDefaultInstanceForType
+	def toBuilder = this
+	def toJson(indent: Int = 0): String = "ScalaBuff JSON generation not enabled. Use --generate_json_method to enable."
+}
+
+object MapCharacterUpdate {
+	@scala.beans.BeanProperty val defaultInstance = new MapCharacterUpdate()
+
+	def parseFrom(data: Array[Byte]): MapCharacterUpdate = defaultInstance.mergeFrom(data)
+	def parseFrom(data: Array[Byte], offset: Int, length: Int): MapCharacterUpdate = defaultInstance.mergeFrom(data, offset, length)
+	def parseFrom(byteString: com.google.protobuf.ByteString): MapCharacterUpdate = defaultInstance.mergeFrom(byteString)
+	def parseFrom(stream: java.io.InputStream): MapCharacterUpdate = defaultInstance.mergeFrom(stream)
+	def parseDelimitedFrom(stream: java.io.InputStream): Option[MapCharacterUpdate] = defaultInstance.mergeDelimitedFromStream(stream)
+
+	val ID_FIELD_NUMBER = 1
+	val X_FIELD_NUMBER = 2
+	val Y_FIELD_NUMBER = 3
+	val Z_FIELD_NUMBER = 4
+
+	def newBuilder = defaultInstance.newBuilderForType
+	def newBuilder(prototype: MapCharacterUpdate) = defaultInstance.mergeFrom(prototype)
+
+}
 final case class QueryServer (
 
 ) extends com.google.protobuf.GeneratedMessageLite
@@ -1153,6 +1371,8 @@ object CommsMessages {
 		 "MapRequest" -> (bytes ⇒ MapRequest.parseFrom(bytes)),
 		 "MapIgnore" -> (bytes ⇒ MapIgnore.parseFrom(bytes)),
 		 "Map" -> (bytes ⇒ Map.parseFrom(bytes)),
+		 "MapUpdate" -> (bytes ⇒ MapUpdate.parseFrom(bytes)),
+		 "MapCharacterUpdate" -> (bytes ⇒ MapCharacterUpdate.parseFrom(bytes)),
 		 "QueryServer" -> (bytes ⇒ QueryServer.parseFrom(bytes)),
 		 "QueryServerResponse" -> (bytes ⇒ QueryServerResponse.parseFrom(bytes))
 	)

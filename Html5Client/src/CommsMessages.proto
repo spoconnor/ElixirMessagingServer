@@ -17,8 +17,10 @@ option optimize_for = SPEED;
     eMapRequest = 7;
     eMapIgnore = 8;
     eMap = 9;
-    eQueryServer = 10;
-    eQueryServerResponse = 11;
+    eMapUpdate = 10;
+    eMapCharacterUpdate = 11;
+    eQueryServer = 12;
+    eQueryServerResponse = 13;
   }
 
   message Message {
@@ -35,8 +37,10 @@ option optimize_for = SPEED;
     optional MapRequest mapRequest = 10;
     optional MapIgnore mapIgnore = 11;
     optional Map map = 12;
-    optional QueryServer queryServer = 13;
-    optional QueryServerResponse queryServerResponse = 14;
+    optional MapUpdate mapUpdate = 13;
+    optional MapCharacterUpdate mapCharacterUpdate = 14;
+    optional QueryServer queryServer = 15;
+    optional QueryServerResponse queryServerResponse = 16;
   }
 
   message Ping
@@ -92,6 +96,22 @@ option optimize_for = SPEED;
     required int32 maxY = 4;
     required int32 dataSize = 5;
     // binary data follows message
+  }
+
+  message MapUpdate 
+  {
+    required int32 x = 1;
+    required int32 y = 2;
+    required int32 z = 3;
+    required int32 newBlock = 4;
+  }
+
+  message MapCharacterUpdate 
+  {
+    required int32 id = 1;
+    required int32 x = 2;
+    required int32 y = 3;
+    required int32 z = 4;
   }
 
   message QueryServer 

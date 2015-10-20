@@ -18,12 +18,15 @@ case class Set(w:Int, l:Int, h:Int ,v:Int)
 class World() extends Actor {
   import context.system
   var log = Logging(context.system, this)
+  lazy val webServerAddr = { new InetSocketAddress("localhost", 8083) }
   val chunks = Map.empty[(Int,Int), ActorRef]
+
+  val tcpClient = actorSystem.actorOf(Props(new TcpClient(webServerAddr)))
 
   def chunk(x:Int, y:Int) = {
     chunks.getOrElseUpdate(
        (x/MapChunk.chunkSize, y/MapChunk.chunkSize),
-       system.actorOf(Props(new MapChunk(x,y))))
+       system.actorOf(Props(new MapChunk(x,y,tcpClient))))
   }
 
   def receive = {

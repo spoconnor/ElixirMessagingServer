@@ -1,6 +1,6 @@
 
-Ê	
-CommsMessages.protoCommsMessages"…
+â
+CommsMessages.protoCommsMessages"ñ
 Message
 msgtype (
 from (	
@@ -15,9 +15,11 @@
 mapRequest
  (2.CommsMessages.MapRequest+
 	mapIgnore (2.CommsMessages.MapIgnore
-map (2.CommsMessages.Map/
-queryServer (2.CommsMessages.QueryServer?
-queryServerResponse (2".CommsMessages.QueryServerResponse"
+map (2.CommsMessages.Map+
+	mapUpdate (2.CommsMessages.MapUpdate=
+mapCharacterUpdate (2!.CommsMessages.MapCharacterUpdate/
+queryServer (2.CommsMessages.QueryServer?
+queryServerResponse (2".CommsMessages.QueryServerResponse"
 Ping
 count ("
 Pong
@@ -46,13 +48,24 @@ MapRequest
 minY (
 maxX (
 maxY (
-dataSize ("
+dataSize (">
+	MapUpdate	
+x (	
+y (	
+z (
+newBlock ("A
+MapCharacterUpdate
+
+id (	
+x (	
+y (	
+z ("
 QueryServer"m
 QueryServerResponse
 minMapChunkX (
 minMapChunkY (
 maxMapChunkX (
-maxMapChunkY (*©
+maxMapChunkY (*Ò
 MsgType
 	eResponse	
 ePing	
@@ -64,7 +77,10 @@ MapRequest
 eMapRequest
 
 eMapIgnore
-eMap	
-eQueryServer
-
-eQueryServerResponseBH
+eMap	
+
+eMapUpdate
+
+eMapCharacterUpdate
+eQueryServer
+eQueryServerResponseBH

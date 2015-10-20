@@ -36,6 +36,10 @@ namespace CommsMessages {
     internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapIgnore, global::CommsMessages.MapIgnore.Builder> internal__static_CommsMessages_MapIgnore__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_CommsMessages_Map__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.Map, global::CommsMessages.Map.Builder> internal__static_CommsMessages_Map__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_CommsMessages_MapUpdate__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapUpdate, global::CommsMessages.MapUpdate.Builder> internal__static_CommsMessages_MapUpdate__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_CommsMessages_MapCharacterUpdate__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapCharacterUpdate, global::CommsMessages.MapCharacterUpdate.Builder> internal__static_CommsMessages_MapCharacterUpdate__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_CommsMessages_QueryServer__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::CommsMessages.QueryServer, global::CommsMessages.QueryServer.Builder> internal__static_CommsMessages_QueryServer__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_CommsMessages_QueryServerResponse__Descriptor;
@@ -49,7 +53,7 @@ namespace CommsMessages {
     
     static CommsMessages() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
-          "ChNDb21tc01lc3NhZ2VzLnByb3RvEg1Db21tc01lc3NhZ2VzIoUECgdNZXNz" + 
+          "ChNDb21tc01lc3NhZ2VzLnByb3RvEg1Db21tc01lc3NhZ2VzIvEECgdNZXNz" + 
           "YWdlEg8KB21zZ3R5cGUYASACKAUSDAoEZnJvbRgCIAIoCRIMCgRkZXN0GAMg" + 
           "AigJEikKCHJlc3BvbnNlGAQgASgLMhcuQ29tbXNNZXNzYWdlcy5SZXNwb25z" + 
           "ZRIhCgRwaW5nGAUgASgLMhMuQ29tbXNNZXNzYWdlcy5QaW5nEiEKBHBvbmcY" + 
@@ -58,31 +62,37 @@ namespace CommsMessages {
           "TWVzc2FnZXMuTG9naW4SHwoDc2F5GAkgASgLMhIuQ29tbXNNZXNzYWdlcy5T" + 
           "YXkSLQoKbWFwUmVxdWVzdBgKIAEoCzIZLkNvbW1zTWVzc2FnZXMuTWFwUmVx" + 
           "dWVzdBIrCgltYXBJZ25vcmUYCyABKAsyGC5Db21tc01lc3NhZ2VzLk1hcEln" + 
-          "bm9yZRIfCgNtYXAYDCABKAsyEi5Db21tc01lc3NhZ2VzLk1hcBIvCgtxdWVy" + 
-          "eVNlcnZlchgNIAEoCzIaLkNvbW1zTWVzc2FnZXMuUXVlcnlTZXJ2ZXISPwoT" + 
-          "cXVlcnlTZXJ2ZXJSZXNwb25zZRgOIAEoCzIiLkNvbW1zTWVzc2FnZXMuUXVl" + 
-          "cnlTZXJ2ZXJSZXNwb25zZSIVCgRQaW5nEg0KBWNvdW50GAEgAigFIhUKBFBv" + 
-          "bmcSDQoFY291bnQYASACKAUiKQoIUmVzcG9uc2USDAoEY29kZRgBIAIoBRIP" + 
-          "CgdtZXNzYWdlGAIgASgJIjsKB05ld1VzZXISEAoIdXNlcm5hbWUYASACKAkS" + 
-          "EAoIcGFzc3dvcmQYAiACKAkSDAoEbmFtZRgDIAIoCSIrCgVMb2dpbhIQCgh1" + 
-          "c2VybmFtZRgBIAIoCRIQCghwYXNzd29yZBgCIAIoCSITCgNTYXkSDAoEdGV4" + 
-          "dBgBIAIoCSIiCgpNYXBSZXF1ZXN0EgkKAXgYASACKAUSCQoBeRgCIAIoBSIh" + 
-          "CglNYXBJZ25vcmUSCQoBeBgBIAIoBRIJCgF5GAIgAigFIk8KA01hcBIMCgRt" + 
-          "aW5YGAEgAigFEgwKBG1pblkYAiACKAUSDAoEbWF4WBgDIAIoBRIMCgRtYXhZ" + 
-          "GAQgAigFEhAKCGRhdGFTaXplGAUgAigFIg0KC1F1ZXJ5U2VydmVyIm0KE1F1" + 
-          "ZXJ5U2VydmVyUmVzcG9uc2USFAoMbWluTWFwQ2h1bmtYGAEgAigFEhQKDG1p" + 
-          "bk1hcENodW5rWRgCIAIoBRIUCgxtYXhNYXBDaHVua1gYAyACKAUSFAoMbWF4" + 
-          "TWFwQ2h1bmtZGAQgAigFKqkBCgdNc2dUeXBlEg0KCWVSZXNwb25zZRABEgkK" + 
-          "BWVQaW5nEAISCQoFZVBvbmcQAxIMCghlTmV3VXNlchAEEgoKBmVMb2dpbhAF" + 
-          "EggKBGVTYXkQBhIPCgtlTWFwUmVxdWVzdBAHEg4KCmVNYXBJZ25vcmUQCBII" + 
-          "CgRlTWFwEAkSEAoMZVF1ZXJ5U2VydmVyEAoSGAoUZVF1ZXJ5U2VydmVyUmVz" + 
-          "cG9uc2UQC0ICSAE=");
+          "bm9yZRIfCgNtYXAYDCABKAsyEi5Db21tc01lc3NhZ2VzLk1hcBIrCgltYXBV" + 
+          "cGRhdGUYDSABKAsyGC5Db21tc01lc3NhZ2VzLk1hcFVwZGF0ZRI9ChJtYXBD" + 
+          "aGFyYWN0ZXJVcGRhdGUYDiABKAsyIS5Db21tc01lc3NhZ2VzLk1hcENoYXJh" + 
+          "Y3RlclVwZGF0ZRIvCgtxdWVyeVNlcnZlchgPIAEoCzIaLkNvbW1zTWVzc2Fn" + 
+          "ZXMuUXVlcnlTZXJ2ZXISPwoTcXVlcnlTZXJ2ZXJSZXNwb25zZRgQIAEoCzIi" + 
+          "LkNvbW1zTWVzc2FnZXMuUXVlcnlTZXJ2ZXJSZXNwb25zZSIVCgRQaW5nEg0K" + 
+          "BWNvdW50GAEgAigFIhUKBFBvbmcSDQoFY291bnQYASACKAUiKQoIUmVzcG9u" + 
+          "c2USDAoEY29kZRgBIAIoBRIPCgdtZXNzYWdlGAIgASgJIjsKB05ld1VzZXIS" + 
+          "EAoIdXNlcm5hbWUYASACKAkSEAoIcGFzc3dvcmQYAiACKAkSDAoEbmFtZRgD" + 
+          "IAIoCSIrCgVMb2dpbhIQCgh1c2VybmFtZRgBIAIoCRIQCghwYXNzd29yZBgC" + 
+          "IAIoCSITCgNTYXkSDAoEdGV4dBgBIAIoCSIiCgpNYXBSZXF1ZXN0EgkKAXgY" + 
+          "ASACKAUSCQoBeRgCIAIoBSIhCglNYXBJZ25vcmUSCQoBeBgBIAIoBRIJCgF5" + 
+          "GAIgAigFIk8KA01hcBIMCgRtaW5YGAEgAigFEgwKBG1pblkYAiACKAUSDAoE" + 
+          "bWF4WBgDIAIoBRIMCgRtYXhZGAQgAigFEhAKCGRhdGFTaXplGAUgAigFIj4K" + 
+          "CU1hcFVwZGF0ZRIJCgF4GAEgAigFEgkKAXkYAiACKAUSCQoBehgDIAIoBRIQ" + 
+          "CghuZXdCbG9jaxgEIAIoBSJBChJNYXBDaGFyYWN0ZXJVcGRhdGUSCgoCaWQY" + 
+          "ASACKAUSCQoBeBgCIAIoBRIJCgF5GAMgAigFEgkKAXoYBCACKAUiDQoLUXVl" + 
+          "cnlTZXJ2ZXIibQoTUXVlcnlTZXJ2ZXJSZXNwb25zZRIUCgxtaW5NYXBDaHVu" + 
+          "a1gYASACKAUSFAoMbWluTWFwQ2h1bmtZGAIgAigFEhQKDG1heE1hcENodW5r" + 
+          "WBgDIAIoBRIUCgxtYXhNYXBDaHVua1kYBCACKAUq0gEKB01zZ1R5cGUSDQoJ" + 
+          "ZVJlc3BvbnNlEAESCQoFZVBpbmcQAhIJCgVlUG9uZxADEgwKCGVOZXdVc2Vy" + 
+          "EAQSCgoGZUxvZ2luEAUSCAoEZVNheRAGEg8KC2VNYXBSZXF1ZXN0EAcSDgoK" + 
+          "ZU1hcElnbm9yZRAIEggKBGVNYXAQCRIOCgplTWFwVXBkYXRlEAoSFwoTZU1h" + 
+          "cENoYXJhY3RlclVwZGF0ZRALEhAKDGVRdWVyeVNlcnZlchAMEhgKFGVRdWVy" + 
+          "eVNlcnZlclJlc3BvbnNlEA1CAkgB");
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_CommsMessages_Message__Descriptor = Descriptor.MessageTypes[0];
         internal__static_CommsMessages_Message__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.Message, global::CommsMessages.Message.Builder>(internal__static_CommsMessages_Message__Descriptor,
-                new string[] { "Msgtype", "From", "Dest", "Response", "Ping", "Pong", "NewUser", "Login", "Say", "MapRequest", "MapIgnore", "Map", "QueryServer", "QueryServerResponse", });
+                new string[] { "Msgtype", "From", "Dest", "Response", "Ping", "Pong", "NewUser", "Login", "Say", "MapRequest", "MapIgnore", "Map", "MapUpdate", "MapCharacterUpdate", "QueryServer", "QueryServerResponse", });
         internal__static_CommsMessages_Ping__Descriptor = Descriptor.MessageTypes[1];
         internal__static_CommsMessages_Ping__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.Ping, global::CommsMessages.Ping.Builder>(internal__static_CommsMessages_Ping__Descriptor,
@@ -119,11 +129,19 @@ namespace CommsMessages {
         internal__static_CommsMessages_Map__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.Map, global::CommsMessages.Map.Builder>(internal__static_CommsMessages_Map__Descriptor,
                 new string[] { "MinX", "MinY", "MaxX", "MaxY", "DataSize", });
-        internal__static_CommsMessages_QueryServer__Descriptor = Descriptor.MessageTypes[10];
+        internal__static_CommsMessages_MapUpdate__Descriptor = Descriptor.MessageTypes[10];
+        internal__static_CommsMessages_MapUpdate__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapUpdate, global::CommsMessages.MapUpdate.Builder>(internal__static_CommsMessages_MapUpdate__Descriptor,
+                new string[] { "X", "Y", "Z", "NewBlock", });
+        internal__static_CommsMessages_MapCharacterUpdate__Descriptor = Descriptor.MessageTypes[11];
+        internal__static_CommsMessages_MapCharacterUpdate__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.MapCharacterUpdate, global::CommsMessages.MapCharacterUpdate.Builder>(internal__static_CommsMessages_MapCharacterUpdate__Descriptor,
+                new string[] { "Id", "X", "Y", "Z", });
+        internal__static_CommsMessages_QueryServer__Descriptor = Descriptor.MessageTypes[12];
         internal__static_CommsMessages_QueryServer__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.QueryServer, global::CommsMessages.QueryServer.Builder>(internal__static_CommsMessages_QueryServer__Descriptor,
                 new string[] { });
-        internal__static_CommsMessages_QueryServerResponse__Descriptor = Descriptor.MessageTypes[11];
+        internal__static_CommsMessages_QueryServerResponse__Descriptor = Descriptor.MessageTypes[13];
         internal__static_CommsMessages_QueryServerResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::CommsMessages.QueryServerResponse, global::CommsMessages.QueryServerResponse.Builder>(internal__static_CommsMessages_QueryServerResponse__Descriptor,
                 new string[] { "MinMapChunkX", "MinMapChunkY", "MaxMapChunkX", "MaxMapChunkY", });
@@ -147,8 +165,10 @@ namespace CommsMessages {
     eMapRequest = 7,
     eMapIgnore = 8,
     eMap = 9,
-    eQueryServer = 10,
-    eQueryServerResponse = 11,
+    eMapUpdate = 10,
+    eMapCharacterUpdate = 11,
+    eQueryServer = 12,
+    eQueryServerResponse = 13,
   }
   
   #endregion
@@ -158,8 +178,8 @@ namespace CommsMessages {
   public sealed partial class Message : pb::GeneratedMessage<Message, Message.Builder> {
     private Message() { }
     private static readonly Message defaultInstance = new Message().MakeReadOnly();
-    private static readonly string[] _messageFieldNames = new string[] { "dest", "from", "login", "map", "mapIgnore", "mapRequest", "msgtype", "newUser", "ping", "pong", "queryServer", "queryServerResponse", "response", "say" };
-    private static readonly uint[] _messageFieldTags = new uint[] { 26, 18, 66, 98, 90, 82, 8, 58, 42, 50, 106, 114, 34, 74 };
+    private static readonly string[] _messageFieldNames = new string[] { "dest", "from", "login", "map", "mapCharacterUpdate", "mapIgnore", "mapRequest", "mapUpdate", "msgtype", "newUser", "ping", "pong", "queryServer", "queryServerResponse", "response", "say" };
+    private static readonly uint[] _messageFieldTags = new uint[] { 26, 18, 66, 98, 114, 90, 82, 106, 8, 58, 42, 50, 122, 130, 34, 74 };
     public static Message DefaultInstance {
       get { return defaultInstance; }
     }
@@ -300,7 +320,27 @@ namespace CommsMessages {
       get { return map_ ?? global::CommsMessages.Map.DefaultInstance; }
     }
     
-    public const int QueryServerFieldNumber = 13;
+    public const int MapUpdateFieldNumber = 13;
+    private bool hasMapUpdate;
+    private global::CommsMessages.MapUpdate mapUpdate_;
+    public bool HasMapUpdate {
+      get { return hasMapUpdate; }
+    }
+    public global::CommsMessages.MapUpdate MapUpdate {
+      get { return mapUpdate_ ?? global::CommsMessages.MapUpdate.DefaultInstance; }
+    }
+    
+    public const int MapCharacterUpdateFieldNumber = 14;
+    private bool hasMapCharacterUpdate;
+    private global::CommsMessages.MapCharacterUpdate mapCharacterUpdate_;
+    public bool HasMapCharacterUpdate {
+      get { return hasMapCharacterUpdate; }
+    }
+    public global::CommsMessages.MapCharacterUpdate MapCharacterUpdate {
+      get { return mapCharacterUpdate_ ?? global::CommsMessages.MapCharacterUpdate.DefaultInstance; }
+    }
+    
+    public const int QueryServerFieldNumber = 15;
     private bool hasQueryServer;
     private global::CommsMessages.QueryServer queryServer_;
     public bool HasQueryServer {
@@ -310,7 +350,7 @@ namespace CommsMessages {
       get { return queryServer_ ?? global::CommsMessages.QueryServer.DefaultInstance; }
     }
     
-    public const int QueryServerResponseFieldNumber = 14;
+    public const int QueryServerResponseFieldNumber = 16;
     private bool hasQueryServerResponse;
     private global::CommsMessages.QueryServerResponse queryServerResponse_;
     public bool HasQueryServerResponse {
@@ -352,6 +392,12 @@ namespace CommsMessages {
         if (HasMap) {
           if (!Map.IsInitialized) return false;
         }
+        if (HasMapUpdate) {
+          if (!MapUpdate.IsInitialized) return false;
+        }
+        if (HasMapCharacterUpdate) {
+          if (!MapCharacterUpdate.IsInitialized) return false;
+        }
         if (HasQueryServerResponse) {
           if (!QueryServerResponse.IsInitialized) return false;
         }
@@ -363,7 +409,7 @@ namespace CommsMessages {
       int size = SerializedSize;
       string[] field_names = _messageFieldNames;
       if (hasMsgtype) {
-        output.WriteInt32(1, field_names[6], Msgtype);
+        output.WriteInt32(1, field_names[8], Msgtype);
       }
       if (hasFrom) {
         output.WriteString(2, field_names[1], From);
@@ -372,37 +418,43 @@ namespace CommsMessages {
         output.WriteString(3, field_names[0], Dest);
       }
       if (hasResponse) {
-        output.WriteMessage(4, field_names[12], Response);
+        output.WriteMessage(4, field_names[14], Response);
       }
       if (hasPing) {
-        output.WriteMessage(5, field_names[8], Ping);
+        output.WriteMessage(5, field_names[10], Ping);
       }
       if (hasPong) {
-        output.WriteMessage(6, field_names[9], Pong);
+        output.WriteMessage(6, field_names[11], Pong);
       }
       if (hasNewUser) {
-        output.WriteMessage(7, field_names[7], NewUser);
+        output.WriteMessage(7, field_names[9], NewUser);
       }
       if (hasLogin) {
         output.WriteMessage(8, field_names[2], Login);
       }
       if (hasSay) {
-        output.WriteMessage(9, field_names[13], Say);
+        output.WriteMessage(9, field_names[15], Say);
       }
       if (hasMapRequest) {
-        output.WriteMessage(10, field_names[5], MapRequest);
+        output.WriteMessage(10, field_names[6], MapRequest);
       }
       if (hasMapIgnore) {
-        output.WriteMessage(11, field_names[4], MapIgnore);
+        output.WriteMessage(11, field_names[5], MapIgnore);
       }
       if (hasMap) {
         output.WriteMessage(12, field_names[3], Map);
       }
+      if (hasMapUpdate) {
+        output.WriteMessage(13, field_names[7], MapUpdate);
+      }
+      if (hasMapCharacterUpdate) {
+        output.WriteMessage(14, field_names[4], MapCharacterUpdate);
+      }
       if (hasQueryServer) {
-        output.WriteMessage(13, field_names[10], QueryServer);
+        output.WriteMessage(15, field_names[12], QueryServer);
       }
       if (hasQueryServerResponse) {
-        output.WriteMessage(14, field_names[11], QueryServerResponse);
+        output.WriteMessage(16, field_names[13], QueryServerResponse);
       }
       UnknownFields.WriteTo(output);
     }
@@ -450,11 +502,17 @@ namespace CommsMessages {
         if (hasMap) {
           size += pb::CodedOutputStream.ComputeMessageSize(12, Map);
         }
+        if (hasMapUpdate) {
+          size += pb::CodedOutputStream.ComputeMessageSize(13, MapUpdate);
+        }
+        if (hasMapCharacterUpdate) {
+          size += pb::CodedOutputStream.ComputeMessageSize(14, MapCharacterUpdate);
+        }
         if (hasQueryServer) {
-          size += pb::CodedOutputStream.ComputeMessageSize(13, QueryServer);
+          size += pb::CodedOutputStream.ComputeMessageSize(15, QueryServer);
         }
         if (hasQueryServerResponse) {
-          size += pb::CodedOutputStream.ComputeMessageSize(14, QueryServerResponse);
+          size += pb::CodedOutputStream.ComputeMessageSize(16, QueryServerResponse);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -616,6 +674,12 @@ namespace CommsMessages {
         if (other.HasMap) {
           MergeMap(other.Map);
         }
+        if (other.HasMapUpdate) {
+          MergeMapUpdate(other.MapUpdate);
+        }
+        if (other.HasMapCharacterUpdate) {
+          MergeMapCharacterUpdate(other.MapCharacterUpdate);
+        }
         if (other.HasQueryServer) {
           MergeQueryServer(other.QueryServer);
         }
@@ -759,6 +823,24 @@ namespace CommsMessages {
               break;
             }
             case 106: {
+              global::CommsMessages.MapUpdate.Builder subBuilder = global::CommsMessages.MapUpdate.CreateBuilder();
+              if (result.hasMapUpdate) {
+                subBuilder.MergeFrom(MapUpdate);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              MapUpdate = subBuilder.BuildPartial();
+              break;
+            }
+            case 114: {
+              global::CommsMessages.MapCharacterUpdate.Builder subBuilder = global::CommsMessages.MapCharacterUpdate.CreateBuilder();
+              if (result.hasMapCharacterUpdate) {
+                subBuilder.MergeFrom(MapCharacterUpdate);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              MapCharacterUpdate = subBuilder.BuildPartial();
+              break;
+            }
+            case 122: {
               global::CommsMessages.QueryServer.Builder subBuilder = global::CommsMessages.QueryServer.CreateBuilder();
               if (result.hasQueryServer) {
                 subBuilder.MergeFrom(QueryServer);
@@ -767,7 +849,7 @@ namespace CommsMessages {
               QueryServer = subBuilder.BuildPartial();
               break;
             }
-            case 114: {
+            case 130: {
               global::CommsMessages.QueryServerResponse.Builder subBuilder = global::CommsMessages.QueryServerResponse.CreateBuilder();
               if (result.hasQueryServerResponse) {
                 subBuilder.MergeFrom(QueryServerResponse);
@@ -1205,6 +1287,86 @@ namespace CommsMessages {
         PrepareBuilder();
         result.hasMap = false;
         result.map_ = null;
+        return this;
+      }
+      
+      public bool HasMapUpdate {
+       get { return result.hasMapUpdate; }
+      }
+      public global::CommsMessages.MapUpdate MapUpdate {
+        get { return result.MapUpdate; }
+        set { SetMapUpdate(value); }
+      }
+      public Builder SetMapUpdate(global::CommsMessages.MapUpdate value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasMapUpdate = true;
+        result.mapUpdate_ = value;
+        return this;
+      }
+      public Builder SetMapUpdate(global::CommsMessages.MapUpdate.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasMapUpdate = true;
+        result.mapUpdate_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeMapUpdate(global::CommsMessages.MapUpdate value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasMapUpdate &&
+            result.mapUpdate_ != global::CommsMessages.MapUpdate.DefaultInstance) {
+            result.mapUpdate_ = global::CommsMessages.MapUpdate.CreateBuilder(result.mapUpdate_).MergeFrom(value).BuildPartial();
+        } else {
+          result.mapUpdate_ = value;
+        }
+        result.hasMapUpdate = true;
+        return this;
+      }
+      public Builder ClearMapUpdate() {
+        PrepareBuilder();
+        result.hasMapUpdate = false;
+        result.mapUpdate_ = null;
+        return this;
+      }
+      
+      public bool HasMapCharacterUpdate {
+       get { return result.hasMapCharacterUpdate; }
+      }
+      public global::CommsMessages.MapCharacterUpdate MapCharacterUpdate {
+        get { return result.MapCharacterUpdate; }
+        set { SetMapCharacterUpdate(value); }
+      }
+      public Builder SetMapCharacterUpdate(global::CommsMessages.MapCharacterUpdate value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasMapCharacterUpdate = true;
+        result.mapCharacterUpdate_ = value;
+        return this;
+      }
+      public Builder SetMapCharacterUpdate(global::CommsMessages.MapCharacterUpdate.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasMapCharacterUpdate = true;
+        result.mapCharacterUpdate_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeMapCharacterUpdate(global::CommsMessages.MapCharacterUpdate value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasMapCharacterUpdate &&
+            result.mapCharacterUpdate_ != global::CommsMessages.MapCharacterUpdate.DefaultInstance) {
+            result.mapCharacterUpdate_ = global::CommsMessages.MapCharacterUpdate.CreateBuilder(result.mapCharacterUpdate_).MergeFrom(value).BuildPartial();
+        } else {
+          result.mapCharacterUpdate_ = value;
+        }
+        result.hasMapCharacterUpdate = true;
+        return this;
+      }
+      public Builder ClearMapCharacterUpdate() {
+        PrepareBuilder();
+        result.hasMapCharacterUpdate = false;
+        result.mapCharacterUpdate_ = null;
         return this;
       }
       
@@ -4174,6 +4336,812 @@ namespace CommsMessages {
       }
     }
     static Map() {
+      object.ReferenceEquals(global::CommsMessages.CommsMessages.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class MapUpdate : pb::GeneratedMessage<MapUpdate, MapUpdate.Builder> {
+    private MapUpdate() { }
+    private static readonly MapUpdate defaultInstance = new MapUpdate().MakeReadOnly();
+    private static readonly string[] _mapUpdateFieldNames = new string[] { "newBlock", "x", "y", "z" };
+    private static readonly uint[] _mapUpdateFieldTags = new uint[] { 32, 8, 16, 24 };
+    public static MapUpdate DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override MapUpdate DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override MapUpdate ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapUpdate__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<MapUpdate, MapUpdate.Builder> InternalFieldAccessors {
+      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapUpdate__FieldAccessorTable; }
+    }
+    
+    public const int XFieldNumber = 1;
+    private bool hasX;
+    private int x_;
+    public bool HasX {
+      get { return hasX; }
+    }
+    public int X {
+      get { return x_; }
+    }
+    
+    public const int YFieldNumber = 2;
+    private bool hasY;
+    private int y_;
+    public bool HasY {
+      get { return hasY; }
+    }
+    public int Y {
+      get { return y_; }
+    }
+    
+    public const int ZFieldNumber = 3;
+    private bool hasZ;
+    private int z_;
+    public bool HasZ {
+      get { return hasZ; }
+    }
+    public int Z {
+      get { return z_; }
+    }
+    
+    public const int NewBlockFieldNumber = 4;
+    private bool hasNewBlock;
+    private int newBlock_;
+    public bool HasNewBlock {
+      get { return hasNewBlock; }
+    }
+    public int NewBlock {
+      get { return newBlock_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        if (!hasX) return false;
+        if (!hasY) return false;
+        if (!hasZ) return false;
+        if (!hasNewBlock) return false;
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _mapUpdateFieldNames;
+      if (hasX) {
+        output.WriteInt32(1, field_names[1], X);
+      }
+      if (hasY) {
+        output.WriteInt32(2, field_names[2], Y);
+      }
+      if (hasZ) {
+        output.WriteInt32(3, field_names[3], Z);
+      }
+      if (hasNewBlock) {
+        output.WriteInt32(4, field_names[0], NewBlock);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasX) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, X);
+        }
+        if (hasY) {
+          size += pb::CodedOutputStream.ComputeInt32Size(2, Y);
+        }
+        if (hasZ) {
+          size += pb::CodedOutputStream.ComputeInt32Size(3, Z);
+        }
+        if (hasNewBlock) {
+          size += pb::CodedOutputStream.ComputeInt32Size(4, NewBlock);
+        }
+        size += UnknownFields.SerializedSize;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    public static MapUpdate ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static MapUpdate ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static MapUpdate ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static MapUpdate ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static MapUpdate ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static MapUpdate ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static MapUpdate ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static MapUpdate ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static MapUpdate ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static MapUpdate ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private MapUpdate MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(MapUpdate prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<MapUpdate, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(MapUpdate cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private MapUpdate result;
+      
+      private MapUpdate PrepareBuilder() {
+        if (resultIsReadOnly) {
+          MapUpdate original = result;
+          result = new MapUpdate();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override MapUpdate MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::CommsMessages.MapUpdate.Descriptor; }
+      }
+      
+      public override MapUpdate DefaultInstanceForType {
+        get { return global::CommsMessages.MapUpdate.DefaultInstance; }
+      }
+      
+      public override MapUpdate BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is MapUpdate) {
+          return MergeFrom((MapUpdate) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(MapUpdate other) {
+        if (other == global::CommsMessages.MapUpdate.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasX) {
+          X = other.X;
+        }
+        if (other.HasY) {
+          Y = other.Y;
+        }
+        if (other.HasZ) {
+          Z = other.Z;
+        }
+        if (other.HasNewBlock) {
+          NewBlock = other.NewBlock;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_mapUpdateFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _mapUpdateFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasX = input.ReadInt32(ref result.x_);
+              break;
+            }
+            case 16: {
+              result.hasY = input.ReadInt32(ref result.y_);
+              break;
+            }
+            case 24: {
+              result.hasZ = input.ReadInt32(ref result.z_);
+              break;
+            }
+            case 32: {
+              result.hasNewBlock = input.ReadInt32(ref result.newBlock_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasX {
+        get { return result.hasX; }
+      }
+      public int X {
+        get { return result.X; }
+        set { SetX(value); }
+      }
+      public Builder SetX(int value) {
+        PrepareBuilder();
+        result.hasX = true;
+        result.x_ = value;
+        return this;
+      }
+      public Builder ClearX() {
+        PrepareBuilder();
+        result.hasX = false;
+        result.x_ = 0;
+        return this;
+      }
+      
+      public bool HasY {
+        get { return result.hasY; }
+      }
+      public int Y {
+        get { return result.Y; }
+        set { SetY(value); }
+      }
+      public Builder SetY(int value) {
+        PrepareBuilder();
+        result.hasY = true;
+        result.y_ = value;
+        return this;
+      }
+      public Builder ClearY() {
+        PrepareBuilder();
+        result.hasY = false;
+        result.y_ = 0;
+        return this;
+      }
+      
+      public bool HasZ {
+        get { return result.hasZ; }
+      }
+      public int Z {
+        get { return result.Z; }
+        set { SetZ(value); }
+      }
+      public Builder SetZ(int value) {
+        PrepareBuilder();
+        result.hasZ = true;
+        result.z_ = value;
+        return this;
+      }
+      public Builder ClearZ() {
+        PrepareBuilder();
+        result.hasZ = false;
+        result.z_ = 0;
+        return this;
+      }
+      
+      public bool HasNewBlock {
+        get { return result.hasNewBlock; }
+      }
+      public int NewBlock {
+        get { return result.NewBlock; }
+        set { SetNewBlock(value); }
+      }
+      public Builder SetNewBlock(int value) {
+        PrepareBuilder();
+        result.hasNewBlock = true;
+        result.newBlock_ = value;
+        return this;
+      }
+      public Builder ClearNewBlock() {
+        PrepareBuilder();
+        result.hasNewBlock = false;
+        result.newBlock_ = 0;
+        return this;
+      }
+    }
+    static MapUpdate() {
+      object.ReferenceEquals(global::CommsMessages.CommsMessages.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class MapCharacterUpdate : pb::GeneratedMessage<MapCharacterUpdate, MapCharacterUpdate.Builder> {
+    private MapCharacterUpdate() { }
+    private static readonly MapCharacterUpdate defaultInstance = new MapCharacterUpdate().MakeReadOnly();
+    private static readonly string[] _mapCharacterUpdateFieldNames = new string[] { "id", "x", "y", "z" };
+    private static readonly uint[] _mapCharacterUpdateFieldTags = new uint[] { 8, 16, 24, 32 };
+    public static MapCharacterUpdate DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override MapCharacterUpdate DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override MapCharacterUpdate ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapCharacterUpdate__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<MapCharacterUpdate, MapCharacterUpdate.Builder> InternalFieldAccessors {
+      get { return global::CommsMessages.CommsMessages.internal__static_CommsMessages_MapCharacterUpdate__FieldAccessorTable; }
+    }
+    
+    public const int IdFieldNumber = 1;
+    private bool hasId;
+    private int id_;
+    public bool HasId {
+      get { return hasId; }
+    }
+    public int Id {
+      get { return id_; }
+    }
+    
+    public const int XFieldNumber = 2;
+    private bool hasX;
+    private int x_;
+    public bool HasX {
+      get { return hasX; }
+    }
+    public int X {
+      get { return x_; }
+    }
+    
+    public const int YFieldNumber = 3;
+    private bool hasY;
+    private int y_;
+    public bool HasY {
+      get { return hasY; }
+    }
+    public int Y {
+      get { return y_; }
+    }
+    
+    public const int ZFieldNumber = 4;
+    private bool hasZ;
+    private int z_;
+    public bool HasZ {
+      get { return hasZ; }
+    }
+    public int Z {
+      get { return z_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        if (!hasId) return false;
+        if (!hasX) return false;
+        if (!hasY) return false;
+        if (!hasZ) return false;
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _mapCharacterUpdateFieldNames;
+      if (hasId) {
+        output.WriteInt32(1, field_names[0], Id);
+      }
+      if (hasX) {
+        output.WriteInt32(2, field_names[1], X);
+      }
+      if (hasY) {
+        output.WriteInt32(3, field_names[2], Y);
+      }
+      if (hasZ) {
+        output.WriteInt32(4, field_names[3], Z);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasId) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, Id);
+        }
+        if (hasX) {
+          size += pb::CodedOutputStream.ComputeInt32Size(2, X);
+        }
+        if (hasY) {
+          size += pb::CodedOutputStream.ComputeInt32Size(3, Y);
+        }
+        if (hasZ) {
+          size += pb::CodedOutputStream.ComputeInt32Size(4, Z);
+        }
+        size += UnknownFields.SerializedSize;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    public static MapCharacterUpdate ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static MapCharacterUpdate ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static MapCharacterUpdate ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static MapCharacterUpdate ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static MapCharacterUpdate ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static MapCharacterUpdate ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static MapCharacterUpdate ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static MapCharacterUpdate ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static MapCharacterUpdate ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static MapCharacterUpdate ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private MapCharacterUpdate MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(MapCharacterUpdate prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<MapCharacterUpdate, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(MapCharacterUpdate cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private MapCharacterUpdate result;
+      
+      private MapCharacterUpdate PrepareBuilder() {
+        if (resultIsReadOnly) {
+          MapCharacterUpdate original = result;
+          result = new MapCharacterUpdate();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override MapCharacterUpdate MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::CommsMessages.MapCharacterUpdate.Descriptor; }
+      }
+      
+      public override MapCharacterUpdate DefaultInstanceForType {
+        get { return global::CommsMessages.MapCharacterUpdate.DefaultInstance; }
+      }
+      
+      public override MapCharacterUpdate BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is MapCharacterUpdate) {
+          return MergeFrom((MapCharacterUpdate) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(MapCharacterUpdate other) {
+        if (other == global::CommsMessages.MapCharacterUpdate.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasId) {
+          Id = other.Id;
+        }
+        if (other.HasX) {
+          X = other.X;
+        }
+        if (other.HasY) {
+          Y = other.Y;
+        }
+        if (other.HasZ) {
+          Z = other.Z;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_mapCharacterUpdateFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _mapCharacterUpdateFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasId = input.ReadInt32(ref result.id_);
+              break;
+            }
+            case 16: {
+              result.hasX = input.ReadInt32(ref result.x_);
+              break;
+            }
+            case 24: {
+              result.hasY = input.ReadInt32(ref result.y_);
+              break;
+            }
+            case 32: {
+              result.hasZ = input.ReadInt32(ref result.z_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasId {
+        get { return result.hasId; }
+      }
+      public int Id {
+        get { return result.Id; }
+        set { SetId(value); }
+      }
+      public Builder SetId(int value) {
+        PrepareBuilder();
+        result.hasId = true;
+        result.id_ = value;
+        return this;
+      }
+      public Builder ClearId() {
+        PrepareBuilder();
+        result.hasId = false;
+        result.id_ = 0;
+        return this;
+      }
+      
+      public bool HasX {
+        get { return result.hasX; }
+      }
+      public int X {
+        get { return result.X; }
+        set { SetX(value); }
+      }
+      public Builder SetX(int value) {
+        PrepareBuilder();
+        result.hasX = true;
+        result.x_ = value;
+        return this;
+      }
+      public Builder ClearX() {
+        PrepareBuilder();
+        result.hasX = false;
+        result.x_ = 0;
+        return this;
+      }
+      
+      public bool HasY {
+        get { return result.hasY; }
+      }
+      public int Y {
+        get { return result.Y; }
+        set { SetY(value); }
+      }
+      public Builder SetY(int value) {
+        PrepareBuilder();
+        result.hasY = true;
+        result.y_ = value;
+        return this;
+      }
+      public Builder ClearY() {
+        PrepareBuilder();
+        result.hasY = false;
+        result.y_ = 0;
+        return this;
+      }
+      
+      public bool HasZ {
+        get { return result.hasZ; }
+      }
+      public int Z {
+        get { return result.Z; }
+        set { SetZ(value); }
+      }
+      public Builder SetZ(int value) {
+        PrepareBuilder();
+        result.hasZ = true;
+        result.z_ = value;
+        return this;
+      }
+      public Builder ClearZ() {
+        PrepareBuilder();
+        result.hasZ = false;
+        result.z_ = 0;
+        return this;
+      }
+    }
+    static MapCharacterUpdate() {
       object.ReferenceEquals(global::CommsMessages.CommsMessages.Descriptor, null);
     }
   }

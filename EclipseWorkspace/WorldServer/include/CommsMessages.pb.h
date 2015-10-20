@@ -44,6 +44,8 @@ class Say;
 class MapRequest;
 class MapIgnore;
 class Map;
+class MapUpdate;
+class MapCharacterUpdate;
 class QueryServer;
 class QueryServerResponse;
 
@@ -57,8 +59,10 @@ enum MsgType {
   eMapRequest = 7,
   eMapIgnore = 8,
   eMap = 9,
-  eQueryServer = 10,
-  eQueryServerResponse = 11
+  eMapUpdate = 10,
+  eMapCharacterUpdate = 11,
+  eQueryServer = 12,
+  eQueryServerResponse = 13
 };
 bool MsgType_IsValid(int value);
 const MsgType MsgType_MIN = eResponse;
@@ -243,19 +247,37 @@ class Message : public ::google::protobuf::Message {
   inline ::CommsMessages::Map* release_map();
   inline void set_allocated_map(::CommsMessages::Map* map);
 
-  // optional .CommsMessages.QueryServer queryServer = 13;
+  // optional .CommsMessages.MapUpdate mapUpdate = 13;
+  inline bool has_mapupdate() const;
+  inline void clear_mapupdate();
+  static const int kMapUpdateFieldNumber = 13;
+  inline const ::CommsMessages::MapUpdate& mapupdate() const;
+  inline ::CommsMessages::MapUpdate* mutable_mapupdate();
+  inline ::CommsMessages::MapUpdate* release_mapupdate();
+  inline void set_allocated_mapupdate(::CommsMessages::MapUpdate* mapupdate);
+
+  // optional .CommsMessages.MapCharacterUpdate mapCharacterUpdate = 14;
+  inline bool has_mapcharacterupdate() const;
+  inline void clear_mapcharacterupdate();
+  static const int kMapCharacterUpdateFieldNumber = 14;
+  inline const ::CommsMessages::MapCharacterUpdate& mapcharacterupdate() const;
+  inline ::CommsMessages::MapCharacterUpdate* mutable_mapcharacterupdate();
+  inline ::CommsMessages::MapCharacterUpdate* release_mapcharacterupdate();
+  inline void set_allocated_mapcharacterupdate(::CommsMessages::MapCharacterUpdate* mapcharacterupdate);
+
+  // optional .CommsMessages.QueryServer queryServer = 15;
   inline bool has_queryserver() const;
   inline void clear_queryserver();
-  static const int kQueryServerFieldNumber = 13;
+  static const int kQueryServerFieldNumber = 15;
   inline const ::CommsMessages::QueryServer& queryserver() const;
   inline ::CommsMessages::QueryServer* mutable_queryserver();
   inline ::CommsMessages::QueryServer* release_queryserver();
   inline void set_allocated_queryserver(::CommsMessages::QueryServer* queryserver);
 
-  // optional .CommsMessages.QueryServerResponse queryServerResponse = 14;
+  // optional .CommsMessages.QueryServerResponse queryServerResponse = 16;
   inline bool has_queryserverresponse() const;
   inline void clear_queryserverresponse();
-  static const int kQueryServerResponseFieldNumber = 14;
+  static const int kQueryServerResponseFieldNumber = 16;
   inline const ::CommsMessages::QueryServerResponse& queryserverresponse() const;
   inline ::CommsMessages::QueryServerResponse* mutable_queryserverresponse();
   inline ::CommsMessages::QueryServerResponse* release_queryserverresponse();
@@ -287,6 +309,10 @@ class Message : public ::google::protobuf::Message {
   inline void clear_has_mapignore();
   inline void set_has_map();
   inline void clear_has_map();
+  inline void set_has_mapupdate();
+  inline void clear_has_mapupdate();
+  inline void set_has_mapcharacterupdate();
+  inline void clear_has_mapcharacterupdate();
   inline void set_has_queryserver();
   inline void clear_has_queryserver();
   inline void set_has_queryserverresponse();
@@ -305,12 +331,14 @@ class Message : public ::google::protobuf::Message {
   ::CommsMessages::MapRequest* maprequest_;
   ::CommsMessages::MapIgnore* mapignore_;
   ::CommsMessages::Map* map_;
+  ::CommsMessages::MapUpdate* mapupdate_;
+  ::CommsMessages::MapCharacterUpdate* mapcharacterupdate_;
   ::CommsMessages::QueryServer* queryserver_;
   ::CommsMessages::QueryServerResponse* queryserverresponse_;
   ::google::protobuf::int32 msgtype_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(14 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(16 + 31) / 32];
 
   friend void  protobuf_AddDesc_CommsMessages_2eproto();
   friend void protobuf_AssignDesc_CommsMessages_2eproto();
@@ -1194,6 +1222,230 @@ class Map : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class MapUpdate : public ::google::protobuf::Message {
+ public:
+  MapUpdate();
+  virtual ~MapUpdate();
+
+  MapUpdate(const MapUpdate& from);
+
+  inline MapUpdate& operator=(const MapUpdate& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MapUpdate& default_instance();
+
+  void Swap(MapUpdate* other);
+
+  // implements Message ----------------------------------------------
+
+  MapUpdate* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MapUpdate& from);
+  void MergeFrom(const MapUpdate& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 x = 1;
+  inline bool has_x() const;
+  inline void clear_x();
+  static const int kXFieldNumber = 1;
+  inline ::google::protobuf::int32 x() const;
+  inline void set_x(::google::protobuf::int32 value);
+
+  // required int32 y = 2;
+  inline bool has_y() const;
+  inline void clear_y();
+  static const int kYFieldNumber = 2;
+  inline ::google::protobuf::int32 y() const;
+  inline void set_y(::google::protobuf::int32 value);
+
+  // required int32 z = 3;
+  inline bool has_z() const;
+  inline void clear_z();
+  static const int kZFieldNumber = 3;
+  inline ::google::protobuf::int32 z() const;
+  inline void set_z(::google::protobuf::int32 value);
+
+  // required int32 newBlock = 4;
+  inline bool has_newblock() const;
+  inline void clear_newblock();
+  static const int kNewBlockFieldNumber = 4;
+  inline ::google::protobuf::int32 newblock() const;
+  inline void set_newblock(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:CommsMessages.MapUpdate)
+ private:
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
+  inline void set_has_z();
+  inline void clear_has_z();
+  inline void set_has_newblock();
+  inline void clear_has_newblock();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 x_;
+  ::google::protobuf::int32 y_;
+  ::google::protobuf::int32 z_;
+  ::google::protobuf::int32 newblock_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_CommsMessages_2eproto();
+  friend void protobuf_AssignDesc_CommsMessages_2eproto();
+  friend void protobuf_ShutdownFile_CommsMessages_2eproto();
+
+  void InitAsDefaultInstance();
+  static MapUpdate* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class MapCharacterUpdate : public ::google::protobuf::Message {
+ public:
+  MapCharacterUpdate();
+  virtual ~MapCharacterUpdate();
+
+  MapCharacterUpdate(const MapCharacterUpdate& from);
+
+  inline MapCharacterUpdate& operator=(const MapCharacterUpdate& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MapCharacterUpdate& default_instance();
+
+  void Swap(MapCharacterUpdate* other);
+
+  // implements Message ----------------------------------------------
+
+  MapCharacterUpdate* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MapCharacterUpdate& from);
+  void MergeFrom(const MapCharacterUpdate& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 id = 1;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 1;
+  inline ::google::protobuf::int32 id() const;
+  inline void set_id(::google::protobuf::int32 value);
+
+  // required int32 x = 2;
+  inline bool has_x() const;
+  inline void clear_x();
+  static const int kXFieldNumber = 2;
+  inline ::google::protobuf::int32 x() const;
+  inline void set_x(::google::protobuf::int32 value);
+
+  // required int32 y = 3;
+  inline bool has_y() const;
+  inline void clear_y();
+  static const int kYFieldNumber = 3;
+  inline ::google::protobuf::int32 y() const;
+  inline void set_y(::google::protobuf::int32 value);
+
+  // required int32 z = 4;
+  inline bool has_z() const;
+  inline void clear_z();
+  static const int kZFieldNumber = 4;
+  inline ::google::protobuf::int32 z() const;
+  inline void set_z(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:CommsMessages.MapCharacterUpdate)
+ private:
+  inline void set_has_id();
+  inline void clear_has_id();
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
+  inline void set_has_z();
+  inline void clear_has_z();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 id_;
+  ::google::protobuf::int32 x_;
+  ::google::protobuf::int32 y_;
+  ::google::protobuf::int32 z_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_CommsMessages_2eproto();
+  friend void protobuf_AssignDesc_CommsMessages_2eproto();
+  friend void protobuf_ShutdownFile_CommsMessages_2eproto();
+
+  void InitAsDefaultInstance();
+  static MapCharacterUpdate* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class QueryServer : public ::google::protobuf::Message {
  public:
   QueryServer();
@@ -1887,15 +2139,91 @@ inline void Message::set_allocated_map(::CommsMessages::Map* map) {
   }
 }
 
-// optional .CommsMessages.QueryServer queryServer = 13;
-inline bool Message::has_queryserver() const {
+// optional .CommsMessages.MapUpdate mapUpdate = 13;
+inline bool Message::has_mapupdate() const {
   return (_has_bits_[0] & 0x00001000u) != 0;
 }
-inline void Message::set_has_queryserver() {
+inline void Message::set_has_mapupdate() {
   _has_bits_[0] |= 0x00001000u;
 }
-inline void Message::clear_has_queryserver() {
+inline void Message::clear_has_mapupdate() {
   _has_bits_[0] &= ~0x00001000u;
+}
+inline void Message::clear_mapupdate() {
+  if (mapupdate_ != NULL) mapupdate_->::CommsMessages::MapUpdate::Clear();
+  clear_has_mapupdate();
+}
+inline const ::CommsMessages::MapUpdate& Message::mapupdate() const {
+  return mapupdate_ != NULL ? *mapupdate_ : *default_instance_->mapupdate_;
+}
+inline ::CommsMessages::MapUpdate* Message::mutable_mapupdate() {
+  set_has_mapupdate();
+  if (mapupdate_ == NULL) mapupdate_ = new ::CommsMessages::MapUpdate;
+  return mapupdate_;
+}
+inline ::CommsMessages::MapUpdate* Message::release_mapupdate() {
+  clear_has_mapupdate();
+  ::CommsMessages::MapUpdate* temp = mapupdate_;
+  mapupdate_ = NULL;
+  return temp;
+}
+inline void Message::set_allocated_mapupdate(::CommsMessages::MapUpdate* mapupdate) {
+  delete mapupdate_;
+  mapupdate_ = mapupdate;
+  if (mapupdate) {
+    set_has_mapupdate();
+  } else {
+    clear_has_mapupdate();
+  }
+}
+
+// optional .CommsMessages.MapCharacterUpdate mapCharacterUpdate = 14;
+inline bool Message::has_mapcharacterupdate() const {
+  return (_has_bits_[0] & 0x00002000u) != 0;
+}
+inline void Message::set_has_mapcharacterupdate() {
+  _has_bits_[0] |= 0x00002000u;
+}
+inline void Message::clear_has_mapcharacterupdate() {
+  _has_bits_[0] &= ~0x00002000u;
+}
+inline void Message::clear_mapcharacterupdate() {
+  if (mapcharacterupdate_ != NULL) mapcharacterupdate_->::CommsMessages::MapCharacterUpdate::Clear();
+  clear_has_mapcharacterupdate();
+}
+inline const ::CommsMessages::MapCharacterUpdate& Message::mapcharacterupdate() const {
+  return mapcharacterupdate_ != NULL ? *mapcharacterupdate_ : *default_instance_->mapcharacterupdate_;
+}
+inline ::CommsMessages::MapCharacterUpdate* Message::mutable_mapcharacterupdate() {
+  set_has_mapcharacterupdate();
+  if (mapcharacterupdate_ == NULL) mapcharacterupdate_ = new ::CommsMessages::MapCharacterUpdate;
+  return mapcharacterupdate_;
+}
+inline ::CommsMessages::MapCharacterUpdate* Message::release_mapcharacterupdate() {
+  clear_has_mapcharacterupdate();
+  ::CommsMessages::MapCharacterUpdate* temp = mapcharacterupdate_;
+  mapcharacterupdate_ = NULL;
+  return temp;
+}
+inline void Message::set_allocated_mapcharacterupdate(::CommsMessages::MapCharacterUpdate* mapcharacterupdate) {
+  delete mapcharacterupdate_;
+  mapcharacterupdate_ = mapcharacterupdate;
+  if (mapcharacterupdate) {
+    set_has_mapcharacterupdate();
+  } else {
+    clear_has_mapcharacterupdate();
+  }
+}
+
+// optional .CommsMessages.QueryServer queryServer = 15;
+inline bool Message::has_queryserver() const {
+  return (_has_bits_[0] & 0x00004000u) != 0;
+}
+inline void Message::set_has_queryserver() {
+  _has_bits_[0] |= 0x00004000u;
+}
+inline void Message::clear_has_queryserver() {
+  _has_bits_[0] &= ~0x00004000u;
 }
 inline void Message::clear_queryserver() {
   if (queryserver_ != NULL) queryserver_->::CommsMessages::QueryServer::Clear();
@@ -1925,15 +2253,15 @@ inline void Message::set_allocated_queryserver(::CommsMessages::QueryServer* que
   }
 }
 
-// optional .CommsMessages.QueryServerResponse queryServerResponse = 14;
+// optional .CommsMessages.QueryServerResponse queryServerResponse = 16;
 inline bool Message::has_queryserverresponse() const {
-  return (_has_bits_[0] & 0x00002000u) != 0;
+  return (_has_bits_[0] & 0x00008000u) != 0;
 }
 inline void Message::set_has_queryserverresponse() {
-  _has_bits_[0] |= 0x00002000u;
+  _has_bits_[0] |= 0x00008000u;
 }
 inline void Message::clear_has_queryserverresponse() {
-  _has_bits_[0] &= ~0x00002000u;
+  _has_bits_[0] &= ~0x00008000u;
 }
 inline void Message::clear_queryserverresponse() {
   if (queryserverresponse_ != NULL) queryserverresponse_->::CommsMessages::QueryServerResponse::Clear();
@@ -2751,6 +3079,190 @@ inline ::google::protobuf::int32 Map::datasize() const {
 inline void Map::set_datasize(::google::protobuf::int32 value) {
   set_has_datasize();
   datasize_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// MapUpdate
+
+// required int32 x = 1;
+inline bool MapUpdate::has_x() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void MapUpdate::set_has_x() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void MapUpdate::clear_has_x() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void MapUpdate::clear_x() {
+  x_ = 0;
+  clear_has_x();
+}
+inline ::google::protobuf::int32 MapUpdate::x() const {
+  return x_;
+}
+inline void MapUpdate::set_x(::google::protobuf::int32 value) {
+  set_has_x();
+  x_ = value;
+}
+
+// required int32 y = 2;
+inline bool MapUpdate::has_y() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MapUpdate::set_has_y() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MapUpdate::clear_has_y() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void MapUpdate::clear_y() {
+  y_ = 0;
+  clear_has_y();
+}
+inline ::google::protobuf::int32 MapUpdate::y() const {
+  return y_;
+}
+inline void MapUpdate::set_y(::google::protobuf::int32 value) {
+  set_has_y();
+  y_ = value;
+}
+
+// required int32 z = 3;
+inline bool MapUpdate::has_z() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void MapUpdate::set_has_z() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void MapUpdate::clear_has_z() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void MapUpdate::clear_z() {
+  z_ = 0;
+  clear_has_z();
+}
+inline ::google::protobuf::int32 MapUpdate::z() const {
+  return z_;
+}
+inline void MapUpdate::set_z(::google::protobuf::int32 value) {
+  set_has_z();
+  z_ = value;
+}
+
+// required int32 newBlock = 4;
+inline bool MapUpdate::has_newblock() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void MapUpdate::set_has_newblock() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void MapUpdate::clear_has_newblock() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void MapUpdate::clear_newblock() {
+  newblock_ = 0;
+  clear_has_newblock();
+}
+inline ::google::protobuf::int32 MapUpdate::newblock() const {
+  return newblock_;
+}
+inline void MapUpdate::set_newblock(::google::protobuf::int32 value) {
+  set_has_newblock();
+  newblock_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// MapCharacterUpdate
+
+// required int32 id = 1;
+inline bool MapCharacterUpdate::has_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void MapCharacterUpdate::set_has_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void MapCharacterUpdate::clear_has_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void MapCharacterUpdate::clear_id() {
+  id_ = 0;
+  clear_has_id();
+}
+inline ::google::protobuf::int32 MapCharacterUpdate::id() const {
+  return id_;
+}
+inline void MapCharacterUpdate::set_id(::google::protobuf::int32 value) {
+  set_has_id();
+  id_ = value;
+}
+
+// required int32 x = 2;
+inline bool MapCharacterUpdate::has_x() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MapCharacterUpdate::set_has_x() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MapCharacterUpdate::clear_has_x() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void MapCharacterUpdate::clear_x() {
+  x_ = 0;
+  clear_has_x();
+}
+inline ::google::protobuf::int32 MapCharacterUpdate::x() const {
+  return x_;
+}
+inline void MapCharacterUpdate::set_x(::google::protobuf::int32 value) {
+  set_has_x();
+  x_ = value;
+}
+
+// required int32 y = 3;
+inline bool MapCharacterUpdate::has_y() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void MapCharacterUpdate::set_has_y() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void MapCharacterUpdate::clear_has_y() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void MapCharacterUpdate::clear_y() {
+  y_ = 0;
+  clear_has_y();
+}
+inline ::google::protobuf::int32 MapCharacterUpdate::y() const {
+  return y_;
+}
+inline void MapCharacterUpdate::set_y(::google::protobuf::int32 value) {
+  set_has_y();
+  y_ = value;
+}
+
+// required int32 z = 4;
+inline bool MapCharacterUpdate::has_z() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void MapCharacterUpdate::set_has_z() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void MapCharacterUpdate::clear_has_z() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void MapCharacterUpdate::clear_z() {
+  z_ = 0;
+  clear_has_z();
+}
+inline ::google::protobuf::int32 MapCharacterUpdate::z() const {
+  return z_;
+}
+inline void MapCharacterUpdate::set_z(::google::protobuf::int32 value) {
+  set_has_z();
+  z_ = value;
 }
 
 // -------------------------------------------------------------------

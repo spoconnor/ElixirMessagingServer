@@ -19,8 +19,10 @@
 #     eMapRequest = 7;
 #     eMapIgnore = 8;
 #     eMap = 9;
-#     eQueryServer = 10;
-#     eQueryServerResponse = 11;
+#     eMapUpdate = 10;
+#     eMapCharacterUpdate = 11;
+#     eQueryServer = 12;
+#     eQueryServerResponse = 13;
 #   }
 # 
 #   message Message {
@@ -37,8 +39,10 @@
 #     optional MapRequest mapRequest = 10;
 #     optional MapIgnore mapIgnore = 11;
 #     optional Map map = 12;
-#     optional QueryServer queryServer = 13;
-#     optional QueryServerResponse queryServerResponse = 14;
+#     optional MapUpdate mapUpdate = 13;
+#     optional MapCharacterUpdate mapCharacterUpdate = 14;
+#     optional QueryServer queryServer = 15;
+#     optional QueryServerResponse queryServerResponse = 16;
 #   }
 # 
 #   message Ping
@@ -96,6 +100,22 @@
 #     // binary data follows message
 #   }
 # 
+#   message MapUpdate 
+#   {
+#     required int32 x = 1;
+#     required int32 y = 2;
+#     required int32 z = 3;
+#     required int32 newBlock = 4;
+#   }
+# 
+#   message MapCharacterUpdate 
+#   {
+#     required int32 id = 1;
+#     required int32 x = 2;
+#     required int32 y = 3;
+#     required int32 z = 4;
+#   }
+# 
 #   message QueryServer 
 #   {
 #   }
@@ -126,8 +146,10 @@ module CommsMessages
     EMapRequest = value(:eMapRequest, 7)
     EMapIgnore = value(:eMapIgnore, 8)
     EMap = value(:eMap, 9)
-    EQueryServer = value(:eQueryServer, 10)
-    EQueryServerResponse = value(:eQueryServerResponse, 11)
+    EMapUpdate = value(:eMapUpdate, 10)
+    EMapCharacterUpdate = value(:eMapCharacterUpdate, 11)
+    EQueryServer = value(:eQueryServer, 12)
+    EQueryServerResponse = value(:eQueryServerResponse, 13)
   end
   class Message < ::Protobuf::Message
     defined_in __FILE__
@@ -143,8 +165,10 @@ module CommsMessages
     optional :MapRequest, :mapRequest, 10
     optional :MapIgnore, :mapIgnore, 11
     optional :Map, :map, 12
-    optional :QueryServer, :queryServer, 13
-    optional :QueryServerResponse, :queryServerResponse, 14
+    optional :MapUpdate, :mapUpdate, 13
+    optional :MapCharacterUpdate, :mapCharacterUpdate, 14
+    optional :QueryServer, :queryServer, 15
+    optional :QueryServerResponse, :queryServerResponse, 16
   end
   class Ping < ::Protobuf::Message
     defined_in __FILE__
@@ -191,6 +215,20 @@ module CommsMessages
     required :int32, :maxX, 3
     required :int32, :maxY, 4
     required :int32, :dataSize, 5
+  end
+  class MapUpdate < ::Protobuf::Message
+    defined_in __FILE__
+    required :int32, :x, 1
+    required :int32, :y, 2
+    required :int32, :z, 3
+    required :int32, :newBlock, 4
+  end
+  class MapCharacterUpdate < ::Protobuf::Message
+    defined_in __FILE__
+    required :int32, :id, 1
+    required :int32, :x, 2
+    required :int32, :y, 3
+    required :int32, :z, 4
   end
   class QueryServer < ::Protobuf::Message
     defined_in __FILE__
