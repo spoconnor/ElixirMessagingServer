@@ -36,6 +36,7 @@ defmodule WorldServerListener do
   end
 
   def recv_connection(client) do
+    Lib.trace("WorldServerListener waiting for data")
     receive do
       {_tcp,_,bin} ->
         Lib.trace("Recv from WorldServer:",bin)
