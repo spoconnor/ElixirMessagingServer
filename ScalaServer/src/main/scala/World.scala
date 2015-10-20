@@ -1,21 +1,20 @@
 package com.example.akkaTcpChat
 
-import akka.actor.Actor
-import akka.actor.ActorRef
-import akka.actor.Props
+import java.net.InetSocketAddress
+import akka.actor.{Actor, Props, ActorRef, ActorSystem}
 import akka.event.Logging
 import scala.collection.mutable.Map
 
 object World {
-  def props(): Props = {
-    Props(new World())
+  def props(actorSystem: ActorSystem): Props = {
+    Props(new World(actorSystem))
   }
 }
 
 case class Get(w:Int, l:Int)
 case class Set(w:Int, l:Int, h:Int ,v:Int) 
 
-class World() extends Actor {
+class World(actorSystem: ActorSystem) extends Actor {
   import context.system
   var log = Logging(context.system, this)
   lazy val webServerAddr = { new InetSocketAddress("localhost", 8083) }

@@ -1,7 +1,6 @@
 package com.example.akkaTcpChat
 
-import akka.actor.Actor
-import akka.actor.Props
+import akka.actor.{Actor,Props,ActorRef}
 import akka.event.Logging
 import scala.collection.mutable.Map
 

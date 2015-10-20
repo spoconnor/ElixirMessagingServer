@@ -24,7 +24,7 @@ import akka.util.ByteString
       case Received(data) =>
         log.info("TcpHandler: received data")
         buffer(data)
-        connection ! Write("ok", Ack)
+        connection ! Write(data, Ack)
 
         context.become({
           case Received(data) => buffer(data)
