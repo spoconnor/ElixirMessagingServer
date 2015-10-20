@@ -10,12 +10,8 @@ class Application extends Bootable
   implicit val actorSystem = ActorSystem("tcpserver")
   implicit val executor = actorSystem.dispatcher
 
-  lazy val addr = {
-    new InetSocketAddress("localhost", 8842)
-  }
-  lazy val webServerAddr = {
-    new InetSocketAddress("localhost", 8083)
-  }
+  lazy val addr = { new InetSocketAddress("localhost", 8842) }
+  lazy val webServerAddr = { new InetSocketAddress("localhost", 8083) }
 
   def startup() = 
   {
@@ -24,8 +20,7 @@ class Application extends Bootable
     val world = actorSystem.actorOf(World.props())
 
     val tcpServer = actorSystem.actorOf(Props(classOf[TcpServer], addr, classOf[TcpHandler]), "simple")
-
-    var tcpClient = actorSystem.actorOf(Props(new TcpClient(webServerAddr)))
+    val tcpClient = actorSystem.actorOf(Props(new TcpClient(webServerAddr)))
 
     // TODO - Move to own actor
     world ! "init"
