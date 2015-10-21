@@ -8,6 +8,10 @@ import java.net.InetSocketAddress
 import akka.util.ByteString
 import scala.concurrent.duration._
 
+object TcpClient {
+  def props(remote: InetSocketAddress): Props = Props(new TcpClient(remote))
+}
+
 class TcpClient(remote: InetSocketAddress) extends Actor with ActorLogging {
  
   import Tcp._
@@ -23,7 +27,7 @@ class TcpClient(remote: InetSocketAddress) extends Actor with ActorLogging {
 
     case CommandFailed(_: Connect) =>
       log.error("TcpClient: connect failed")
-      val s = sender
+      //val s = sender
       context.system.scheduler.scheduleOnce(5 seconds, self, "reconnect")
       //context stop self
  
@@ -43,10 +47,9 @@ class TcpClient(remote: InetSocketAddress) extends Actor with ActorLogging {
           connection ! Close
         case _: ConnectionClosed =>
           log.info("TcpClient: connection closed")
-          //val s = sender
-          //context.system.scheduler.scheduleOnce(5 seconds, self, "reconnect")
-          // TODO - send message to parent context?
-          context stop self
+          context.unbecome()
+          context.system.scheduler.scheduleOnce(5 seconds, self, "reconnect")
+          //context stop self
       }
   }
 }

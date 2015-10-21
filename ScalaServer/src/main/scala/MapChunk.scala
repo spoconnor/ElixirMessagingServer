@@ -16,20 +16,20 @@ object MapChunk {
   def chunkSize() = 10
 }
 
-class MapChunk(xc: Int, yc: Int, outComms: ActorRef) extends Actor {
+class MapChunk(xc: Int, yc: Int) extends Actor {
   import context.system
   val chunkX: Int = xc
   val chunkY: Int = yc
   val width: Int = MapChunk.chunkSize()
   val length: Int = MapChunk.chunkSize()
   val height: Int = 10
-  val tcpClient: ActorRef = outComms
   var log = Logging(context.system, this)
   private val data = Array.ofDim[Column](width,length)
 
   def receive = {
     case "init" => log.info("init")
     case "dump" => Dump()
+    case "GetVisible" => GetVisible()
     case Get(w,l) => get(w,l)
     case Set(w,l,h,v) => set(w,l,h,v) 
     case _ => log.info("MapChunk received unknown message")
@@ -53,7 +53,6 @@ class MapChunk(xc: Int, yc: Int, outComms: ActorRef) extends Actor {
         data(w)(l) = c
       }
     }
-    tcpClient ! "chunk"
   }
 
   def get(w:Int, l:Int) {
@@ -61,8 +60,8 @@ class MapChunk(xc: Int, yc: Int, outComms: ActorRef) extends Actor {
   }
 
   def set(w:Int, l:Int, h:Int, v:Int) {
-    tcpClient ! "set"
     data(w)(l).Set(h,v)
+    context.actorSelection("/user/tcpclient") ! "set"
   }
 
   override def toString(): String = "Chunk " + width + "," + length;
@@ -86,5 +85,11 @@ class MapChunk(xc: Int, yc: Int, outComms: ActorRef) extends Actor {
     for (l <- 0 to length-1) { Console.print("-") }
     Console.print("--")
     Console.println()
+  }
+
+  def GetVisible() =
+  {
+    Console.println("MapChunk getting visible (" + chunkX + "," + chunkY + ")")
+    context.actorSelection("/user/tcpclient") ! "visible"
   }
 }
