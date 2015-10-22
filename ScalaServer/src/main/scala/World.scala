@@ -28,7 +28,7 @@ class World(actorSystem: ActorSystem) extends Actor {
   def receive = {
     case "init" => init
     case "dump" => dump
-    case "GetVisible" => GetVisible()
+    case "GetVisible" => GetVisible
     case Get(w,l) => chunk(w,l) ! new Get(w,l)
     case Set(w,l,h,v) => chunk(w,l) ! new Set(w,l,h,v)
     case _ => log.info("World received unknown message")

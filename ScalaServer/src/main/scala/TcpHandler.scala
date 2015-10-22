@@ -22,8 +22,13 @@ import akka.util.ByteString
 
     def receive = {
       case Received(data) =>
-        log.info("TcpHandler: received data")
+        log.info("TcpHandler: received data...")
         buffer(data)
+        val msgLength:Int = data.head
+        log.info("TcpHandler: received length {}", msgLength)
+        val msgArray = data.slice(1, msgLength+1).toArray
+        val msg = CommsMessages.Message.parseFrom(msgArray)
+        log.info("TcpHandler: received msgtype {}", msg.msgtype)
         connection ! Write(data, Ack)
 
         context.become({
