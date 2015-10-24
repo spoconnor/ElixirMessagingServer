@@ -13,7 +13,10 @@ import akka.util.ByteString
     extends Actor with ActorLogging {
 
     import Tcp._
+    import context.system
     log.info("TcpHandler: initializing")
+
+    val messageHandler = context.actorOf(MessageHandler.props(), "messageHandler")
 
     // sign death pact: this actor terminates when connection breaks
     context watch connection
@@ -29,6 +32,7 @@ import akka.util.ByteString
         val msgArray = data.slice(1, msgLength+1).toArray
         val msg = CommsMessages.Message.parseFrom(msgArray)
         log.info("TcpHandler: received msgtype {}", msg.msgtype)
+        messageHandler ! msg
         connection ! Write(data, Ack)
 
         context.become({
