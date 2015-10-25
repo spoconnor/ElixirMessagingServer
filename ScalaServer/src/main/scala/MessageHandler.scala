@@ -27,27 +27,30 @@ class MessageHandler() extends Actor {
 
   def process(msg:CommsMessages.Message) = 
   msg.msgtype match {
-    case 6 => processSay(Option[Say])
-    case 7 => processMapRequest(Option[MapRequest])
-    case 10 => processMapUpdate(Option[MapUpdate])
+    case 6 => msg.say match { 
+      case Some(m) => processSay(m)
+      case _ => log.debug("MessageHandler.process: Expected data missing")
+    }
+    case 7 => msg.mapRequest match { 
+      case Some(m) => processMapRequest(m) 
+      case _ => log.debug("MessageHandler.process: Expected data missing")
+    }
+    case 10 => msg.mapUpdate match { 
+      case Some(m) => processMapUpdate(m) 
+      case _ => log.debug("MessageHandler.process: Expected data missing")
+    }
     case _ => log.debug("MessageHandler.process: Ignoring message")
   }
 
   def processSay(say:CommsMessages.Say) = {
       log.debug("MessageHandler.processSay:" + say.text)
   }
-  def processSay(say:None) = {
-  }
 
   def processMapRequest(mapRequest:CommsMessages.MapRequest) = {
       log.debug("MessageHandler.mapRequest:" + mapRequest.x + "," + mapRequest.y)
   }
-  def processSay(mapRequest:None) = {
-  }
 
   def processMapUpdate(mapUpdate:CommsMessages.MapUpdate) = {
       log.debug("MessageHandler.mapUpdate:" + mapUpdate.x + "," + mapUpdate.y)
-  }
-  def processSay(mapUpdate:None) = {
   }
 }
