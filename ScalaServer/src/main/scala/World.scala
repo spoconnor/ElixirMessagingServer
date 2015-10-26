@@ -28,6 +28,7 @@ class World(actorSystem: ActorSystem) extends Actor {
   def receive = {
     case "init" => init
     case "dump" => dump
+    case msg:CommsMessages.MapRequest => mapRequest(msg)
     case "GetVisible" => GetVisible
     case Get(w,l) => chunk(w,l) ! new Get(w,l)
     case Set(w,l,h,v) => chunk(w,l) ! new Set(w,l,h,v)
@@ -38,6 +39,10 @@ class World(actorSystem: ActorSystem) extends Actor {
     log.info("Dump:")
     chunks.keys.foreach(k => log.info(k.toString))
     chunks.values.foreach(c => c ! "dump")
+  }
+
+  def mapRequest(msg:CommsMessages.MapRequest) = {
+    log.info("World:MapRequest")
   }
 
   def GetVisible = {
