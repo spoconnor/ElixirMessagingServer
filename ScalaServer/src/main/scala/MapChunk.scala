@@ -29,6 +29,7 @@ class MapChunk(xc: Int, yc: Int) extends Actor {
   def receive = {
     case "init" => log.info("init")
     case "dump" => Dump()
+    case msg:CommsMessages.MapRequest => mapRequest(msg)
     case "GetVisible" => GetVisible()
     case Get(w,l) => get(w,l)
     case Set(w,l,h,v) => set(w,l,h,v) 
@@ -91,5 +92,10 @@ class MapChunk(xc: Int, yc: Int) extends Actor {
   {
     Console.println("MapChunk getting visible (" + chunkX + "," + chunkY + ")")
     context.actorSelection("/user/tcpclient") ! "visible"
+  }
+
+  def mapRequest(msg:CommsMessages.MapRequest) =
+  {
+    Console.println("MapChunk.mapRequest")
   }
 }
