@@ -17,7 +17,7 @@ class Application extends Bootable
   {
     // Register all needed actors
     //val server = actorSystem.actorOf(Server.props(addr), "server")
-    val world = actorSystem.actorOf(World.props(actorSystem), "world")
+    val world = actorSystem.actorOf(World.props(), "world")
 
     val tcpServer = actorSystem.actorOf(Props(classOf[TcpServer], addr, classOf[TcpHandler]), "simple")
     val tcpClient = actorSystem.actorOf(TcpClient.props(webServerAddr), "tcpclient")

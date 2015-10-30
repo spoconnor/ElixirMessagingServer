@@ -1,8 +1,9 @@
 package com.example.akkaTcpChat
 
-import akka.actor.{Actor,Props,ActorRef}
+import akka.actor._
 import akka.event.Logging
 import scala.collection.mutable.Map
+import akka.util.ByteString
 
 class Column {
   val data = Map.empty[Int, Int]
@@ -16,14 +17,13 @@ object MapChunk {
   def chunkSize() = 10
 }
 
-class MapChunk(xc: Int, yc: Int) extends Actor {
+class MapChunk(xc: Int, yc: Int) extends Actor with ActorLogging {
   import context.system
   val chunkX: Int = xc
   val chunkY: Int = yc
   val width: Int = MapChunk.chunkSize()
   val length: Int = MapChunk.chunkSize()
   val height: Int = 10
-  var log = Logging(context.system, this)
   private val data = Array.ofDim[Column](width,length)
 
   def receive = {
@@ -96,6 +96,20 @@ class MapChunk(xc: Int, yc: Int) extends Actor {
 
   def mapRequest(msg:CommsMessages.MapRequest) =
   {
-    Console.println("MapChunk.mapRequest")
+    log.info("MapChunk.mapRequest")
+    val response = new CommsMessages.Message(CommsMessages.MsgType.eMap)
+//TODO - map coords
+    val minX:Int = 0
+    val minY:Int = 0
+    val maxX:Int = MapChunk.chunkSize() 
+    val maxY:Int = MapChunk.chunkSize()
+    val dataSize:Int = 0
+    response.setMap(new CommsMessages.Map(minX,minY,maxX,maxY,dataSize))
+    // TODO move common code to fn
+    val msgBytes = response.toByteArray()
+    val resBytes = ByteString("%04d%s".format(
+      response.getSerializedSize,
+      new String(msgBytes)))
+    context.actorSelection("/user/tcpclient") ! resBytes
   }
 }

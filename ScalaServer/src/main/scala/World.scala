@@ -1,22 +1,21 @@
 package com.example.akkaTcpChat
 
 import java.net.InetSocketAddress
-import akka.actor.{Actor, Props, ActorRef, ActorSystem}
+import akka.actor._
 import akka.event.Logging
 import scala.collection.mutable.Map
 
 object World {
-  def props(actorSystem: ActorSystem): Props = {
-    Props(new World(actorSystem))
+  def props(): Props = {
+    Props(new World())
   }
 }
 
 case class Get(w:Int, l:Int)
 case class Set(w:Int, l:Int, h:Int ,v:Int) 
 
-class World(actorSystem: ActorSystem) extends Actor {
+class World() extends Actor with ActorLogging {
   import context.system
-  var log = Logging(context.system, this)
   val chunks = Map.empty[(Int,Int), ActorRef]
 
   def chunk(x:Int, y:Int) = {
@@ -28,7 +27,9 @@ class World(actorSystem: ActorSystem) extends Actor {
   def receive = {
     case "init" => init
     case "dump" => dump
-    case msg:CommsMessages.MapRequest => chunk(msg.x,msg.y) ! msg
+    case msg:CommsMessages.MapRequest => 
+      log.info("World recevied maprequest")
+      chunk(msg.x,msg.y) ! msg
     case "GetVisible" => GetVisible
     case Get(w,l) => chunk(w,l) ! new Get(w,l)
     case Set(w,l,h,v) => chunk(w,l) ! new Set(w,l,h,v)
