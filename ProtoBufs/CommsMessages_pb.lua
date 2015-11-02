@@ -137,9 +137,9 @@ MESSAGE_FROM_FIELD.number = 2
 MESSAGE_FROM_FIELD.index = 1
 MESSAGE_FROM_FIELD.label = 2
 MESSAGE_FROM_FIELD.has_default_value = false
-MESSAGE_FROM_FIELD.default_value = ""
-MESSAGE_FROM_FIELD.type = 9
-MESSAGE_FROM_FIELD.cpp_type = 9
+MESSAGE_FROM_FIELD.default_value = 0
+MESSAGE_FROM_FIELD.type = 5
+MESSAGE_FROM_FIELD.cpp_type = 1
 
 MESSAGE_DEST_FIELD.name = "dest"
 MESSAGE_DEST_FIELD.full_name = ".CommsMessages.Message.dest"
@@ -147,9 +147,9 @@ MESSAGE_DEST_FIELD.number = 3
 MESSAGE_DEST_FIELD.index = 2
 MESSAGE_DEST_FIELD.label = 2
 MESSAGE_DEST_FIELD.has_default_value = false
-MESSAGE_DEST_FIELD.default_value = ""
-MESSAGE_DEST_FIELD.type = 9
-MESSAGE_DEST_FIELD.cpp_type = 9
+MESSAGE_DEST_FIELD.default_value = 0
+MESSAGE_DEST_FIELD.type = 5
+MESSAGE_DEST_FIELD.cpp_type = 1
 
 MESSAGE_RESPONSE_FIELD.name = "response"
 MESSAGE_RESPONSE_FIELD.full_name = ".CommsMessages.Message.response"

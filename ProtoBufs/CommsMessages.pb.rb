@@ -27,8 +27,8 @@
 # 
 #   message Message {
 #     required int32 msgtype = 1;
-#     required string from = 2;
-#     required string dest = 3;
+#     required int32 from = 2;
+#     required int32 dest = 3;
 # 
 #     optional Response response = 4;
 #     optional Ping ping = 5;
@@ -154,8 +154,8 @@ module CommsMessages
   class Message < ::Protobuf::Message
     defined_in __FILE__
     required :int32, :msgtype, 1
-    required :string, :from, 2
-    required :string, :dest, 3
+    required :int32, :from, 2
+    required :int32, :dest, 3
     optional :Response, :response, 4
     optional :Ping, :ping, 5
     optional :Pong, :pong, 6

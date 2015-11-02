@@ -5,6 +5,8 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'Html5Client', { preload: prel
 var ProtoBuf = dcodeIO.ProtoBuf;
 var builder = ProtoBuf.loadProtoFile("CommsMessages.proto")
 var CommsMessages = builder.build("CommsMessages")
+var clientId = 0;
+var webServerId = 1000;
 var socket;
 
 //var socket = new WebSocket("ws://localhost:8000/socket/server/startDaemon.php");
@@ -44,7 +46,10 @@ function connect() {
         }
 
         socket.onmessage = function(msg) {
-            console.log('Received: '+msg.data);
+            console.log('Received: '+msg.msgtype);
+            if (msg.msgtype == 4) {
+              processResponse(msg)
+            }
         }
 
         socket.onclose = function() {
@@ -58,7 +63,7 @@ function connect() {
 function login(socket) {
     try {
         console.log('Login...');
-        var msg = new CommsMessages.Message({"msgtype":5, "from":"html5", "dest":"cloud" });
+        var msg = new CommsMessages.Message({"msgtype":5, "from":clientId, "dest":webServerId });
         msg.login = new CommsMessages.Login({"username":"sean", "password":"pass"});
         var data = msg.encodeDelimited().toArrayBuffer();
         socket.send(data);
@@ -67,10 +72,17 @@ function login(socket) {
     }
 }
 
+function processResponse(msg) {
+    if (msg.response.code == 1) {
+        clientId = msg.dest
+        console.log('Logged in, clientId = '+clientId)
+    }
+}
+
 function say(text) {
     try {
         console.log('Say...');
-        var msg = new CommsMessages.Message({"msgtype":6, "from":"html5", "dest":"cloud" });
+        var msg = new CommsMessages.Message({"msgtype":6, "from":clientId, "dest":webServerId });
         msg.say = new CommsMessages.Say({"text":text});
         var data = msg.encodeDelimited().toArrayBuffer();
         socket.send(data);
@@ -82,7 +94,7 @@ function say(text) {
 function getMap(x,y) {
     try {
         console.log('GetMap...');
-        var msg = new CommsMessages.Message({"msgtype":7, "from":"html5", "dest":"cloud" });
+        var msg = new CommsMessages.Message({"msgtype":7, "from":clientId, "dest":webServerId });
         msg.mapRequest = new CommsMessages.MapRequest({"x":x, "y":y});
         var data = msg.encodeDelimited().toArrayBuffer();
         socket.send(data);

@@ -54,8 +54,8 @@ namespace CommsMessages {
     static CommsMessages() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           "ChNDb21tc01lc3NhZ2VzLnByb3RvEg1Db21tc01lc3NhZ2VzIvEECgdNZXNz" + 
-          "YWdlEg8KB21zZ3R5cGUYASACKAUSDAoEZnJvbRgCIAIoCRIMCgRkZXN0GAMg" + 
-          "AigJEikKCHJlc3BvbnNlGAQgASgLMhcuQ29tbXNNZXNzYWdlcy5SZXNwb25z" + 
+          "YWdlEg8KB21zZ3R5cGUYASACKAUSDAoEZnJvbRgCIAIoBRIMCgRkZXN0GAMg" + 
+          "AigFEikKCHJlc3BvbnNlGAQgASgLMhcuQ29tbXNNZXNzYWdlcy5SZXNwb25z" + 
           "ZRIhCgRwaW5nGAUgASgLMhMuQ29tbXNNZXNzYWdlcy5QaW5nEiEKBHBvbmcY" + 
           "BiABKAsyEy5Db21tc01lc3NhZ2VzLlBvbmcSJwoHbmV3VXNlchgHIAEoCzIW" + 
           "LkNvbW1zTWVzc2FnZXMuTmV3VXNlchIjCgVsb2dpbhgIIAEoCzIULkNvbW1z" + 
@@ -179,7 +179,7 @@ namespace CommsMessages {
     private Message() { }
     private static readonly Message defaultInstance = new Message().MakeReadOnly();
     private static readonly string[] _messageFieldNames = new string[] { "dest", "from", "login", "map", "mapCharacterUpdate", "mapIgnore", "mapRequest", "mapUpdate", "msgtype", "newUser", "ping", "pong", "queryServer", "queryServerResponse", "response", "say" };
-    private static readonly uint[] _messageFieldTags = new uint[] { 26, 18, 66, 98, 114, 90, 82, 106, 8, 58, 42, 50, 122, 130, 34, 74 };
+    private static readonly uint[] _messageFieldTags = new uint[] { 24, 16, 66, 98, 114, 90, 82, 106, 8, 58, 42, 50, 122, 130, 34, 74 };
     public static Message DefaultInstance {
       get { return defaultInstance; }
     }
@@ -212,21 +212,21 @@ namespace CommsMessages {
     
     public const int FromFieldNumber = 2;
     private bool hasFrom;
-    private string from_ = "";
+    private int from_;
     public bool HasFrom {
       get { return hasFrom; }
     }
-    public string From {
+    public int From {
       get { return from_; }
     }
     
     public const int DestFieldNumber = 3;
     private bool hasDest;
-    private string dest_ = "";
+    private int dest_;
     public bool HasDest {
       get { return hasDest; }
     }
-    public string Dest {
+    public int Dest {
       get { return dest_; }
     }
     
@@ -412,10 +412,10 @@ namespace CommsMessages {
         output.WriteInt32(1, field_names[8], Msgtype);
       }
       if (hasFrom) {
-        output.WriteString(2, field_names[1], From);
+        output.WriteInt32(2, field_names[1], From);
       }
       if (hasDest) {
-        output.WriteString(3, field_names[0], Dest);
+        output.WriteInt32(3, field_names[0], Dest);
       }
       if (hasResponse) {
         output.WriteMessage(4, field_names[14], Response);
@@ -470,10 +470,10 @@ namespace CommsMessages {
           size += pb::CodedOutputStream.ComputeInt32Size(1, Msgtype);
         }
         if (hasFrom) {
-          size += pb::CodedOutputStream.ComputeStringSize(2, From);
+          size += pb::CodedOutputStream.ComputeInt32Size(2, From);
         }
         if (hasDest) {
-          size += pb::CodedOutputStream.ComputeStringSize(3, Dest);
+          size += pb::CodedOutputStream.ComputeInt32Size(3, Dest);
         }
         if (hasResponse) {
           size += pb::CodedOutputStream.ComputeMessageSize(4, Response);
@@ -733,12 +733,12 @@ namespace CommsMessages {
               result.hasMsgtype = input.ReadInt32(ref result.msgtype_);
               break;
             }
-            case 18: {
-              result.hasFrom = input.ReadString(ref result.from_);
+            case 16: {
+              result.hasFrom = input.ReadInt32(ref result.from_);
               break;
             }
-            case 26: {
-              result.hasDest = input.ReadString(ref result.dest_);
+            case 24: {
+              result.hasDest = input.ReadInt32(ref result.dest_);
               break;
             }
             case 34: {
@@ -891,12 +891,11 @@ namespace CommsMessages {
       public bool HasFrom {
         get { return result.hasFrom; }
       }
-      public string From {
+      public int From {
         get { return result.From; }
         set { SetFrom(value); }
       }
-      public Builder SetFrom(string value) {
-        pb::ThrowHelper.ThrowIfNull(value, "value");
+      public Builder SetFrom(int value) {
         PrepareBuilder();
         result.hasFrom = true;
         result.from_ = value;
@@ -905,19 +904,18 @@ namespace CommsMessages {
       public Builder ClearFrom() {
         PrepareBuilder();
         result.hasFrom = false;
-        result.from_ = "";
+        result.from_ = 0;
         return this;
       }
       
       public bool HasDest {
         get { return result.hasDest; }
       }
-      public string Dest {
+      public int Dest {
         get { return result.Dest; }
         set { SetDest(value); }
       }
-      public Builder SetDest(string value) {
-        pb::ThrowHelper.ThrowIfNull(value, "value");
+      public Builder SetDest(int value) {
         PrepareBuilder();
         result.hasDest = true;
         result.dest_ = value;
@@ -926,7 +924,7 @@ namespace CommsMessages {
       public Builder ClearDest() {
         PrepareBuilder();
         result.hasDest = false;
-        result.dest_ = "";
+        result.dest_ = 0;
         return this;
       }
       

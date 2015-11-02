@@ -41,7 +41,7 @@ end
 
 # New User
 def loginMsg(clientS, %CommsMessages.Message{msgtype: 4, from: _from, dest: _dest, newUser: newUser}) do
-  Lib.trace("NewUser #{newUser.username}")
+  Lib.trace("NewUser #{newUser.username} - TODO")
 end
 
 # Login
@@ -60,7 +60,7 @@ def loginMsg(clientS, %CommsMessages.Message{msgtype: 5, from: _from, dest: _des
     {:fail, _} -> WebsocketWebsockets.die(clientS,"Already Connected");
     id ->
       Lib.trace("ObjectId: #{id}")
-      response = CommsMessages.Message.new(msgtype: 1, from: "Elixir", dest: login.username, response: CommsMessages.Response.new(code: 1, message: "Welcome #{login.username}!"))
+      response = CommsMessages.Message.new(msgtype: 1, from: 1000, dest: id, response: CommsMessages.Response.new(code: 1, message: "Welcome #{login.username}!"))
       data = Packet.encode(response)
       WebsocketWebsockets.sendTcpMsg(clientS, data)
       client(%WebsocketSimple{id: id, sock: clientS})

@@ -142,29 +142,19 @@ class Message : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 msgtype() const;
   inline void set_msgtype(::google::protobuf::int32 value);
 
-  // required string from = 2;
+  // required int32 from = 2;
   inline bool has_from() const;
   inline void clear_from();
   static const int kFromFieldNumber = 2;
-  inline const ::std::string& from() const;
-  inline void set_from(const ::std::string& value);
-  inline void set_from(const char* value);
-  inline void set_from(const char* value, size_t size);
-  inline ::std::string* mutable_from();
-  inline ::std::string* release_from();
-  inline void set_allocated_from(::std::string* from);
+  inline ::google::protobuf::int32 from() const;
+  inline void set_from(::google::protobuf::int32 value);
 
-  // required string dest = 3;
+  // required int32 dest = 3;
   inline bool has_dest() const;
   inline void clear_dest();
   static const int kDestFieldNumber = 3;
-  inline const ::std::string& dest() const;
-  inline void set_dest(const ::std::string& value);
-  inline void set_dest(const char* value);
-  inline void set_dest(const char* value, size_t size);
-  inline ::std::string* mutable_dest();
-  inline ::std::string* release_dest();
-  inline void set_allocated_dest(::std::string* dest);
+  inline ::google::protobuf::int32 dest() const;
+  inline void set_dest(::google::protobuf::int32 value);
 
   // optional .CommsMessages.Response response = 4;
   inline bool has_response() const;
@@ -320,8 +310,8 @@ class Message : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* from_;
-  ::std::string* dest_;
+  ::google::protobuf::int32 msgtype_;
+  ::google::protobuf::int32 from_;
   ::CommsMessages::Response* response_;
   ::CommsMessages::Ping* ping_;
   ::CommsMessages::Pong* pong_;
@@ -335,7 +325,7 @@ class Message : public ::google::protobuf::Message {
   ::CommsMessages::MapCharacterUpdate* mapcharacterupdate_;
   ::CommsMessages::QueryServer* queryserver_;
   ::CommsMessages::QueryServerResponse* queryserverresponse_;
-  ::google::protobuf::int32 msgtype_;
+  ::google::protobuf::int32 dest_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(16 + 31) / 32];
@@ -1657,7 +1647,7 @@ inline void Message::set_msgtype(::google::protobuf::int32 value) {
   msgtype_ = value;
 }
 
-// required string from = 2;
+// required int32 from = 2;
 inline bool Message::has_from() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -1668,66 +1658,18 @@ inline void Message::clear_has_from() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void Message::clear_from() {
-  if (from_ != &::google::protobuf::internal::kEmptyString) {
-    from_->clear();
-  }
+  from_ = 0;
   clear_has_from();
 }
-inline const ::std::string& Message::from() const {
-  return *from_;
-}
-inline void Message::set_from(const ::std::string& value) {
-  set_has_from();
-  if (from_ == &::google::protobuf::internal::kEmptyString) {
-    from_ = new ::std::string;
-  }
-  from_->assign(value);
-}
-inline void Message::set_from(const char* value) {
-  set_has_from();
-  if (from_ == &::google::protobuf::internal::kEmptyString) {
-    from_ = new ::std::string;
-  }
-  from_->assign(value);
-}
-inline void Message::set_from(const char* value, size_t size) {
-  set_has_from();
-  if (from_ == &::google::protobuf::internal::kEmptyString) {
-    from_ = new ::std::string;
-  }
-  from_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Message::mutable_from() {
-  set_has_from();
-  if (from_ == &::google::protobuf::internal::kEmptyString) {
-    from_ = new ::std::string;
-  }
+inline ::google::protobuf::int32 Message::from() const {
   return from_;
 }
-inline ::std::string* Message::release_from() {
-  clear_has_from();
-  if (from_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = from_;
-    from_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void Message::set_allocated_from(::std::string* from) {
-  if (from_ != &::google::protobuf::internal::kEmptyString) {
-    delete from_;
-  }
-  if (from) {
-    set_has_from();
-    from_ = from;
-  } else {
-    clear_has_from();
-    from_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
+inline void Message::set_from(::google::protobuf::int32 value) {
+  set_has_from();
+  from_ = value;
 }
 
-// required string dest = 3;
+// required int32 dest = 3;
 inline bool Message::has_dest() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -1738,63 +1680,15 @@ inline void Message::clear_has_dest() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void Message::clear_dest() {
-  if (dest_ != &::google::protobuf::internal::kEmptyString) {
-    dest_->clear();
-  }
+  dest_ = 0;
   clear_has_dest();
 }
-inline const ::std::string& Message::dest() const {
-  return *dest_;
-}
-inline void Message::set_dest(const ::std::string& value) {
-  set_has_dest();
-  if (dest_ == &::google::protobuf::internal::kEmptyString) {
-    dest_ = new ::std::string;
-  }
-  dest_->assign(value);
-}
-inline void Message::set_dest(const char* value) {
-  set_has_dest();
-  if (dest_ == &::google::protobuf::internal::kEmptyString) {
-    dest_ = new ::std::string;
-  }
-  dest_->assign(value);
-}
-inline void Message::set_dest(const char* value, size_t size) {
-  set_has_dest();
-  if (dest_ == &::google::protobuf::internal::kEmptyString) {
-    dest_ = new ::std::string;
-  }
-  dest_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Message::mutable_dest() {
-  set_has_dest();
-  if (dest_ == &::google::protobuf::internal::kEmptyString) {
-    dest_ = new ::std::string;
-  }
+inline ::google::protobuf::int32 Message::dest() const {
   return dest_;
 }
-inline ::std::string* Message::release_dest() {
-  clear_has_dest();
-  if (dest_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = dest_;
-    dest_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void Message::set_allocated_dest(::std::string* dest) {
-  if (dest_ != &::google::protobuf::internal::kEmptyString) {
-    delete dest_;
-  }
-  if (dest) {
-    set_has_dest();
-    dest_ = dest;
-  } else {
-    clear_has_dest();
-    dest_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
+inline void Message::set_dest(::google::protobuf::int32 value) {
+  set_has_dest();
+  dest_ = value;
 }
 
 // optional .CommsMessages.Response response = 4;

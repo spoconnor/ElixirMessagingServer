@@ -3,8 +3,8 @@
 CommsMessages.protoCommsMessages"ñ
 Message
 msgtype (
-from (	
-dest (	)
+from (
+dest ()
 response (2.CommsMessages.Response!
 ping (2.CommsMessages.Ping!
 pong (2.CommsMessages.Pong'

@@ -57,8 +57,8 @@ object MsgType extends net.sandrogrzicic.scalabuff.Enum {
 }
 final case class Message (
 	`msgtype`: Int = 0,
-	`from`: String = "",
-	`dest`: String = "",
+	`from`: Int = 0,
+	`dest`: Int = 0,
 	`response`: Option[Response] = None,
 	`ping`: Option[Ping] = None,
 	`pong`: Option[Pong] = None,
@@ -107,8 +107,8 @@ final case class Message (
 
 	def writeTo(output: com.google.protobuf.CodedOutputStream) {
 		output.writeInt32(1, `msgtype`)
-		output.writeString(2, `from`)
-		output.writeString(3, `dest`)
+		output.writeInt32(2, `from`)
+		output.writeInt32(3, `dest`)
 		if (`response`.isDefined) output.writeMessage(4, `response`.get)
 		if (`ping`.isDefined) output.writeMessage(5, `ping`.get)
 		if (`pong`.isDefined) output.writeMessage(6, `pong`.get)
@@ -128,8 +128,8 @@ final case class Message (
 		import com.google.protobuf.CodedOutputStream._
 		var __size = 0
 		__size += computeInt32Size(1, `msgtype`)
-		__size += computeStringSize(2, `from`)
-		__size += computeStringSize(3, `dest`)
+		__size += computeInt32Size(2, `from`)
+		__size += computeInt32Size(3, `dest`)
 		if (`response`.isDefined) __size += computeMessageSize(4, `response`.get)
 		if (`ping`.isDefined) __size += computeMessageSize(5, `ping`.get)
 		if (`pong`.isDefined) __size += computeMessageSize(6, `pong`.get)
@@ -150,8 +150,8 @@ final case class Message (
 	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): Message = {
 		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __msgtype: Int = 0
-		var __from: String = ""
-		var __dest: String = ""
+		var __from: Int = 0
+		var __dest: Int = 0
 		var __response: Option[Response] = `response`
 		var __ping: Option[Ping] = `ping`
 		var __pong: Option[Pong] = `pong`
@@ -187,8 +187,8 @@ final case class Message (
 		while (true) in.readTag match {
 			case 0 => return __newMerged
 			case 8 => __msgtype = in.readInt32()
-			case 18 => __from = in.readString()
-			case 26 => __dest = in.readString()
+			case 16 => __from = in.readInt32()
+			case 24 => __dest = in.readInt32()
 			case 34 => __response = Some(readMessage[Response](in, __response.orElse({
 				__response = Response.defaultInstance
 				__response

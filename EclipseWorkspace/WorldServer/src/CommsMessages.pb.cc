@@ -400,8 +400,8 @@ void protobuf_AddDesc_CommsMessages_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\023CommsMessages.proto\022\rCommsMessages\"\361\004\n"
-    "\007Message\022\017\n\007msgtype\030\001 \002(\005\022\014\n\004from\030\002 \002(\t\022"
-    "\014\n\004dest\030\003 \002(\t\022)\n\010response\030\004 \001(\0132\027.CommsM"
+    "\007Message\022\017\n\007msgtype\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022"
+    "\014\n\004dest\030\003 \002(\005\022)\n\010response\030\004 \001(\0132\027.CommsM"
     "essages.Response\022!\n\004ping\030\005 \001(\0132\023.CommsMe"
     "ssages.Ping\022!\n\004pong\030\006 \001(\0132\023.CommsMessage"
     "s.Pong\022\'\n\007newUser\030\007 \001(\0132\026.CommsMessages."
@@ -553,8 +553,8 @@ Message::Message(const Message& from)
 void Message::SharedCtor() {
   _cached_size_ = 0;
   msgtype_ = 0;
-  from_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  dest_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  from_ = 0;
+  dest_ = 0;
   response_ = NULL;
   ping_ = NULL;
   pong_ = NULL;
@@ -576,12 +576,6 @@ Message::~Message() {
 }
 
 void Message::SharedDtor() {
-  if (from_ != &::google::protobuf::internal::kEmptyString) {
-    delete from_;
-  }
-  if (dest_ != &::google::protobuf::internal::kEmptyString) {
-    delete dest_;
-  }
   if (this != default_instance_) {
     delete response_;
     delete ping_;
@@ -623,16 +617,8 @@ Message* Message::New() const {
 void Message::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     msgtype_ = 0;
-    if (has_from()) {
-      if (from_ != &::google::protobuf::internal::kEmptyString) {
-        from_->clear();
-      }
-    }
-    if (has_dest()) {
-      if (dest_ != &::google::protobuf::internal::kEmptyString) {
-        dest_->clear();
-      }
-    }
+    from_ = 0;
+    dest_ = 0;
     if (has_response()) {
       if (response_ != NULL) response_->::CommsMessages::Response::Clear();
     }
@@ -696,37 +682,35 @@ bool Message::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_from;
+        if (input->ExpectTag(16)) goto parse_from;
         break;
       }
 
-      // required string from = 2;
+      // required int32 from = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_from:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_from()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->from().data(), this->from().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &from_)));
+          set_has_from();
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_dest;
+        if (input->ExpectTag(24)) goto parse_dest;
         break;
       }
 
-      // required string dest = 3;
+      // required int32 dest = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_dest:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_dest()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->dest().data(), this->dest().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &dest_)));
+          set_has_dest();
         } else {
           goto handle_uninterpreted;
         }
@@ -939,22 +923,14 @@ void Message::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->msgtype(), output);
   }
 
-  // required string from = 2;
+  // required int32 from = 2;
   if (has_from()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->from().data(), this->from().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->from(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->from(), output);
   }
 
-  // required string dest = 3;
+  // required int32 dest = 3;
   if (has_dest()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->dest().data(), this->dest().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      3, this->dest(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->dest(), output);
   }
 
   // optional .CommsMessages.Response response = 4;
@@ -1048,24 +1024,14 @@ void Message::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->msgtype(), target);
   }
 
-  // required string from = 2;
+  // required int32 from = 2;
   if (has_from()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->from().data(), this->from().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->from(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->from(), target);
   }
 
-  // required string dest = 3;
+  // required int32 dest = 3;
   if (has_dest()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->dest().data(), this->dest().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->dest(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->dest(), target);
   }
 
   // optional .CommsMessages.Response response = 4;
@@ -1177,17 +1143,17 @@ int Message::ByteSize() const {
           this->msgtype());
     }
 
-    // required string from = 2;
+    // required int32 from = 2;
     if (has_from()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->from());
     }
 
-    // required string dest = 3;
+    // required int32 dest = 3;
     if (has_dest()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->dest());
     }
 
