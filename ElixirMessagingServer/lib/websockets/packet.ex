@@ -2,6 +2,7 @@ defmodule Packet do
 
   def decode(<<dataSize::8,data::binary>>) do
     msgData = :binary.part(data,0,dataSize)
+    Lib.trace("Packet.decoding #{msgData}")
     message = CommsMessages.Message.decode(<<msgData::binary>>)
   end
 

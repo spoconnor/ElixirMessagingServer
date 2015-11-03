@@ -60,13 +60,29 @@ function connect() {
     }
 }
 
+function sendMessage(message) {
+  var msg = message.encodeDelimited().toArrayBuffer();
+  var buf = new ArrayBuffer(msg.byteLength + 1);
+  buf[0] = msg.byteLength;
+  for(var i=0; i < msg.byteLength; i++) {
+      buf[i+1] = msg[i];
+  }
+
+  console.log('Sending:' + msg.byteLength);
+  console.log(buf);
+  socket.send(buf);
+}  
+
 function login(socket) {
     try {
         console.log('Login...');
         var msg = new CommsMessages.Message({"msgtype":5, "from":clientId, "dest":webServerId });
         msg.login = new CommsMessages.Login({"username":"sean", "password":"pass"});
-        var data = msg.encodeDelimited().toArrayBuffer();
-        socket.send(data);
+
+        sendMessage(msg)
+        //var data = msg.encodeDelimited().toArrayBuffer();
+        //socket.send(data);
+
     } catch(exception) {
        console.log('Error:' + exception);
     }
@@ -84,8 +100,9 @@ function say(text) {
         console.log('Say...');
         var msg = new CommsMessages.Message({"msgtype":6, "from":clientId, "dest":webServerId });
         msg.say = new CommsMessages.Say({"text":text});
-        var data = msg.encodeDelimited().toArrayBuffer();
-        socket.send(data);
+        sendMessage(msg)
+        //var data = msg.encodeDelimited().toArrayBuffer();
+        //socket.send(data);
     } catch(exception) {
        console.log('Error:' + exception);
     }
@@ -96,8 +113,9 @@ function getMap(x,y) {
         console.log('GetMap...');
         var msg = new CommsMessages.Message({"msgtype":7, "from":clientId, "dest":webServerId });
         msg.mapRequest = new CommsMessages.MapRequest({"x":x, "y":y});
-        var data = msg.encodeDelimited().toArrayBuffer();
-        socket.send(data);
+        sendMessage(msg)
+        //var data = msg.encodeDelimited().toArrayBuffer();
+        //socket.send(data);
     } catch(exception) {
        console.log('Error:' + exception);
     }

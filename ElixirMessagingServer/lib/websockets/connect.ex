@@ -33,6 +33,7 @@ def step2(clientS) do
       str = to_string(decodeString(bin1))
       Lib.trace("Received:", str)
       message = Packet.decode(str)
+      Lib.trace("decoded")
       loginMsg(clientS, message)
     after timeoutTime ->
       WebsocketWebsockets.die(clientS,"Timeout on Handshake")
