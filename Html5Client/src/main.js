@@ -30,7 +30,7 @@ var _appendBuffer = function(buffer1, buffer2) {
   var tmp = new Uint8Array(buffer1.byteLength + buffer2.byteLength);
   tmp.set(new Uint8Array(buffer1), 0);
   tmp.set(new Uint8Array(buffer2), buffer1.byteLength);
-  return tmp.buffer;
+  return tmp;//.buffer;
 };
 
 function connect() {
@@ -61,16 +61,9 @@ function connect() {
 }
 
 function sendMessage(message) {
-  var msg = message.encodeDelimited().toArrayBuffer();
-  var buf = new ArrayBuffer(msg.byteLength + 1);
-  buf[0] = msg.byteLength;
-  for(var i=0; i < msg.byteLength; i++) {
-      buf[i+1] = msg[i];
-  }
-
-  console.log('Sending:' + msg.byteLength);
-  console.log(buf);
-  socket.send(buf);
+  var msg = new Uint8Array(message.encodeDelimited().toArrayBuffer());
+  console.log("Sending:"+msg);
+  socket.send(msg);
 }  
 
 function login(socket) {

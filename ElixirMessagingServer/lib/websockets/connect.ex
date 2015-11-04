@@ -30,7 +30,8 @@ def step2(clientS) do
   receive do
     {_tcp, _, bin1} ->
       Lib.trace("Received binary:", bin1)
-      str = to_string(decodeString(bin1))
+      #str = to_string(decodeStream(bin1))
+      str = decodeStream(bin1)
       Lib.trace("Received:", str)
       message = Packet.decode(str)
       Lib.trace("decoded")
@@ -72,17 +73,18 @@ end
 #  Lib.trace("Unexpected type received", unexpected)
 #end
 
-def decodeString(data) do
-  decodeStream(:binary.bin_to_list(data))
-end
+#def decodeString(data) do
+#  decodeStream(:binary.bin_to_list(data))
+#end
 # binary encrypted string marker
-def decodeStream([130,b2|t]) do
-  [mask1,mask2,mask3,mask4|data] = t
+def decodeStream(<<130::size(8),b2::size(8),t::binary>>) do
+  <<mask1::size(8),mask2::size(8),mask3::size(8),mask4::size(8),data::binary>> = t
   masks = [mask1,mask2,mask3,mask4]
-  decodeBytes(data,masks,[])
+  #Lib.trace("DecodeMasks=#{mask1},#{mask2},#{mask3},#{mask4}")
+  decodeBytes(data,masks,<<>>)
 end
 # text encrypted string marker
-def decodeStream([129,b2|t]) do
+def decodeStream(<<129::size(8),b2::size(8),t::binary>>) do
   #length = b2 &&& 127  # bitwise AND, unless special case
   #indexFirstMask = 2   # if not a special case
   # TODO - For message length > 126 bytes
@@ -91,25 +93,27 @@ def decodeStream([129,b2|t]) do
   #else if length == 127  # special case 2
   #  indexFirstMask = 10
   #end
-  [mask1,mask2,mask3,mask4|data] = t
+  <<mask1::size(8),mask2::size(8),mask3::size(8),mask4::size(8),data::binary>> = t
   masks = [mask1,mask2,mask3,mask4]
-  decodeBytes(data,masks,[])
+  #Lib.trace("DecodeMasks=#{mask1},#{mask2},#{mask3},#{mask4}")
+  decodeBytes(data,masks,<<>>)
 end
 
-def decodeBytes([],_masks,decoded) do
+def decodeBytes(<<>>,_masks,decoded) do
   decoded
 end
 def decodeBytes(data,masks,decoded) do
-  [byte|data2]=data
+  <<byte::size(8),data2::binary>>=data
   [mask|masks2]=masks
-  decodeBytes(data2, masks2++[mask], decoded ++ [byte ^^^ mask])
+  #Lib.trace("Decoding=#{byte} with mask #{mask} = #{byte ^^^ mask}")
+  decodeBytes(data2, masks2++[mask], decoded <> <<byte ^^^ mask>>)
 end
 
 def client(state) do
   Lib.trace("Client #{state.id} receive loop")
   receive do
     {_tcp,_,bin} -> 
-      str = to_string(decodeString(bin))
+      str = to_string(decodeStream(bin))
       Lib.trace("received:", str)
       Lib.trace("type:", Packet.msgType(str))
 
