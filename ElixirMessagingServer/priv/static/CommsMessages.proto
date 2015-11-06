@@ -1,4 +1,4 @@
-//package CommsMessages;
+package CommsMessages;
  
 //import "google/protobuf/csharp_options.proto";
 //
@@ -6,6 +6,42 @@
 //option (google.protobuf.csharp_file_options).umbrella_classname = "WorldEventsProtos";
 
 option optimize_for = SPEED;
+
+  enum MsgType {
+    eResponse = 1;
+    ePing = 2;
+    ePong = 3;
+    eNewUser = 4;
+    eLogin = 5;
+    eSay = 6;
+    eMapRequest = 7;
+    eMapIgnore = 8;
+    eMap = 9;
+    eMapUpdate = 10;
+    eMapCharacterUpdate = 11;
+    eQueryServer = 12;
+    eQueryServerResponse = 13;
+  }
+
+  message Message {
+    required int32 msgtype = 1;
+    required int32 from = 2;
+    required int32 dest = 3;
+
+    optional Response response = 4;
+    optional Ping ping = 5;
+    optional Pong pong = 6;
+    optional NewUser newUser = 7;
+    optional Login login = 8;
+    optional Say say = 9;
+    optional MapRequest mapRequest = 10;
+    optional MapIgnore mapIgnore = 11;
+    optional Map map = 12;
+    optional MapUpdate mapUpdate = 13;
+    optional MapCharacterUpdate mapCharacterUpdate = 14;
+    optional QueryServer queryServer = 15;
+    optional QueryServerResponse queryServerResponse = 16;
+  }
 
   message Ping
   {
@@ -39,20 +75,53 @@ option optimize_for = SPEED;
   {
     required string text = 1;
   }
-  
-  enum MsgType {
-    eResponse = 1;
-    ePing = 2;
-    ePong = 3;
-    eNewUser = 4;
-    eLogin = 5;
-    eSay = 6;
+
+  message MapRequest
+  {
+    required int32 x = 1;
+    required int32 y = 2;
   }
 
-  message Header {
-    // Identifies type of following data
-    required int32 msgtype = 1;
-    required string from = 2;
-    required string dest = 3;
+  message MapIgnore
+  {
+    required int32 x = 1;
+    required int32 y = 2;
   }
 
+  message Map
+  {
+    required int32 minX = 1;
+    required int32 minY = 2;
+    required int32 maxX = 3;
+    required int32 maxY = 4;
+    required int32 dataSize = 5;
+    // binary data follows message
+  }
+
+  message MapUpdate 
+  {
+    required int32 x = 1;
+    required int32 y = 2;
+    required int32 z = 3;
+    required int32 newBlock = 4;
+  }
+
+  message MapCharacterUpdate 
+  {
+    required int32 id = 1;
+    required int32 x = 2;
+    required int32 y = 3;
+    required int32 z = 4;
+  }
+
+  message QueryServer 
+  {
+  }
+
+  message QueryServerResponse 
+  {
+    required int32 minMapChunkX = 1;
+    required int32 minMapChunkY = 2;
+    required int32 maxMapChunkX = 3;
+    required int32 maxMapChunkY = 4;
+  }

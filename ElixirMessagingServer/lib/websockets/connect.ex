@@ -77,6 +77,12 @@ end
 #  decodeStream(:binary.bin_to_list(data))
 #end
 # binary encrypted string marker
+def decodeStream(<<136::size(8),b2::size(8),t::binary>>) do
+  <<mask1::size(8),mask2::size(8),mask3::size(8),mask4::size(8),data::binary>> = t
+  masks = [mask1,mask2,mask3,mask4]
+  #Lib.trace("DecodeMasks=#{mask1},#{mask2},#{mask3},#{mask4}")
+  decodeBytes(data,masks,<<>>)
+end
 def decodeStream(<<130::size(8),b2::size(8),t::binary>>) do
   <<mask1::size(8),mask2::size(8),mask3::size(8),mask4::size(8),data::binary>> = t
   masks = [mask1,mask2,mask3,mask4]
@@ -113,6 +119,7 @@ def client(state) do
   Lib.trace("Client #{state.id} receive loop")
   receive do
     {_tcp,_,bin} -> 
+      Lib.trace("received bin:", bin)
       str = to_string(decodeStream(bin))
       Lib.trace("received:", str)
       Lib.trace("type:", Packet.msgType(str))

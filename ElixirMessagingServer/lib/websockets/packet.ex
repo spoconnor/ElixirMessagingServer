@@ -25,6 +25,7 @@ defmodule Packet do
   end
 
   def encode(message) do
+    Lib.trace("Packet.encode")
     bodyData = CommsMessages.Message.encode(message)
     <<byte_size(bodyData)>> <> bodyData
   end

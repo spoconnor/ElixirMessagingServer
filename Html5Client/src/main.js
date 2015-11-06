@@ -46,7 +46,8 @@ function connect() {
         }
 
         socket.onmessage = function(msg) {
-            console.log('Received: '+msg.msgtype);
+            console.log("Received Message");
+            console.log('Received msgtype: '+msg.msgtype);
             if (msg.msgtype == 4) {
               processResponse(msg)
             }
@@ -61,9 +62,11 @@ function connect() {
 }
 
 function sendMessage(message) {
+  console.log("Preparing to send message");
   var msg = new Uint8Array(message.encodeDelimited().toArrayBuffer());
   console.log("Sending:"+msg);
   socket.send(msg);
+  console.log("Message Sent");
 }  
 
 function login(socket) {
@@ -140,10 +143,10 @@ function create() {
     connect();
 
     // TODO - wait for open state, then send these
-    setTimeout(function () {
-      say("Hello World!");
-      getMap(1,1);
-    }, 5000);
+//    setTimeout(function () {
+//      say("Hello World!");
+//      getMap(1,1);
+//    }, 5000);
 
     game.stage.backgroundColor = '#404040';
 
