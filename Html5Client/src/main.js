@@ -47,9 +47,10 @@ function connect() {
 
         socket.onmessage = function(msg) {
             console.log("Received Message");
-            console.log('Received msgtype: '+msg.msgtype);
-            if (msg.msgtype == 4) {
-              processResponse(msg)
+            var message = CommsMessages.decode(msg.data);
+            console.log('Received msgtype: '+message.msgtype);
+            if (message.msgtype == 4) {
+              processResponse(message)
             }
         }
 
@@ -64,7 +65,7 @@ function connect() {
 function sendMessage(message) {
   console.log("Preparing to send message");
   var msg = new Uint8Array(message.encodeDelimited().toArrayBuffer());
-  console.log("Sending:"+msg);
+  console.log("Sending:"+msg[0]+","+msg[1]+","+msg[2]);
   socket.send(msg);
   console.log("Message Sent");
 }  

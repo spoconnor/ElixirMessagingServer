@@ -50,17 +50,19 @@ end
 
 def sendTcpMsg(clientS, msg) do
   Lib.trace("Sending", msg)
-  :gen_tcp.send(clientS, encodeString(msg))
+  encoded = encodeString(msg)
+  Lib.trace("Sending encoded", encoded)
+  :gen_tcp.send(clientS, encoded)
 end
 
 def encodeString(msg) do
-encodeStream(:binary.bin_to_list(msg))
+  encodeStream(:binary.bin_to_list(msg))
 end
 def encodeStream(msg) do
   #masks = [:random.uniform(255), :random.uniform(255),
   #         :random.uniform(255), :random.uniform(255)]
   #[129, Enum.count(msg) ||| 128] ++ masks
-  [129, Enum.count(msg)] ++ msg
+  [130, Enum.count(msg)] ++ msg
 end
 #def encodeBytes([],encoded) do
 #  encoded
