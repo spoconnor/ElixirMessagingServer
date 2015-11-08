@@ -47,7 +47,7 @@ function connect() {
 
         socket.onmessage = function(msg) {
             console.log("Received Message");
-            var message = CommsMessages.decode(msg.data);
+            var message = CommsMessages.Message.decodeDelimited(msg.data);
             console.log('Received msgtype: '+message.msgtype);
             if (message.msgtype == 4) {
               processResponse(message)
