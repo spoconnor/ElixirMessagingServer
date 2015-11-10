@@ -37,6 +37,7 @@ function connect() {
     try {
         var host = "ws://localhost:8081";// /socket/server/startDaemon.php";
         socket = new WebSocket(host);
+        socket.binaryType = "arraybuffer"; // or assign to "blob"
 
         console.log('Socket Status: '+socket.readyState);
 
@@ -46,14 +47,20 @@ function connect() {
         }
 
         socket.onmessage = function(msg) {
-            console.log("Received Message");
-            var array = new Uint8Array(msg.data)
-            var protoMsgLen = array[0];
-            var protoMsg = msg.data.slice(1);
-            var message = CommsMessages.Message.decodeDelimited(protoMsg);
-            console.log('Received msgtype: '+message.msgtype);
-            if (message.msgtype == 4) {
-              processResponse(message)
+            if (typeof msg.data === "string"){
+              console.log("Received Text data from the server: " + msg.data);
+            } else if (msg.data instanceof Blob){
+              console.log("Received Blob data from the server")
+            } else if (msg.data instanceof ArrayBuffer){
+              console.log("Received ArrayBuffer data from the server")
+              var array = new Uint8Array(msg.data)
+              var protoMsgLen = array[0];
+              //var protoMsg = msg.data.slice(1);  // TODO - change this once length added to full message
+              var message = CommsMessages.Message.decodeDelimited(msg.data);
+              console.log('Received msgtype: '+message.msgtype);
+              if (message.msgtype == 4) {
+                processResponse(message)
+              }
             }
         }
 
@@ -147,10 +154,10 @@ function create() {
     connect();
 
     // TODO - wait for open state, then send these
-//    setTimeout(function () {
-//      say("Hello World!");
-//      getMap(1,1);
-//    }, 5000);
+    setTimeout(function () {
+      say("Hello World!");
+      getMap(1,1);
+    }, 5000);
 
     game.stage.backgroundColor = '#404040';
 
