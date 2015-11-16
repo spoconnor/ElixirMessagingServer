@@ -37,6 +37,7 @@ class TcpClient(remote: InetSocketAddress) extends Actor with ActorLogging {
       connection ! Register(self)
       context become {
         case data: ByteString =>
+          log.info("TcpClient: Sending data")
           connection ! Write(data)
         case CommandFailed(w: Write) =>
           // O/S buffer was full

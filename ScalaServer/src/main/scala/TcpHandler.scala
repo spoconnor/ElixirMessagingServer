@@ -33,7 +33,15 @@ import akka.util.ByteString
         val msg = CommsMessages.Message.parseFrom(msgArray)
         log.info("TcpHandler: received msgtype {}", msg.msgtype)
         messageHandler ! msg
-        connection ! Write(data, Ack)
+
+        val response = new CommsMessages.Message(CommsMessages.MsgType.eResponse)
+        response.setResponse(new CommsMessages.Response(1))
+        val msgBytes = response.toByteArray()
+        val msgLen = Array[Byte](msgBytes.length.toByte)
+        val msgStr = ByteString.fromArray(msgLen ++ msgBytes)
+
+        log.info("TcpHandler: sending {}", msgStr)
+        connection ! Write(msgStr, Ack)
 
         context.become({
           case Received(data) => buffer(data)

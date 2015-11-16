@@ -105,11 +105,11 @@ class MapChunk(xc: Int, yc: Int) extends Actor with ActorLogging {
     val maxY:Int = MapChunk.chunkSize()
     val dataSize:Int = 0
     response.setMap(new CommsMessages.Map(minX,minY,maxX,maxY,dataSize))
+
     // TODO move common code to fn
     val msgBytes = response.toByteArray()
-    val resBytes = ByteString("%04d%s".format(
-      response.getSerializedSize,
-      new String(msgBytes)))
-    context.actorSelection("/user/tcpclient") ! resBytes
+    val msgLen = Array[Byte](msgBytes.length.toByte)
+    val msgStr = ByteString.fromArray(msgLen ++ msgBytes)
+    context.actorSelection("/user/tcpclient") ! msgStr
   }
 }

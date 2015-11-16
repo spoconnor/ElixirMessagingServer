@@ -40,7 +40,9 @@ defmodule WorldServerListener do
     receive do
       {_tcp,_,bin} ->
         Lib.trace("Recv from WorldServer:",bin)
-        # TODO - process recv message from WorldServer
+        Lib.trace("type:", Packet.msgType(bin))
+        msg = Packet.decode(bin)
+        
         recv_connection(client)
       after timeoutTime ->
         Lib.trace("WorldServerListener timeout")

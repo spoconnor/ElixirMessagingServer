@@ -18,8 +18,11 @@ defmodule Packet do
       6 -> "Say"
       7 -> "MapRequest"
       8 -> "MapIgnore"
-      9 -> "QueryServer"
-     10 -> "QueryServerResponse"
+      9 -> "Map"
+     10 -> "MapUpdate"
+     11 -> "MapCharacterUpdate"
+     12 -> "QueryServer"
+     13 -> "QueryServerResponse"
       _ -> "Unknown"
     end
   end
