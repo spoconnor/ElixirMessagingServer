@@ -47,13 +47,13 @@ def loginMsg(clientS, %CommsMessages.Message{msgtype: 4, from: _from, dest: _des
 end
 
 # Login
-def loginMsg(clientS, %CommsMessages.Message{msgtype: 5, from: _from, dest: _dest, login: login}) do
-  Lib.trace("Login #{login.username}")
+def loginMsg(clientS, %CommsMessages.Message{msgtype: 5, from: from, dest: _dest, login: login}) do
+  Lib.trace("Login #{login.username} = #{from}")
   #if (length(user.name)>25) do
   #  WebsocketWebsockets.die("Name too long")
   #end
   {:ok,{ip,_}} = :inet.peername(clientS)
-  state = %WebsocketUser{user: login.username, sock: clientS, x: 1,y: 1, ip: ip, pid: self()}
+  state = %WebsocketUser{user: login.username, id: from, sock: clientS, x: 1,y: 1, ip: ip, pid: self()}
 
   notify_pid = spawn(fn() -> notify_thread(clientS) end)
   WebsocketUsers.add_user(WebsocketUsers, login.username, notify_pid)

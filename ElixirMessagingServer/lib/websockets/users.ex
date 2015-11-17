@@ -31,7 +31,9 @@ defmodule WebsocketUsers do
     data = Packet.decode(payload)
     Lib.trace("MessageType:", data.msgtype)
 #    actions(payload, msg)
-    notify_users(payload, data.dest, users)
+#    notify_users(payload, data.dest, users)
+    # TODO - for now, just send to everyone
+    notify_users(payload, "", users)
     {:noreply, users}
   end
 

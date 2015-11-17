@@ -42,7 +42,7 @@ defmodule WorldServerListener do
         Lib.trace("Recv from WorldServer:",bin)
         Lib.trace("type:", Packet.msgType(bin))
         msg = Packet.decode(bin)
-        
+        WebsocketUsers.notify(WebsocketUsers, bin)
         recv_connection(client)
       after timeoutTime ->
         Lib.trace("WorldServerListener timeout")
