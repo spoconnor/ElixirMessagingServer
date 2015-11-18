@@ -11,6 +11,16 @@ class Column {
   def Get(h:Int):Int = data(h)
 
   def Dump() = { data foreach {case (key, value) => Console.print(key)}}
+
+  def GetVisible(arr: List[Byte]) : List[Byte] = {
+    var temp: List[Byte] = arr
+    data foreach {
+      case (key, value) => 
+        temp = key.toByte :: temp
+        temp = value.toByte :: temp
+    }
+    return temp
+  }
 }
 
 object MapChunk {
@@ -90,8 +100,16 @@ class MapChunk(xc: Int, yc: Int) extends Actor with ActorLogging {
 
   def GetVisible() =
   {
-    Console.println("MapChunk getting visible (" + chunkX + "," + chunkY + ")")
-    context.actorSelection("/user/tcpclient") ! "visible"
+    var arr: List[Byte] = List()
+    for (w <- 0 to width-1)
+    {
+      arr = w.toByte :: arr
+      for (l <- 0 to length-1)
+      {
+        arr = l.toByte :: arr
+        arr = data(w)(l).GetVisible(arr)
+      }
+    }
   }
 
   def mapRequest(msg:CommsMessages.MapRequest) =
@@ -109,7 +127,9 @@ class MapChunk(xc: Int, yc: Int) extends Actor with ActorLogging {
     // TODO move common code to fn
     val msgBytes = response.toByteArray()
     val msgLen = Array[Byte](msgBytes.length.toByte)
-    val msgStr = ByteString.fromArray(msgLen ++ msgBytes)
+    var data = GetVisible()
+    val dataBytes = data.toArray()
+    val msgStr = ByteString.fromArray(msgLen ++ msgBytes ++ dataBytes)
     context.actorSelection("/user/tcpclient") ! msgStr
   }
 }
