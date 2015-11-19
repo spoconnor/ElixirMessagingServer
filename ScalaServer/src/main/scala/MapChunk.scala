@@ -9,7 +9,7 @@ class Column {
   val data = Map.empty[Int, Int]
   def Set(h:Int, v:Int) = data += (h -> v)
   def Get(h:Int):Int = data(h)
-
+  def Get():Map[Int,Int] = data
   def Dump() = { data foreach {case (key, value) => Console.print(key)}}
 
   def GetVisible(arr: List[Byte]) : List[Byte] = {
@@ -98,7 +98,7 @@ class MapChunk(xc: Int, yc: Int) extends Actor with ActorLogging {
     Console.println()
   }
 
-  def GetVisible() =
+  def GetVisible() : List[Byte] = 
   {
     var arr: List[Byte] = List()
     for (w <- 0 to width-1)
@@ -107,9 +107,16 @@ class MapChunk(xc: Int, yc: Int) extends Actor with ActorLogging {
       for (l <- 0 to length-1)
       {
         arr = l.toByte :: arr
-        arr = data(w)(l).GetVisible(arr)
+
+        var col:Map[Int,Int] = data(w)(l).Get()
+        col foreach {
+          case (key, value) => 
+            arr = key.toByte :: arr
+            arr = value.toByte :: arr
+        }
       }
     }
+    return arr
   }
 
   def mapRequest(msg:CommsMessages.MapRequest) =
