@@ -108,7 +108,7 @@ class MapChunk(xc: Int, yc: Int) extends Actor with ActorLogging {
       {
         arr = l.toByte :: arr
 
-        var col:Map[Int,Int] = data(w)(l).Get()
+        val col = data(w)(l).Get()
         col foreach {
           case (key, value) => 
             arr = key.toByte :: arr
@@ -134,8 +134,8 @@ class MapChunk(xc: Int, yc: Int) extends Actor with ActorLogging {
     // TODO move common code to fn
     val msgBytes = response.toByteArray()
     val msgLen = Array[Byte](msgBytes.length.toByte)
-    var data = GetVisible()
-    val dataBytes = data.toArray()
+    val data = GetVisible()
+    val dataBytes = data.toBuffer
     val msgStr = ByteString.fromArray(msgLen ++ msgBytes ++ dataBytes)
     context.actorSelection("/user/tcpclient") ! msgStr
   }
