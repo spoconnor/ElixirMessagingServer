@@ -1,20 +1,5 @@
-FROM debian:wheezy
+FROM trenpixster/elixir
 MAINTAINER Sean OConnor <onewheel@gmail.com>
-
-# Erlang
-ADD http://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc /tmp/install/
-ADD http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb /tmp/install/
-RUN apt-key add /tmp/install/erlang_solutions.asc \
- && dpkg -i /tmp/install/erlang-solutions_1.0_all.deb \
- && apt-get update \
- && apt-get install erlang wget unzip -y \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
-
-# Elixir
-RUN wget https://github.com/elixir-lang/elixir/releases/download/v1.1.0/Precompiled.zip \
- && unzip Precompiled.zip -d /usr \
- && rm Precompiled.zip
 
 ############
 # My Code

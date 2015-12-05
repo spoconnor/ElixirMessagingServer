@@ -1,13 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otp.2010", "OTP.NET-2010\Otp\Otp.2010.csproj", "{8155F56B-4925-406C-8619-7D0E57DD7FE1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtpTest", "OTP.NET-2010\OtpTest\OtpTest.csproj", "{51C10949-3327-4CE9-A4D0-58F1336284F4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldServer", "WorldServer\WorldServer.csproj", "{ED9CDEB6-5F1F-4C58-8F57-F216266F4B79}"
-EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "FSharpServer", "FSharpServer\FSharpServer.fsproj", "{4E01C89C-948D-4F59-A579-E0D33E18BFFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,21 +9,16 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4E01C89C-948D-4F59-A579-E0D33E18BFFA}.Debug|x86.ActiveCfg = Debug|x86
-		{4E01C89C-948D-4F59-A579-E0D33E18BFFA}.Debug|x86.Build.0 = Debug|x86
-		{4E01C89C-948D-4F59-A579-E0D33E18BFFA}.Release|x86.ActiveCfg = Release|x86
-		{4E01C89C-948D-4F59-A579-E0D33E18BFFA}.Release|x86.Build.0 = Release|x86
-		{51C10949-3327-4CE9-A4D0-58F1336284F4}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{51C10949-3327-4CE9-A4D0-58F1336284F4}.Debug|x86.Build.0 = Debug|Any CPU
-		{51C10949-3327-4CE9-A4D0-58F1336284F4}.Release|x86.ActiveCfg = Release|Any CPU
-		{51C10949-3327-4CE9-A4D0-58F1336284F4}.Release|x86.Build.0 = Release|Any CPU
-		{8155F56B-4925-406C-8619-7D0E57DD7FE1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{8155F56B-4925-406C-8619-7D0E57DD7FE1}.Debug|x86.Build.0 = Debug|Any CPU
-		{8155F56B-4925-406C-8619-7D0E57DD7FE1}.Release|x86.ActiveCfg = Release|Any CPU
-		{8155F56B-4925-406C-8619-7D0E57DD7FE1}.Release|x86.Build.0 = Release|Any CPU
 		{ED9CDEB6-5F1F-4C58-8F57-F216266F4B79}.Debug|x86.ActiveCfg = Debug|x86
 		{ED9CDEB6-5F1F-4C58-8F57-F216266F4B79}.Debug|x86.Build.0 = Debug|x86
 		{ED9CDEB6-5F1F-4C58-8F57-F216266F4B79}.Release|x86.ActiveCfg = Release|x86
 		{ED9CDEB6-5F1F-4C58-8F57-F216266F4B79}.Release|x86.Build.0 = Release|x86
+		{4E01C89C-948D-4F59-A579-E0D33E18BFFA}.Debug|x86.ActiveCfg = Debug|x86
+		{4E01C89C-948D-4F59-A579-E0D33E18BFFA}.Debug|x86.Build.0 = Debug|x86
+		{4E01C89C-948D-4F59-A579-E0D33E18BFFA}.Release|x86.ActiveCfg = Release|x86
+		{4E01C89C-948D-4F59-A579-E0D33E18BFFA}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = WorldServer\WorldServer.csproj
 	EndGlobalSection
 EndGlobal
