@@ -23,7 +23,7 @@ namespace Sean.World
 	{
 		// The port number for the remote device.
 		private const int port = 8083;
-		private const IPHostEntry remoteHost = Dns.Resolve("my_elixir_server");
+		private static IPHostEntry remoteHost = Dns.GetHostEntry("my_elixir_server");
 
 		// ManualResetEvent instances signal completion.
 		private static ManualResetEvent connectDone = new ManualResetEvent(false);
@@ -128,7 +128,7 @@ namespace Sean.World
 					receiveDone.Set();
 				}
 			} catch (Exception e) {
-				Console.WriteLine(e.ToString());
+	  			Console.WriteLine(e.ToString());
 			}
 		}
 
@@ -157,9 +157,9 @@ namespace Sean.World
 			}
 		}
 
-		public static int Main(String[] args) {
-			StartClient();
-			return 0;
-		}
+		//public static int Main(String[] args) {
+		//	StartClient();
+		//	return 0;
+		//}
 	}
 }
