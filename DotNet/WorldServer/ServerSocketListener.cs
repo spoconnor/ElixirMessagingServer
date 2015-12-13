@@ -19,7 +19,7 @@ namespace Sean.World
 	}
 
 	public class ServerSocketListener {
-		public static int ServerListenPort = 8842;
+		public static int ServerListenPort = 8084;
 
 	    // Thread signal.
 	    public static ManualResetEvent allDone = new ManualResetEvent(false);
