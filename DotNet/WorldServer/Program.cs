@@ -15,7 +15,11 @@ namespace Sean.World
             //var otpServer = new OtpServer();
             //otpServer.Start();
 
+            var client = new ClientSocket ();
+            client.Run ();
+
             ServerSocketListener.StartListening();
+
 
             Console.WriteLine("Press any key to exit");
             Console.ReadKey();

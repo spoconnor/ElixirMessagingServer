@@ -71,6 +71,7 @@ namespace Sean.World
 	    }
 
 	    public static void AcceptCallback(IAsyncResult ar) {
+            Console.WriteLine ("AcceptCallback");
 	        // Signal the main thread to continue.
 	        allDone.Set();
 
@@ -86,6 +87,7 @@ namespace Sean.World
 	    }
 
 	    public static void ReadCallback(IAsyncResult ar) {
+            Console.WriteLine ("ReadCallback");
 	        String content = String.Empty;
 
 	        // Retrieve the state object and the handler socket
@@ -97,18 +99,16 @@ namespace Sean.World
 	        int bytesRead = handler.EndReceive(ar);
 
 	        if (bytesRead > 0) {
+                Console.WriteLine ("Read {0} of {1} bytes", bytesRead, state.buffer[0] + 1);
 	            // There  might be more data, so store the data received so far.
-	            state.sb.Append(Encoding.ASCII.GetString(
-	                state.buffer,0,bytesRead));
+	            state.sb.Append(Encoding.ASCII.GetString(state.buffer,0,bytesRead));
 
 	            // Check for end-of-file tag. If it is not there, read 
 	            // more data.
 	            content = state.sb.ToString();
-	            if (content.IndexOf("<EOF>") > -1) {
-	                // All the data has been read from the 
-	                // client. Display it on the console.
-	                Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
-	                    content.Length, content );
+                if (state.buffer[0] + 1 <= state.buffer.Length) {
+	                // All the data has been read from the client.
+	                Console.WriteLine("Read {0} bytes from socket", content.Length );
 	                // Echo the data back to the client.
 	                Send(handler, content);
 	            } else {
@@ -120,6 +120,7 @@ namespace Sean.World
 	    }
 
 	    private static void Send(Socket handler, String data) {
+            Console.WriteLine ("Send");
 	        // Convert the string data to byte data using ASCII encoding.
 	        byte[] byteData = Encoding.ASCII.GetBytes(data);
 
@@ -130,6 +131,7 @@ namespace Sean.World
 
 	    private static void SendCallback(IAsyncResult ar) {
 	        try {
+                Console.WriteLine ("SendCallback");
 	            // Retrieve the socket from the state object.
 	            Socket handler = (Socket) ar.AsyncState;
 
