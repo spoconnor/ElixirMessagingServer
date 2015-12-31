@@ -6,27 +6,30 @@ using System.Threading;
 
 namespace Sean.World
 {
-    public class ClientSocket
+    public static class ClientSocket
     {
-        private static socket SynchronousSocketClient;
+        private static SynchronousSocketClient socket;
         private const string server = "elixirserver";
         private const int port = 8083;
 
-        
-
-        public void Run()
+        private static SynchronousSocketClient GetSocket()
         {
-            try 
-            {
-                var client = new SynchronousSocketClient ("elixirserver", 8083);
-                Thread oThread = new Thread(new ThreadStart(client.StartClient));
-                oThread.Start();
-                oThread.Join();
+            if (socket == null) {
+                socket = new SynchronousSocketClient ("elixirserver", 8083);
             }
-            catch (Exception ex) 
-            {
-                Console.WriteLine("Exception creating ClientSocker thread : {0}", ex.ToString());
-            }
+            return socket;
+        }
+
+        public static void SendMessage()
+        {
+            // TODO - threads
+            GetSocket ().SendMessage ();
+        }
+
+        public static void RecvMessage()
+        {
+            // TODO - threads
+            GetSocket ().RecvMessage ();
         }
     }
 
@@ -67,19 +70,17 @@ namespace Sean.World
         private static IPHostEntry remoteHost;
         private IPAddress ipAddress;
 
-        public bool IsConnected()
+        private bool IsConnected
         {
             get
             {
-                return socket != null;
+                return socket != null && socket.IsBound;
             }
         }
 
         private void Connect() 
         {
             Console.WriteLine("SynchronousSocketClient.StartClient");
-            byte[] bytes = new byte[1024];
-
             IPEndPoint remoteEP = new IPEndPoint(ipAddress, port);
             socket = new Socket(
                 AddressFamily.InterNetwork, 
@@ -96,6 +97,7 @@ namespace Sean.World
                 // Encode the data string into a byte array.
                 byte[] msg = Encoding.ASCII.GetBytes ("This is a test<EOF>");
                 int bytesSent = socket.Send (msg);
+                Console.WriteLine("SynchronousSocketClient.SendMessage sent {0} bytes", bytesSent);
             } catch (ArgumentNullException ane) {
                 Console.WriteLine ("ArgumentNullException : {0}", ane.ToString ());
             } catch (SocketException se) {
@@ -110,12 +112,14 @@ namespace Sean.World
             try {
                 if (!IsConnected) Connect();
                 // Receive the response from the remote device.
+                byte[] bytes = new byte[1024];
                 int bytesRec = socket.Receive (bytes);
-                Console.WriteLine ("Echoed test = {0}", Encoding.ASCII.GetString (bytes, 0, bytesRec));
-            } catch (SocketException se) {
+                Console.WriteLine("SynchronousSocketClient.RecvMessage received {0} bytes", bytesRec);
+             } catch (SocketException se) {
                 Console.WriteLine ("SocketException : {0}", se.ToString ());
             } catch (Exception ex) {
                 Console.WriteLine ("Unexpected exception : {0}", ex.ToString ());
             }
         }
     }
+}

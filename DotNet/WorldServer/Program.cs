@@ -15,8 +15,7 @@ namespace Sean.World
             //var otpServer = new OtpServer();
             //otpServer.Start();
 
-            var client = new ClientSocket ();
-            client.Run ();
+            ClientSocket.SendMessage ();
 
             ServerSocketListener.StartListening();
 
