@@ -8,6 +8,12 @@ namespace Sean.World
 {
     public class ClientSocket
     {
+        private static socket SynchronousSocketClient;
+        private const string server = "elixirserver";
+        private const int port = 8083;
+
+        
+
         public void Run()
         {
             try 
@@ -49,6 +55,7 @@ namespace Sean.World
                 if (socket != null) {
                     socket.Shutdown (SocketShutdown.Both);
                     socket.Close ();
+                    socket = null;
                 }
             }
             // Free any unmanaged objects here.
@@ -60,38 +67,32 @@ namespace Sean.World
         private static IPHostEntry remoteHost;
         private IPAddress ipAddress;
 
-        public void StartClient() 
+        public bool IsConnected()
         {
-            try 
+            get
             {
-                Console.WriteLine("SynchronousSocketClient.StartClient");
-                byte[] bytes = new byte[1024];
-
-                IPEndPoint remoteEP = new IPEndPoint(ipAddress, port);
-                socket = new Socket(
-                    AddressFamily.InterNetwork, 
-                    SocketType.Stream, ProtocolType.Tcp );
-
-                socket.Connect(remoteEP);
-                Console.WriteLine("Socket connected to {0}", socket.RemoteEndPoint.ToString());
+                return socket != null;
             }
-            catch (ArgumentNullException ane) 
-            {
-                Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
-            } 
-            catch (SocketException se) 
-            {
-                Console.WriteLine("SocketException : {0}", se.ToString());
-            } 
-            catch (Exception ex) 
-            {
-                Console.WriteLine("Unexpected exception : {0}", ex.ToString());
-            }
+        }
+
+        private void Connect() 
+        {
+            Console.WriteLine("SynchronousSocketClient.StartClient");
+            byte[] bytes = new byte[1024];
+
+            IPEndPoint remoteEP = new IPEndPoint(ipAddress, port);
+            socket = new Socket(
+                AddressFamily.InterNetwork, 
+                SocketType.Stream, ProtocolType.Tcp );
+
+            socket.Connect(remoteEP);
+            Console.WriteLine("Socket connected to {0}", socket.RemoteEndPoint.ToString());
         }
 
         public void SendMessage()
         {
             try {
+                if (!IsConnected) Connect();
                 // Encode the data string into a byte array.
                 byte[] msg = Encoding.ASCII.GetBytes ("This is a test<EOF>");
                 int bytesSent = socket.Send (msg);
@@ -107,11 +108,10 @@ namespace Sean.World
         public void RecvMessage()
         {
             try {
+                if (!IsConnected) Connect();
                 // Receive the response from the remote device.
                 int bytesRec = socket.Receive (bytes);
                 Console.WriteLine ("Echoed test = {0}", Encoding.ASCII.GetString (bytes, 0, bytesRec));
-            } catch (ArgumentNullException ane) {
-                Console.WriteLine ("ArgumentNullException : {0}", ane.ToString ());
             } catch (SocketException se) {
                 Console.WriteLine ("SocketException : {0}", se.ToString ());
             } catch (Exception ex) {
