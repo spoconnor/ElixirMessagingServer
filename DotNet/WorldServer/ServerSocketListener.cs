@@ -100,17 +100,24 @@ namespace Sean.World
 
 	        if (bytesRead > 0) {
                 Console.WriteLine ("Read {0} of {1} bytes", bytesRead, state.buffer[0] + 1);
+                var builder = new StringBuilder ();
+                for (int i=0; i<state.buffer[0] + 1; i++) {
+                    builder.Append (state.buffer [i].ToString ());
+                    builder.Append (",");
+                }
+                Console.WriteLine ("{0}", builder.ToString());
 	            // There  might be more data, so store the data received so far.
-	            state.sb.Append(Encoding.ASCII.GetString(state.buffer,0,bytesRead));
+                state.sb.Append(Encoding.UTF8.GetString(state.buffer,0,bytesRead));
 
-	            // Check for end-of-file tag. If it is not there, read 
-	            // more data.
+	            // Check for end-of-file tag. If it is not there, read more data.
 	            content = state.sb.ToString();
                 if (state.buffer[0] + 1 <= state.buffer.Length) {
 	                // All the data has been read from the client.
 	                Console.WriteLine("Read {0} bytes from socket", content.Length );
+
 	                // Echo the data back to the client.
 	                Send(handler, content);
+
 	            } else {
 	                // Not all data received. Get more.
 					handler.BeginReceive(state.buffer, 0, ServerStateObject.BufferSize, 0,
@@ -122,7 +129,14 @@ namespace Sean.World
 	    private static void Send(Socket handler, String data) {
             Console.WriteLine ("Send");
 	        // Convert the string data to byte data using ASCII encoding.
-	        byte[] byteData = Encoding.ASCII.GetBytes(data);
+            byte[] byteData = Encoding.UTF8.GetBytes(data);
+
+            var builder = new StringBuilder ();
+            for (int i=0; i<byteData.Length; i++) {
+                builder.Append (byteData [i].ToString ());
+                builder.Append (",");
+            }
+            Console.WriteLine ("{0}", builder.ToString());
 
 	        // Begin sending the data to the remote device.
 	        handler.BeginSend(byteData, 0, byteData.Length, 0,
@@ -138,7 +152,6 @@ namespace Sean.World
 	            // Complete sending the data to the remote device.
 	            int bytesSent = handler.EndSend(ar);
 	            Console.WriteLine("Sent {0} bytes to client.", bytesSent);
-
 	            handler.Shutdown(SocketShutdown.Both);
 	            handler.Close();
 

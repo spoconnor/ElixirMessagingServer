@@ -99,11 +99,11 @@ namespace Sean.World
                 int bytesSent = socket.Send (msg);
                 Console.WriteLine("SynchronousSocketClient.SendMessage sent {0} bytes", bytesSent);
             } catch (ArgumentNullException ane) {
-                Console.WriteLine ("ArgumentNullException : {0}", ane.ToString ());
+                Console.WriteLine ("ArgumentNullException : {0}", ane.Message);
             } catch (SocketException se) {
-                Console.WriteLine ("SocketException : {0}", se.ToString ());
+                Console.WriteLine ("SocketException : {0}", se.Message);
             } catch (Exception ex) {
-                Console.WriteLine ("Unexpected exception : {0}", ex.ToString ());
+                Console.WriteLine ("Unexpected exception : {0}", ex.Message);
             }
         }
 
@@ -116,9 +116,9 @@ namespace Sean.World
                 int bytesRec = socket.Receive (bytes);
                 Console.WriteLine("SynchronousSocketClient.RecvMessage received {0} bytes", bytesRec);
              } catch (SocketException se) {
-                Console.WriteLine ("SocketException : {0}", se.ToString ());
+                Console.WriteLine ("SocketException : {0}", se.Message);
             } catch (Exception ex) {
-                Console.WriteLine ("Unexpected exception : {0}", ex.ToString ());
+                Console.WriteLine ("Unexpected exception : {0}", ex.Message);
             }
         }
     }
