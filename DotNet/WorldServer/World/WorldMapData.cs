@@ -1,13 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Sean.World
 {
     internal class MapCell
     {
+        private Dictionary<byte, byte> cells = new Dictionary<byte, byte>();
+        private byte minHeight = 0;
+        private byte maxHeight = 0;
+
         public MapCell()
         {
         }
 
+        public void Generate(byte heightMap)
+        {
+            maxHeight = heightMap;
+            for (byte y=0; y<heightMap; y++) {
+                cells [y] = 1;
+            }
+            cells [maxHeight] = 2;
+        }
+
+        public IEnumerable<byte> Serialize()
+        {
+            yield return minHeight;
+            yield return maxHeight;
+            for (byte y=minHeight; y<=maxHeight; y++) {
+                yield return cells [y];
+            }
+        }
     }
 
     internal class WorldMapData
@@ -31,8 +53,23 @@ namespace Sean.World
                 for (int z = 0; z < SizeZ; z++)
                 {
                     builder.Append(heightMap[x][z] / 10);
+                    mapCells [x] [z] = new MapCell ();
+                    mapCells [x] [z].Generate ((byte)heightMap[x][z]);
                 }
                 Console.WriteLine(builder.ToString());
+            }
+        }
+
+        public IEnumerable<byte> Serialize()
+        {
+            for (int x = 0; x < SizeX; x++)
+            {
+                for (int z = 0; z < SizeZ; z++)
+                {
+                    foreach (byte temp in mapCells [x] [z].Serialize ()) {
+                        yield return temp;
+                    }
+                }
             }
         }
 

@@ -2,20 +2,22 @@
 
 namespace Sean.World
 {
-	class MainClass
+    static class MainClass
 	{
+        static WorldMapData worldMapData;
+
 		static public void Main(String[] args)
 		{
 			Console.WriteLine("World Server...");
-            WorldMapData worldMapData = new WorldMapData();
+            worldMapData = new WorldMapData();
             worldMapData.Generate();
 
-			WorldData.Initialize();
+			WorldData.Initialize(); // TODO - not hooked in
 
             //var otpServer = new OtpServer();
             //otpServer.Start();
 
-            ClientSocket.SendMessage ();
+            //ClientSocket.SendMessage ();
 
             ServerSocketListener.StartListening();
 

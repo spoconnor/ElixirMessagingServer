@@ -20,10 +20,10 @@ namespace Sean.World
             return socket;
         }
 
-        public static void SendMessage()
+        public static void SendMessage(CommsMessages.Message message, byte[] data)
         {
             // TODO - threads
-            GetSocket ().SendMessage ();
+            GetSocket ().SendMessage (message, data);
         }
 
         public static void RecvMessage()
@@ -90,7 +90,7 @@ namespace Sean.World
             Console.WriteLine("Socket connected to {0}", socket.RemoteEndPoint.ToString());
         }
 
-        public void SendMessage()
+        public void SendMessage(CommsMessages.Message message, byte[] data)
         {
             try {
                 if (!IsConnected) Connect();

@@ -74,11 +74,15 @@
     <Compile Include="World\WorldMapData.cs" />
     <Compile Include="World\Generator\Misc.cs" />
     <Compile Include="ServerSocketListener.cs" />
-    <Compile Include="ClientSocket.cs" />
+    <Compile Include="World\MessageParser.cs" />
+    <Compile Include="World\ClientManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Shared\" />
     <Folder Include="World\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClientSocket.cs_" />
   </ItemGroup>
 </Project>

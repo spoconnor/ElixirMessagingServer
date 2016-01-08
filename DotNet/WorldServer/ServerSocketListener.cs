@@ -6,6 +6,8 @@ using System.Threading;
 
 namespace Sean.World
 {
+    public static Hashtable clientsList = new Hashtable(); 
+
 	// State object for reading client data asynchronously
 	public class ServerStateObject {
 	    // Client  socket.
@@ -20,6 +22,7 @@ namespace Sean.World
 
 	public class ServerSocketListener {
 		public static int ServerListenPort = 8084;
+        private const int MaxMessageBufferSize = 1024;
 
 	    // Thread signal.
 	    public static ManualResetEvent allDone = new ManualResetEvent(false);
@@ -100,12 +103,14 @@ namespace Sean.World
 
 	        if (bytesRead > 0) {
                 Console.WriteLine ("Read {0} of {1} bytes", bytesRead, state.buffer[0] + 1);
-                var builder = new StringBuilder ();
-                for (int i=0; i<state.buffer[0] + 1; i++) {
-                    builder.Append (state.buffer [i].ToString ());
-                    builder.Append (",");
+                {
+                    var builder = new StringBuilder ();
+                    for (int i=0; i<state.buffer[0] + 1; i++) {
+                        builder.Append (state.buffer [i].ToString ());
+                        builder.Append (",");
+                    }
+                    Console.WriteLine ("{0}", builder.ToString ());
                 }
-                Console.WriteLine ("{0}", builder.ToString());
 	            // There  might be more data, so store the data received so far.
                 state.sb.Append(Encoding.UTF8.GetString(state.buffer,0,bytesRead));
 
@@ -115,9 +120,19 @@ namespace Sean.World
 	                // All the data has been read from the client.
 	                Console.WriteLine("Read {0} bytes from socket", content.Length );
 
-	                // Echo the data back to the client.
-	                Send(handler, content);
+                    var recv = MessageParser.ReadMessage (state.buffer);
 
+	                // Echo a response back to the client.
+                    var messageBuilder = new CommsMessages.Message.Builder ();
+                    messageBuilder.SetMsgtype((int)CommsMessages.MsgType.eResponse);
+                    var respBuilder = new CommsMessages.Response.Builder ();
+                    respBuilder.SetCode(0);
+                    respBuilder.SetMessage("OK");
+                    messageBuilder.SetResponse(respBuilder);
+                    var message = messageBuilder.BuildPartial ();
+
+                    var messageBytes = MessageParser.WriteMessage (message);
+                    Send(handler, messageBytes);
 	            } else {
 	                // Not all data received. Get more.
 					handler.BeginReceive(state.buffer, 0, ServerStateObject.BufferSize, 0,
@@ -126,10 +141,10 @@ namespace Sean.World
 	        }
 	    }
 
-	    private static void Send(Socket handler, String data) {
+        private static void Send(Socket handler, byte[] byteData) {
             Console.WriteLine ("Send");
 	        // Convert the string data to byte data using ASCII encoding.
-            byte[] byteData = Encoding.UTF8.GetBytes(data);
+            //byte[] byteData = Encoding.UTF8.GetBytes(data);
 
             var builder = new StringBuilder ();
             for (int i=0; i<byteData.Length; i++) {
