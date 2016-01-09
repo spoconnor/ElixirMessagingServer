@@ -3,21 +3,106 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Sean.World
 {
-    public static Hashtable clientsList = new Hashtable(); 
 
 	// State object for reading client data asynchronously
-	public class ServerStateObject {
-	    // Client  socket.
-	    public Socket workSocket = null;
-	    // Size of receive buffer.
+	public class ClientConnection {
+        public ClientConnection(TcpClient inClientSocket)
+        {
+            this.socket = inClientSocket;
+        }
+
+        public static List<ClientConnection> clientsList = new List<ClientConnection> ();
+
+	    public TcpClient socket = null;
 	    public const int BufferSize = 1024;
-	    // Receive buffer.
 	    public byte[] buffer = new byte[BufferSize];
-	    // Received data string.
 	    public StringBuilder sb = new StringBuilder();  
+
+        public void StartClient()
+        {
+            Thread ctThread = new Thread(DoConversation);
+            ctThread.Start();
+        }
+
+        private void DoConversation()
+        {
+            int requestCount = 0;
+            byte[] bytesFrom = new byte[10025];
+            string dataFromClient = null;
+            Byte[] sendBytes = null;
+            string serverResponse = null;
+            string rCount = null;
+            requestCount = 0;
+
+            try {
+                while (true) {
+                    NetworkStream networkStream = socket.GetStream ();
+                    int bytesRead = networkStream.Read (bytesFrom, 0, BufferSize);
+                    if (bytesRead > 0)
+                    {
+                        Console.WriteLine ("Read {0} bytes", bytesRead);
+                        {
+                            var builder = new StringBuilder ();
+                            for (int i=0; i<bytesFrom[0] + 1; i++) {
+                                builder.Append (bytesFrom [i].ToString ());
+                                builder.Append (",");
+                            }
+                            Console.WriteLine ("{0}", builder.ToString ());
+                        }
+
+                        var recv = MessageParser.ReadMessage (bytesFrom);
+
+                        // Send a response back to the client.
+                        var messageBuilder = new CommsMessages.Message.Builder ();
+                        messageBuilder.SetMsgtype ((int)CommsMessages.MsgType.eResponse);
+                        var respBuilder = new CommsMessages.Response.Builder ();
+                        respBuilder.SetCode (0);
+                        respBuilder.SetMessage ("OK");
+                        messageBuilder.SetResponse (respBuilder);
+                        var message = messageBuilder.BuildPartial ();
+
+                        var messageBytes = MessageParser.WriteMessage (message);
+                        Send (messageBytes);
+                    }
+                    else
+                    {
+                        Thread.Sleep(500);
+                    }
+                }
+            } catch (Exception ex) {
+                Console.WriteLine (ex.ToString ());
+            }
+        }
+
+        public void Send(byte[] byteData) {
+            Console.WriteLine ("Send");
+            var builder = new StringBuilder ();
+            for (int i=0; i<byteData.Length; i++) {
+                builder.Append (byteData [i].ToString ());
+                builder.Append (",");
+            }
+            Console.WriteLine ("{0}", builder.ToString());
+
+            // Begin sending the data to the remote device.
+            NetworkStream socketStream = socket.GetStream();
+            socketStream.Write(byteData, 0, byteData.Length);
+            socketStream.Flush ();
+        }
+         
+        /*
+        public static void broadcast(byte[] byteData)
+        {
+            foreach (ClientConnection client in clientsList)
+            {
+                client.Send (byteData);
+            }
+        }
+        */
 	}
 
 	public class ServerSocketListener {
@@ -30,49 +115,52 @@ namespace Sean.World
 	    public ServerSocketListener() {
 	    }
 
-	    public static void StartListening() {
-	        // Data buffer for incoming data.
-	        //byte[] bytes = new Byte[1024];
+	    public static void Run() {
+            Thread thread = new Thread (new ThreadStart (StartListening));
+            thread.Start ();
+        }
+        private static void StartListening() {
+            try {
+                TcpListener serverSocket = new TcpListener(ServerListenPort);
+                TcpClient clientSocket = default(TcpClient);
+                serverSocket.Start();
+                Console.WriteLine("Waiting for a connection...");
+                while (true) {
+                    var socket = serverSocket.AcceptTcpClient();
+                    Console.WriteLine("Client joined");
+                    var client = new ClientConnection (socket);
+                    ClientConnection.clientsList.Add(client);
+                    client.StartClient();
+                }
+                clientSocket.Close();
+                serverSocket.Stop();
+                Console.WriteLine("Ending Listening Server");
+            }
+            catch (Exception e) {
+                Console.WriteLine("Exception caught in ServerSocketListener - {0}", e.ToString());
+            }
 
-	        // Establish the local endpoint for the socket.
-	        // The DNS name of the computer
-	        // running the listener is "host.contoso.com".
+            /*
 	        IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
 	        IPAddress ipAddress = ipHostInfo.AddressList[0];
 			IPEndPoint localEndPoint = new IPEndPoint(ipAddress, ServerListenPort);
-
-	        // Create a TCP/IP socket.
-	        Socket listener = new Socket(AddressFamily.InterNetwork,
-	            SocketType.Stream, ProtocolType.Tcp );
-
-	        // Bind the socket to the local endpoint and listen for incoming connections.
+	        Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
 	        try {
 	            listener.Bind(localEndPoint);
 	            listener.Listen(100);
-
 	            while (true) {
-	                // Set the event to nonsignaled state.
 	                allDone.Reset();
-
-	                // Start an asynchronous socket to listen for connections.
 	                Console.WriteLine("Waiting for a connection...");
-	                listener.BeginAccept( 
-	                    new AsyncCallback(AcceptCallback),
-	                    listener );
-
-	                // Wait until a connection is made before continuing.
-	                allDone.WaitOne();
+	                listener.BeginAccept(new AsyncCallback(AcceptCallback), listener );
+                    allDone.WaitOne(); // Wait until a connection is made before continuing.
 	            }
-
 	        } catch (Exception e) {
 	            Console.WriteLine(e.ToString());
 	        }
-
-	        Console.WriteLine("\nPress ENTER to continue...");
-	        Console.Read();
-
+            */   
 	    }
 
+        /*
 	    public static void AcceptCallback(IAsyncResult ar) {
             Console.WriteLine ("AcceptCallback");
 	        // Signal the main thread to continue.
@@ -83,20 +171,22 @@ namespace Sean.World
 	        Socket handler = listener.EndAccept(ar);
 
 	        // Create the state object.
-			ServerStateObject state = new ServerStateObject();
-	        state.workSocket = handler;
-			handler.BeginReceive( state.buffer, 0, ServerStateObject.BufferSize, 0,
+			ClientConnection state = new ClientConnection();
+	        state.socket = handler;
+			handler.BeginReceive( state.buffer, 0, ClientConnection.BufferSize, 0,
 	            new AsyncCallback(ReadCallback), state);
 	    }
+        */
 
+        /*
 	    public static void ReadCallback(IAsyncResult ar) {
             Console.WriteLine ("ReadCallback");
 	        String content = String.Empty;
 
 	        // Retrieve the state object and the handler socket
 	        // from the asynchronous state object.
-			ServerStateObject state = (ServerStateObject) ar.AsyncState;
-	        Socket handler = state.workSocket;
+			ClientConnection state = (ClientConnection) ar.AsyncState;
+	        Socket handler = state.socket;
 
 	        // Read data from the client socket. 
 	        int bytesRead = handler.EndReceive(ar);
@@ -135,7 +225,7 @@ namespace Sean.World
                     Send(handler, messageBytes);
 	            } else {
 	                // Not all data received. Get more.
-					handler.BeginReceive(state.buffer, 0, ServerStateObject.BufferSize, 0,
+					handler.BeginReceive(state.buffer, 0, ClientConnection.BufferSize, 0,
 	                    new AsyncCallback(ReadCallback), state);
 	            }
 	        }
@@ -174,6 +264,7 @@ namespace Sean.World
 	            Console.WriteLine(e.ToString());
 	        }
 	    }
+        */   
 	}
 
 }

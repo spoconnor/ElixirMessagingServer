@@ -39,8 +39,8 @@ namespace Sean.World
             Octaves = 3;
             MinY = 0;
             MaxY = 100;
-            SizeX = 20;
-            SizeZ = 40;
+            SizeX = 10;
+            SizeZ = 10;
         }
 
         public void Generate()

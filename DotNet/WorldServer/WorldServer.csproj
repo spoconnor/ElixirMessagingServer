@@ -40,6 +40,7 @@
     <Reference Include="Google.ProtocolBuffers">
       <HintPath>..\..\ProtoBufs\DotNet\Google.ProtocolBuffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -76,13 +77,11 @@
     <Compile Include="ServerSocketListener.cs" />
     <Compile Include="World\MessageParser.cs" />
     <Compile Include="World\ClientManager.cs" />
+    <Compile Include="ClientSocket.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Shared\" />
     <Folder Include="World\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClientSocket.cs_" />
   </ItemGroup>
 </Project>

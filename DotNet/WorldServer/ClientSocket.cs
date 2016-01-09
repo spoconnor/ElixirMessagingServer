@@ -85,7 +85,6 @@ namespace Sean.World
             socket = new Socket(
                 AddressFamily.InterNetwork, 
                 SocketType.Stream, ProtocolType.Tcp );
-
             socket.Connect(remoteEP);
             Console.WriteLine("Socket connected to {0}", socket.RemoteEndPoint.ToString());
         }
@@ -95,7 +94,24 @@ namespace Sean.World
             try {
                 if (!IsConnected) Connect();
                 // Encode the data string into a byte array.
-                byte[] msg = Encoding.ASCII.GetBytes ("This is a test<EOF>");
+
+                var messageBytes = MessageParser.WriteMessage (message);
+
+                //byte[] msg = Encoding.ASCII.GetBytes ("This is a test<EOF>");
+                var msg = new byte[messageBytes.Length + data.Length];
+                //msg[0] = (byte)((messageBytes.Length + data.Length)/256);
+                //msg[1] = (byte)((messageBytes.Length + data.Length)%256);
+                messageBytes.CopyTo(msg, 0);
+                data.CopyTo(msg, messageBytes.Length);
+
+                System.Text.StringBuilder builder = new System.Text.StringBuilder();
+                for (int z = 0; z < 20; z++)
+                {
+                    builder.Append(msg[z]);
+                    builder.Append(",");
+                }
+                Console.WriteLine(builder.ToString());
+
                 int bytesSent = socket.Send (msg);
                 Console.WriteLine("SynchronousSocketClient.SendMessage sent {0} bytes", bytesSent);
             } catch (ArgumentNullException ane) {

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Sean.World
 {
@@ -19,8 +21,30 @@ namespace Sean.World
 
             //ClientSocket.SendMessage ();
 
-            ServerSocketListener.StartListening();
+            ServerSocketListener.Run();
 
+            while (true) {
+                var mapData = worldMapData.Serialize().ToArray();
+
+                var messageBuilder = new CommsMessages.Message.Builder ();
+                messageBuilder.SetMsgtype ((int)CommsMessages.MsgType.eMap);
+                messageBuilder.SetDest (0);
+                messageBuilder.SetFrom (1);
+                var mapBuilder = new CommsMessages.Map.Builder ();
+                mapBuilder.SetMinX (0);
+                mapBuilder.SetMinY (0);
+                mapBuilder.SetMaxX (worldMapData.SizeX);
+                mapBuilder.SetMaxY (worldMapData.SizeZ);
+                mapBuilder.SetDataSize (mapData.Length);
+                messageBuilder.SetMap (mapBuilder);
+                var message = messageBuilder.BuildPartial ();
+                //var messageBytes = MessageParser.WriteMessage (message);
+
+                //ClientConnection.broadcast(messageBytes.Concat(mapData).ToArray());
+                ClientSocket.SendMessage (message, mapData);
+                
+                System.Threading.Thread.Sleep (10000);
+            }
 
             Console.WriteLine("Press any key to exit");
             Console.ReadKey();
