@@ -17,9 +17,9 @@ namespace Sean.World
         {
             maxHeight = heightMap;
             for (byte y=0; y<heightMap; y++) {
-                cells [y] = 1;
+                cells [y] = 5;
             }
-            cells [maxHeight] = 2;
+            cells [maxHeight] = 5;
         }
 
         public IEnumerable<byte> Serialize()
@@ -38,7 +38,7 @@ namespace Sean.World
         {
             Octaves = 3;
             MinY = 0;
-            MaxY = 100;
+            MaxY = 10;
             SizeX = 10;
             SizeZ = 10;
         }
@@ -52,7 +52,7 @@ namespace Sean.World
                 System.Text.StringBuilder builder = new System.Text.StringBuilder();
                 for (int z = 0; z < SizeZ; z++)
                 {
-                    builder.Append(heightMap[x][z] / 10);
+                    builder.Append(heightMap[x][z]);
                     mapCells [x] [z] = new MapCell ();
                     mapCells [x] [z].Generate ((byte)heightMap[x][z]);
                 }
