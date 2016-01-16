@@ -82,6 +82,5 @@ namespace Sean.World
         private int[][] heightMap;
         private MapCell[][] mapCells;
     }
-
 }
 
