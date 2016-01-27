@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Owin.Hosting;
+using System.Net.Http;
 
 namespace Sean.World
 {
@@ -11,6 +13,19 @@ namespace Sean.World
 		static public void Main(String[] args)
 		{
 			Console.WriteLine("World Server...");
+
+            // Start OWIN host 
+            string baseAddress = "http://localhost:9000/"; 
+            using (WebApp.Start<Startup>(url: baseAddress)) 
+            { 
+                HttpClient client = new HttpClient(); 
+                var response = client.GetAsync(baseAddress + "api/Test").Result; // Test call
+                Console.WriteLine(response); 
+                Console.WriteLine(response.Content.ReadAsStringAsync().Result); 
+            }
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+
             worldMapData = new WorldMapData();
             worldMapData.Generate();
 
