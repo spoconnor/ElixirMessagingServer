@@ -14,6 +14,7 @@ namespace Sean.World
 		{
 			Console.WriteLine("World Server...");
 
+            /*
             // Start OWIN host 
             string baseAddress = "http://localhost:9000/"; 
             using (WebApp.Start<Startup>(url: baseAddress)) 
@@ -25,9 +26,26 @@ namespace Sean.World
             }
             Console.WriteLine("Press any key to continue");
             Console.ReadKey();
+            */
 
             worldMapData = new WorldMapData();
             worldMapData.Generate();
+
+            while (true)
+            {
+                Console.Clear ();
+                worldMapData.Render ();
+                var key = Console.ReadKey ();
+                switch (key.KeyChar)
+                {
+                    case 'q': Cursor.MoveUp (); break;
+                    case 'a': Cursor.MoveDown (); break;
+                    case 'p': Cursor.MoveRight (); break;
+                    case 'o': Cursor.MoveLeft (); break;
+                    case '+': Cursor.ZoomIn (); break;
+                    case '-': Cursor.ZoomOut (); break;
+                }
+            }
 
 			WorldData.Initialize(); // TODO - not hooked in
 
@@ -48,15 +66,15 @@ namespace Sean.World
                 var mapBuilder = new CommsMessages.Map.Builder ();
                 mapBuilder.SetMinX (0);
                 mapBuilder.SetMinY (0);
-                mapBuilder.SetMaxX (worldMapData.SizeX);
-                mapBuilder.SetMaxY (worldMapData.SizeZ);
+                mapBuilder.SetMaxX (50);
+                mapBuilder.SetMaxY (80);
                 mapBuilder.SetDataSize (mapData.Length);
                 messageBuilder.SetMap (mapBuilder);
                 var message = messageBuilder.BuildPartial ();
                 //var messageBytes = MessageParser.WriteMessage (message);
 
                 //ClientConnection.broadcast(messageBytes.Concat(mapData).ToArray());
-                ClientSocket.SendMessage (message, mapData);
+//                ClientSocket.SendMessage (message, mapData);
                 
                 System.Threading.Thread.Sleep (10000);
             }

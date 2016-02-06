@@ -111,7 +111,6 @@
     <Compile Include="World\Generator\PerlinNoise.cs" />
     <Compile Include="World\Generator\TreeGenerator.cs" />
     <Compile Include="World\Render\TexCoordsShort.cs" />
-    <Compile Include="World\WorldMapData.cs" />
     <Compile Include="World\Generator\Misc.cs" />
     <Compile Include="ServerSocketListener.cs" />
     <Compile Include="World\MessageParser.cs" />
@@ -120,12 +119,21 @@
     <Compile Include="RestInterface\Startup.cs" />
     <Compile Include="RestInterface\TestController.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
+    <Compile Include="World\Map\WorldMapData.cs" />
+    <Compile Include="World\Map\RegionMapData.cs" />
+    <Compile Include="World\Map\Cursor.cs" />
+    <Compile Include="World\Map\Cell.cs" />
+    <Compile Include="World\Objects\Character.cs" />
+    <Compile Include="World\Map\Location.cs" />
+    <Compile Include="World\Objects\CharacterManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Shared\" />
     <Folder Include="World\" />
     <Folder Include="RestInterface\" />
+    <Folder Include="World\Map\" />
+    <Folder Include="World\Objects\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

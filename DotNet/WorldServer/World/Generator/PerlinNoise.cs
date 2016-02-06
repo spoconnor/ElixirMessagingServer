@@ -22,7 +22,7 @@
 		}
 
 		private static int Interpolate(int minY, int maxY, float t)
-		{
+        {
 			float u = 1 - t;
 			return (int)(minY * u + maxY * t);
 		}
@@ -58,7 +58,6 @@
 			}
 			return treeMap;
 		}
-
 
 		private static float[][] GenerateSmoothNoise(float[][] baseNoise, int octave)
 		{
