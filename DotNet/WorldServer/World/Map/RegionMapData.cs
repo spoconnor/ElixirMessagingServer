@@ -18,10 +18,11 @@ namespace Sean.World
 
         public string RenderWorldView()
         {
-            if (_height > WorldMapData.WaterLevel)
-                return "O";
-            else
-                return " ";
+            //if (_height > WorldMapData.WaterLevel)
+            //    return "O";
+            //else
+            //    return " ";
+            return _height.ToString();
         }
 
         public void Render()

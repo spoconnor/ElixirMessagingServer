@@ -10,10 +10,11 @@ namespace Sean.World
 
         public string Render()
         {
-            if (_height > WorldMapData.WaterLevel)
-                return ".";
-            else
-                return " ";
+            //if (_height > WorldMapData.WaterLevel)
+            //    return ".";
+            //else
+            //    return " ";
+            return _height.ToString ();
         }
 
         private byte _height;

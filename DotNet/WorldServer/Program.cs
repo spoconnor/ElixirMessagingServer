@@ -28,6 +28,9 @@ namespace Sean.World
             Console.ReadKey();
             */
 
+            var d = new Array<int> (5, 10, 5, 10, 1);
+
+
             worldMapData = new WorldMapData();
             worldMapData.Generate();
 

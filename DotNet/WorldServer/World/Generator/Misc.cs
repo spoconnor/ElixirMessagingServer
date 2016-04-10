@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Sean.World
 {
@@ -14,6 +16,18 @@ namespace Sean.World
             }
             return image;
         }
+
+        public float GetDeterministicHash (int x, int z, int worldSeed)
+        {
+            using (MD5 md5Hash = MD5.Create ()) 
+            {
+                string input = $"{x}-{z}-{worldSeed}";
+                // Convert the input string to a byte array and compute the hash.
+                byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+                return System.BitConverter.ToSingle(data, 0);
+            }
+        }
+
     }
 }
 
