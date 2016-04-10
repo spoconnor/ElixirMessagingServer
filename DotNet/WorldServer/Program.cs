@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Owin.Hosting;
+//using Microsoft.Owin.Hosting;
 using System.Net.Http;
 
 namespace Sean.World
@@ -28,8 +28,10 @@ namespace Sean.World
             Console.ReadKey();
             */
 
-            var d = new Array<int> (5, 10, 5, 10, 1);
-
+            var d = new Array<int> (new ArraySize(){minX=50, maxX=100, minZ=50, maxZ=100, scale=5});
+            foreach (var a in d.GetLines()) {
+            
+            }
 
             worldMapData = new WorldMapData();
             worldMapData.Generate();

@@ -17,7 +17,7 @@ namespace Sean.World
             return image;
         }
 
-        public float GetDeterministicHash (int x, int z, int worldSeed)
+        public static float GetDeterministicHash (int x, int z, int worldSeed)
         {
             using (MD5 md5Hash = MD5.Create ()) 
             {

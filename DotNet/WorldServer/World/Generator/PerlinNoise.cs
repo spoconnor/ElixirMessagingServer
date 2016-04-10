@@ -2,18 +2,13 @@
 {
 	internal class PerlinNoise
 	{
-		private static float[][] GenerateWhiteNoise(int width, int height)
+        private static void GenerateWhiteNoise(Array<float> array, int worldSeed)
 		{
-            float[][] noise = Misc.GetEmptyArray<float>(width, height);
-
-			for (int i = 0; i < width; i++)
-			{
-				for (int j = 0; j < height; j++)
-				{
-					noise[i][j] = (float)Settings.Random.NextDouble();
-				}
-			}
-			return noise;
+            for (int z = array.Size.minZ; z < array.Size.maxZ; z += array.Size.scale) {
+                for (int x = array.Size.minX; x < array.Size.maxX; x += array.Size.scale) {
+                    array.Set (x, z, Misc.GetDeterministicHash (x, z, worldSeed));
+                }
+            }		
 		}
 
 		private static float Interpolate(float x0, float x1, float alpha)
@@ -27,44 +22,34 @@
 			return (int)(minY * u + maxY * t);
 		}
 
-		private static int[][] MapInts(int minY, int maxY, float[][] perlinNoise)
+        private static Array<int> MapInts(int minY, int maxY, Array<float> perlinNoise)
 		{
-			int width = perlinNoise.Length;
-			int height = perlinNoise[0].Length;
-            int[][] heightMap = Misc.GetEmptyArray<int>(width, height);
-
-			for (int i = 0; i < width; i++)
-			{
-				for (int j = 0; j < height; j++)
-				{
-					heightMap[i][j] = Interpolate(minY, maxY, perlinNoise[i][j]);
-				}
-			}
+            var heightMap = new Array<int>(perlinNoise.Size);
+            for (int z = heightMap.Size.minZ; z < heightMap.Size.maxZ; z += heightMap.Size.scale) {
+                for (int x = heightMap.Size.minX; x < heightMap.Size.maxX; x += heightMap.Size.scale) {
+                    heightMap.Set (x, z, Interpolate(minY, maxY, perlinNoise.Get(x,z)));
+                }
+            }
 			return heightMap;
 		}
 
-		private static float[][] MapFloats(float minY, float maxY, float[][] perlinNoise)
-		{
-			int width = perlinNoise.Length;
-			int height = perlinNoise[0].Length;
-			float[][] treeMap = Misc.GetEmptyArray<float>(width, height);
+        private static Array<float> MapFloats(int minY, int maxY, Array<float> perlinNoise)
+        {
+            var heightMap = new Array<float>(perlinNoise.Size);
+            for (int z = heightMap.Size.minZ; z < heightMap.Size.maxZ; z += heightMap.Size.scale) {
+                for (int x = heightMap.Size.minX; x < heightMap.Size.maxX; x += heightMap.Size.scale) {
+                    heightMap.Set (x, z, Interpolate(minY, maxY, perlinNoise.Get(x,z)));
+                }
+            }
+            return heightMap;
+        }
 
-			for (int i = 0; i < width; i++)
-			{
-				for (int j = 0; j < height; j++)
-				{
-					treeMap[i][j] = Interpolate(minY, maxY, perlinNoise[i][j]);
-				}
-			}
-			return treeMap;
-		}
-
-		private static float[][] GenerateSmoothNoise(float[][] baseNoise, int octave)
+        private static Array<float> GenerateSmoothNoise(Array<float> baseNoise, int octave)
 		{
 			int width = baseNoise.Length;
 			int height = baseNoise[0].Length;
 
-            float[][] smoothNoise = Misc.GetEmptyArray<float>(width, height);
+            var smoothNoise = Misc.GetEmptyArray<float>(width, height);
 			int samplePeriod = 1 << octave; // calculates 2 ^ k
 			float sampleFrequency = 1.0f / samplePeriod;
 
@@ -89,13 +74,13 @@
 					float bottom = Interpolate(baseNoise[iSample0][jSample1], baseNoise[iSample1][jSample1], horizontalBlend);
 
 					//final blend
-					smoothNoise[i][j] = Interpolate(top, bottom, verticalBlend);
+                    smoothNoise.Set(i,j,Interpolate(top, bottom, verticalBlend));
 				}
 			}
 			return smoothNoise;
 		}
 
-		private static float[][] GeneratePerlinNoise(float[][] baseNoise, int octaveCount)
+        private static Array<float> GeneratePerlinNoise(Array<float> baseNoise, int octaveCount)
 		{
 			int width = baseNoise.Length;
 			int height = baseNoise[0].Length;
@@ -110,7 +95,7 @@
 				smoothNoise[i] = GenerateSmoothNoise(baseNoise, i);
 			}
 
-            float[][] perlinNoise = Misc.GetEmptyArray<float>(width, height); //an array of floats initialised to 0
+            Array<float> perlinNoise = Misc.GetEmptyArray<float>(width, height); //an array of floats initialised to 0
 
 			float amplitude = 1f;
 			float totalAmplitude = 0.0f;
@@ -141,18 +126,24 @@
 			return perlinNoise;
 		}
 
-		public static int[][] GetIntMap(int width, int height, int minY, int maxY, int octaveCount)
+		public static Array<int> GetIntMap(int width, int height, int minY, int maxY, int octaveCount)
 		{
-            float[][] baseNoise = GenerateWhiteNoise(width, height);
-			float[][] perlinNoise = GeneratePerlinNoise(baseNoise, octaveCount);
+            var baseNoise = new Array<float>();
+            GenerateWhiteNoise(baseNoise, WorldSeed);
+            var perlinNoise = new Array<float>();
+			GeneratePerlinNoise(baseNoise, perlinNoise, octaveCount);
 			return MapInts(minY, maxY, perlinNoise);
 		}
 
         public static float[][] GetFloatMap(int width, int height, float minY, float maxY, int octaveCount)
 		{
-            float[][] baseNoise = GenerateWhiteNoise(width, height);
-			float[][] perlinNoise = GeneratePerlinNoise(baseNoise, octaveCount);
-			return MapFloats(minY, maxY, perlinNoise);
+            var baseNoise = new Array<float>();
+            GenerateWhiteNoise(baseNoise, WorldSeed);
+            var perlinNoise = new Array<float>();
+            GeneratePerlinNoise(baseNoise, perlinNoise, octaveCount);
+            return MapFloats(minY, maxY, perlinNoise);
 		}
+
+        public int WorldSeed { get; set; }
 	}
 }
