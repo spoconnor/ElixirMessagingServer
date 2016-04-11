@@ -5,6 +5,12 @@ using System.Collections.Generic;
 
 namespace Sean.World
 {
+    public struct Vector2
+    {
+        public float x;
+        public float y;
+    }
+
     public class ArraySize
     {
         public int minZ;
@@ -12,6 +18,8 @@ namespace Sean.World
         public int minX;
         public int maxX;
         public int scale;
+        public int width { get { return maxZ - minZ; } }
+        public int height { get { return maxX - minX; } }
     }
 
     public class ArrayLine<T> 
