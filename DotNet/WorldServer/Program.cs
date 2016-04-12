@@ -28,10 +28,14 @@ namespace Sean.World
             Console.ReadKey();
             */
 
-            var size = new ArraySize(){minX=0, maxX=40, minZ=0, maxZ=40, scale=1};
-
-            var data = PerlinNoise.GetIntMap(size, 3);
+            var size = new ArraySize(){minX=0, maxX=80, minZ=0, maxZ=10, scale=1};
+            var data = PerlinNoise.GetIntMap(size, 1);
             data.Render();
+            Console.WriteLine ();
+            size = new ArraySize(){minX=0, maxX=80, minZ=0, maxZ=20, scale=1};
+            data = PerlinNoise.GetIntMap(size, 3);
+            data.Render();
+
             //var d = new Array<int> (new ArraySize(){minX=50, maxX=100, minZ=50, maxZ=100, scale=5});
             //foreach (var a in d.GetLines()) {
             //

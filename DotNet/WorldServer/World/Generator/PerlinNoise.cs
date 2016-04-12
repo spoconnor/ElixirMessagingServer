@@ -181,6 +181,7 @@ namespace Sean.World
 
 
         //---------------
+        // see http://flafla2.github.io/2014/08/09/perlinnoise.html
 
         public int repeat;
 
