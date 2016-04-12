@@ -18,8 +18,12 @@ namespace Sean.World
         public int minX;
         public int maxX;
         public int scale;
-        public int width { get { return maxZ - minZ; } }
-        public int height { get { return maxX - minX; } }
+        public int minHeight;
+        public int maxHeight;
+        public int zWidth { get { return maxZ - minZ; } }
+        public int xHeight { get { return maxX - minX; } }
+        public float NormalizeZ(int z) { return (float)(z - minZ) / zWidth; }
+        public float NormalizeX(int x) { return (float)(x - minX) / xHeight; }
     }
 
     public class ArrayLine<T> 
@@ -32,17 +36,17 @@ namespace Sean.World
 
         public T this[int x]
         {
-            get { return _data[x]; }
-            set { _data[x] = value; }
+            get { return _data[ToArrayCoord(x)]; }
+            set { _data[ToArrayCoord(x)] = value; }
         } 
             
         public T Get(int x)
         {
-            return _data [x];
+            return _data [ToArrayCoord(x)];
         }
-        public void Set(int x, int z, T value)
+        public void Set(int x, T value)
         {
-            _data [x] = value;
+            _data [ToArrayCoord(x)] = value;
         }
 
         public IEnumerator<T> GetCells ()
@@ -57,6 +61,17 @@ namespace Sean.World
         {
             return (x - _size.minX) / _size.scale;
         }
+
+        public void Render()
+        {
+            System.Text.StringBuilder builder = new System.Text.StringBuilder();
+            for (int x = 0; x < ToArrayCoord(_size.maxX); x++)
+            {
+                builder.Append(_data[x]);
+            }
+            Console.WriteLine(builder.ToString());
+        }
+
 
         private T[] _data;
         private ArraySize _size;
@@ -78,16 +93,16 @@ namespace Sean.World
 
         public object this[int z]
         {
-            get { return _data[z]; }
+            get { return _data[ToArrayCoord(z)]; }
         } 
 
         public T Get(int x, int z)
         {
-            return _data [z].Get (x);
+            return _data [ToArrayCoord(z)].Get (x);
         }
         public void Set(int x, int z, T value)
         {
-            _data [z].Set (x, value);
+            _data [ToArrayCoord(z)].Set(x, value);
         }
 
         public IEnumerable<ArrayLine<T>> GetLines ()
@@ -97,6 +112,8 @@ namespace Sean.World
                 yield return _data [z];
             }
         }
+
+        /*
         public IEnumerable<T> GetCells ()
         {
             for (int z = 0; z < ToArrayCoord (_size.maxZ); z++) 
@@ -106,6 +123,16 @@ namespace Sean.World
                 }
             }
         }
+        */
+
+        public void Render()
+        {
+            for (int z = 0; z < ToArrayCoord (_size.maxZ); z++) 
+            {
+                _data[z].Render();
+            }
+        }
+
 
         private int ToArrayCoord(int z)
         {

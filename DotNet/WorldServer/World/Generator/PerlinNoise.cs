@@ -67,7 +67,7 @@ namespace Sean.World
 				//calculate the horizontal sampling indices
 				int iSample0 = (i / samplePeriod) * samplePeriod;
                 int iSample1 = (iSample0 + samplePeriod);
-                if (iSample1 > baseNoise.Size.maxZ) iSample1 = iSample1 - baseNoise.Size.width; //wrap around
+                if (iSample1 > baseNoise.Size.maxZ) iSample1 = iSample1 - baseNoise.Size.zWidth; //wrap around
 				float horizontalBlend = (i - iSample0) * sampleFrequency;
 
                 for (int j = baseNoise.Size.minX; j < baseNoise.Size.maxX; j += baseNoise.Size.scale) 
@@ -75,7 +75,7 @@ namespace Sean.World
 					//calculate the vertical sampling indices
 					int jSample0 = (j / samplePeriod) * samplePeriod;
                     int jSample1 = (jSample0 + samplePeriod);
-                    if (jSample1 > baseNoise.Size.maxX) jSample1 = jSample1 - baseNoise.Size.height; //wrap around
+                    if (jSample1 > baseNoise.Size.maxX) jSample1 = jSample1 - baseNoise.Size.xHeight; //wrap around
 					float verticalBlend = (j - jSample0) * sampleFrequency;
 
 					//blend the top two corners
@@ -133,6 +133,7 @@ namespace Sean.World
 			return perlinNoise;
 		}
 
+        /*
 		public static Array<int> GetIntMap(ArraySize size, int octaveCount)
 		{
             var baseNoise = new Array<float>(size);
@@ -150,24 +151,33 @@ namespace Sean.World
             GeneratePerlinNoise(baseNoise, perlinNoise, octaveCount);
             return MapFloats(minY, maxY, perlinNoise);
 		}
+        */
 
-
-
-      
-        /////////////////////////////////////////
-        private const int VectorCount = 100;
-        private static Vector2[] vectors = new Vector2[VectorCount]; 
-        private static void PrecomputeVectors()
+        public static int[][] GetIntMap(int SizeX, int SizeZ, int MinY, int MaxY, int Octaves)
         {
-            for (int i = 0; i<VectorCount; i++)
-            {
-                float a = (i * 2 * Math.PI) / VectorCount;
-                vectors [i].x = Math.Cos (a);
-                vectors [i].y = Math.Sin (a);            
-            }
+            return new int[SizeX][];
+        }
+        public static float[][] GetFloatMap(int SizeInBlocksX, int SizeInBlocksZ, int a, int MAX_SURFACE_HEIGHT, int b)
+        {
+            return new float[SizeInBlocksX][];
         }
 
- 
+        public static Array<int> GetIntMap(ArraySize size, int octaveCount)
+        {
+            var perlin = new PerlinNoise();
+            var noise = new Array<int>(size);
+            for (int z = noise.Size.minZ; z < noise.Size.maxZ; z += noise.Size.scale)
+            {
+                for (int x = noise.Size.minX; x < noise.Size.maxX; x += noise.Size.scale)
+                {
+                    float iNorm = noise.Size.NormalizeZ(z);
+                    float jNorm = noise.Size.NormalizeX(x);
+                    var height = perlin.Perlin(iNorm, jNorm, 0.0);
+                    noise.Set(x,z, (int)(height*10));
+                }
+            }
+            return noise;
+        }
 
 
         //---------------
