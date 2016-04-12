@@ -17,6 +17,15 @@ namespace Sean.World
             return image;
         }
 
+        private static byte[] GenerateDeterministicHash(int x, int y, int z, int worldSeed)
+        {
+            using (MD5 md5Hash = MD5.Create ()) 
+            {
+                string input = $"{x}-{y}-{z}-{worldSeed}";
+                // Convert the input string to a byte array and compute the hash.
+                return md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+            }
+        }
         private static byte[] GenerateDeterministicHash(int x, int z, int worldSeed)
         {
             using (MD5 md5Hash = MD5.Create ()) 
@@ -30,6 +39,11 @@ namespace Sean.World
         {
             byte[] data = GenerateDeterministicHash(x,z,worldSeed);
             return System.BitConverter.ToSingle(data, 0);
+        }
+        public static int GetDeterministicInt (int x, int y, int z, int worldSeed)
+        {
+            byte[] data = GenerateDeterministicHash(x,y,z,worldSeed);
+            return System.BitConverter.ToInt32(data, 0);
         }
         public static int GetDeterministicInt (int x, int z, int worldSeed)
         {

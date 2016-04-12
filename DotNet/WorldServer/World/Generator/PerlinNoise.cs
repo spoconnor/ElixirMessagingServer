@@ -172,7 +172,7 @@ namespace Sean.World
                 {
                     float iNorm = noise.Size.NormalizeZ(z);
                     float jNorm = noise.Size.NormalizeX(x);
-                    var height = perlin.Perlin(iNorm, jNorm, 0.0);
+                    double height = perlin.OctavePerlin (iNorm, jNorm, 0.0, octaveCount, 1.0);
                     noise.Set(x,z, (int)(height*10));
                 }
             }
@@ -205,6 +205,7 @@ namespace Sean.World
             return total/maxValue;
         }
 
+        /*
         private static readonly int[] permutation = { 151,160,137,91,90,15,                 // Hash lookup table as defined by Ken Perlin.  This is a randomly
             131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,    // arranged array of all numbers from 0-255 inclusive.
             190, 6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,
@@ -228,6 +229,11 @@ namespace Sean.World
                 p[x] = permutation[x%256];
             }
         }
+        */
+
+        private int p(int x, int y, int z) {
+            return Misc.GetDeterministicInt (x, y, z, WorldSeed) % 256;
+        }
 
         public double Perlin(double x, double y, double z) {
             if(repeat > 0) {                                    // If we have any repeat on, change the coordinates to their "local" repetitions
@@ -247,14 +253,23 @@ namespace Sean.World
             double w = Fade(zf);
 
             int aaa, aba, aab, abb, baa, bba, bab, bbb;
-            aaa = p[p[p[    xi ]+    yi ]+    zi ];
-            aba = p[p[p[    xi ]+Inc(yi)]+    zi ];
-            aab = p[p[p[    xi ]+    yi ]+Inc(zi)];
-            abb = p[p[p[    xi ]+Inc(yi)]+Inc(zi)];
-            baa = p[p[p[Inc(xi)]+    yi ]+    zi ];
-            bba = p[p[p[Inc(xi)]+Inc(yi)]+    zi ];
-            bab = p[p[p[Inc(xi)]+    yi ]+Inc(zi)];
-            bbb = p[p[p[Inc(xi)]+Inc(yi)]+Inc(zi)];
+            //aaa = p[p[p[    xi ]+    yi ]+    zi ];
+            //aba = p[p[p[    xi ]+Inc(yi)]+    zi ];
+            //aab = p[p[p[    xi ]+    yi ]+Inc(zi)];
+            //abb = p[p[p[    xi ]+Inc(yi)]+Inc(zi)];
+            //baa = p[p[p[Inc(xi)]+    yi ]+    zi ];
+            //bba = p[p[p[Inc(xi)]+Inc(yi)]+    zi ];
+            //bab = p[p[p[Inc(xi)]+    yi ]+Inc(zi)];
+            //bbb = p[p[p[Inc(xi)]+Inc(yi)]+Inc(zi)];
+
+            aaa = p(    xi,     yi,      zi );
+            aba = p(    xi, Inc(yi),     zi );
+            aab = p(    xi,     yi,  Inc(zi));
+            abb = p(    xi, Inc(yi), Inc(zi));
+            baa = p(Inc(xi),    yi,      zi );
+            bba = p(Inc(xi),Inc(yi),     zi );
+            bab = p(Inc(xi),    yi,  Inc(zi));
+            bbb = p(Inc(xi),Inc(yi), Inc(zi));
 
             double x1, x2, y1, y2;
             x1 = Lerp(  Grad (aaa, xf  , yf  , zf),     // The gradient function calculates the dot product between a pseudorandom
