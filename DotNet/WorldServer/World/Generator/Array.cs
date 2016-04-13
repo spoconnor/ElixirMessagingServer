@@ -24,6 +24,8 @@ namespace Sean.World
         public int xHeight { get { return maxX - minX; } }
         public float NormalizeZ(int z) { return (float)(z - minZ) / zWidth; }
         public float NormalizeX(int x) { return (float)(x - minX) / xHeight; }
+        public int UnNormX(double x) { return (int)(x * xHeight) + minX; }
+        public int UnNormZ(double z) { return (int)(z * zWidth) + minZ; }
     }
 
     public class ArrayLine<T> 

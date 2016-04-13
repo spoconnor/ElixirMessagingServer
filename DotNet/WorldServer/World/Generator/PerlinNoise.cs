@@ -170,9 +170,7 @@ namespace Sean.World
             {
                 for (int x = noise.Size.minX; x < noise.Size.maxX; x += noise.Size.scale)
                 {
-                    float iNorm = noise.Size.NormalizeZ(z);
-                    float jNorm = noise.Size.NormalizeX(x);
-                    double height = perlin.OctavePerlin (iNorm, jNorm, 0.0, octaveCount, 1.0);
+                    double height = perlin.OctavePerlin (noise.Size, x,z, 0, octaveCount, 1.0); // switching z<->y
                     noise.Set(x,z, (int)(height*10));
                 }
             }
@@ -183,19 +181,19 @@ namespace Sean.World
         //---------------
         // see http://flafla2.github.io/2014/08/09/perlinnoise.html
 
-        public int repeat;
+        //public int repeat;
 
-        public PerlinNoise(int repeat = -1) {
-            this.repeat = repeat;
-        }
+        //public PerlinNoise(int repeat = -1) {
+        //    this.repeat = repeat;
+        //}
 
-        public double OctavePerlin(double x, double y, double z, int octaves, double persistence) {
+        public double OctavePerlin(ArraySize size, int x, int y, int z, int octaves, double persistence) {
             double total = 0;
-            double frequency = 1;
+            int frequency = 1;
             double amplitude = 1;
             double maxValue = 0;            // Used for normalizing result to 0.0 - 1.0
             for(int i=0;i<octaves;i++) {
-                total += Perlin(x * frequency, y * frequency, z * frequency) * amplitude;
+                total += Perlin(size, x * frequency, y * frequency, z * frequency) * amplitude;
 
                 maxValue += amplitude;
 
@@ -236,22 +234,19 @@ namespace Sean.World
             return Misc.GetDeterministicInt (x, y, z, WorldSeed) % 256;
         }
 
-        public double Perlin(double x, double y, double z) {
-            if(repeat > 0) {                                    // If we have any repeat on, change the coordinates to their "local" repetitions
-                x = x%repeat;
-                y = y%repeat;
-                z = z%repeat;
-            }
+        public double Perlin(ArraySize size, int x, int y, int z) {
+            //if(repeat > 0) {                                    // If we have any repeat on, change the coordinates to their "local" repetitions
+            //    x = x%repeat;
+            //    y = y%repeat;
+            //    z = z%repeat;
+            //}
 
-            int xi = (int)x & 255;                              // Calculate the "unit cube" that the point asked will be located in
-            int yi = (int)y & 255;                              // The left bound is ( |_x_|,|_y_|,|_z_| ) and the right bound is that
-            int zi = (int)z & 255;                              // plus 1.  Next we calculate the location (from 0.0 to 1.0) in that cube.
-            double xf = x-(int)x;                               // We also fade the location to smooth the result.
-            double yf = y-(int)y;
-            double zf = z-(int)z;
-            double u = Fade(xf);
-            double v = Fade(yf);
-            double w = Fade(zf);
+            //int xi = (int)x;// & 255;                     // Calculate the "unit cube" that the point asked will be located in
+            //int yi = (int)y;// & 255;                     // The left bound is ( |_x_|,|_y_|,|_z_| ) and the right bound is that
+            //int zi = (int)z;// & 255;                     // plus 1.  Next we calculate the location (from 0.0 to 1.0) in that cube.
+            //double xf = x-(int)x;                         // We also fade the location to smooth the result.
+            //double yf = y-(int)y;
+            //double zf = z-(int)z;
 
             int aaa, aba, aab, abb, baa, bba, bab, bbb;
             //aaa = p[p[p[    xi ]+    yi ]+    zi ];
@@ -263,29 +258,36 @@ namespace Sean.World
             //bab = p[p[p[Inc(xi)]+    yi ]+Inc(zi)];
             //bbb = p[p[p[Inc(xi)]+Inc(yi)]+Inc(zi)];
 
-            aaa = p(    xi,     yi,      zi );
-            aba = p(    xi, Inc(yi),     zi );
-            aab = p(    xi,     yi,  Inc(zi));
-            abb = p(    xi, Inc(yi), Inc(zi));
-            baa = p(Inc(xi),    yi,      zi );
-            bba = p(Inc(xi),Inc(yi),     zi );
-            bab = p(Inc(xi),    yi,  Inc(zi));
-            bbb = p(Inc(xi),Inc(yi), Inc(zi));
+            aaa = p(    x,     y,      z );
+            aba = p(    x, Inc(y),     z );
+            aab = p(    x,     y,  Inc(z));
+            abb = p(    x, Inc(y), Inc(z));
+            baa = p(Inc(x),    y,      z );
+            bba = p(Inc(x),Inc(y),     z );
+            bab = p(Inc(x),    y,  Inc(z));
+            bbb = p(Inc(x),Inc(y), Inc(z));
+
+            double xn = size.NormalizeX(x);
+            double yn = size.NormalizeZ(z);
+            double zn = 0;
+            double u = xn;//Fade(xn);
+            double v = yn;//Fade(yn);
+            double w = zn;//Fade(zn);
 
             double x1, x2, y1, y2;
-            x1 = Lerp(  Grad (aaa, xf  , yf  , zf),     // The gradient function calculates the dot product between a pseudorandom
-                Grad (baa, xf-1, yf  , zf),             // gradient vector and the vector from the input coordinate to the 8
+            x1 = Lerp(  Grad (aaa, xn  , yn  , zn),     // The gradient function calculates the dot product between a pseudorandom
+                Grad (baa, xn-1, yn  , zn),             // gradient vector and the vector from the input coordinate to the 8
                 u);                                     // surrounding points in its unit cube.
-            x2 = Lerp(  Grad (aba, xf  , yf-1, zf),     // This is all then lerped together as a sort of weighted average based on the faded (u,v,w)
-                Grad (bba, xf-1, yf-1, zf),             // values we made earlier.
+            x2 = Lerp(  Grad (aba, xn  , yn-1, zn),     // This is all then lerped together as a sort of weighted average based on the faded (u,v,w)
+                Grad (bba, xn-1, yn-1, zn),             // values we made earlier.
                 u);
             y1 = Lerp(x1, x2, v);
 
-            x1 = Lerp(  Grad (aab, xf  , yf  , zf-1),
-                Grad (bab, xf-1, yf  , zf-1),
+            x1 = Lerp(  Grad (aab, xn  , yn  , zn-1),
+                Grad (bab, xn-1, yn  , zn-1),
                 u);
-            x2 = Lerp(  Grad (abb, xf  , yf-1, zf-1),
-                Grad (bbb, xf-1, yf-1, zf-1),
+            x2 = Lerp(  Grad (abb, xn  , yn-1, zn-1),
+                Grad (bbb, xn-1, yn-1, zn-1),
                 u);
             y2 = Lerp (x1, x2, v);
 
@@ -294,7 +296,7 @@ namespace Sean.World
 
         public int Inc(int num) {
             num++;
-            if (repeat > 0) num %= repeat;
+            //if (repeat > 0) num %= repeat;
 
             return num;
         }
@@ -323,11 +325,7 @@ namespace Sean.World
         }
 
 
-
-
-
         //---------------
-
 
 
         public int WorldSeed { get; set; }
