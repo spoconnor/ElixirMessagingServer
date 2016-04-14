@@ -22,6 +22,10 @@ namespace Sean.World
         public int maxHeight;
         public int zWidth { get { return maxZ - minZ; } }
         public int xHeight { get { return maxX - minX; } }
+
+        public int period;
+        public int NormToPeriod(int v) { return (int)(v / period); }
+
         public float NormalizeZ(int z) { return (float)(z - minZ) / zWidth; }
         public float NormalizeX(int x) { return (float)(x - minX) / xHeight; }
         public int UnNormX(double x) { return (int)(x * xHeight) + minX; }

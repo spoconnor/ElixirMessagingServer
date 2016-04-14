@@ -258,14 +258,17 @@ namespace Sean.World
             //bab = p[p[p[Inc(xi)]+    yi ]+Inc(zi)];
             //bbb = p[p[p[Inc(xi)]+Inc(yi)]+Inc(zi)];
 
-            aaa = p(    x,     y,      z );
-            aba = p(    x, Inc(y),     z );
-            aab = p(    x,     y,  Inc(z));
-            abb = p(    x, Inc(y), Inc(z));
-            baa = p(Inc(x),    y,      z );
-            bba = p(Inc(x),Inc(y),     z );
-            bab = p(Inc(x),    y,  Inc(z));
-            bbb = p(Inc(x),Inc(y), Inc(z));
+            int xf = x;// size.NormToPeriod(x);
+            int yf = y;// size.NormToPeriod(y);
+            int zf = z;// size.NormToPeriod(z);
+            aaa = p(    xf,     yf,      zf );
+            aba = p(    xf, (yf+size.period),     zf );
+            aab = p(    xf,     yf,  (zf+size.period));
+            abb = p(    xf, (yf+size.period), (zf+size.period));
+            baa = p((xf+size.period),    yf,      zf );
+            bba = p((xf+size.period),(yf+size.period),     zf );
+            bab = p((xf+size.period),    yf,  (zf+size.period));
+            bbb = p((xf+size.period),(yf+size.period), (zf+size.period));
 
             double xn = size.NormalizeX(x);
             double yn = size.NormalizeZ(z);
@@ -292,13 +295,6 @@ namespace Sean.World
             y2 = Lerp (x1, x2, v);
 
             return (Lerp (y1, y2, w)+1)/2;              // For convenience we bound it to 0 - 1 (theoretical min/max before is -1 - 1)
-        }
-
-        public int Inc(int num) {
-            num++;
-            //if (repeat > 0) num %= repeat;
-
-            return num;
         }
 
         public static double Grad(int hash, double x, double y, double z) {
