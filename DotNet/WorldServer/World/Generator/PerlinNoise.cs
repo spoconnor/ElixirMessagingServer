@@ -258,9 +258,9 @@ namespace Sean.World
             //bab = p[p[p[Inc(xi)]+    yi ]+Inc(zi)];
             //bbb = p[p[p[Inc(xi)]+Inc(yi)]+Inc(zi)];
 
-            int xf = x;// size.NormToPeriod(x);
-            int yf = y;// size.NormToPeriod(y);
-            int zf = z;// size.NormToPeriod(z);
+            int xf = size.NormToPeriod(x);
+            int yf = size.NormToPeriod(y);
+            int zf = size.NormToPeriod(z);
             aaa = p(    xf,     yf,      zf );
             aba = p(    xf, (yf+size.period),     zf );
             aab = p(    xf,     yf,  (zf+size.period));
@@ -270,8 +270,8 @@ namespace Sean.World
             bab = p((xf+size.period),    yf,  (zf+size.period));
             bbb = p((xf+size.period),(yf+size.period), (zf+size.period));
 
-            double xn = size.NormalizeX(x);
-            double yn = size.NormalizeZ(z);
+            double xn = size.NormToPeriod (x);//size.NormalizeX(x);
+            double yn = size.NormToPeriod (y);//size.NormalizeZ(y);
             double zn = 0;
             double u = xn;//Fade(xn);
             double v = yn;//Fade(yn);
