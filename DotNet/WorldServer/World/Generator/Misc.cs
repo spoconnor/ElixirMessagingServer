@@ -40,15 +40,15 @@ namespace Sean.World
             byte[] data = GenerateDeterministicHash(x,z,worldSeed);
             return System.BitConverter.ToSingle(data, 0);
         }
-        public static int GetDeterministicInt (int x, int y, int z, int worldSeed)
+        public static uint GetDeterministicInt (int x, int y, int z, int worldSeed)
         {
             byte[] data = GenerateDeterministicHash(x,y,z,worldSeed);
-            return System.BitConverter.ToInt32(data, 0);
+            return System.BitConverter.ToUInt32(data, 0);
         }
-        public static int GetDeterministicInt (int x, int z, int worldSeed)
+        public static uint GetDeterministicInt (int x, int z, int worldSeed)
         {
             byte[] data = GenerateDeterministicHash(x,z,worldSeed);
-            return System.BitConverter.ToInt32(data, 0);
+            return System.BitConverter.ToUInt32(data, 0);
         }
 
     }

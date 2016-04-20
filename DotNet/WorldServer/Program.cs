@@ -28,11 +28,11 @@ namespace Sean.World
             Console.ReadKey();
             */
 
-            var size = new ArraySize(){minX=0, maxX=80, minZ=0, maxZ=20, scale=1, period=20};
+            var size = new ArraySize(){minX=0, maxX=60, minZ=0, maxZ=20, scale=1, period=20};
             var data = PerlinNoise.GetIntMap(size, 1);
             data.Render();
             Console.WriteLine ();
-            size = new ArraySize(){minX=0, maxX=80, minZ=20, maxZ=40, scale=1, period=20};
+            size = new ArraySize(){minX=0, maxX=60, minZ=20, maxZ=40, scale=1, period=20};
             data = PerlinNoise.GetIntMap(size, 1);
             data.Render();
 

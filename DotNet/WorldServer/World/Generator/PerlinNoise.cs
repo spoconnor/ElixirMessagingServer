@@ -170,7 +170,7 @@ namespace Sean.World
             {
                 for (int x = noise.Size.minX; x < noise.Size.maxX; x += noise.Size.scale)
                 {
-                    double height = perlin.OctavePerlin (noise.Size, x,z, 0, octaveCount, 1.0); // switching z<->y
+                    double height = perlin.OctavePerlin (noise.Size, x,1,z, octaveCount, 1.0);
                     noise.Set(x,z, (int)(height*10));
                 }
             }
@@ -188,12 +188,15 @@ namespace Sean.World
         //}
 
         public double OctavePerlin(ArraySize size, int x, int y, int z, int octaves, double persistence) {
+            double xf = (double)x / size.maxX;
+            double yf = 0.0;
+            double zf = (double)z / size.maxZ;
             double total = 0;
             int frequency = 1;
             double amplitude = 1;
             double maxValue = 0;            // Used for normalizing result to 0.0 - 1.0
             for(int i=0;i<octaves;i++) {
-                total += Perlin(size, x * frequency, y * frequency, z * frequency) * amplitude;
+                total += Perlin(size, xf, yf, zf) * amplitude;
 
                 maxValue += amplitude;
 
@@ -231,70 +234,56 @@ namespace Sean.World
         */
 
         private int p(int x, int y, int z) {
-            return Misc.GetDeterministicInt (x, y, z, WorldSeed) % 256;
+            return (int)(Misc.GetDeterministicInt (x, y, z, WorldSeed) % 256);
         }
 
-        public double Perlin(ArraySize size, int x, int y, int z) {
+        public double Perlin(ArraySize size, double x, double y, double z) {
             //if(repeat > 0) {                                    // If we have any repeat on, change the coordinates to their "local" repetitions
             //    x = x%repeat;
             //    y = y%repeat;
             //    z = z%repeat;
             //}
 
-            //int xi = (int)x;// & 255;                     // Calculate the "unit cube" that the point asked will be located in
-            //int yi = (int)y;// & 255;                     // The left bound is ( |_x_|,|_y_|,|_z_| ) and the right bound is that
-            //int zi = (int)z;// & 255;                     // plus 1.  Next we calculate the location (from 0.0 to 1.0) in that cube.
-            //double xf = x-(int)x;                         // We also fade the location to smooth the result.
-            //double yf = y-(int)y;
-            //double zf = z-(int)z;
+            int xi = (int)x;// & 255;                     // Calculate the "unit cube" that the point asked will be located in
+            int yi = (int)y;// & 255;                     // The left bound is ( |_x_|,|_y_|,|_z_| ) and the right bound is that
+            int zi = (int)z;// & 255;                     // plus 1.  Next we calculate the location (from 0.0 to 1.0) in that cube.
+            double xf = x-(int)x;                         // We also fade the location to smooth the result.
+            double yf = y-(int)y;
+            double zf = z-(int)z;
+
 
             int aaa, aba, aab, abb, baa, bba, bab, bbb;
-            //aaa = p[p[p[    xi ]+    yi ]+    zi ];
-            //aba = p[p[p[    xi ]+Inc(yi)]+    zi ];
-            //aab = p[p[p[    xi ]+    yi ]+Inc(zi)];
-            //abb = p[p[p[    xi ]+Inc(yi)]+Inc(zi)];
-            //baa = p[p[p[Inc(xi)]+    yi ]+    zi ];
-            //bba = p[p[p[Inc(xi)]+Inc(yi)]+    zi ];
-            //bab = p[p[p[Inc(xi)]+    yi ]+Inc(zi)];
-            //bbb = p[p[p[Inc(xi)]+Inc(yi)]+Inc(zi)];
+            aaa = p(    xi ,    yi ,    zi );
+            aba = p(    xi , (yi++),    zi );
+            aab = p(    xi ,    yi , (zi++));
+            abb = p(    xi , (yi++), (zi++));
+            baa = p( (xi++),    yi ,    zi );
+            bba = p( (xi++), (yi++),    zi );
+            bab = p( (xi++),    yi , (zi++));
+            bbb = p( (xi++), (yi++), (zi++));
 
-            int xf = size.NormToPeriod(x);
-            int yf = size.NormToPeriod(y);
-            int zf = size.NormToPeriod(z);
-            aaa = p(    xf,     yf,      zf );
-            aba = p(    xf, (yf+size.period),     zf );
-            aab = p(    xf,     yf,  (zf+size.period));
-            abb = p(    xf, (yf+size.period), (zf+size.period));
-            baa = p((xf+size.period),    yf,      zf );
-            bba = p((xf+size.period),(yf+size.period),     zf );
-            bab = p((xf+size.period),    yf,  (zf+size.period));
-            bbb = p((xf+size.period),(yf+size.period), (zf+size.period));
-
-            double xn = size.NormToPeriod (x);//size.NormalizeX(x);
-            double yn = size.NormToPeriod (y);//size.NormalizeZ(y);
-            double zn = 0;
-            double u = xn;//Fade(xn);
-            double v = yn;//Fade(yn);
-            double w = zn;//Fade(zn);
+            double u = xf;//fade(xf);
+            double v = yf;//fade(yf);
+            double w = zf;//fade(zf);
 
             double x1, x2, y1, y2;
-            x1 = Lerp(  Grad (aaa, xn  , yn  , zn),     // The gradient function calculates the dot product between a pseudorandom
-                Grad (baa, xn-1, yn  , zn),             // gradient vector and the vector from the input coordinate to the 8
+            x1 = Lerp(    Grad (aaa, xf  , yf  , zf),           // The gradient function calculates the dot product between a pseudorandom
+                Grad (baa, xf-1, yf  , zf),             // gradient vector and the vector from the input coordinate to the 8
                 u);                                     // surrounding points in its unit cube.
-            x2 = Lerp(  Grad (aba, xn  , yn-1, zn),     // This is all then lerped together as a sort of weighted average based on the faded (u,v,w)
-                Grad (bba, xn-1, yn-1, zn),             // values we made earlier.
+            x2 = Lerp(    Grad (aba, xf  , yf-1, zf),           // This is all then lerped together as a sort of weighted average based on the faded (u,v,w)
+                Grad (bba, xf-1, yf-1, zf),             // values we made earlier.
                 u);
             y1 = Lerp(x1, x2, v);
 
-            x1 = Lerp(  Grad (aab, xn  , yn  , zn-1),
-                Grad (bab, xn-1, yn  , zn-1),
+            x1 = Lerp(    Grad (aab, xf  , yf  , zf-1),
+                Grad (bab, xf-1, yf  , zf-1),
                 u);
-            x2 = Lerp(  Grad (abb, xn  , yn-1, zn-1),
-                Grad (bbb, xn-1, yn-1, zn-1),
+            x2 = Lerp(    Grad (abb, xf  , yf-1, zf-1),
+                Grad (bbb, xf-1, yf-1, zf-1),
                 u);
             y2 = Lerp (x1, x2, v);
 
-            return (Lerp (y1, y2, w)+1)/2;              // For convenience we bound it to 0 - 1 (theoretical min/max before is -1 - 1)
+            return (Lerp (y1, y2, w)+1)/2;                      // For convenience we bind the result to 0 - 1 (theoretical min/max before is [-1, 1])
         }
 
         public static double Grad(int hash, double x, double y, double z) {
