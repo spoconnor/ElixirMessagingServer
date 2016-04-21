@@ -68,10 +68,10 @@ namespace Sean.World
             return (x - _size.minX) / _size.scale;
         }
 
-        public void Render()
+        public void Render(int minX, int maxX)
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder();
-            for (int x = 0; x < ToArrayCoord(_size.maxX); x++)
+            for (int x = minX; x < maxX; x++)
             {
                 builder.Append(_data[x]);
             }
@@ -131,11 +131,11 @@ namespace Sean.World
         }
         */
 
-        public void Render()
+        public void Render(int minX, int maxX, int minZ, int maxZ)
         {
-            for (int z = 0; z < ToArrayCoord (_size.maxZ); z++) 
+            for (int z = minZ; z < maxZ; z++) 
             {
-                _data[z].Render();
+                _data[z].Render(minX, maxX);
             }
         }
 

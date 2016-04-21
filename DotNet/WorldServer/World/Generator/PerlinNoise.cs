@@ -162,13 +162,13 @@ namespace Sean.World
             return new float[SizeInBlocksX][];
         }
 
-        public static Array<int> GetIntMap(ArraySize size, int octaveCount)
+        public static Array<int> GetIntMap(ArraySize size, int minX, int maxX, int minZ, int maxZ, int octaveCount)
         {
             var perlin = new PerlinNoise();
             var noise = new Array<int>(size);
-            for (int z = noise.Size.minZ; z < noise.Size.maxZ; z += noise.Size.scale)
+            for (int z = minZ; z < maxZ; z += noise.Size.scale)
             {
-                for (int x = noise.Size.minX; x < noise.Size.maxX; x += noise.Size.scale)
+                for (int x = minX; x < maxX; x += noise.Size.scale)
                 {
                     double height = perlin.OctavePerlin (noise.Size, x,1,z, octaveCount, 1.0);
                     noise.Set(x,z, (int)(height*10));
