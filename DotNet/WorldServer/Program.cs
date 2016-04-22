@@ -41,6 +41,7 @@ namespace Sean.World
             //
             //}
 
+            /*
             worldMapData = new WorldMapData();
             worldMapData.Generate();
 
@@ -59,7 +60,7 @@ namespace Sean.World
                     case '-': Cursor.ZoomOut (); break;
                 }
             }
-
+            */
 			WorldData.Initialize(); // TODO - not hooked in
 
             //var otpServer = new OtpServer();

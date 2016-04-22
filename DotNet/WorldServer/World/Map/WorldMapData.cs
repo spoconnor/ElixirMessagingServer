@@ -17,6 +17,7 @@ namespace Sean.World
             SizeZStretch = 6;
         }
 
+        /*
         public void Generate()
         {
             heightMap = PerlinNoise.GetIntMap(SizeX+1, SizeZ+1, MinY, MaxY, Octaves);
@@ -38,6 +39,7 @@ namespace Sean.World
                 }
             }
         }
+        */
 
         public void Render ()
         {
