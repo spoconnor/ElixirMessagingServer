@@ -31,10 +31,10 @@ namespace Sean.World
 					float verticalBlend = (j - jSample0) * sampleFrequency;
 
 					//blend the top two corners
-                    float top = Lerp(baseNoise.Get(jSample0,iSample0), baseNoise.Get(jSample0,iSample1), horizontalBlend);
+                    float top = Lerp(baseNoise[jSample0,iSample0], baseNoise[jSample0,iSample1], horizontalBlend);
 
 					//blend the bottom two corners
-                    float bottom = Lerp(baseNoise.Get(jSample1,iSample0), baseNoise.Get(jSample1,iSample1), horizontalBlend);
+                    float bottom = Lerp(baseNoise[jSample1,iSample0], baseNoise[jSample1,iSample1], horizontalBlend);
 
 					//final blend
                     smoothNoise.Set(j,i,Lerp(top, bottom, verticalBlend));

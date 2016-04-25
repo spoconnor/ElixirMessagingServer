@@ -8,7 +8,7 @@ namespace Sean.World
 {
     static class MainClass
 	{
-        static WorldMapData worldMapData;
+        static WorldMap worldMapData;
 
 		static public void Main(String[] args)
 		{
@@ -28,11 +28,11 @@ namespace Sean.World
             Console.ReadKey();
             */
 
-            var size = new ArraySize(){minX=0, maxX=60, minZ=0, maxZ=40, scale=1, period=20};
+            var size = new ArraySize(){minX=0, maxX=60, minZ=0, maxZ=40, scale=1};
             var data = PerlinNoise.GetIntMap(size, 0,60,0,20, 10);
             data.Render(0,60,0,20);
             Console.WriteLine ();
-            //size = new ArraySize(){minX=0, maxX=60, minZ=20, maxZ=40, scale=1, period=20};
+            //size = new ArraySize(){minX=0, maxX=60, minZ=20, maxZ=40, scale=1};
             data = PerlinNoise.GetIntMap(size, 0,60,20,40, 10);
             data.Render(0,60,20,40);
 
@@ -41,10 +41,10 @@ namespace Sean.World
             //
             //}
 
-            /*
-            worldMapData = new WorldMapData();
-            worldMapData.Generate();
 
+            worldMapData = new WorldMap();
+            worldMapData.Generate();
+            /*
             while (true)
             {
                 Console.Clear ();
@@ -61,7 +61,6 @@ namespace Sean.World
                 }
             }
             */
-			WorldData.Initialize(); // TODO - not hooked in
 
             //var otpServer = new OtpServer();
             //otpServer.Start();

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -8,8 +8,6 @@
     <RootNamespace>Sean.World</RootNamespace>
     <AssemblyName>WorldServer</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
-    <ProductVersion>12.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -118,14 +116,13 @@
     <Compile Include="World\MessageParser.cs" />
     <Compile Include="World\ClientManager.cs" />
     <Compile Include="ClientSocket.cs" />
-    <Compile Include="World\Map\WorldMapData.cs" />
-    <Compile Include="World\Map\RegionMapData.cs" />
     <Compile Include="World\Map\Cursor.cs" />
     <Compile Include="World\Map\Cell.cs" />
     <Compile Include="World\Objects\Character.cs" />
     <Compile Include="World\Map\Location.cs" />
     <Compile Include="World\Objects\CharacterManager.cs" />
     <Compile Include="World\Generator\Array.cs" />
+    <Compile Include="World\Map\WorldMap.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

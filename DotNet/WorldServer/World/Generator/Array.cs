@@ -17,14 +17,11 @@ namespace Sean.World
         public int maxZ;
         public int minX;
         public int maxX;
-        public int scale;
+        public int scale = 1;
         public int minHeight;
         public int maxHeight;
         public int zWidth { get { return maxZ - minZ; } }
         public int xHeight { get { return maxX - minX; } }
-
-        public int period;
-        public int NormToPeriod(int v) { return (int)(v / period) * period; }
 
         public float NormalizeZ(int z) { return (float)(z - minZ) / zWidth; }
         public float NormalizeX(int x) { return (float)(x - minX) / xHeight; }
@@ -45,11 +42,7 @@ namespace Sean.World
             get { return _data[ToArrayCoord(x)]; }
             set { _data[ToArrayCoord(x)] = value; }
         } 
-            
-        public T Get(int x)
-        {
-            return _data [ToArrayCoord(x)];
-        }
+           
         public void Set(int x, T value)
         {
             _data [ToArrayCoord(x)] = value;
@@ -77,14 +70,22 @@ namespace Sean.World
             }
             Console.WriteLine(builder.ToString());
         }
-
-
+            
         private T[] _data;
         private ArraySize _size;
     }
 
     public class Array<T>
     {
+        public Array(int x, int z)
+        {
+            _size = new ArraySize (){ maxX=x, maxZ=z };
+            _data = new ArrayLine<T>[ToArrayCoord(_size.maxZ)];
+            for (int i = 0; i < ToArrayCoord(_size.maxZ); i++)
+            {
+                _data[i] = new ArrayLine<T>(_size);
+            }
+        }
         public Array (ArraySize size)
         {
             _size = size;
@@ -96,16 +97,13 @@ namespace Sean.World
         }
 
         public ArraySize Size { get { return _size; } }
-
-        public object this[int z]
+            
+        public T this[int x, int z]
         {
-            get { return _data[ToArrayCoord(z)]; }
+            get { return _data[ToArrayCoord(z)][x]; }
+            set { _data[ToArrayCoord(z)][x] = value; }
         } 
-
-        public T Get(int x, int z)
-        {
-            return _data [ToArrayCoord(z)].Get (x);
-        }
+            
         public void Set(int x, int z, T value)
         {
             _data [ToArrayCoord(z)].Set(x, value);
@@ -118,19 +116,7 @@ namespace Sean.World
                 yield return _data [z];
             }
         }
-
-        /*
-        public IEnumerable<T> GetCells ()
-        {
-            for (int z = 0; z < ToArrayCoord (_size.maxZ); z++) 
-            {
-                foreach (var cell in _data[z].GetCells()) {
-                    yield return cell;
-                }
-            }
-        }
-        */
-
+            
         public void Render(int minX, int maxX, int minZ, int maxZ)
         {
             for (int z = minZ; z < maxZ; z++) 
@@ -138,8 +124,7 @@ namespace Sean.World
                 _data[z].Render(minX, maxX);
             }
         }
-
-
+            
         private int ToArrayCoord(int z)
         {
             return (z - _size.minZ) / _size.scale;

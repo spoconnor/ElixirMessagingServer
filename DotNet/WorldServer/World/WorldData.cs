@@ -28,11 +28,6 @@ namespace Sean.World
 			GameItems = new ConcurrentDictionary<int, GameItemDynamic>();
 		}
 
-        internal static void Initialize()
-        {
-
-        }
-
 		#region Properties (Saved)
         internal static WorldType WorldType { get; set; }
 		/// <summary>Original Raw Seed used to generate this world. Blank if no seed was used.</summary>
@@ -45,6 +40,7 @@ namespace Sean.World
 		{
 			get { return System.Threading.Interlocked.Increment(ref GameObjectIdSeq); }
 		}
+
 
         private static int _sizeInChunksX;
 		/// <summary>Number of chunks in X direction that make up the world.</summary>
