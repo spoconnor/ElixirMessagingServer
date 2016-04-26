@@ -5,23 +5,24 @@ namespace Sean.World
 {
     internal class WorldMap
     {
-        public const byte WaterLevel = 1;
-        public const int RegionSize = 5;
-        public const int MapX = 120;
-        public const int MapZ = 60;
+
 
         public WorldMap()
         {
-            Octaves = 3;
-            MinY = 0;
-            MaxY = 10;
-            SizeZStretch = 6;
+            MinX = 10000;
+            MinZ = 10000;
+            MapScale = 32;
+            MaxX = MinX + (MapScale * 80);
+            MaxZ = MinZ + (MapScale * 80);
         }
             
         public void Generate()
         {
-            var size = new ArraySize(){minX=0, maxX=MapX, minZ=0, maxZ=MapZ, scale=RegionSize};
-            heightMap = PerlinNoise.GetIntMap(size, 0,MapX,0,MapZ, 3);
+            var size = new ArraySize(){
+                minX=MinX, maxX=MaxX, minZ=MinZ, maxZ=MaxZ, 
+                viewMinX=MinX, viewMaxX=MaxX, viewMinZ=MinZ, viewMaxZ=MaxZ, 
+                scale=MapScale};
+            heightMap = PerlinNoise.GetIntMap(size, 3);
         }
 
         /*
@@ -41,13 +42,13 @@ namespace Sean.World
         */
 
 
-        public int Octaves { get; set; }
-        public int MinY { get; set; }
-        public int MaxY { get; set; }
-        public int SizeZStretch { get; set; }
+        public int MinX { get; set; }
+        public int MaxX { get; set; }
+        public int MinZ { get; set; }
+        public int MaxZ { get; set; }
+        public int MapScale { get; set; }
 
         private Array<int> heightMap;
-        private Chunks chunks;
     }
 }
 

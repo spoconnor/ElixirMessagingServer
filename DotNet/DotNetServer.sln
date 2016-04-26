@@ -19,23 +19,17 @@ Global
 		{4E01C89C-948D-4F59-A579-E0D33E18BFFA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = WorldServer\WorldServer.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
-		$1.inheritsSet = VisualStudio
-		$1.scope = text/plain
 		$1.FileWidth = 120
+		$1.inheritsSet = VisualStudio
 		$1.inheritsScope = text/plain
+		$1.scope = text/plain
 		$0.CSharpFormattingPolicy = $2
-		$2.ElseIfNewLinePlacement = SameLine
 		$2.AfterDelegateDeclarationParameterComma = True
 		$2.inheritsSet = Mono
 		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp
-		$0.TextStylePolicy = $3
-		$3.FileWidth = 120
-		$3.inheritsSet = VisualStudio
-		$3.inheritsScope = text/plain
-		$3.scope = text/plain
+		StartupItem = WorldServer\WorldServer.csproj
 	EndGlobalSection
 EndGlobal

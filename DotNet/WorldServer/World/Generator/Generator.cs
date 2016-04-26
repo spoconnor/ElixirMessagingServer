@@ -41,13 +41,17 @@ namespace Sean.World
                 maxZ = WorldData.SizeInBlocksZ,
                 minX = 0,
                 maxX = WorldData.SizeInBlocksX,
+                viewMinZ = 0,
+                viewMaxZ = WorldData.SizeInBlocksZ,
+                viewMinX = 0,
+                viewMaxX = WorldData.SizeInBlocksX,
                 scale = 1,
                 minHeight = MIN_SURFACE_HEIGHT,
                 maxHeight = MAX_SURFACE_HEIGHT,
             };
 
-			var heightMap = PerlinNoise.GetIntMap(worldSize, 0, WorldData.SizeInBlocksX, 0, WorldData.SizeInBlocksZ, 8);
-            var mineralMap = PerlinNoise.GetFloatMap(worldSize, 0, WorldData.SizeInBlocksX, 0, WorldData.SizeInBlocksZ, 2);
+			var heightMap = PerlinNoise.GetIntMap(worldSize, 8);
+            var mineralMap = PerlinNoise.GetFloatMap(worldSize, 2);
 
 			var chunkCount = 1;
 			foreach (Chunk chunk in WorldData.Chunks)

@@ -43,31 +43,30 @@ namespace Sean.World
 			return smoothNoise;
 		}
 
-        public static Array<int> GetIntMap(ArraySize size, int minX, int maxX, int minZ, int maxZ, int octaveCount)
+        public static Array<int> GetIntMap(ArraySize size, int octaveCount)
         {
             var perlin = new PerlinNoise();
             var noise = new Array<int>(size);
-            for (int z = minZ; z < maxZ; z += noise.Size.scale)
+            for (int z = size.viewMinZ; z < size.viewMaxZ; z += size.scale)
             {
-                for (int x = minX; x < maxX; x += noise.Size.scale)
+                for (int x = size.viewMinX; x < size.viewMaxX; x += size.scale)
                 {
-                    double height = perlin.OctavePerlin (noise.Size, x,1,z, octaveCount, 1.0);
-                    noise.Set(x,z, (int)(height*10));
+                    double height = perlin.OctavePerlin (size, x,1,z, octaveCount, 1.0);
+                    noise.Set (x, z, (int)(height * size.maxY));
                 }
             }
             return noise;
         }
 
-        public static Array<float> GetFloatMap(ArraySize size, int minX, int maxX, int minZ, int maxZ, int octaveCount)
+        public static Array<float> GetFloatMap(ArraySize size, int octaveCount)
         {
             var perlin = new PerlinNoise();
             var noise = new Array<float>(size);
-            for (int z = minZ; z < maxZ; z += noise.Size.scale)
+            for (int z = size.viewMinZ; z < size.viewMaxZ; z += size.scale)
             {
-                for (int x = minX; x < maxX; x += noise.Size.scale)
-                {
-                    double height = perlin.OctavePerlin(noise.Size, x, 1, z, octaveCount, 1.0);
-                    noise.Set(x, z, (float)(height * 10));
+                for (int x = size.viewMinX; x < size.viewMaxX; x += size.scale) {
+                    double height = perlin.OctavePerlin (noise.Size, x, 1, z, octaveCount, 1.0);
+                    noise.Set (x, z, (float)(height * size.maxY));
                 }
             }
             return noise;
