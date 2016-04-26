@@ -35,16 +35,13 @@ namespace Sean.World
 
             const int MIN_SURFACE_HEIGHT = Chunk.CHUNK_HEIGHT / 2 - 40; //max amount below half
 			const int MAX_SURFACE_HEIGHT = Chunk.CHUNK_HEIGHT / 2 + 8; //max amount above half
+
             var worldSize = new ArraySize()
             {
                 minZ = 0,
                 maxZ = WorldData.SizeInBlocksZ,
                 minX = 0,
                 maxX = WorldData.SizeInBlocksX,
-                viewMinZ = 0,
-                viewMaxZ = WorldData.SizeInBlocksZ,
-                viewMinX = 0,
-                viewMaxX = WorldData.SizeInBlocksX,
                 scale = 1,
                 minHeight = MIN_SURFACE_HEIGHT,
                 maxHeight = MAX_SURFACE_HEIGHT,

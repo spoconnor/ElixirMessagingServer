@@ -35,6 +35,7 @@ namespace Sean.World
 		/// <summary>Original program version used when this world was generated.</summary>
         internal static string GeneratorVersion { get; set; }
 
+
         internal static int GameObjectIdSeq;
         internal static int NextGameObjectId
 		{

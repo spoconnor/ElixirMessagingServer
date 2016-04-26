@@ -21,11 +21,6 @@ namespace Sean.World
         public int minY;
         public int maxY;
 
-        public int viewMinZ;
-        public int viewMaxZ;
-        public int viewMinX;
-        public int viewMaxX;
-
         public int scale = 1;
         public int minHeight;
         public int maxHeight;
@@ -59,7 +54,7 @@ namespace Sean.World
 
         public IEnumerator<T> GetCells ()
         {
-            for (int x = 0; x < ToArrayCoord (_size.viewMaxX); x++) 
+            for (int x = 0; x < ToArrayCoord (_size.maxX); x++) 
             {
                 yield return _data [x];
             }
@@ -73,7 +68,7 @@ namespace Sean.World
         public void Render()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder();
-            for (int x = 0; x < ToArrayCoord(_size.viewMaxX); x++)
+            for (int x = 0; x < ToArrayCoord(_size.maxX); x++)
             {
                 builder.Append(_data[x]);
             }
@@ -88,9 +83,9 @@ namespace Sean.World
     {
         public Array(int x, int z)
         {
-            _size = new ArraySize (){ maxX=x, maxZ=z, viewMaxX=x, viewMaxZ=z };
-            _data = new ArrayLine<T>[ToArrayCoord(_size.viewMaxZ)];
-            for (int i = 0; i < ToArrayCoord(_size.viewMaxZ); i++)
+            _size = new ArraySize (){ maxX=x, maxZ=z };
+            _data = new ArrayLine<T>[ToArrayCoord(_size.maxZ)];
+            for (int i = 0; i < ToArrayCoord(_size.maxZ); i++)
             {
                 _data[i] = new ArrayLine<T>(_size);
             }
@@ -98,8 +93,8 @@ namespace Sean.World
         public Array (ArraySize size)
         {
             _size = size;
-            _data = new ArrayLine<T>[ToArrayCoord(_size.viewMaxZ)];
-            for (int z = 0; z < ToArrayCoord(_size.viewMaxZ); z++)
+            _data = new ArrayLine<T>[ToArrayCoord(_size.maxZ)];
+            for (int z = 0; z < ToArrayCoord(_size.maxZ); z++)
             {
                 _data[z] = new ArrayLine<T>(_size);
             }
@@ -120,7 +115,7 @@ namespace Sean.World
 
         public IEnumerable<ArrayLine<T>> GetLines ()
         {
-            for (int z = 0; z < ToArrayCoord (_size.viewMaxZ); z++) 
+            for (int z = 0; z < ToArrayCoord (_size.maxZ); z++) 
             {
                 yield return _data [z];
             }
@@ -128,7 +123,7 @@ namespace Sean.World
             
         public void Render()
         {
-            for (int z = 0; z < ToArrayCoord(_size.viewMaxZ); z++) 
+            for (int z = 0; z < ToArrayCoord(_size.maxZ); z++) 
             {
                 _data[z].Render();
             }
@@ -136,7 +131,7 @@ namespace Sean.World
             
         private int ToArrayCoord(int z)
         {
-            return (z - _size.viewMinZ) / _size.scale;
+            return (z - _size.minZ) / _size.scale;
         }
 
         private ArrayLine<T>[] _data;

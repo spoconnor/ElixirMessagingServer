@@ -6,7 +6,11 @@ namespace Sean.World
 
 	internal class PerlinNoise
 	{
-
+        static PerlinNoise()
+        {
+            WorldSeed = 1234;
+            PerlinUnitSize = 10;
+        }
 
         private static Array<float> GenerateSmoothNoise(Array<float> baseNoise, int octave)
 		{
@@ -47,9 +51,9 @@ namespace Sean.World
         {
             var perlin = new PerlinNoise();
             var noise = new Array<int>(size);
-            for (int z = size.viewMinZ; z < size.viewMaxZ; z += size.scale)
+            for (int z = size.minZ; z < size.maxZ; z += size.scale)
             {
-                for (int x = size.viewMinX; x < size.viewMaxX; x += size.scale)
+                for (int x = size.minX; x < size.maxX; x += size.scale)
                 {
                     double height = perlin.OctavePerlin (size, x,1,z, octaveCount, 1.0);
                     noise.Set (x, z, (int)(height * size.maxY));
@@ -62,9 +66,9 @@ namespace Sean.World
         {
             var perlin = new PerlinNoise();
             var noise = new Array<float>(size);
-            for (int z = size.viewMinZ; z < size.viewMaxZ; z += size.scale)
+            for (int z = size.minZ; z < size.maxZ; z += size.scale)
             {
-                for (int x = size.viewMinX; x < size.viewMaxX; x += size.scale) {
+                for (int x = size.minX; x < size.maxX; x += size.scale) {
                     double height = perlin.OctavePerlin (noise.Size, x, 1, z, octaveCount, 1.0);
                     noise.Set (x, z, (float)(height * size.maxY));
                 }
@@ -73,9 +77,9 @@ namespace Sean.World
         }
 
         public double OctavePerlin(ArraySize size, int x, int y, int z, int octaves, double persistence) {
-            double xf = (double)x / size.maxX;
+            double xf = (double)x / PerlinUnitSize;
             double yf = 0.0;
-            double zf = (double)z / size.maxZ;
+            double zf = (double)z / PerlinUnitSize;
             double total = 0;
             int frequency = 1;
             double amplitude = 1;
@@ -190,7 +194,9 @@ namespace Sean.World
             return t * t * t * (t * (t * 6 - 15) + 10);         // 6t^5 - 15t^4 + 10t^3
         }
 
-        public int WorldSeed { get; set; }
+        public static int WorldSeed { get; set; }
+
+        public static int PerlinUnitSize { get; set; }
         //public int repeat;
-	}
+    }
 }

@@ -20,7 +20,6 @@ namespace Sean.World
         {
             var size = new ArraySize(){
                 minX=MinX, maxX=MaxX, minZ=MinZ, maxZ=MaxZ, 
-                viewMinX=MinX, viewMaxX=MaxX, viewMinZ=MinZ, viewMaxZ=MaxZ, 
                 scale=MapScale};
             heightMap = PerlinNoise.GetIntMap(size, 3);
         }
