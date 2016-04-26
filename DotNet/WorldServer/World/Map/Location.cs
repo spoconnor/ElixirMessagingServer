@@ -15,11 +15,12 @@ namespace Sean.World
 
         public int X { get; set; }
         public int Z { get; set; }
+        /*
         public int WorldX { get { return X / RegionMapData.SizeX; } }
         public int WorldZ { get { return Z / RegionMapData.SizeZ; } }
         public int RegionX { get { return X % RegionMapData.SizeX; } }
         public int RegionZ { get { return Z % RegionMapData.SizeZ; } }
-
+        */
         public bool EstimatedLocation { get; set; }
     }
 }

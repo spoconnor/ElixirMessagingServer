@@ -14,6 +14,7 @@ namespace Sean.World
 		{
 			Console.WriteLine("World Server...");
 
+
             /*
             // Start OWIN host 
             string baseAddress = "http://localhost:9000/"; 
@@ -30,11 +31,11 @@ namespace Sean.World
 
             var size = new ArraySize(){minX=0, maxX=60, minZ=0, maxZ=40, scale=1};
             var data = PerlinNoise.GetIntMap(size, 0,60,0,20, 10);
-            data.Render(0,60,0,20);
+            data.Render();
             Console.WriteLine ();
             //size = new ArraySize(){minX=0, maxX=60, minZ=20, maxZ=40, scale=1};
             data = PerlinNoise.GetIntMap(size, 0,60,20,40, 10);
-            data.Render(0,60,20,40);
+            data.Render();
 
             //var d = new Array<int> (new ArraySize(){minX=50, maxX=100, minZ=50, maxZ=100, scale=5});
             //foreach (var a in d.GetLines()) {
@@ -68,29 +69,6 @@ namespace Sean.World
             //ClientSocket.SendMessage ();
 
             ServerSocketListener.Run();
-
-            while (true) {
-                var mapData = worldMapData.Serialize().ToArray();
-
-                var messageBuilder = new CommsMessages.Message.Builder ();
-                messageBuilder.SetMsgtype ((int)CommsMessages.MsgType.eMap);
-                messageBuilder.SetDest (0);
-                messageBuilder.SetFrom (1);
-                var mapBuilder = new CommsMessages.Map.Builder ();
-                mapBuilder.SetMinX (0);
-                mapBuilder.SetMinY (0);
-                mapBuilder.SetMaxX (50);
-                mapBuilder.SetMaxY (80);
-                mapBuilder.SetDataSize (mapData.Length);
-                messageBuilder.SetMap (mapBuilder);
-                var message = messageBuilder.BuildPartial ();
-                //var messageBytes = MessageParser.WriteMessage (message);
-
-                //ClientConnection.broadcast(messageBytes.Concat(mapData).ToArray());
-//                ClientSocket.SendMessage (message, mapData);
-                
-                System.Threading.Thread.Sleep (10000);
-            }
 
             Console.WriteLine("Press any key to exit");
             Console.ReadKey();

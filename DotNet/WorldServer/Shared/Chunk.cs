@@ -601,9 +601,14 @@ namespace Sean.World
 				Debug.WriteLine("Grass finished growing in chunk {0} All possible changes made", Coords);
 			}
 		}
-	
+
+        public void Render()
+        {
+            HeightMap.Render();
+        }
+
         #region Xml
-		internal XmlNode GetXml(XmlDocument xmlDocument)
+        internal XmlNode GetXml(XmlDocument xmlDocument)
 		{
 			var xmlNode = xmlDocument.CreateNode(XmlNodeType.Element, "C", string.Empty);
 			if (xmlNode.Attributes == null) throw new Exception("Node attributes is null.");

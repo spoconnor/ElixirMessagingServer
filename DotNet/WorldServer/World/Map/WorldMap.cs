@@ -24,6 +24,7 @@ namespace Sean.World
             heightMap = PerlinNoise.GetIntMap(size, 0,MapX,0,MapZ, 3);
         }
 
+        /*
         public void Render ()
         {
             for (int x = 0; x < MapX; x++) {
@@ -37,26 +38,15 @@ namespace Sean.World
                 Console.WriteLine (builder.ToString ());
             }
         }
+        */
 
-        public IEnumerable<byte> Serialize()
-        {
-            for (int x = 0; x < MapX; x++)
-            {
-                for (int z = 0; z < MapZ; z++)
-                {
-                    foreach (byte temp in chunks [x,z].Serialize ()) {
-                        yield return temp;
-                    }
-                }
-            }
-        }
 
         public int Octaves { get; set; }
         public int MinY { get; set; }
         public int MaxY { get; set; }
         public int SizeZStretch { get; set; }
 
-        private int[][] heightMap;
+        private Array<int> heightMap;
         private Chunks chunks;
     }
 }

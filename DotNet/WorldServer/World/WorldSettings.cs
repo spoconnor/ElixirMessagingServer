@@ -21,11 +21,8 @@ namespace Sean.World
                 WorldData.GeneratorVersion = "1.0";// settingsNode.Attributes["GeneratorVersion"].Value;
                 WorldData.GameObjectIdSeq = 1; //int.Parse(settingsNode.Attributes["GameObjectIdSeq"].Value);
                 WorldData.WorldType = WorldType.Grass;// (WorldType)Convert.ToInt32(settingsNode.Attributes["WorldType"].Value);
-                WorldData.SizeInChunksX = 32;// int.Parse(settingsNode.Attributes["SizeX"].Value);
-				//world size Y is only there for future use, no need to load it
-                WorldData.SizeInChunksZ = 32; //int.Parse(settingsNode.Attributes["SizeZ"].Value);
 
-                WorldData.Chunks = new Chunks(WorldData.SizeInChunksX, WorldData.SizeInChunksZ); //initialize world chunks (must be done prior to assigning clutter to the chunks)
+                WorldData.Chunks = new Chunks();
 			}
 			catch (Exception ex)
 			{

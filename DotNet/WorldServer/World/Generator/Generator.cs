@@ -31,7 +31,7 @@ namespace Sean.World
 
 			Settings.Random = string.IsNullOrEmpty(WorldData.RawSeed) ? new Random() : new Random(GetNumericSeed());
 			
-			WorldData.Chunks = new Chunks(WorldData.SizeInChunksX, WorldData.SizeInChunksZ);
+			WorldData.Chunks = new Chunks();
 
             const int MIN_SURFACE_HEIGHT = Chunk.CHUNK_HEIGHT / 2 - 40; //max amount below half
 			const int MAX_SURFACE_HEIGHT = Chunk.CHUNK_HEIGHT / 2 + 8; //max amount above half

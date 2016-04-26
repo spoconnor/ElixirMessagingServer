@@ -8,7 +8,7 @@ namespace Sean.World
         }
 
         public string Name { get; set; }
-        public Location Location { get; set; }
+        //public Location Location { get; set; }
     }
 }
 
