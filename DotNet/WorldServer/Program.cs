@@ -31,9 +31,9 @@ namespace Sean.World
 
 
             var size = new ArraySize(){
-                minX=0, maxX=60, minZ=0, maxZ=30, 
+                minX=0, maxX=40, minZ=0, maxZ=40, 
                 scale=1, maxY=10};
-            var data = PerlinNoise.GetIntMap(size,3);
+            var data = PerlinNoise.GetIntMap(size,1);
             data.Render();
             Console.WriteLine ();
             size = new ArraySize(){

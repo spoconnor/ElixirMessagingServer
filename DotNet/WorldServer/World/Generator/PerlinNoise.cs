@@ -8,7 +8,7 @@ namespace Sean.World
 	{
         static PerlinNoise()
         {
-            WorldSeed = 1234;
+            WorldSeed = 4321;
             PerlinUnitSize = 10;
         }
 
@@ -110,19 +110,19 @@ namespace Sean.World
             int xi = (int)x;// & 255;                     // Calculate the "unit cube" that the point asked will be located in
             int yi = (int)y;// & 255;                     // The left bound is ( |_x_|,|_y_|,|_z_| ) and the right bound is that
             int zi = (int)z;// & 255;                     // plus 1.  Next we calculate the location (from 0.0 to 1.0) in that cube.
-            double xf = x-(int)x;                         // We also fade the location to smooth the result.
-            double yf = y-(int)y;
-            double zf = z-(int)z;
+            double xf = Math.Round(x-Math.Floor(x),15);                         // We also fade the location to smooth the result.
+            double yf = Math.Round(y-Math.Floor(y),15);
+            double zf = Math.Round(z-Math.Floor(z),15);
 
             int aaa, aba, aab, abb, baa, bba, bab, bbb;
             aaa = p(    xi ,    yi ,    zi );
-            aba = p(    xi , (yi++),    zi );
-            aab = p(    xi ,    yi , (zi++));
-            abb = p(    xi , (yi++), (zi++));
-            baa = p( (xi++),    yi ,    zi );
-            bba = p( (xi++), (yi++),    zi );
-            bab = p( (xi++),    yi , (zi++));
-            bbb = p( (xi++), (yi++), (zi++));
+            aba = p(    xi , (yi+1),    zi );
+            aab = p(    xi ,    yi , (zi+1));
+            abb = p(    xi , (yi+1), (zi+1));
+            baa = p( (xi+1),    yi ,    zi );
+            bba = p( (xi+1), (yi+1),    zi );
+            bab = p( (xi+1),    yi , (zi+1));
+            bbb = p( (xi+1), (yi+1), (zi+1));
 
             double u = xf;//fade(xf);
             double v = yf;//fade(yf);
