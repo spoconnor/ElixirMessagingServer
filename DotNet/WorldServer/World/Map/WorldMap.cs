@@ -8,32 +8,27 @@ namespace Sean.World
     {
         public WorldMap(int chunkSize, int initialSize)
         {
-            MinX = 10000;
-            MinZ = 10000;
-            MapSize = initialSize;
             MapScale = chunkSize;
-            MaxX = MinX + (MapScale * MapSize);
-            MaxZ = MinZ + (MapScale * MapSize);
-            mapChunks = new MapChunk[MapSize, MapSize];
+            MaxXBlock = initialSize;
+            MaxZBlock = initialSize;
+            mapChunks = new MapChunk[MaxXBlock, MaxZBlock];
         }
             
         public void Generate()
         {
             var size = new ArraySize(){
-                minX=MinX, maxX=MaxX, minZ=MinZ, maxZ=MaxZ, 
+                minX=0, maxX=MaxXPosition, minZ=0, maxZ=MaxZPosition, 
                 scale=MapScale};
             heightMap = PerlinNoise.GetIntMap(size, 3);
         }
-
-
 
         /// <summary>Get a chunk from the array. Based on world block coords.</summary>
         public Chunk this[Position position]
         {
             get {
-                int i = (position.X / Chunk.CHUNK_SIZE) - MinX;
-                int j = (position.Z / Chunk.CHUNK_SIZE) - MinZ;
-                return GetOrCreate(i, j);
+                int x = (position.X / MapScale);
+                int z = (position.Z / MapScale);
+                return GetOrCreate(x, z);
             }
         }
 
@@ -41,26 +36,24 @@ namespace Sean.World
         public Chunk this[Coords coords]
         {
             get {
-                int i = (coords.Xblock / Chunk.CHUNK_SIZE) - MinX;
-                int j = (coords.Zblock / Chunk.CHUNK_SIZE) - MinZ;
-                return GetOrCreate(i, j);
+                int x = (coords.Xblock / MapScale);
+                int z = (coords.Zblock / MapScale);
+                return GetOrCreate(x, z);
             }
         }
-        private Chunk GetOrCreate(int i, int j)
+        private Chunk GetOrCreate(int x, int z)
         {
-            var mapChunk = mapChunks[i, j];
+            var mapChunk = mapChunks[x, z];
             if (mapChunk == null)
             {
                 mapChunk = new MapChunk();
-                var chunkCoords = new ChunkCoords(i + MinX, j + MinZ);
+                var chunkCoords = new ChunkCoords(x, z);
                 mapChunk.Chunk = new Chunk(chunkCoords);
                 Generator.Generate(mapChunk.Chunk);
-                mapChunks[i, j] = mapChunk;
+                mapChunks[x, z] = mapChunk;
             }
             return mapChunk.Chunk;
         }
-
-
 
         /*
         public void Render ()
@@ -78,13 +71,11 @@ namespace Sean.World
         }
         */
 
-
-        public int MinX { get; set; }
-        public int MaxX { get; set; }
-        public int MinZ { get; set; }
-        public int MaxZ { get; set; }
+        public int MaxXBlock { get; set; }
+        public int MaxZBlock { get; set; }
+        public int MaxXPosition { get { return MaxXBlock * MapScale; } }
+        public int MaxZPosition { get { return MaxZBlock * MapScale; } }
         public int MapScale { get; set; }
-        public int MapSize { get; set; }
         private MapChunk[,] mapChunks;
 
         private Array<int> heightMap;

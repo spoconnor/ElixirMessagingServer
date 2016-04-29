@@ -47,7 +47,7 @@ namespace Sean.World
 
         	GenerateChunk(chunk, heightMap, mineralMap);
 
-
+            /*
 			//loop through chunks again for actions that require the neighboring chunks to be built
 			Debug.WriteLine("Completing growth in chunks and building heightmaps...");
             Debug.WriteLine("Completing growth in chunks...", 0, 0);
@@ -65,16 +65,16 @@ namespace Sean.World
 				//ClutterGenerator.Generate(chunk, takenPositions);
 			}
 
-			Settings.Random = new Random(); //reset the random object to ensure the seed is not used for any more random numbers as this could make gameplay predictable
 			Debug.WriteLine("World generation complete.");
+            */
 
 			//default sun to directly overhead in new worlds
 			//SkyHost.SunAngleRadians = OpenTK.MathHelper.PiOver2;
 			//SkyHost.SunLightStrength = SkyHost.BRIGHTEST_SKYLIGHT_STRENGTH;
 
-			Debug.WriteLine("New world saving...");
-			WorldData.SaveToDisk();
-			Debug.WriteLine("New world save complete.");
+			//Debug.WriteLine("New world saving...");
+			//WorldData.SaveToDisk();
+			//Debug.WriteLine("New world save complete.");
 		}
 
 		private static void GenerateChunk(Chunk chunk, Array<int> heightMap, Array<float> mineralMap)

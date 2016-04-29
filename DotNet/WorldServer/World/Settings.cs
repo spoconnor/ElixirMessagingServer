@@ -10,6 +10,8 @@ namespace Sean.World
     /// </summary>
     internal static class Settings
     {
+        public static Random Random = new Random();
+
         private static Version _version;
         /// <summary>Store the version here so the game window can still know what version we are running.</summary>
         internal static Version Version

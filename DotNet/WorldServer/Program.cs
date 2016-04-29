@@ -8,12 +8,9 @@ namespace Sean.World
 {
     static class MainClass
 	{
-        static WorldMap worldMapData;
-
 		static public void Main(String[] args)
 		{
 			Console.WriteLine("World Server...");
-
 
             /*
             // Start OWIN host 
@@ -28,7 +25,6 @@ namespace Sean.World
             Console.WriteLine("Press any key to continue");
             Console.ReadKey();
             */
-
 
             var size = new ArraySize(){
                 minX=0, maxX=40, minZ=0, maxZ=40, 
@@ -47,9 +43,9 @@ namespace Sean.World
             //
             //}
 
-
-            worldMapData = new WorldMap(chunkSize:32, initialSize:80);
-            worldMapData.Generate();
+            var worldMap = new WorldMap(chunkSize:32, initialSize:80);
+            worldMap.Generate();
+            var chunk = worldMap [new Position(worldMap.MaxXPosition / 2, 0, worldMap.MaxZPosition / 2)];
             /*
             while (true)
             {
