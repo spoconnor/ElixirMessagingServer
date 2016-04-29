@@ -78,6 +78,7 @@
     <Compile Include="Shared\UiTextGraphics.cs" />
     <Compile Include="World\Chunks.cs" />
     <Compile Include="World\Constants.cs" />
+    <Compile Include="World\Map\MapChunk.cs" />
     <Compile Include="World\Settings.cs" />
     <Compile Include="World\WorldData.cs" />
     <Compile Include="World\WorldHost.cs" />
@@ -100,12 +101,8 @@
     <Compile Include="World\Map\WorldMap.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Shared\" />
-    <Folder Include="World\" />
     <Folder Include="RestInterface\" />
-    <Folder Include="World\Map\" />
-    <Folder Include="World\Objects\" />
   </ItemGroup>
+  <ItemGroup />
 </Project>

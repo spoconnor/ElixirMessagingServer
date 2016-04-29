@@ -24,24 +24,19 @@ namespace Sean.World
 			return finalSeed;
 		}
 
-		public static void Generate()
+		public static void Generate(Chunk chunk)
 		{
-			Debug.WriteLine("Generating new world: " + Settings.WorldFilePath);
-			Debug.WriteLine("World type: {0}, Size {1}x{2}", WorldData.WorldType, WorldData.SizeInChunksX, WorldData.SizeInChunksZ);
-
-			Settings.Random = string.IsNullOrEmpty(WorldData.RawSeed) ? new Random() : new Random(GetNumericSeed());
-			
-			WorldData.Chunks = new Chunks();
+            Debug.WriteLine("Generating new chunk: " + chunk.Coords);
 
             const int MIN_SURFACE_HEIGHT = Chunk.CHUNK_HEIGHT / 2 - 40; //max amount below half
 			const int MAX_SURFACE_HEIGHT = Chunk.CHUNK_HEIGHT / 2 + 8; //max amount above half
 
             var worldSize = new ArraySize()
             {
-                minZ = 0,
-                maxZ = WorldData.SizeInBlocksZ,
-                minX = 0,
-                maxX = WorldData.SizeInBlocksX,
+                minZ = chunk.Coords.WorldCoordsZ,
+                maxZ = chunk.Coords.WorldCoordsZ + Chunk.CHUNK_SIZE,
+                minX = chunk.Coords.WorldCoordsX,
+                maxX = chunk.Coords.WorldCoordsX + Chunk.CHUNK_SIZE,
                 scale = 1,
                 minHeight = MIN_SURFACE_HEIGHT,
                 maxHeight = MAX_SURFACE_HEIGHT,
@@ -50,16 +45,8 @@ namespace Sean.World
 			var heightMap = PerlinNoise.GetIntMap(worldSize, 8);
             var mineralMap = PerlinNoise.GetFloatMap(worldSize, 2);
 
-			var chunkCount = 1;
-			foreach (Chunk chunk in WorldData.Chunks)
-			{
-                Debug.WriteLine(string.Format("Generating Chunks {0} / {1}", chunkCount, WorldData.SizeInChunksX * WorldData.SizeInChunksZ), chunkCount, WorldData.SizeInChunksX * WorldData.SizeInChunksZ);
-				
-				//bm: we can't run this in parallel or the results will not be deterministic based on our seed.
-				GenerateChunk(WorldData.Chunks[chunk.Coords.X, chunk.Coords.Z], heightMap, mineralMap);
+        	GenerateChunk(chunk, heightMap, mineralMap);
 
-				chunkCount++;
-			}
 
 			//loop through chunks again for actions that require the neighboring chunks to be built
 			Debug.WriteLine("Completing growth in chunks and building heightmaps...");

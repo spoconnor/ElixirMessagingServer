@@ -48,7 +48,7 @@ namespace Sean.World
             //}
 
 
-            worldMapData = new WorldMap();
+            worldMapData = new WorldMap(chunkSize:32, initialSize:80);
             worldMapData.Generate();
             /*
             while (true)

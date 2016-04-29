@@ -16,7 +16,7 @@ namespace Sean.World
 		{
             Coords = chunkCoords;
 			Blocks = new Blocks(CHUNK_SIZE, CHUNK_HEIGHT, CHUNK_SIZE);
-            HeightMap = new Array<int>(CHUNK_SIZE, CHUNK_SIZE);
+            //HeightMap = new Array<int>(CHUNK_SIZE, CHUNK_SIZE);
 			//Clutters = new HashSet<Clutter>();
 			LightSources = new ConcurrentDictionary<int, LightSource>();
 			//Mobs = new HashSet<Mob>();
@@ -36,6 +36,7 @@ namespace Sean.World
 
 		/// <summary>Heighest level in each vertical column containing a non transparent block. Sky light does not shine through this point. Used in rendering and lighting calculations.</summary>
 		public Array<int> HeightMap;
+		public Array<float> MineralMap;
 		public byte[,,] SkyLightMapInitial;
 		public byte[,,] ItemLightMapInitial;
 
