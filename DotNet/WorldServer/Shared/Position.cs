@@ -79,7 +79,7 @@ namespace Sean.World
 		/// </summary>
 		internal Block GetBlock()
 		{
-			return WorldData.Chunks[this].Blocks[this];
+            return WorldData.WorldMap.Chunk(this).Blocks[this];
 		}
 
 		/// <summary>
@@ -94,20 +94,20 @@ namespace Sean.World
 				//check in X direction
 				if (X > 0 && X % Chunk.CHUNK_SIZE == 0)
 				{
-					chunks.Add(WorldData.Chunks[(X - 1) / Chunk.CHUNK_SIZE, Z / Chunk.CHUNK_SIZE]); //add left chunk
+                    chunks.Add(WorldData.WorldMap.Chunk((X - 1) / Chunk.CHUNK_SIZE, Z / Chunk.CHUNK_SIZE)); //add left chunk
 				}
 				else if (X < WorldData.SizeInBlocksX - 1 && X % Chunk.CHUNK_SIZE == Chunk.CHUNK_SIZE - 1)
 				{
-					chunks.Add(WorldData.Chunks[(X + 1) / Chunk.CHUNK_SIZE, Z / Chunk.CHUNK_SIZE]); //add right chunk
+                    chunks.Add(WorldData.WorldMap.Chunk((X + 1) / Chunk.CHUNK_SIZE, Z / Chunk.CHUNK_SIZE)); //add right chunk
 				}
 				//check in Z direction
 				if (Z > 0 && Z % Chunk.CHUNK_SIZE == 0)
 				{
-					chunks.Add(WorldData.Chunks[X / Chunk.CHUNK_SIZE, (Z - 1) / Chunk.CHUNK_SIZE]); //add back chunk
+                    chunks.Add(WorldData.WorldMap.Chunk(X / Chunk.CHUNK_SIZE, (Z - 1) / Chunk.CHUNK_SIZE)); //add back chunk
 				}
 				else if (Z < WorldData.SizeInBlocksZ - 1 && Z % Chunk.CHUNK_SIZE == Chunk.CHUNK_SIZE - 1)
 				{
-					chunks.Add(WorldData.Chunks[X / Chunk.CHUNK_SIZE, (Z + 1) / Chunk.CHUNK_SIZE]); //add front chunk
+                    chunks.Add(WorldData.WorldMap.Chunk(X / Chunk.CHUNK_SIZE, (Z + 1) / Chunk.CHUNK_SIZE)); //add front chunk
 				}
 				return chunks;
 			}

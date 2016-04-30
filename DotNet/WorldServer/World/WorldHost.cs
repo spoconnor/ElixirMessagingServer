@@ -50,11 +50,12 @@ namespace Sean.World
 
             //var chunksByDist = new List<Chunk> ();
 
+/*
             //immediately render up to INITIAL_CHUNK_RENDER_DISTANCE chunks away within the initial view frustum
             var immediateChunkTasks = new List<Task> ();
-            foreach (Chunk chunk in WorldData.Chunks)
+            foreach (Chunk chunk in WorldData.WorldMap.Chunks)
             {
-/*
+
                 var dist = chunk.DistanceFromPlayer ();
                 if (dist <= INITIAL_CHUNK_RENDER_DISTANCE * Chunk.CHUNK_SIZE && chunk.IsInFrustum)
                 {
@@ -70,12 +71,12 @@ namespace Sean.World
                     if (dist < Settings.ZFarForChunkLoad)
                         chunksByDist.Add (chunk);
                 }
-*/
+
             }
             Task.WaitAll (immediateChunkTasks.ToArray ()); //wait for initial chunks to finish building before we continue
             stopwatch.Stop ();
             Debug.WriteLine ("Initial chunk frustum load time: {0}ms ({1} chunks)", stopwatch.ElapsedMilliseconds, immediateChunkTasks.Count);
-     
+*/     
             //now sort by distance and queue so nearby chunks are built first
             //chunksByDist.Sort ((c1, c2) => Math.Sqrt (Math.Pow (Game.Player.Coords.Xblock - c1.Coords.WorldCoordsX, 2) + Math.Pow (Game.Player.Coords.Zblock - c1.Coords.WorldCoordsZ, 2)).CompareTo (Math.Sqrt (Math.Pow (Game.Player.Coords.Xblock - c2.Coords.WorldCoordsX, 2) + Math.Pow (Game.Player.Coords.Zblock - c2.Coords.WorldCoordsZ, 2))));
             //chunksByDist.ForEach (c => {

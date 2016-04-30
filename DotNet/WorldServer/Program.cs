@@ -26,43 +26,53 @@ namespace Sean.World
             Console.ReadKey();
             */
 
-            var size = new ArraySize(){
-                minX=0, maxX=40, minZ=0, maxZ=40, 
-                scale=1, maxY=10};
-            var data = PerlinNoise.GetIntMap(size,1);
-            data.Render();
+            const int MIN_SURFACE_HEIGHT = Chunk.CHUNK_HEIGHT / 2 - 40; //max amount below half
+            const int MAX_SURFACE_HEIGHT = Chunk.CHUNK_HEIGHT / 2 + 8; //max amount above half
+            var worldSize = new ArraySize()
+            {
+                minZ = 100,
+                maxZ = 100 + Chunk.CHUNK_SIZE,
+                minX = 100,
+                maxX = 100 + Chunk.CHUNK_SIZE,
+                scale = 1,
+                minHeight = MIN_SURFACE_HEIGHT,
+                maxHeight = MAX_SURFACE_HEIGHT,
+            };
+            var data = PerlinNoise.GetIntMap(worldSize, 8);
+            data.Render ();
             Console.WriteLine ();
-            size = new ArraySize(){
-                minX=0, maxX=60, minZ=30, maxZ=60, 
-                scale=1, maxY=10};
-            data = PerlinNoise.GetIntMap(size,3);
-            data.Render();
 
             //var d = new Array<int> (new ArraySize(){minX=50, maxX=100, minZ=50, maxZ=100, scale=5});
             //foreach (var a in d.GetLines()) {
             //
             //}
 
-            var worldMap = new WorldMap(chunkSize:32, initialSize:80);
-            worldMap.Generate();
-            var chunk = worldMap [new Position(worldMap.MaxXPosition / 2, 0, worldMap.MaxZPosition / 2)];
-            /*
+            WorldSettings.LoadSettings ();
+
+            WorldData.WorldMap.Generate();
+
+            int x = WorldData.WorldMap.MaxXPosition / 2;
+            int y = 0;
+            int z = WorldData.WorldMap.MaxZPosition / 2;
+
+            var cursor = new Position (x, y, z);
             while (true)
             {
                 Console.Clear ();
-                worldMapData.Render ();
+                var chunk = WorldData.WorldMap.Chunk (cursor);
+                chunk.Render (y);
                 var key = Console.ReadKey ();
                 switch (key.KeyChar)
                 {
-                    case 'q': Cursor.MoveUp (); break;
-                    case 'a': Cursor.MoveDown (); break;
-                    case 'p': Cursor.MoveRight (); break;
-                    case 'o': Cursor.MoveLeft (); break;
-                    case '+': Cursor.ZoomIn (); break;
-                    case '-': Cursor.ZoomOut (); break;
+                    case 'q': z=z-1; break;
+                    case 'a': z=z+1; break;
+                    case 'p': x=x+1; break;
+                    case 'o': x=x-1; break;
+                    case '>': y=y+1; break;
+                    case '<': y=y-1; break;
                 }
             }
-            */
+
 
             //var otpServer = new OtpServer();
             //otpServer.Start();

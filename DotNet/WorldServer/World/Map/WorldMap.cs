@@ -22,24 +22,26 @@ namespace Sean.World
             heightMap = PerlinNoise.GetIntMap(size, 3);
         }
 
-        /// <summary>Get a chunk from the array. Based on world block coords.</summary>
-        public Chunk this[Position position]
+        /// <summary>Get a chunk from the array. Based on the x,z of the chunk in the world. Note these are chunk coords not block coords.</summary>
+        public Chunk Chunk(int x, int z)
         {
-            get {
-                int x = (position.X / MapScale);
-                int z = (position.Z / MapScale);
-                return GetOrCreate(x, z);
-            }
+            return GetOrCreate(x, z); 
+        }
+
+        /// <summary>Get a chunk from the array. Based on world block coords.</summary>
+        public Chunk Chunk(Position position)
+        {
+            int x = (position.X / MapScale);
+            int z = (position.Z / MapScale);
+            return GetOrCreate(x, z);
         }
 
         /// <summary>Get a chunk from the array. Based on more accurate world object coords.</summary>
-        public Chunk this[Coords coords]
+        public Chunk Chunk(Coords coords)
         {
-            get {
-                int x = (coords.Xblock / MapScale);
-                int z = (coords.Zblock / MapScale);
-                return GetOrCreate(x, z);
-            }
+            int x = (coords.Xblock / MapScale);
+            int z = (coords.Zblock / MapScale);
+            return GetOrCreate(x, z);
         }
         private Chunk GetOrCreate(int x, int z)
         {

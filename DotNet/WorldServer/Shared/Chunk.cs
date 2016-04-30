@@ -603,7 +603,7 @@ namespace Sean.World
 			}
 		}
 
-        public void Render()
+        public void Render(int y)
         {
             HeightMap.Render();
         }

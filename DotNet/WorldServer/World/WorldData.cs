@@ -80,7 +80,8 @@ namespace Sean.World
 		#region Properties (Dynamic)
 		/// <summary>True when the world has been completely loaded from disk for server and single player or when world has been completely received in multiplayer.</summary>
         public static bool IsLoaded { get; set; }
-        public static Chunks Chunks;
+        //public static Chunks Chunks;
+        public static WorldMap WorldMap;
 		public static bool GenerateWithTrees = true;
 		#endregion
 
@@ -88,14 +89,14 @@ namespace Sean.World
 		/// <summary>Get a block using world coords.</summary>
         internal static Block GetBlock(ref Coords coords)
 		{
-			return Chunks[coords].Blocks[coords];
+            return WorldMap.Chunk(coords).Blocks[coords];
 		}
 
 		/// <summary>Get a block using world x,y,z. Use this overload to avoid constructing coords when they arent needed.</summary>
 		/// <remarks>For example, this provided ~40% speed increase in the World.PropagateLight function compared to constructing coords and calling the above overload.</remarks>
         internal static Block GetBlock(int x, int y, int z)
 		{
-			return Chunks[x / Chunk.CHUNK_SIZE, z / Chunk.CHUNK_SIZE].Blocks[x % Chunk.CHUNK_SIZE, y, z % Chunk.CHUNK_SIZE];
+            return WorldMap.Chunk(x / Chunk.CHUNK_SIZE, z / Chunk.CHUNK_SIZE).Blocks[x % Chunk.CHUNK_SIZE, y, z % Chunk.CHUNK_SIZE];
 		}
 
 		/// <summary>
@@ -115,7 +116,7 @@ namespace Sean.World
 
         internal static int GetHeightMapLevel(int x, int z)
 		{
-			return Chunks[x / Chunk.CHUNK_SIZE, z / Chunk.CHUNK_SIZE].HeightMap[x % Chunk.CHUNK_SIZE, z % Chunk.CHUNK_SIZE];
+            return WorldMap.Chunk(x / Chunk.CHUNK_SIZE, z / Chunk.CHUNK_SIZE).HeightMap[x % Chunk.CHUNK_SIZE, z % Chunk.CHUNK_SIZE];
 		}
 
 		/// <summary>Check if any of 4 directly adjacent blocks receive direct sunlight. Uses the heightmap so that the server can also use this method. If the server stored light info then it could be used instead.</summary>
@@ -148,7 +149,7 @@ namespace Sean.World
 				if (position.Y + 1 < Chunk.CHUNK_HEIGHT && GetBlock(position.X, position.Y + 1, position.Z).Type == Block.BlockType.Water) type = Block.BlockType.Water;
 			}
 
-			var chunk = Chunks[position];
+            var chunk = WorldMap.Chunk(position);
 			var block = position.GetBlock();
 			var oldType = block.Type;
 			block.Type = type; //assign the new type
@@ -202,7 +203,7 @@ namespace Sean.World
 							}
 							if (adjacent.IsValidBlockLocation && adjacent.GetBlock().Type == Block.BlockType.Water)
 							{
-								Chunks[adjacent].WaterExpanding = true;
+                            WorldMap.Chunk(adjacent).WaterExpanding = true;
 							}
 						}
 						break;
@@ -257,7 +258,7 @@ namespace Sean.World
 				{
 					var adjBlock = tuple.Item1.GetBlock();
 					if (adjBlock.Type != Block.BlockType.Air) continue; //position cannot contain an item if the block is not air
-					var adjChunk = tuple.Item2 == Face.Top || tuple.Item2 == Face.Bottom ? chunk : Chunks[tuple.Item1]; //get the chunk in case the adjacent position crosses a chunk boundary
+                    var adjChunk = tuple.Item2 == Face.Top || tuple.Item2 == Face.Bottom ? chunk : WorldMap.Chunk(tuple.Item1); //get the chunk in case the adjacent position crosses a chunk boundary
 					var lightSourceToRemove = adjChunk.LightSources.FirstOrDefault(lightSource => tuple.Item1.IsOnBlock(ref lightSource.Value.Coords));
 					if (lightSourceToRemove.Value != null && lightSourceToRemove.Value.AttachedToFace == tuple.Item2.ToOpposite()) //remove the light source
 					{

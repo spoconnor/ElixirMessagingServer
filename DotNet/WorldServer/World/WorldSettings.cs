@@ -22,7 +22,7 @@ namespace Sean.World
                 WorldData.GameObjectIdSeq = 1; //int.Parse(settingsNode.Attributes["GameObjectIdSeq"].Value);
                 WorldData.WorldType = WorldType.Grass;// (WorldType)Convert.ToInt32(settingsNode.Attributes["WorldType"].Value);
 
-                WorldData.Chunks = new Chunks();
+                WorldData.WorldMap = new WorldMap(chunkSize:32, initialSize:80);
 			}
 			catch (Exception ex)
 			{

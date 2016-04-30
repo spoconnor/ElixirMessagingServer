@@ -92,7 +92,6 @@
     <Compile Include="World\MessageParser.cs" />
     <Compile Include="World\ClientManager.cs" />
     <Compile Include="ClientSocket.cs" />
-    <Compile Include="World\Map\Cursor.cs" />
     <Compile Include="World\Map\Cell.cs" />
     <Compile Include="World\Objects\Character.cs" />
     <Compile Include="World\Map\Location.cs" />

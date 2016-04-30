@@ -42,10 +42,10 @@ namespace Sean.World
                 maxHeight = MAX_SURFACE_HEIGHT,
             };
 
-			var heightMap = PerlinNoise.GetIntMap(worldSize, 8);
-            var mineralMap = PerlinNoise.GetFloatMap(worldSize, 2);
+            chunk.HeightMap = PerlinNoise.GetIntMap(worldSize, 8);
+            chunk.MineralMap = PerlinNoise.GetFloatMap(worldSize, 2);
 
-        	GenerateChunk(chunk, heightMap, mineralMap);
+        	GenerateChunk(chunk);
 
             /*
 			//loop through chunks again for actions that require the neighboring chunks to be built
@@ -77,13 +77,13 @@ namespace Sean.World
 			//Debug.WriteLine("New world save complete.");
 		}
 
-		private static void GenerateChunk(Chunk chunk, Array<int> heightMap, Array<float> mineralMap)
+		private static void GenerateChunk(Chunk chunk)
 		{
 			for (var x = chunk.Coords.WorldCoordsX; x < chunk.Coords.WorldCoordsX + Chunk.CHUNK_SIZE; x++)
 			{
 				for (var z = chunk.Coords.WorldCoordsZ; z < chunk.Coords.WorldCoordsZ + Chunk.CHUNK_SIZE; z++)
 				{
-					for (var y = 0; y <= Math.Max(heightMap[x,z], WATER_LEVEL); y++)
+                    for (var y = 0; y <= Math.Max(chunk.HeightMap[x,z], WATER_LEVEL); y++)
 					{
 						Block.BlockType blockType;
 						if (y == 0) //world base
@@ -95,7 +95,7 @@ namespace Sean.World
 							//dont use gravel at this depth (a quick test showed this cuts 15-20% from world file size)
 							blockType = Block.BlockType.Rock;
 						}
-                        else if (y == heightMap[x, z]) //ground level
+                        else if (y == chunk.HeightMap[x, z]) //ground level
 						{
 							if (y > WATER_LEVEL)
 							{
@@ -126,11 +126,11 @@ namespace Sean.World
 								}
 							}
 						}
-						else if (y > heightMap[x, z] && y <= WATER_LEVEL)
+                        else if (y > chunk.HeightMap[x, z] && y <= WATER_LEVEL)
 						{
-							blockType = (WorldData.WorldType == WorldType.Winter && y == WATER_LEVEL && y - heightMap[x, z] <= 3) ? Block.BlockType.Ice : Block.BlockType.Water;
+                            blockType = (WorldData.WorldType == WorldType.Winter && y == WATER_LEVEL && y - chunk.HeightMap[x, z] <= 3) ? Block.BlockType.Ice : Block.BlockType.Water;
 						}
-						else if (y > heightMap[x, z] - 5) //within 5 blocks of the surface
+                        else if (y > chunk.HeightMap[x, z] - 5) //within 5 blocks of the surface
 						{
 							switch (Settings.Random.Next(0, 37))
 							{
@@ -155,10 +155,10 @@ namespace Sean.World
 						chunk.Blocks[x % Chunk.CHUNK_SIZE, y, z % Chunk.CHUNK_SIZE] = new Block(blockType);
 					}
 
-					if (mineralMap[x, z] < heightMap[x, z] - 5 && mineralMap[x, z] % 1f > 0.80f)
+                    if (chunk.MineralMap[x, z] < chunk.HeightMap[x, z] - 5 && chunk.MineralMap[x, z] % 1f > 0.80f)
 					{
 						Block.BlockType mineralType;
-						switch ((int)(mineralMap[x, z] % 0.01 * 1000))
+                        switch ((int)(chunk.MineralMap[x, z] % 0.01 * 1000))
 						{
 							case 0:
 							case 1:
@@ -184,7 +184,7 @@ namespace Sean.World
 								mineralType = Block.BlockType.Iron;
 								break;
 						}
-						var mineralPosition = new Position(x, (int)mineralMap[x, z], z);
+                        var mineralPosition = new Position(x, (int)chunk.MineralMap[x, z], z);
 						chunk.Blocks[mineralPosition] = new Block(mineralType);
 						
 						//expand this mineral node
@@ -205,14 +205,14 @@ namespace Sean.World
 									mineralPosition.Z = Math.Max(mineralPosition.Z - 1, 0);
 									break;
 								case 4:
-									mineralPosition.Y = Math.Min(mineralPosition.Y + 1, heightMap[x, z] - 5 - 1);
+                                mineralPosition.Y = Math.Min(mineralPosition.Y + 1, chunk.HeightMap[x, z] - 5 - 1);
 									break;
 								case 5:
 									mineralPosition.Y = Math.Max(mineralPosition.Y - 1, 0);
 									break;
 							}
 							//need to get the chunk because this block could be expanding into an adjacent chunk
-							WorldData.Chunks[mineralPosition].Blocks[mineralPosition] = new Block(mineralType);
+                            WorldData.WorldMap.Chunk(mineralPosition).Blocks[mineralPosition] = new Block(mineralType);
 						}
 					}
 				}
