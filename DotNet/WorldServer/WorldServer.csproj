@@ -98,6 +98,7 @@
     <Compile Include="World\Objects\CharacterManager.cs" />
     <Compile Include="World\Generator\Array.cs" />
     <Compile Include="World\Map\WorldMap.cs" />
+    <Compile Include="WorldServer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

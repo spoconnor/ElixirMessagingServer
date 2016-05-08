@@ -37,12 +37,14 @@ namespace Sean.World
                 maxZ = chunk.Coords.WorldCoordsZ + Chunk.CHUNK_SIZE,
                 minX = chunk.Coords.WorldCoordsX,
                 maxX = chunk.Coords.WorldCoordsX + Chunk.CHUNK_SIZE,
+                minY = 0,
+                maxY = 10,
                 scale = 1,
                 minHeight = MIN_SURFACE_HEIGHT,
                 maxHeight = MAX_SURFACE_HEIGHT,
             };
 
-            chunk.HeightMap = PerlinNoise.GetIntMap(worldSize, 8);
+            chunk.HeightMap = PerlinNoise.GetIntMap(worldSize, 4);
             chunk.MineralMap = PerlinNoise.GetFloatMap(worldSize, 2);
 
         	GenerateChunk(chunk);

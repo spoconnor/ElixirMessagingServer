@@ -28,6 +28,11 @@ namespace Sean.World
             return GetOrCreate(x, z); 
         }
 
+        public Chunk Chunk(ChunkCoords chunkCoords)
+        {
+            return GetOrCreate (chunkCoords.X, chunkCoords.Z);
+        }
+
         /// <summary>Get a chunk from the array. Based on world block coords.</summary>
         public Chunk Chunk(Position position)
         {
@@ -45,9 +50,11 @@ namespace Sean.World
         }
         private Chunk GetOrCreate(int x, int z)
         {
+            Console.WriteLine ($"Getting {x},{z}");
             var mapChunk = mapChunks[x, z];
             if (mapChunk == null)
             {
+                Console.WriteLine ($"Generating {x},{z}");
                 mapChunk = new MapChunk();
                 var chunkCoords = new ChunkCoords(x, z);
                 mapChunk.Chunk = new Chunk(chunkCoords);

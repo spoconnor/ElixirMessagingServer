@@ -9,7 +9,7 @@
 			WorldCoordsX = X * Chunk.CHUNK_SIZE;
 			WorldCoordsZ = Z * Chunk.CHUNK_SIZE;
 		}
-
+            
 		public ChunkCoords(ref Coords coords)
 		{
 			X = coords.Xblock / Chunk.CHUNK_SIZE;
