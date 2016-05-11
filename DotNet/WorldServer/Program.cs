@@ -6,6 +6,11 @@ using System.Net.Http;
 
 namespace Sean.World
 {
+    class FrameEventArgs
+    {
+        public int Time;
+    }
+
     static class MainClass
 	{
 		static public void Main(String[] args)

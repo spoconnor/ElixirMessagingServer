@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Sockets;
-using OpenTK;
 using System.Diagnostics;
 
 namespace Sean.World

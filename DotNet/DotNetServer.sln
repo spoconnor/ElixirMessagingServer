@@ -3,12 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldServer", "WorldServer\WorldServer.csproj", "{ED9CDEB6-5F1F-4C58-8F57-F216266F4B79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClient", "TestClient\TestClient.csproj", "{7301AA7C-790E-4765-9036-D2A11BF47E92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7301AA7C-790E-4765-9036-D2A11BF47E92}.Debug|x86.ActiveCfg = Debug|x86
+		{7301AA7C-790E-4765-9036-D2A11BF47E92}.Debug|x86.Build.0 = Debug|x86
+		{7301AA7C-790E-4765-9036-D2A11BF47E92}.Release|x86.ActiveCfg = Release|x86
+		{7301AA7C-790E-4765-9036-D2A11BF47E92}.Release|x86.Build.0 = Release|x86
 		{ED9CDEB6-5F1F-4C58-8F57-F216266F4B79}.Debug|x86.ActiveCfg = Debug|x86
 		{ED9CDEB6-5F1F-4C58-8F57-F216266F4B79}.Debug|x86.Build.0 = Debug|x86
 		{ED9CDEB6-5F1F-4C58-8F57-F216266F4B79}.Release|x86.ActiveCfg = Release|x86

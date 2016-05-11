@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Xml;
-using OpenTK;
-using OpenTK.Graphics.OpenGL;
 
 namespace Sean.World
 {

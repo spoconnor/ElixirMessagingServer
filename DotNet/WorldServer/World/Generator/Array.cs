@@ -2,11 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 
-
 namespace Sean.World
 {
     public struct Vector2
     {
+        public Vector2(float x, float y)
+        {
+            this.x = x;
+            this.y = y;
+        }
         public float x;
         public float y;
     }

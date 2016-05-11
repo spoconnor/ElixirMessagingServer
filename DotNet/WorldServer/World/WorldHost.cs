@@ -5,8 +5,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTK;
-using OpenTK.Graphics.OpenGL;
 
 namespace Sean.World
 {
@@ -91,7 +89,7 @@ namespace Sean.World
    #endregion
 
    #region Render
-        private static void UpdateCharacters_OnHalfSecondElapsed (FrameEventArgs e)
+        private static void UpdateCharacters_OnHalfSecondElapsed ()//FrameEventArgs e)
         {
             //foreach (var character in Game.Characters)
             //{

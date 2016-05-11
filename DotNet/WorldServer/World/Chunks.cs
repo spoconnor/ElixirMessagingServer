@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Diagnostics;
-using OpenTK;
 using System.Collections.Concurrent;
 
 namespace Sean.World

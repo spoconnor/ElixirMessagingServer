@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Xml;
-using OpenTK;
 
 namespace Sean.World
 {
@@ -51,13 +50,13 @@ namespace Sean.World
 		#endregion
 
 		#region Events
-		internal delegate void BounceEventHandler(FrameEventArgs e);
+        internal delegate void BounceEventHandler(FrameEventArgs e);
 		internal event BounceEventHandler Bounce;
 
-		internal delegate void StopEventHandler(FrameEventArgs e);
+        internal delegate void StopEventHandler(FrameEventArgs e);
 		internal event StopEventHandler Stop;
 
-		internal delegate void DecayEventHandler(FrameEventArgs e);
+        internal delegate void DecayEventHandler(FrameEventArgs e);
 		internal event DecayEventHandler Decay;
 		#endregion
 
