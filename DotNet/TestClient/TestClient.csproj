@@ -7,7 +7,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>TestClient</RootNamespace>
     <AssemblyName>TestClient</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +30,106 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
+    <Compile Include="GameActions\AddBlock.cs" />
+    <Compile Include="GameActions\AddBlockItem.cs" />
+    <Compile Include="GameActions\AddBlockMulti.cs" />
+    <Compile Include="GameActions\AddCuboid.cs" />
+    <Compile Include="GameActions\AddProjectile.cs" />
+    <Compile Include="GameActions\AddStaticItem.cs" />
+    <Compile Include="GameActions\AddStructure.cs" />
+    <Compile Include="GameActions\ChatMsg.cs" />
+    <Compile Include="GameActions\Connect.cs" />
+    <Compile Include="GameActions\Disconnect.cs" />
+    <Compile Include="GameActions\GameAction.cs" />
+    <Compile Include="GameActions\GetWorld.cs" />
+    <Compile Include="GameActions\NetworkClient.cs" />
+    <Compile Include="GameActions\PickupBlockItem.cs" />
+    <Compile Include="GameActions\PlayerInfo.cs" />
+    <Compile Include="GameActions\PlayerMove.cs" />
+    <Compile Include="GameActions\PlayerOption.cs" />
+    <Compile Include="GameActions\RemoveBlock.cs" />
+    <Compile Include="GameActions\RemoveBlockItem.cs" />
+    <Compile Include="GameActions\RemoveBlockMulti.cs" />
+    <Compile Include="GameActions\ServerCommand.cs" />
+    <Compile Include="GameActions\ServerMsg.cs" />
+    <Compile Include="GameActions\ServerSync.cs" />
+    <Compile Include="GameActions\ThrowException.cs" />
+    <Compile Include="GameObjects\GameObject.cs" />
+    <Compile Include="GameObjects\GameItems\BlockItem.cs" />
+    <Compile Include="GameObjects\GameItems\Clutter.cs" />
+    <Compile Include="GameObjects\GameItems\GameItemDynamic.cs" />
+    <Compile Include="GameObjects\GameItems\GameItemStatic.cs" />
+    <Compile Include="GameObjects\GameItems\LightSource.cs" />
+    <Compile Include="GameObjects\GameItems\Projectile.cs" />
+    <Compile Include="GameObjects\Units\Character.cs" />
+    <Compile Include="GameObjects\Units\Mob.cs" />
+    <Compile Include="GameObjects\Units\Player.cs" />
+    <Compile Include="GameObjects\Units\Unit.cs" />
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="Hosts\BlockCursorHost.cs" />
+    <Compile Include="Hosts\CharacterHost.cs" />
+    <Compile Include="Hosts\IHost.cs" />
+    <Compile Include="Hosts\PerformanceHost.cs" />
+    <Compile Include="Hosts\Input\InputHost.cs" />
+    <Compile Include="Hosts\Input\Movement.cs" />
+    <Compile Include="Hosts\Input\SlashCommands.cs" />
+    <Compile Include="Hosts\Ui\Button.cs" />
+    <Compile Include="Hosts\Ui\Buttons.cs" />
+    <Compile Include="Hosts\Ui\ChatMessage.cs" />
+    <Compile Include="Hosts\Ui\UiHost.cs" />
+    <Compile Include="Hosts\World\Block.cs" />
+    <Compile Include="Hosts\World\Blocks.cs" />
+    <Compile Include="Hosts\World\Chunk.cs" />
+    <Compile Include="Hosts\World\ChunkCoords.cs" />
+    <Compile Include="Hosts\World\Chunks.cs" />
+    <Compile Include="Hosts\World\Coords.cs" />
+    <Compile Include="Hosts\World\Lighting.cs" />
+    <Compile Include="Hosts\World\Position.cs" />
+    <Compile Include="Hosts\World\SkyHost.cs" />
+    <Compile Include="Hosts\World\WorldData.cs" />
+    <Compile Include="Hosts\World\WorldHost.cs" />
+    <Compile Include="Hosts\World\WorldSettings.cs" />
+    <Compile Include="Hosts\World\Render\BlockRender.cs" />
+    <Compile Include="Hosts\World\Render\ChunkVbo.cs" />
+    <Compile Include="Hosts\World\Render\ColorRgb.cs" />
+    <Compile Include="Hosts\World\Render\TexCoordsShort.cs" />
+    <Compile Include="Scripting\Character.cs" />
+    <Compile Include="Scripting\Construction.cs" />
+    <Compile Include="Scripting\GraphicsAlgorithms.cs" />
+    <Compile Include="Scripting\ICharacter.cs" />
+    <Compile Include="Scripting\IScriptHost.cs" />
+    <Compile Include="Scripting\Knowledge.cs" />
+    <Compile Include="Scripting\Map.cs" />
+    <Compile Include="Scripting\PathFinder.cs" />
+    <Compile Include="Scripting\ScriptHost.cs" />
+    <Compile Include="Scripting\Tasks.cs" />
+    <Compile Include="Scripting\test.cs" />
+    <Compile Include="Server\Controller.cs" />
+    <Compile Include="Server\NetworkPlayer.cs" />
+    <Compile Include="Server\ServerConsole.Designer.cs" />
+    <Compile Include="Server\ServerConsole.cs" />
+    <Compile Include="Server\StructureBuilder.cs" />
+    <Compile Include="Server\UPnP.cs" />
+    <Compile Include="Sounds\Audio.cs" />
+    <Compile Include="Sounds\Music.cs" />
+    <Compile Include="Sounds\Resources\SoundFiles.Designer.cs" />
+    <Compile Include="Textures\TextureLoader.cs" />
+    <Compile Include="Textures\Resources\BlockTextures64.Designer.cs" />
+    <Compile Include="Textures\Resources\ClutterTextures64.Designer.cs" />
+    <Compile Include="Textures\Resources\EnvironmentTextures.Designer.cs" />
+    <Compile Include="Textures\Resources\ItemTextures.Designer.cs" />
+    <Compile Include="Textures\Resources\UiTextures.Designer.cs" />
+    <Compile Include="Textures\Resources\UnitTextures.Designer.cs" />
+    <Compile Include="Utilities\Diagnostics.cs" />
+    <Compile Include="Utilities\DisplayList.cs" />
+    <Compile Include="Utilities\Exceptions.cs" />
+    <Compile Include="Utilities\GlHelper.cs" />
+    <Compile Include="Utilities\Misc.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http" />
@@ -54,5 +154,119 @@
   <ItemGroup>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
+    <None Include="GameObjects\GameObjects.cd" />
+    <None Include="gtk-gui\gui.stetic" />
+    <None Include="Images\Globe1.ico" />
+    <None Include="Images\GreenCheck.png" />
+    <None Include="Images\GreenFlag.png" />
+    <None Include="Images\LauncherBackground2.jpg" />
+    <None Include="Images\Progress.gif" />
+    <None Include="Images\vgicon.ico" />
+    <None Include="Server\ServerConsole.resources" />
+    <None Include="Server\ServerConsole.resx" />
+    <None Include="Sounds\Resources\AddBlock.wav" />
+    <None Include="Sounds\Resources\ItemPickup.wav" />
+    <None Include="Sounds\Resources\JumpOutOfWater.wav" />
+    <None Include="Sounds\Resources\Message.wav" />
+    <None Include="Sounds\Resources\PlayerConnect.wav" />
+    <None Include="Sounds\Resources\PlayerLanding.wav" />
+    <None Include="Sounds\Resources\RemoveBlock.wav" />
+    <None Include="Sounds\Resources\SoundFiles.resources" />
+    <None Include="Sounds\Resources\SoundFiles.resx" />
+    <None Include="Sounds\Resources\Splash.wav" />
+    <None Include="Sounds\Resources\TimeToDreamMono.wav" />
+    <None Include="Sounds\Resources\WaterBubbles.wav" />
+    <None Include="Textures\Blocks64\Bricks.png" />
+    <None Include="Textures\Blocks64\Coal.png" />
+    <None Include="Textures\Blocks64\Cobble.png" />
+    <None Include="Textures\Blocks64\Copper.png" />
+    <None Include="Textures\Blocks64\Crate.png" />
+    <None Include="Textures\Blocks64\CrateSide.png" />
+    <None Include="Textures\Blocks64\Dirt.png" />
+    <None Include="Textures\Blocks64\ElmTree.png" />
+    <None Include="Textures\Blocks64\FancyBlack.png" />
+    <None Include="Textures\Blocks64\FancyGreen.png" />
+    <None Include="Textures\Blocks64\FancyRed.png" />
+    <None Include="Textures\Blocks64\FancyWhite.png" />
+    <None Include="Textures\Blocks64\Gold.png" />
+    <None Include="Textures\Blocks64\Grass.png" />
+    <None Include="Textures\Blocks64\GrassSide.png" />
+    <None Include="Textures\Blocks64\Gravel.png" />
+    <None Include="Textures\Blocks64\Ice.png" />
+    <None Include="Textures\Blocks64\Iron.png" />
+    <None Include="Textures\Blocks64\Lava.png" />
+    <None Include="Textures\Blocks64\LavaRock.png" />
+    <None Include="Textures\Blocks64\Leaves.png" />
+    <None Include="Textures\Blocks64\Oil.png" />
+    <None Include="Textures\Blocks64\PrisonBars.png" />
+    <None Include="Textures\Blocks64\Rock.png" />
+    <None Include="Textures\Blocks64\Sand.png" />
+    <None Include="Textures\Blocks64\SandDark.png" />
+    <None Include="Textures\Blocks64\Shelf1.png" />
+    <None Include="Textures\Blocks64\Snow.png" />
+    <None Include="Textures\Blocks64\SnowLeaves.png" />
+    <None Include="Textures\Blocks64\SnowSide.png" />
+    <None Include="Textures\Blocks64\Speaker.png" />
+    <None Include="Textures\Blocks64\SteelDoorBottom.png" />
+    <None Include="Textures\Blocks64\SteelDoorTop.png" />
+    <None Include="Textures\Blocks64\SteelPlate.png" />
+    <None Include="Textures\Blocks64\SteelPlate2.png" />
+    <None Include="Textures\Blocks64\Tree.png" />
+    <None Include="Textures\Blocks64\TreeTrunk.png" />
+    <None Include="Textures\Blocks64\Water.png" />
+    <None Include="Textures\Blocks64\Water2.png" />
+    <None Include="Textures\Blocks64\Water3.png" />
+    <None Include="Textures\Blocks64\Water4.png" />
+    <None Include="Textures\Blocks64\WoodTile1.png" />
+    <None Include="Textures\Blocks64\WoodTile2.png" />
+    <None Include="Textures\Clutter64\Bush.png" />
+    <None Include="Textures\Clutter64\Grass1.png" />
+    <None Include="Textures\Clutter64\Grass2.png" />
+    <None Include="Textures\Clutter64\Grass3.png" />
+    <None Include="Textures\Clutter64\Grass4.png" />
+    <None Include="Textures\Clutter64\Grass5.png" />
+    <None Include="Textures\Clutter64\Grass6.png" />
+    <None Include="Textures\Clutter64\Grass7.png" />
+    <None Include="Textures\Clutter64\Grass8.png" />
+    <None Include="Textures\Environment\Moon.png" />
+    <None Include="Textures\Environment\Sun.png" />
+    <None Include="Textures\Item\Lantern.png" />
+    <None Include="Textures\Resources\BlockTextures64.resources" />
+    <None Include="Textures\Resources\BlockTextures64.resx" />
+    <None Include="Textures\Resources\ClutterTextures64.resources" />
+    <None Include="Textures\Resources\ClutterTextures64.resx" />
+    <None Include="Textures\Resources\EnvironmentTextures.resources" />
+    <None Include="Textures\Resources\EnvironmentTextures.resx" />
+    <None Include="Textures\Resources\ItemTextures.resources" />
+    <None Include="Textures\Resources\ItemTextures.resx" />
+    <None Include="Textures\Resources\UiTextures.resources" />
+    <None Include="Textures\Resources\UiTextures.resx" />
+    <None Include="Textures\Resources\UnitTextures.resources" />
+    <None Include="Textures\Resources\UnitTextures.resx" />
+    <None Include="Textures\Ui\Axe.png" />
+    <None Include="Textures\Ui\BaseCharacter.png" />
+    <None Include="Textures\Ui\BlockCursor.png" />
+    <None Include="Textures\Ui\CompassArrow.png" />
+    <None Include="Textures\Ui\CrossHairs.png" />
+    <None Include="Textures\Ui\LargeKeep.png" />
+    <None Include="Textures\Ui\PickAxe.png" />
+    <None Include="Textures\Ui\Shovel.png" />
+    <None Include="Textures\Ui\SmallKeep.png" />
+    <None Include="Textures\Ui\ToolCuboid.png" />
+    <None Include="Textures\Ui\ToolDefault.png" />
+    <None Include="Textures\Ui\ToolFastBuild.png" />
+    <None Include="Textures\Ui\ToolFastDestroy.png" />
+    <None Include="Textures\Ui\ToolTree.png" />
+    <None Include="Textures\Ui\Tower.png" />
+    <None Include="Textures\Unit\Arm.png" />
+    <None Include="Textures\Unit\Head.png" />
+    <None Include="Textures\Unit\Leg.png" />
+    <None Include="Textures\Unit\Torso.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WorldGenerator\WorldGenerator.csproj">
+      <Project>{ED9CDEB6-5F1F-4C58-8F57-F216266F4B79}</Project>
+      <Name>WorldGenerator</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
