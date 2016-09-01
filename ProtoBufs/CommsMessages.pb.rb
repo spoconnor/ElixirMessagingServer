@@ -33,25 +33,22 @@
 #     optional Response response = 4;
 #     optional Ping ping = 5;
 #     optional Pong pong = 6;
-#     optional NewUser newUser = 7;
-#     optional Login login = 8;
-#     optional Say say = 9;
-#     optional MapRequest mapRequest = 10;
-#     optional MapIgnore mapIgnore = 11;
-#     optional Map map = 12;
-#     optional MapUpdate mapUpdate = 13;
-#     optional MapCharacterUpdate mapCharacterUpdate = 14;
-#     optional QueryServer queryServer = 15;
-#     optional QueryServerResponse queryServerResponse = 16;
+#     optional Login login = 7;
+#     optional Say say = 8;
+#     optional MapRequest mapRequest = 9;
+#     optional MapIgnore mapIgnore = 10;
+#     optional Map map = 11;
+#     optional MapUpdate mapUpdate = 12;
+#     optional MapCharacterUpdate mapCharacterUpdate = 13;
+#     optional QueryServer queryServer = 14;
+#     optional QueryServerResponse queryServerResponse = 15;
 #   }
 # 
 #   message Ping
 #   {
-#     required int32 count = 1;
 #   }
 #   message Pong
 #   {
-#     required int32 count = 1;
 #   }
 # 
 #   message Response
@@ -59,18 +56,13 @@
 #     required int32 code = 1;
 #     optional string message = 2;
 #   }
-# 
-#   message NewUser
-#   {
-#     required string username = 1;
-#     required string password = 2;
-#     required string name = 3;
-#   }
 #   
 #   message Login
 #   {
-#     required string username = 1;
-#     required string password = 2;
+#     required string ipaddress = 1;
+#     required int32 port = 2;
+#     required string username = 3;
+#     required string password = 4;
 #   }
 #   
 #   message Say 
@@ -96,8 +88,6 @@
 #     required int32 minY = 2;
 #     required int32 maxX = 3;
 #     required int32 maxY = 4;
-#     required int32 dataSize = 5;
-#     // binary data follows message
 #   }
 # 
 #   message MapUpdate 
@@ -118,14 +108,13 @@
 # 
 #   message QueryServer 
 #   {
+#     required string parameter = 1;
 #   }
 # 
 #   message QueryServerResponse 
 #   {
-#     required int32 minMapChunkX = 1;
-#     required int32 minMapChunkY = 2;
-#     required int32 maxMapChunkX = 3;
-#     required int32 maxMapChunkY = 4;
+#     required string parameter = 1;
+#     required string value = 2;
 #   }
 
 require 'protobuf/message/message'
@@ -159,40 +148,33 @@ module CommsMessages
     optional :Response, :response, 4
     optional :Ping, :ping, 5
     optional :Pong, :pong, 6
-    optional :NewUser, :newUser, 7
-    optional :Login, :login, 8
-    optional :Say, :say, 9
-    optional :MapRequest, :mapRequest, 10
-    optional :MapIgnore, :mapIgnore, 11
-    optional :Map, :map, 12
-    optional :MapUpdate, :mapUpdate, 13
-    optional :MapCharacterUpdate, :mapCharacterUpdate, 14
-    optional :QueryServer, :queryServer, 15
-    optional :QueryServerResponse, :queryServerResponse, 16
+    optional :Login, :login, 7
+    optional :Say, :say, 8
+    optional :MapRequest, :mapRequest, 9
+    optional :MapIgnore, :mapIgnore, 10
+    optional :Map, :map, 11
+    optional :MapUpdate, :mapUpdate, 12
+    optional :MapCharacterUpdate, :mapCharacterUpdate, 13
+    optional :QueryServer, :queryServer, 14
+    optional :QueryServerResponse, :queryServerResponse, 15
   end
   class Ping < ::Protobuf::Message
     defined_in __FILE__
-    required :int32, :count, 1
   end
   class Pong < ::Protobuf::Message
     defined_in __FILE__
-    required :int32, :count, 1
   end
   class Response < ::Protobuf::Message
     defined_in __FILE__
     required :int32, :code, 1
     optional :string, :message, 2
   end
-  class NewUser < ::Protobuf::Message
-    defined_in __FILE__
-    required :string, :username, 1
-    required :string, :password, 2
-    required :string, :name, 3
-  end
   class Login < ::Protobuf::Message
     defined_in __FILE__
-    required :string, :username, 1
-    required :string, :password, 2
+    required :string, :ipaddress, 1
+    required :int32, :port, 2
+    required :string, :username, 3
+    required :string, :password, 4
   end
   class Say < ::Protobuf::Message
     defined_in __FILE__
@@ -214,7 +196,6 @@ module CommsMessages
     required :int32, :minY, 2
     required :int32, :maxX, 3
     required :int32, :maxY, 4
-    required :int32, :dataSize, 5
   end
   class MapUpdate < ::Protobuf::Message
     defined_in __FILE__
@@ -232,12 +213,11 @@ module CommsMessages
   end
   class QueryServer < ::Protobuf::Message
     defined_in __FILE__
+    required :string, :parameter, 1
   end
   class QueryServerResponse < ::Protobuf::Message
     defined_in __FILE__
-    required :int32, :minMapChunkX, 1
-    required :int32, :minMapChunkY, 2
-    required :int32, :maxMapChunkX, 3
-    required :int32, :maxMapChunkY, 4
+    required :string, :parameter, 1
+    required :string, :value, 2
   end
 end

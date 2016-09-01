@@ -1,39 +1,35 @@
 
-â
-CommsMessages.protoCommsMessages"ñ
+Ê
+
+CommsMessages.protoCommsMessages"È
 Message
 msgtype (
 from (
 dest ()
 response (2.CommsMessages.Response!
 ping (2.CommsMessages.Ping!
-pong (2.CommsMessages.Pong'
-newUser (2.CommsMessages.NewUser#
-login (2.CommsMessages.Login
-say	 (2.CommsMessages.Say-
+pong (2.CommsMessages.Pong#
+login (2.CommsMessages.Login
+say (2.CommsMessages.Say-
 
-mapRequest
- (2.CommsMessages.MapRequest+
-	mapIgnore (2.CommsMessages.MapIgnore
-map (2.CommsMessages.Map+
-	mapUpdate (2.CommsMessages.MapUpdate=
-mapCharacterUpdate (2!.CommsMessages.MapCharacterUpdate/
-queryServer (2.CommsMessages.QueryServer?
-queryServerResponse (2".CommsMessages.QueryServerResponse"
-Ping
-count ("
-Pong
-count (")
+mapRequest	 (2.CommsMessages.MapRequest+
+	mapIgnore
+ (2.CommsMessages.MapIgnore
+map (2.CommsMessages.Map+
+	mapUpdate (2.CommsMessages.MapUpdate=
+mapCharacterUpdate (2!.CommsMessages.MapCharacterUpdate/
+queryServer (2.CommsMessages.QueryServer?
+queryServerResponse (2".CommsMessages.QueryServerResponse"
+Ping"
+Pong")
 Response
 code (
-message (	";
-NewUser
-username (	
-password (	
-name (	"+
-Login
-username (	
-password (	"
+message (	"L
+Login
+	ipaddress (	
+port (
+username (	
+password (	"
 Say
 text (	""
 
@@ -42,13 +38,12 @@ MapRequest
 y ("!
 	MapIgnore	
 x (	
-y ("O
+y ("=
 Map
 minX (
 minY (
 maxX (
-maxY (
-dataSize (">
+maxY (">
 	MapUpdate	
 x (	
 y (	
@@ -59,13 +54,12 @@ MapRequest
 id (	
 x (	
 y (	
-z ("
-QueryServer"m
-QueryServerResponse
-minMapChunkX (
-minMapChunkY (
-maxMapChunkX (
-maxMapChunkY (*Ò
+z (" 
+QueryServer
+	parameter (	"7
+QueryServerResponse
+	parameter (	
+value (	*Ò
 MsgType
 	eResponse	
 ePing	

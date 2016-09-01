@@ -38,7 +38,6 @@ class Message;
 class Ping;
 class Pong;
 class Response;
-class NewUser;
 class Login;
 class Say;
 class MapRequest;
@@ -183,91 +182,82 @@ class Message : public ::google::protobuf::Message {
   inline ::CommsMessages::Pong* release_pong();
   inline void set_allocated_pong(::CommsMessages::Pong* pong);
 
-  // optional .CommsMessages.NewUser newUser = 7;
-  inline bool has_newuser() const;
-  inline void clear_newuser();
-  static const int kNewUserFieldNumber = 7;
-  inline const ::CommsMessages::NewUser& newuser() const;
-  inline ::CommsMessages::NewUser* mutable_newuser();
-  inline ::CommsMessages::NewUser* release_newuser();
-  inline void set_allocated_newuser(::CommsMessages::NewUser* newuser);
-
-  // optional .CommsMessages.Login login = 8;
+  // optional .CommsMessages.Login login = 7;
   inline bool has_login() const;
   inline void clear_login();
-  static const int kLoginFieldNumber = 8;
+  static const int kLoginFieldNumber = 7;
   inline const ::CommsMessages::Login& login() const;
   inline ::CommsMessages::Login* mutable_login();
   inline ::CommsMessages::Login* release_login();
   inline void set_allocated_login(::CommsMessages::Login* login);
 
-  // optional .CommsMessages.Say say = 9;
+  // optional .CommsMessages.Say say = 8;
   inline bool has_say() const;
   inline void clear_say();
-  static const int kSayFieldNumber = 9;
+  static const int kSayFieldNumber = 8;
   inline const ::CommsMessages::Say& say() const;
   inline ::CommsMessages::Say* mutable_say();
   inline ::CommsMessages::Say* release_say();
   inline void set_allocated_say(::CommsMessages::Say* say);
 
-  // optional .CommsMessages.MapRequest mapRequest = 10;
+  // optional .CommsMessages.MapRequest mapRequest = 9;
   inline bool has_maprequest() const;
   inline void clear_maprequest();
-  static const int kMapRequestFieldNumber = 10;
+  static const int kMapRequestFieldNumber = 9;
   inline const ::CommsMessages::MapRequest& maprequest() const;
   inline ::CommsMessages::MapRequest* mutable_maprequest();
   inline ::CommsMessages::MapRequest* release_maprequest();
   inline void set_allocated_maprequest(::CommsMessages::MapRequest* maprequest);
 
-  // optional .CommsMessages.MapIgnore mapIgnore = 11;
+  // optional .CommsMessages.MapIgnore mapIgnore = 10;
   inline bool has_mapignore() const;
   inline void clear_mapignore();
-  static const int kMapIgnoreFieldNumber = 11;
+  static const int kMapIgnoreFieldNumber = 10;
   inline const ::CommsMessages::MapIgnore& mapignore() const;
   inline ::CommsMessages::MapIgnore* mutable_mapignore();
   inline ::CommsMessages::MapIgnore* release_mapignore();
   inline void set_allocated_mapignore(::CommsMessages::MapIgnore* mapignore);
 
-  // optional .CommsMessages.Map map = 12;
+  // optional .CommsMessages.Map map = 11;
   inline bool has_map() const;
   inline void clear_map();
-  static const int kMapFieldNumber = 12;
+  static const int kMapFieldNumber = 11;
   inline const ::CommsMessages::Map& map() const;
   inline ::CommsMessages::Map* mutable_map();
   inline ::CommsMessages::Map* release_map();
   inline void set_allocated_map(::CommsMessages::Map* map);
 
-  // optional .CommsMessages.MapUpdate mapUpdate = 13;
+  // optional .CommsMessages.MapUpdate mapUpdate = 12;
   inline bool has_mapupdate() const;
   inline void clear_mapupdate();
-  static const int kMapUpdateFieldNumber = 13;
+  static const int kMapUpdateFieldNumber = 12;
   inline const ::CommsMessages::MapUpdate& mapupdate() const;
   inline ::CommsMessages::MapUpdate* mutable_mapupdate();
   inline ::CommsMessages::MapUpdate* release_mapupdate();
   inline void set_allocated_mapupdate(::CommsMessages::MapUpdate* mapupdate);
 
-  // optional .CommsMessages.MapCharacterUpdate mapCharacterUpdate = 14;
+  // optional .CommsMessages.MapCharacterUpdate mapCharacterUpdate = 13;
   inline bool has_mapcharacterupdate() const;
   inline void clear_mapcharacterupdate();
-  static const int kMapCharacterUpdateFieldNumber = 14;
+  static const int kMapCharacterUpdateFieldNumber = 13;
   inline const ::CommsMessages::MapCharacterUpdate& mapcharacterupdate() const;
   inline ::CommsMessages::MapCharacterUpdate* mutable_mapcharacterupdate();
   inline ::CommsMessages::MapCharacterUpdate* release_mapcharacterupdate();
   inline void set_allocated_mapcharacterupdate(::CommsMessages::MapCharacterUpdate* mapcharacterupdate);
 
-  // optional .CommsMessages.QueryServer queryServer = 15;
+  // optional .CommsMessages.QueryServer queryServer = 14;
   inline bool has_queryserver() const;
   inline void clear_queryserver();
-  static const int kQueryServerFieldNumber = 15;
+  static const int kQueryServerFieldNumber = 14;
   inline const ::CommsMessages::QueryServer& queryserver() const;
   inline ::CommsMessages::QueryServer* mutable_queryserver();
   inline ::CommsMessages::QueryServer* release_queryserver();
   inline void set_allocated_queryserver(::CommsMessages::QueryServer* queryserver);
 
-  // optional .CommsMessages.QueryServerResponse queryServerResponse = 16;
+  // optional .CommsMessages.QueryServerResponse queryServerResponse = 15;
   inline bool has_queryserverresponse() const;
   inline void clear_queryserverresponse();
-  static const int kQueryServerResponseFieldNumber = 16;
+  static const int kQueryServerResponseFieldNumber = 15;
   inline const ::CommsMessages::QueryServerResponse& queryserverresponse() const;
   inline ::CommsMessages::QueryServerResponse* mutable_queryserverresponse();
   inline ::CommsMessages::QueryServerResponse* release_queryserverresponse();
@@ -287,8 +277,6 @@ class Message : public ::google::protobuf::Message {
   inline void clear_has_ping();
   inline void set_has_pong();
   inline void clear_has_pong();
-  inline void set_has_newuser();
-  inline void clear_has_newuser();
   inline void set_has_login();
   inline void clear_has_login();
   inline void set_has_say();
@@ -315,7 +303,6 @@ class Message : public ::google::protobuf::Message {
   ::CommsMessages::Response* response_;
   ::CommsMessages::Ping* ping_;
   ::CommsMessages::Pong* pong_;
-  ::CommsMessages::NewUser* newuser_;
   ::CommsMessages::Login* login_;
   ::CommsMessages::Say* say_;
   ::CommsMessages::MapRequest* maprequest_;
@@ -328,7 +315,7 @@ class Message : public ::google::protobuf::Message {
   ::google::protobuf::int32 dest_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(16 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(15 + 31) / 32];
 
   friend void  protobuf_AddDesc_CommsMessages_2eproto();
   friend void protobuf_AssignDesc_CommsMessages_2eproto();
@@ -393,24 +380,14 @@ class Ping : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 count = 1;
-  inline bool has_count() const;
-  inline void clear_count();
-  static const int kCountFieldNumber = 1;
-  inline ::google::protobuf::int32 count() const;
-  inline void set_count(::google::protobuf::int32 value);
-
   // @@protoc_insertion_point(class_scope:CommsMessages.Ping)
  private:
-  inline void set_has_count();
-  inline void clear_has_count();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 count_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[1];
 
   friend void  protobuf_AddDesc_CommsMessages_2eproto();
   friend void protobuf_AssignDesc_CommsMessages_2eproto();
@@ -475,24 +452,14 @@ class Pong : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 count = 1;
-  inline bool has_count() const;
-  inline void clear_count();
-  static const int kCountFieldNumber = 1;
-  inline ::google::protobuf::int32 count() const;
-  inline void set_count(::google::protobuf::int32 value);
-
   // @@protoc_insertion_point(class_scope:CommsMessages.Pong)
  private:
-  inline void set_has_count();
-  inline void clear_has_count();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 count_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[1];
 
   friend void  protobuf_AddDesc_CommsMessages_2eproto();
   friend void protobuf_AssignDesc_CommsMessages_2eproto();
@@ -600,123 +567,6 @@ class Response : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class NewUser : public ::google::protobuf::Message {
- public:
-  NewUser();
-  virtual ~NewUser();
-
-  NewUser(const NewUser& from);
-
-  inline NewUser& operator=(const NewUser& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const NewUser& default_instance();
-
-  void Swap(NewUser* other);
-
-  // implements Message ----------------------------------------------
-
-  NewUser* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const NewUser& from);
-  void MergeFrom(const NewUser& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required string username = 1;
-  inline bool has_username() const;
-  inline void clear_username();
-  static const int kUsernameFieldNumber = 1;
-  inline const ::std::string& username() const;
-  inline void set_username(const ::std::string& value);
-  inline void set_username(const char* value);
-  inline void set_username(const char* value, size_t size);
-  inline ::std::string* mutable_username();
-  inline ::std::string* release_username();
-  inline void set_allocated_username(::std::string* username);
-
-  // required string password = 2;
-  inline bool has_password() const;
-  inline void clear_password();
-  static const int kPasswordFieldNumber = 2;
-  inline const ::std::string& password() const;
-  inline void set_password(const ::std::string& value);
-  inline void set_password(const char* value);
-  inline void set_password(const char* value, size_t size);
-  inline ::std::string* mutable_password();
-  inline ::std::string* release_password();
-  inline void set_allocated_password(::std::string* password);
-
-  // required string name = 3;
-  inline bool has_name() const;
-  inline void clear_name();
-  static const int kNameFieldNumber = 3;
-  inline const ::std::string& name() const;
-  inline void set_name(const ::std::string& value);
-  inline void set_name(const char* value);
-  inline void set_name(const char* value, size_t size);
-  inline ::std::string* mutable_name();
-  inline ::std::string* release_name();
-  inline void set_allocated_name(::std::string* name);
-
-  // @@protoc_insertion_point(class_scope:CommsMessages.NewUser)
- private:
-  inline void set_has_username();
-  inline void clear_has_username();
-  inline void set_has_password();
-  inline void clear_has_password();
-  inline void set_has_name();
-  inline void clear_has_name();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::std::string* username_;
-  ::std::string* password_;
-  ::std::string* name_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
-
-  friend void  protobuf_AddDesc_CommsMessages_2eproto();
-  friend void protobuf_AssignDesc_CommsMessages_2eproto();
-  friend void protobuf_ShutdownFile_CommsMessages_2eproto();
-
-  void InitAsDefaultInstance();
-  static NewUser* default_instance_;
-};
-// -------------------------------------------------------------------
-
 class Login : public ::google::protobuf::Message {
  public:
   Login();
@@ -771,10 +621,29 @@ class Login : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string username = 1;
+  // required string ipaddress = 1;
+  inline bool has_ipaddress() const;
+  inline void clear_ipaddress();
+  static const int kIpaddressFieldNumber = 1;
+  inline const ::std::string& ipaddress() const;
+  inline void set_ipaddress(const ::std::string& value);
+  inline void set_ipaddress(const char* value);
+  inline void set_ipaddress(const char* value, size_t size);
+  inline ::std::string* mutable_ipaddress();
+  inline ::std::string* release_ipaddress();
+  inline void set_allocated_ipaddress(::std::string* ipaddress);
+
+  // required int32 port = 2;
+  inline bool has_port() const;
+  inline void clear_port();
+  static const int kPortFieldNumber = 2;
+  inline ::google::protobuf::int32 port() const;
+  inline void set_port(::google::protobuf::int32 value);
+
+  // required string username = 3;
   inline bool has_username() const;
   inline void clear_username();
-  static const int kUsernameFieldNumber = 1;
+  static const int kUsernameFieldNumber = 3;
   inline const ::std::string& username() const;
   inline void set_username(const ::std::string& value);
   inline void set_username(const char* value);
@@ -783,10 +652,10 @@ class Login : public ::google::protobuf::Message {
   inline ::std::string* release_username();
   inline void set_allocated_username(::std::string* username);
 
-  // required string password = 2;
+  // required string password = 4;
   inline bool has_password() const;
   inline void clear_password();
-  static const int kPasswordFieldNumber = 2;
+  static const int kPasswordFieldNumber = 4;
   inline const ::std::string& password() const;
   inline void set_password(const ::std::string& value);
   inline void set_password(const char* value);
@@ -797,6 +666,10 @@ class Login : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:CommsMessages.Login)
  private:
+  inline void set_has_ipaddress();
+  inline void clear_has_ipaddress();
+  inline void set_has_port();
+  inline void clear_has_port();
   inline void set_has_username();
   inline void clear_has_username();
   inline void set_has_password();
@@ -804,11 +677,13 @@ class Login : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::std::string* ipaddress_;
   ::std::string* username_;
   ::std::string* password_;
+  ::google::protobuf::int32 port_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_CommsMessages_2eproto();
   friend void protobuf_AssignDesc_CommsMessages_2eproto();
@@ -1172,13 +1047,6 @@ class Map : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 maxy() const;
   inline void set_maxy(::google::protobuf::int32 value);
 
-  // required int32 dataSize = 5;
-  inline bool has_datasize() const;
-  inline void clear_datasize();
-  static const int kDataSizeFieldNumber = 5;
-  inline ::google::protobuf::int32 datasize() const;
-  inline void set_datasize(::google::protobuf::int32 value);
-
   // @@protoc_insertion_point(class_scope:CommsMessages.Map)
  private:
   inline void set_has_minx();
@@ -1189,8 +1057,6 @@ class Map : public ::google::protobuf::Message {
   inline void clear_has_maxx();
   inline void set_has_maxy();
   inline void clear_has_maxy();
-  inline void set_has_datasize();
-  inline void clear_has_datasize();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -1198,10 +1064,9 @@ class Map : public ::google::protobuf::Message {
   ::google::protobuf::int32 miny_;
   ::google::protobuf::int32 maxx_;
   ::google::protobuf::int32 maxy_;
-  ::google::protobuf::int32 datasize_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_CommsMessages_2eproto();
   friend void protobuf_AssignDesc_CommsMessages_2eproto();
@@ -1490,14 +1355,29 @@ class QueryServer : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
+  // required string parameter = 1;
+  inline bool has_parameter() const;
+  inline void clear_parameter();
+  static const int kParameterFieldNumber = 1;
+  inline const ::std::string& parameter() const;
+  inline void set_parameter(const ::std::string& value);
+  inline void set_parameter(const char* value);
+  inline void set_parameter(const char* value, size_t size);
+  inline ::std::string* mutable_parameter();
+  inline ::std::string* release_parameter();
+  inline void set_allocated_parameter(::std::string* parameter);
+
   // @@protoc_insertion_point(class_scope:CommsMessages.QueryServer)
  private:
+  inline void set_has_parameter();
+  inline void clear_has_parameter();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::std::string* parameter_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[1];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
   friend void  protobuf_AddDesc_CommsMessages_2eproto();
   friend void protobuf_AssignDesc_CommsMessages_2eproto();
@@ -1562,54 +1442,44 @@ class QueryServerResponse : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 minMapChunkX = 1;
-  inline bool has_minmapchunkx() const;
-  inline void clear_minmapchunkx();
-  static const int kMinMapChunkXFieldNumber = 1;
-  inline ::google::protobuf::int32 minmapchunkx() const;
-  inline void set_minmapchunkx(::google::protobuf::int32 value);
+  // required string parameter = 1;
+  inline bool has_parameter() const;
+  inline void clear_parameter();
+  static const int kParameterFieldNumber = 1;
+  inline const ::std::string& parameter() const;
+  inline void set_parameter(const ::std::string& value);
+  inline void set_parameter(const char* value);
+  inline void set_parameter(const char* value, size_t size);
+  inline ::std::string* mutable_parameter();
+  inline ::std::string* release_parameter();
+  inline void set_allocated_parameter(::std::string* parameter);
 
-  // required int32 minMapChunkY = 2;
-  inline bool has_minmapchunky() const;
-  inline void clear_minmapchunky();
-  static const int kMinMapChunkYFieldNumber = 2;
-  inline ::google::protobuf::int32 minmapchunky() const;
-  inline void set_minmapchunky(::google::protobuf::int32 value);
-
-  // required int32 maxMapChunkX = 3;
-  inline bool has_maxmapchunkx() const;
-  inline void clear_maxmapchunkx();
-  static const int kMaxMapChunkXFieldNumber = 3;
-  inline ::google::protobuf::int32 maxmapchunkx() const;
-  inline void set_maxmapchunkx(::google::protobuf::int32 value);
-
-  // required int32 maxMapChunkY = 4;
-  inline bool has_maxmapchunky() const;
-  inline void clear_maxmapchunky();
-  static const int kMaxMapChunkYFieldNumber = 4;
-  inline ::google::protobuf::int32 maxmapchunky() const;
-  inline void set_maxmapchunky(::google::protobuf::int32 value);
+  // required string value = 2;
+  inline bool has_value() const;
+  inline void clear_value();
+  static const int kValueFieldNumber = 2;
+  inline const ::std::string& value() const;
+  inline void set_value(const ::std::string& value);
+  inline void set_value(const char* value);
+  inline void set_value(const char* value, size_t size);
+  inline ::std::string* mutable_value();
+  inline ::std::string* release_value();
+  inline void set_allocated_value(::std::string* value);
 
   // @@protoc_insertion_point(class_scope:CommsMessages.QueryServerResponse)
  private:
-  inline void set_has_minmapchunkx();
-  inline void clear_has_minmapchunkx();
-  inline void set_has_minmapchunky();
-  inline void clear_has_minmapchunky();
-  inline void set_has_maxmapchunkx();
-  inline void clear_has_maxmapchunkx();
-  inline void set_has_maxmapchunky();
-  inline void clear_has_maxmapchunky();
+  inline void set_has_parameter();
+  inline void clear_has_parameter();
+  inline void set_has_value();
+  inline void clear_has_value();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 minmapchunkx_;
-  ::google::protobuf::int32 minmapchunky_;
-  ::google::protobuf::int32 maxmapchunkx_;
-  ::google::protobuf::int32 maxmapchunky_;
+  ::std::string* parameter_;
+  ::std::string* value_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   friend void  protobuf_AddDesc_CommsMessages_2eproto();
   friend void protobuf_AssignDesc_CommsMessages_2eproto();
@@ -1805,53 +1675,15 @@ inline void Message::set_allocated_pong(::CommsMessages::Pong* pong) {
   }
 }
 
-// optional .CommsMessages.NewUser newUser = 7;
-inline bool Message::has_newuser() const {
+// optional .CommsMessages.Login login = 7;
+inline bool Message::has_login() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void Message::set_has_newuser() {
+inline void Message::set_has_login() {
   _has_bits_[0] |= 0x00000040u;
 }
-inline void Message::clear_has_newuser() {
-  _has_bits_[0] &= ~0x00000040u;
-}
-inline void Message::clear_newuser() {
-  if (newuser_ != NULL) newuser_->::CommsMessages::NewUser::Clear();
-  clear_has_newuser();
-}
-inline const ::CommsMessages::NewUser& Message::newuser() const {
-  return newuser_ != NULL ? *newuser_ : *default_instance_->newuser_;
-}
-inline ::CommsMessages::NewUser* Message::mutable_newuser() {
-  set_has_newuser();
-  if (newuser_ == NULL) newuser_ = new ::CommsMessages::NewUser;
-  return newuser_;
-}
-inline ::CommsMessages::NewUser* Message::release_newuser() {
-  clear_has_newuser();
-  ::CommsMessages::NewUser* temp = newuser_;
-  newuser_ = NULL;
-  return temp;
-}
-inline void Message::set_allocated_newuser(::CommsMessages::NewUser* newuser) {
-  delete newuser_;
-  newuser_ = newuser;
-  if (newuser) {
-    set_has_newuser();
-  } else {
-    clear_has_newuser();
-  }
-}
-
-// optional .CommsMessages.Login login = 8;
-inline bool Message::has_login() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-inline void Message::set_has_login() {
-  _has_bits_[0] |= 0x00000080u;
-}
 inline void Message::clear_has_login() {
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void Message::clear_login() {
   if (login_ != NULL) login_->::CommsMessages::Login::Clear();
@@ -1881,15 +1713,15 @@ inline void Message::set_allocated_login(::CommsMessages::Login* login) {
   }
 }
 
-// optional .CommsMessages.Say say = 9;
+// optional .CommsMessages.Say say = 8;
 inline bool Message::has_say() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void Message::set_has_say() {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000080u;
 }
 inline void Message::clear_has_say() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline void Message::clear_say() {
   if (say_ != NULL) say_->::CommsMessages::Say::Clear();
@@ -1919,15 +1751,15 @@ inline void Message::set_allocated_say(::CommsMessages::Say* say) {
   }
 }
 
-// optional .CommsMessages.MapRequest mapRequest = 10;
+// optional .CommsMessages.MapRequest mapRequest = 9;
 inline bool Message::has_maprequest() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+  return (_has_bits_[0] & 0x00000100u) != 0;
 }
 inline void Message::set_has_maprequest() {
-  _has_bits_[0] |= 0x00000200u;
+  _has_bits_[0] |= 0x00000100u;
 }
 inline void Message::clear_has_maprequest() {
-  _has_bits_[0] &= ~0x00000200u;
+  _has_bits_[0] &= ~0x00000100u;
 }
 inline void Message::clear_maprequest() {
   if (maprequest_ != NULL) maprequest_->::CommsMessages::MapRequest::Clear();
@@ -1957,15 +1789,15 @@ inline void Message::set_allocated_maprequest(::CommsMessages::MapRequest* mapre
   }
 }
 
-// optional .CommsMessages.MapIgnore mapIgnore = 11;
+// optional .CommsMessages.MapIgnore mapIgnore = 10;
 inline bool Message::has_mapignore() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 inline void Message::set_has_mapignore() {
-  _has_bits_[0] |= 0x00000400u;
+  _has_bits_[0] |= 0x00000200u;
 }
 inline void Message::clear_has_mapignore() {
-  _has_bits_[0] &= ~0x00000400u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void Message::clear_mapignore() {
   if (mapignore_ != NULL) mapignore_->::CommsMessages::MapIgnore::Clear();
@@ -1995,15 +1827,15 @@ inline void Message::set_allocated_mapignore(::CommsMessages::MapIgnore* mapigno
   }
 }
 
-// optional .CommsMessages.Map map = 12;
+// optional .CommsMessages.Map map = 11;
 inline bool Message::has_map() const {
-  return (_has_bits_[0] & 0x00000800u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 inline void Message::set_has_map() {
-  _has_bits_[0] |= 0x00000800u;
+  _has_bits_[0] |= 0x00000400u;
 }
 inline void Message::clear_has_map() {
-  _has_bits_[0] &= ~0x00000800u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 inline void Message::clear_map() {
   if (map_ != NULL) map_->::CommsMessages::Map::Clear();
@@ -2033,15 +1865,15 @@ inline void Message::set_allocated_map(::CommsMessages::Map* map) {
   }
 }
 
-// optional .CommsMessages.MapUpdate mapUpdate = 13;
+// optional .CommsMessages.MapUpdate mapUpdate = 12;
 inline bool Message::has_mapupdate() const {
-  return (_has_bits_[0] & 0x00001000u) != 0;
+  return (_has_bits_[0] & 0x00000800u) != 0;
 }
 inline void Message::set_has_mapupdate() {
-  _has_bits_[0] |= 0x00001000u;
+  _has_bits_[0] |= 0x00000800u;
 }
 inline void Message::clear_has_mapupdate() {
-  _has_bits_[0] &= ~0x00001000u;
+  _has_bits_[0] &= ~0x00000800u;
 }
 inline void Message::clear_mapupdate() {
   if (mapupdate_ != NULL) mapupdate_->::CommsMessages::MapUpdate::Clear();
@@ -2071,15 +1903,15 @@ inline void Message::set_allocated_mapupdate(::CommsMessages::MapUpdate* mapupda
   }
 }
 
-// optional .CommsMessages.MapCharacterUpdate mapCharacterUpdate = 14;
+// optional .CommsMessages.MapCharacterUpdate mapCharacterUpdate = 13;
 inline bool Message::has_mapcharacterupdate() const {
-  return (_has_bits_[0] & 0x00002000u) != 0;
+  return (_has_bits_[0] & 0x00001000u) != 0;
 }
 inline void Message::set_has_mapcharacterupdate() {
-  _has_bits_[0] |= 0x00002000u;
+  _has_bits_[0] |= 0x00001000u;
 }
 inline void Message::clear_has_mapcharacterupdate() {
-  _has_bits_[0] &= ~0x00002000u;
+  _has_bits_[0] &= ~0x00001000u;
 }
 inline void Message::clear_mapcharacterupdate() {
   if (mapcharacterupdate_ != NULL) mapcharacterupdate_->::CommsMessages::MapCharacterUpdate::Clear();
@@ -2109,15 +1941,15 @@ inline void Message::set_allocated_mapcharacterupdate(::CommsMessages::MapCharac
   }
 }
 
-// optional .CommsMessages.QueryServer queryServer = 15;
+// optional .CommsMessages.QueryServer queryServer = 14;
 inline bool Message::has_queryserver() const {
-  return (_has_bits_[0] & 0x00004000u) != 0;
+  return (_has_bits_[0] & 0x00002000u) != 0;
 }
 inline void Message::set_has_queryserver() {
-  _has_bits_[0] |= 0x00004000u;
+  _has_bits_[0] |= 0x00002000u;
 }
 inline void Message::clear_has_queryserver() {
-  _has_bits_[0] &= ~0x00004000u;
+  _has_bits_[0] &= ~0x00002000u;
 }
 inline void Message::clear_queryserver() {
   if (queryserver_ != NULL) queryserver_->::CommsMessages::QueryServer::Clear();
@@ -2147,15 +1979,15 @@ inline void Message::set_allocated_queryserver(::CommsMessages::QueryServer* que
   }
 }
 
-// optional .CommsMessages.QueryServerResponse queryServerResponse = 16;
+// optional .CommsMessages.QueryServerResponse queryServerResponse = 15;
 inline bool Message::has_queryserverresponse() const {
-  return (_has_bits_[0] & 0x00008000u) != 0;
+  return (_has_bits_[0] & 0x00004000u) != 0;
 }
 inline void Message::set_has_queryserverresponse() {
-  _has_bits_[0] |= 0x00008000u;
+  _has_bits_[0] |= 0x00004000u;
 }
 inline void Message::clear_has_queryserverresponse() {
-  _has_bits_[0] &= ~0x00008000u;
+  _has_bits_[0] &= ~0x00004000u;
 }
 inline void Message::clear_queryserverresponse() {
   if (queryserverresponse_ != NULL) queryserverresponse_->::CommsMessages::QueryServerResponse::Clear();
@@ -2189,53 +2021,9 @@ inline void Message::set_allocated_queryserverresponse(::CommsMessages::QuerySer
 
 // Ping
 
-// required int32 count = 1;
-inline bool Ping::has_count() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void Ping::set_has_count() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void Ping::clear_has_count() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void Ping::clear_count() {
-  count_ = 0;
-  clear_has_count();
-}
-inline ::google::protobuf::int32 Ping::count() const {
-  return count_;
-}
-inline void Ping::set_count(::google::protobuf::int32 value) {
-  set_has_count();
-  count_ = value;
-}
-
 // -------------------------------------------------------------------
 
 // Pong
-
-// required int32 count = 1;
-inline bool Pong::has_count() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void Pong::set_has_count() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void Pong::clear_has_count() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void Pong::clear_count() {
-  count_ = 0;
-  clear_has_count();
-}
-inline ::google::protobuf::int32 Pong::count() const {
-  return count_;
-}
-inline void Pong::set_count(::google::protobuf::int32 value) {
-  set_has_count();
-  count_ = value;
-}
 
 // -------------------------------------------------------------------
 
@@ -2335,231 +2123,109 @@ inline void Response::set_allocated_message(::std::string* message) {
 
 // -------------------------------------------------------------------
 
-// NewUser
-
-// required string username = 1;
-inline bool NewUser::has_username() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void NewUser::set_has_username() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void NewUser::clear_has_username() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void NewUser::clear_username() {
-  if (username_ != &::google::protobuf::internal::kEmptyString) {
-    username_->clear();
-  }
-  clear_has_username();
-}
-inline const ::std::string& NewUser::username() const {
-  return *username_;
-}
-inline void NewUser::set_username(const ::std::string& value) {
-  set_has_username();
-  if (username_ == &::google::protobuf::internal::kEmptyString) {
-    username_ = new ::std::string;
-  }
-  username_->assign(value);
-}
-inline void NewUser::set_username(const char* value) {
-  set_has_username();
-  if (username_ == &::google::protobuf::internal::kEmptyString) {
-    username_ = new ::std::string;
-  }
-  username_->assign(value);
-}
-inline void NewUser::set_username(const char* value, size_t size) {
-  set_has_username();
-  if (username_ == &::google::protobuf::internal::kEmptyString) {
-    username_ = new ::std::string;
-  }
-  username_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* NewUser::mutable_username() {
-  set_has_username();
-  if (username_ == &::google::protobuf::internal::kEmptyString) {
-    username_ = new ::std::string;
-  }
-  return username_;
-}
-inline ::std::string* NewUser::release_username() {
-  clear_has_username();
-  if (username_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = username_;
-    username_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void NewUser::set_allocated_username(::std::string* username) {
-  if (username_ != &::google::protobuf::internal::kEmptyString) {
-    delete username_;
-  }
-  if (username) {
-    set_has_username();
-    username_ = username;
-  } else {
-    clear_has_username();
-    username_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string password = 2;
-inline bool NewUser::has_password() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void NewUser::set_has_password() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void NewUser::clear_has_password() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void NewUser::clear_password() {
-  if (password_ != &::google::protobuf::internal::kEmptyString) {
-    password_->clear();
-  }
-  clear_has_password();
-}
-inline const ::std::string& NewUser::password() const {
-  return *password_;
-}
-inline void NewUser::set_password(const ::std::string& value) {
-  set_has_password();
-  if (password_ == &::google::protobuf::internal::kEmptyString) {
-    password_ = new ::std::string;
-  }
-  password_->assign(value);
-}
-inline void NewUser::set_password(const char* value) {
-  set_has_password();
-  if (password_ == &::google::protobuf::internal::kEmptyString) {
-    password_ = new ::std::string;
-  }
-  password_->assign(value);
-}
-inline void NewUser::set_password(const char* value, size_t size) {
-  set_has_password();
-  if (password_ == &::google::protobuf::internal::kEmptyString) {
-    password_ = new ::std::string;
-  }
-  password_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* NewUser::mutable_password() {
-  set_has_password();
-  if (password_ == &::google::protobuf::internal::kEmptyString) {
-    password_ = new ::std::string;
-  }
-  return password_;
-}
-inline ::std::string* NewUser::release_password() {
-  clear_has_password();
-  if (password_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = password_;
-    password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void NewUser::set_allocated_password(::std::string* password) {
-  if (password_ != &::google::protobuf::internal::kEmptyString) {
-    delete password_;
-  }
-  if (password) {
-    set_has_password();
-    password_ = password;
-  } else {
-    clear_has_password();
-    password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string name = 3;
-inline bool NewUser::has_name() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void NewUser::set_has_name() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void NewUser::clear_has_name() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void NewUser::clear_name() {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    name_->clear();
-  }
-  clear_has_name();
-}
-inline const ::std::string& NewUser::name() const {
-  return *name_;
-}
-inline void NewUser::set_name(const ::std::string& value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(value);
-}
-inline void NewUser::set_name(const char* value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(value);
-}
-inline void NewUser::set_name(const char* value, size_t size) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* NewUser::mutable_name() {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  return name_;
-}
-inline ::std::string* NewUser::release_name() {
-  clear_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = name_;
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void NewUser::set_allocated_name(::std::string* name) {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    delete name_;
-  }
-  if (name) {
-    set_has_name();
-    name_ = name;
-  } else {
-    clear_has_name();
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// -------------------------------------------------------------------
-
 // Login
 
-// required string username = 1;
-inline bool Login::has_username() const {
+// required string ipaddress = 1;
+inline bool Login::has_ipaddress() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Login::set_has_username() {
+inline void Login::set_has_ipaddress() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Login::clear_has_username() {
+inline void Login::clear_has_ipaddress() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void Login::clear_ipaddress() {
+  if (ipaddress_ != &::google::protobuf::internal::kEmptyString) {
+    ipaddress_->clear();
+  }
+  clear_has_ipaddress();
+}
+inline const ::std::string& Login::ipaddress() const {
+  return *ipaddress_;
+}
+inline void Login::set_ipaddress(const ::std::string& value) {
+  set_has_ipaddress();
+  if (ipaddress_ == &::google::protobuf::internal::kEmptyString) {
+    ipaddress_ = new ::std::string;
+  }
+  ipaddress_->assign(value);
+}
+inline void Login::set_ipaddress(const char* value) {
+  set_has_ipaddress();
+  if (ipaddress_ == &::google::protobuf::internal::kEmptyString) {
+    ipaddress_ = new ::std::string;
+  }
+  ipaddress_->assign(value);
+}
+inline void Login::set_ipaddress(const char* value, size_t size) {
+  set_has_ipaddress();
+  if (ipaddress_ == &::google::protobuf::internal::kEmptyString) {
+    ipaddress_ = new ::std::string;
+  }
+  ipaddress_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Login::mutable_ipaddress() {
+  set_has_ipaddress();
+  if (ipaddress_ == &::google::protobuf::internal::kEmptyString) {
+    ipaddress_ = new ::std::string;
+  }
+  return ipaddress_;
+}
+inline ::std::string* Login::release_ipaddress() {
+  clear_has_ipaddress();
+  if (ipaddress_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = ipaddress_;
+    ipaddress_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Login::set_allocated_ipaddress(::std::string* ipaddress) {
+  if (ipaddress_ != &::google::protobuf::internal::kEmptyString) {
+    delete ipaddress_;
+  }
+  if (ipaddress) {
+    set_has_ipaddress();
+    ipaddress_ = ipaddress;
+  } else {
+    clear_has_ipaddress();
+    ipaddress_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required int32 port = 2;
+inline bool Login::has_port() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Login::set_has_port() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Login::clear_has_port() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void Login::clear_port() {
+  port_ = 0;
+  clear_has_port();
+}
+inline ::google::protobuf::int32 Login::port() const {
+  return port_;
+}
+inline void Login::set_port(::google::protobuf::int32 value) {
+  set_has_port();
+  port_ = value;
+}
+
+// required string username = 3;
+inline bool Login::has_username() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void Login::set_has_username() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void Login::clear_has_username() {
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void Login::clear_username() {
   if (username_ != &::google::protobuf::internal::kEmptyString) {
@@ -2621,15 +2287,15 @@ inline void Login::set_allocated_username(::std::string* username) {
   }
 }
 
-// required string password = 2;
+// required string password = 4;
 inline bool Login::has_password() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void Login::set_has_password() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void Login::clear_has_password() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void Login::clear_password() {
   if (password_ != &::google::protobuf::internal::kEmptyString) {
@@ -2953,28 +2619,6 @@ inline void Map::set_maxy(::google::protobuf::int32 value) {
   maxy_ = value;
 }
 
-// required int32 dataSize = 5;
-inline bool Map::has_datasize() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void Map::set_has_datasize() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void Map::clear_has_datasize() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void Map::clear_datasize() {
-  datasize_ = 0;
-  clear_has_datasize();
-}
-inline ::google::protobuf::int32 Map::datasize() const {
-  return datasize_;
-}
-inline void Map::set_datasize(::google::protobuf::int32 value) {
-  set_has_datasize();
-  datasize_ = value;
-}
-
 // -------------------------------------------------------------------
 
 // MapUpdate
@@ -3163,96 +2807,218 @@ inline void MapCharacterUpdate::set_z(::google::protobuf::int32 value) {
 
 // QueryServer
 
+// required string parameter = 1;
+inline bool QueryServer::has_parameter() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void QueryServer::set_has_parameter() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void QueryServer::clear_has_parameter() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void QueryServer::clear_parameter() {
+  if (parameter_ != &::google::protobuf::internal::kEmptyString) {
+    parameter_->clear();
+  }
+  clear_has_parameter();
+}
+inline const ::std::string& QueryServer::parameter() const {
+  return *parameter_;
+}
+inline void QueryServer::set_parameter(const ::std::string& value) {
+  set_has_parameter();
+  if (parameter_ == &::google::protobuf::internal::kEmptyString) {
+    parameter_ = new ::std::string;
+  }
+  parameter_->assign(value);
+}
+inline void QueryServer::set_parameter(const char* value) {
+  set_has_parameter();
+  if (parameter_ == &::google::protobuf::internal::kEmptyString) {
+    parameter_ = new ::std::string;
+  }
+  parameter_->assign(value);
+}
+inline void QueryServer::set_parameter(const char* value, size_t size) {
+  set_has_parameter();
+  if (parameter_ == &::google::protobuf::internal::kEmptyString) {
+    parameter_ = new ::std::string;
+  }
+  parameter_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* QueryServer::mutable_parameter() {
+  set_has_parameter();
+  if (parameter_ == &::google::protobuf::internal::kEmptyString) {
+    parameter_ = new ::std::string;
+  }
+  return parameter_;
+}
+inline ::std::string* QueryServer::release_parameter() {
+  clear_has_parameter();
+  if (parameter_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = parameter_;
+    parameter_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void QueryServer::set_allocated_parameter(::std::string* parameter) {
+  if (parameter_ != &::google::protobuf::internal::kEmptyString) {
+    delete parameter_;
+  }
+  if (parameter) {
+    set_has_parameter();
+    parameter_ = parameter;
+  } else {
+    clear_has_parameter();
+    parameter_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
 // -------------------------------------------------------------------
 
 // QueryServerResponse
 
-// required int32 minMapChunkX = 1;
-inline bool QueryServerResponse::has_minmapchunkx() const {
+// required string parameter = 1;
+inline bool QueryServerResponse::has_parameter() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void QueryServerResponse::set_has_minmapchunkx() {
+inline void QueryServerResponse::set_has_parameter() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void QueryServerResponse::clear_has_minmapchunkx() {
+inline void QueryServerResponse::clear_has_parameter() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void QueryServerResponse::clear_minmapchunkx() {
-  minmapchunkx_ = 0;
-  clear_has_minmapchunkx();
+inline void QueryServerResponse::clear_parameter() {
+  if (parameter_ != &::google::protobuf::internal::kEmptyString) {
+    parameter_->clear();
+  }
+  clear_has_parameter();
 }
-inline ::google::protobuf::int32 QueryServerResponse::minmapchunkx() const {
-  return minmapchunkx_;
+inline const ::std::string& QueryServerResponse::parameter() const {
+  return *parameter_;
 }
-inline void QueryServerResponse::set_minmapchunkx(::google::protobuf::int32 value) {
-  set_has_minmapchunkx();
-  minmapchunkx_ = value;
+inline void QueryServerResponse::set_parameter(const ::std::string& value) {
+  set_has_parameter();
+  if (parameter_ == &::google::protobuf::internal::kEmptyString) {
+    parameter_ = new ::std::string;
+  }
+  parameter_->assign(value);
+}
+inline void QueryServerResponse::set_parameter(const char* value) {
+  set_has_parameter();
+  if (parameter_ == &::google::protobuf::internal::kEmptyString) {
+    parameter_ = new ::std::string;
+  }
+  parameter_->assign(value);
+}
+inline void QueryServerResponse::set_parameter(const char* value, size_t size) {
+  set_has_parameter();
+  if (parameter_ == &::google::protobuf::internal::kEmptyString) {
+    parameter_ = new ::std::string;
+  }
+  parameter_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* QueryServerResponse::mutable_parameter() {
+  set_has_parameter();
+  if (parameter_ == &::google::protobuf::internal::kEmptyString) {
+    parameter_ = new ::std::string;
+  }
+  return parameter_;
+}
+inline ::std::string* QueryServerResponse::release_parameter() {
+  clear_has_parameter();
+  if (parameter_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = parameter_;
+    parameter_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void QueryServerResponse::set_allocated_parameter(::std::string* parameter) {
+  if (parameter_ != &::google::protobuf::internal::kEmptyString) {
+    delete parameter_;
+  }
+  if (parameter) {
+    set_has_parameter();
+    parameter_ = parameter;
+  } else {
+    clear_has_parameter();
+    parameter_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
-// required int32 minMapChunkY = 2;
-inline bool QueryServerResponse::has_minmapchunky() const {
+// required string value = 2;
+inline bool QueryServerResponse::has_value() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void QueryServerResponse::set_has_minmapchunky() {
+inline void QueryServerResponse::set_has_value() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void QueryServerResponse::clear_has_minmapchunky() {
+inline void QueryServerResponse::clear_has_value() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void QueryServerResponse::clear_minmapchunky() {
-  minmapchunky_ = 0;
-  clear_has_minmapchunky();
+inline void QueryServerResponse::clear_value() {
+  if (value_ != &::google::protobuf::internal::kEmptyString) {
+    value_->clear();
+  }
+  clear_has_value();
 }
-inline ::google::protobuf::int32 QueryServerResponse::minmapchunky() const {
-  return minmapchunky_;
+inline const ::std::string& QueryServerResponse::value() const {
+  return *value_;
 }
-inline void QueryServerResponse::set_minmapchunky(::google::protobuf::int32 value) {
-  set_has_minmapchunky();
-  minmapchunky_ = value;
+inline void QueryServerResponse::set_value(const ::std::string& value) {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::kEmptyString) {
+    value_ = new ::std::string;
+  }
+  value_->assign(value);
 }
-
-// required int32 maxMapChunkX = 3;
-inline bool QueryServerResponse::has_maxmapchunkx() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+inline void QueryServerResponse::set_value(const char* value) {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::kEmptyString) {
+    value_ = new ::std::string;
+  }
+  value_->assign(value);
 }
-inline void QueryServerResponse::set_has_maxmapchunkx() {
-  _has_bits_[0] |= 0x00000004u;
+inline void QueryServerResponse::set_value(const char* value, size_t size) {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::kEmptyString) {
+    value_ = new ::std::string;
+  }
+  value_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline void QueryServerResponse::clear_has_maxmapchunkx() {
-  _has_bits_[0] &= ~0x00000004u;
+inline ::std::string* QueryServerResponse::mutable_value() {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::kEmptyString) {
+    value_ = new ::std::string;
+  }
+  return value_;
 }
-inline void QueryServerResponse::clear_maxmapchunkx() {
-  maxmapchunkx_ = 0;
-  clear_has_maxmapchunkx();
+inline ::std::string* QueryServerResponse::release_value() {
+  clear_has_value();
+  if (value_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = value_;
+    value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
 }
-inline ::google::protobuf::int32 QueryServerResponse::maxmapchunkx() const {
-  return maxmapchunkx_;
-}
-inline void QueryServerResponse::set_maxmapchunkx(::google::protobuf::int32 value) {
-  set_has_maxmapchunkx();
-  maxmapchunkx_ = value;
-}
-
-// required int32 maxMapChunkY = 4;
-inline bool QueryServerResponse::has_maxmapchunky() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void QueryServerResponse::set_has_maxmapchunky() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void QueryServerResponse::clear_has_maxmapchunky() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void QueryServerResponse::clear_maxmapchunky() {
-  maxmapchunky_ = 0;
-  clear_has_maxmapchunky();
-}
-inline ::google::protobuf::int32 QueryServerResponse::maxmapchunky() const {
-  return maxmapchunky_;
-}
-inline void QueryServerResponse::set_maxmapchunky(::google::protobuf::int32 value) {
-  set_has_maxmapchunky();
-  maxmapchunky_ = value;
+inline void QueryServerResponse::set_allocated_value(::std::string* value) {
+  if (value_ != &::google::protobuf::internal::kEmptyString) {
+    delete value_;
+  }
+  if (value) {
+    set_has_value();
+    value_ = value;
+  } else {
+    clear_has_value();
+    value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 
